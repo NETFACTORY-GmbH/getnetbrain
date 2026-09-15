@@ -1,0 +1,12 @@
+# getnetbrain.netfactory.de
+# Produktseite zu NETbrain und Auslieferungsort des Installationsskripts.
+
+User-agent: *
+Allow: /
+
+# Das Installationsskript gehört nicht in den Index — es ist ein Endpunkt für
+# curl, keine Seite. Über den Link in der Anleitung bleibt es erreichbar.
+Disallow: /install.sh
+Disallow: /install.sh@
+
+Sitemap: https://getnetbrain.netfactory.de/sitemap.xml

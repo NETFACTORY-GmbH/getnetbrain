@@ -3,15 +3,154 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>NETbrain — Firmenwissen, das bleibt | NETFACTORY</title>
-<meta name="description" content="NETbrain ist die Wissensplattform für Unternehmen: kuratiertes Firmenwissen, privater Vault und KI-Chat in einer Installation auf Ihrem eigenen Server. Ein Produkt der NETFACTORY GmbH Internet Service.">
+<title>NETbrain — Wissensplattform auf Ihrem eigenen Server</title>
+<meta name="description" content="NETbrain vereint kuratiertes Firmenwissen, private Notizen und KI-Chat auf Ihrem eigenen Server. Wissen bleibt als Markdown lesbar, die KI wählen Sie selbst.">
+<link rel="canonical" href="https://getnetbrain.netfactory.de/">
+<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1">
+<meta name="author" content="NETFACTORY GmbH Internet Service">
 <meta name="theme-color" content="#000000">
+<meta name="format-detection" content="telephone=no">
 <link rel="icon" href="bilder/favicon-32.png" sizes="32x32">
 <link rel="apple-touch-icon" href="bilder/favicon-180.png">
-<meta property="og:title" content="NETbrain — Firmenwissen, das bleibt">
-<meta property="og:description" content="Kuratiertes Firmenwissen, privater Vault und KI-Chat. Eine Installation auf Ihrem eigenen Server.">
+
 <meta property="og:type" content="website">
 <meta property="og:locale" content="de_DE">
+<meta property="og:site_name" content="NETbrain">
+<meta property="og:url" content="https://getnetbrain.netfactory.de/">
+<meta property="og:title" content="NETbrain — Firmenwissen, das bleibt">
+<meta property="og:description" content="Kuratiertes Firmenwissen, privater Vault und KI-Chat. Eine Installation auf Ihrem eigenen Server.">
+<meta property="og:image" content="https://getnetbrain.netfactory.de/bilder/og-image.png">
+<meta property="og:image:secure_url" content="https://getnetbrain.netfactory.de/bilder/og-image.png">
+<meta property="og:image:type" content="image/png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="NETbrain — Ihr Firmenwissen gehört Ihnen. Auch wenn KI mitliest.">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="NETbrain — Firmenwissen, das bleibt">
+<meta name="twitter:description" content="Kuratiertes Firmenwissen, privater Vault und KI-Chat. Eine Installation auf Ihrem eigenen Server.">
+<meta name="twitter:image" content="https://getnetbrain.netfactory.de/bilder/og-image.png">
+<meta name="twitter:image:alt" content="NETbrain — Ihr Firmenwissen gehört Ihnen. Auch wenn KI mitliest.">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "NETbrain",
+  "applicationCategory": "BusinessApplication",
+  "applicationSubCategory": "Wissensmanagement",
+  "operatingSystem": "Linux (Docker), Bedienung im Browser",
+  "url": "https://getnetbrain.netfactory.de/",
+  "description": "Wissensplattform für Unternehmen: kuratiertes Firmenwissen, privater Vault und KI-Chat in einer Installation auf dem eigenen Server.",
+  "inLanguage": "de",
+  "softwareVersion": "0.4.1",
+  "releaseNotes": "Alpha-Version in der Pilotphase.",
+  "featureList": [
+    "Kuratiertes Firmenwissen mit Freigabe durch Kuratoren",
+    "Privater Vault: Notizen bleiben im lokalen Ordner des Mitarbeiters",
+    "KI-Chat mit Ende-zu-Ende-verschlüsselter Historie",
+    "Wählbarer KI-Anbieter: eigener Modellserver oder Cloud",
+    "Stichwortsuche ohne KI-Aufruf",
+    "Wissenspflege: Prüftermine, Verantwortliche, Dubletten",
+    "Versionshistorie, Änderungsprotokoll und Papierkorb",
+    "Verschlüsselte Sicherungen"
+  ],
+  "offers": {
+    "@type": "Offer",
+    "priceCurrency": "EUR",
+    "description": "Lizenz je Installation und Jahr, unbegrenzte Benutzerzahl, Aktualisierungen und monatliche Betreuungszeit inklusive. Preis auf Anfrage.",
+    "availability": "https://schema.org/LimitedAvailability"
+  },
+  "publisher": {
+    "@id": "https://getnetbrain.netfactory.de/#netfactory"
+  }
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "@id": "https://getnetbrain.netfactory.de/#netfactory",
+  "name": "NETFACTORY GmbH Internet Service",
+  "url": "https://www.netfactory.de/",
+  "logo": "https://getnetbrain.netfactory.de/bilder/netfactory-logo.svg",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "Kleine Straße 5",
+    "postalCode": "49584",
+    "addressLocality": "Fürstenau",
+    "addressCountry": "DE"
+  },
+  "telephone": "+49 5901 51736-0",
+  "email": "info@netfactory.de",
+  "vatID": "DE186434904"
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Wo liegen unsere Daten?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Auf dem Server, den Sie stellen. NETbrain wird als Container je Kunde installiert — im eigenen Rechenzentrum, bei Ihrem Hoster oder auf einer VM Ihrer Wahl. Es gibt keine zentrale NETbrain-Cloud, in der Ihre Inhalte zusammenliefen."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Was passiert mit unserem Wissen, wenn wir KI nutzen?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Nur das, was Sie entscheiden. Betreiben Sie ein Modell im eigenen Haus, verlässt nichts Ihr Netz. Nutzen Sie einen Cloud-Anbieter, geht ausschließlich der jeweils angefragte Ausschnitt dorthin, nicht der Bestand. Wer KI überhaupt nutzen darf, legen Sie in der Administration fest."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Kommen wir wieder heraus, wenn wir wechseln wollen?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Ja. Das Firmenwissen sind Markdown-Dateien mit Metadaten in einem Ordner — kopierbar, lesbar, in jedem Editor zu öffnen. Ein Export ist deshalb kein Projekt, sondern ein Kopiervorgang."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Was kostet NETbrain?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Abgerechnet wird je Installation und Jahr, inklusive Aktualisierungen und einer festen monatlichen Betreuungszeit. Die Zahl der Benutzerkonten ist nicht begrenzt. Den konkreten Preis nennen wir im Erstgespräch, sobald klar ist, wer die KI-Zugänge stellt — das ist der einzige Posten, der je nach Aufstellung variiert."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Was braucht unsere IT?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Eine VM mit Debian oder Ubuntu, 4 GB RAM, Docker und Docker Compose, einen DNS-Namen und einen Reverse-Proxy, der TLS beendet. Die vollständige Liste bekommen Sie vor dem Termin, damit die gemeinsame Stunde Einrichtung ist und kein Proxy-Workshop."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "In welchem Stadium ist das Produkt?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "NETbrain ist eine junge Software in der Pilotphase und wird bei NETFACTORY selbst täglich eingesetzt. Wir sagen das offen: Wer heute einsteigt, bekommt kurze Wege zur Entwicklung und Einfluss auf die Reihenfolge der nächsten Ausbauschritte — und arbeitet mit einem Produkt, das an manchen Stellen noch wächst."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Wer steht dahinter?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Die NETFACTORY GmbH Internet Service in Fürstenau, seit über zwei Jahrzehnten IT-Dienstleister. NETbrain ist aus dem eigenen Bedarf entstanden. Entwicklung, Betrieb und Betreuung liegen damit in einer Hand und in Deutschland — Ihre Fragen landen bei jemandem, der die Software gebaut hat."
+      }
+    }
+  ]
+}
+</script>
+
 <link rel="preload" href="schriften/geist-latin.woff2" as="font" type="font/woff2" crossorigin>
 <style>
 
@@ -302,10 +441,16 @@
   .rechtlich{margin-top:1.25rem; font-size:.8125rem; color:#ffffff73; line-height:150%; max-width:80ch}
 
   @media(max-width:700px){.nurgross{display:none}}
+  /* Sprungmarke: nur bei Tastaturfokus sichtbar. */
+  .sprung{position:absolute; left:-9999px; top:0; z-index:200; padding:.75rem 1.25rem;
+    background:var(--white); color:#000; border-radius:0 0 var(--radius-knopf) 0; font-weight:500}
+  .sprung:focus{left:0}
   @media(prefers-reduced-motion:reduce){*{transition:none !important; scroll-behavior:auto}}
 </style>
 </head>
 <body>
+
+<a class="sprung" href="#inhalt">Zum Inhalt springen</a>
 
 <div class="schienen" aria-hidden="true">
   <div class="schienen-feld">
@@ -322,7 +467,7 @@
       <svg viewBox="0 0 64 64" aria-hidden="true"><g fill="#1BCCC4"><path d="M32 4 58 19 32 34 6 19Z"/><path d="M6 26 27 38 27 61 6 49Z"/><path d="M37 38 58 26 58 49 37 61Z"/></g></svg>
       <span><b>NET</b>brain</span>
     </a>
-    <nav>
+    <nav aria-label="Hauptnavigation">
       <a href="#herausforderungen">Herausforderungen</a>
       <a href="#loesung">Lösung</a>
       <a href="#datenhoheit">Datenhoheit</a>
@@ -332,7 +477,7 @@
   </div>
 </header>
 
-<main>
+<main id="inhalt">
 
 <!-- Held -->
 <section class="held">
@@ -718,7 +863,7 @@
         <p>Wissensplattform für Unternehmen.</p>
         <div class="absender">
           <span>Ein Produkt der</span>
-          <img src="bilder/netfactory-logo.svg" alt="NETFACTORY" width="120" height="13">
+          <img src="bilder/netfactory-logo.svg" alt="NETFACTORY" width="120" height="13" loading="lazy" decoding="async">
         </div>
       </div>
       <div>

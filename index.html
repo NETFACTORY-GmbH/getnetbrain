@@ -1,0 +1,755 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>NETbrain — Firmenwissen, das bleibt | NETFACTORY</title>
+<meta name="description" content="NETbrain ist die Wissensplattform für Unternehmen: kuratiertes Firmenwissen, privater Vault und KI-Chat in einer Installation auf Ihrem eigenen Server. Ein Produkt der NETFACTORY GmbH Internet Service.">
+<meta name="theme-color" content="#000000">
+<link rel="icon" href="bilder/favicon-32.png" sizes="32x32">
+<link rel="apple-touch-icon" href="bilder/favicon-180.png">
+<meta property="og:title" content="NETbrain — Firmenwissen, das bleibt">
+<meta property="og:description" content="Kuratiertes Firmenwissen, privater Vault und KI-Chat. Eine Installation auf Ihrem eigenen Server.">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="de_DE">
+<link rel="preload" href="schriften/geist-latin.woff2" as="font" type="font/woff2" crossorigin>
+<style>
+
+  @font-face {
+    font-family: 'Geist';
+    font-style: normal;
+    font-weight: 100 900;
+    font-display: swap;
+    src: url('schriften/geist-latin.woff2') format('woff2');
+    unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+  }
+  @font-face {
+    font-family: 'Geist';
+    font-style: normal;
+    font-weight: 100 900;
+    font-display: swap;
+    src: url('schriften/geist-latin-ext.woff2') format('woff2');
+    unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+  }
+
+  :root{
+    --blue:#14ada6; --blue-hell:#1bccc4; --green:#92e188; --dark:#000;
+    --marke:#1bccc4; --carbon:#191919;
+    --white:#fff; --paragraph_white:#ffffffb3; --leise:#fff9;
+    --glas:#ffffff0d; --glas-stark:#ffffff1a; --linie:#ffffff1a;
+    --schatten-innen:inset 0 4px 12px #ffffff59, 0 4px 12px #0000001a;
+    --radius:.625rem; --radius-knopf:.375rem;
+    --container:73.7rem; --rand:1.875rem;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth; -webkit-text-size-adjust:100%}
+  body{
+    margin:0; position:relative; background-color:var(--dark); color:var(--paragraph_white);
+    font-family:Geist,"Geist Local",ui-sans-serif,system-ui,-apple-system,"Segoe UI",Arial,sans-serif;
+    font-size:1rem; line-height:155%; overflow-x:hidden;
+  }
+  img,svg{max-width:100%; display:block}
+  a{color:var(--white); text-decoration:none}
+  p{margin:0}
+  h1,h2,h3,h4{color:var(--white); font-weight:400; letter-spacing:-.03em; line-height:120%; margin:0}
+  h1{font-size:clamp(2.35rem,5.4vw,3.6rem)}
+  h2{font-size:clamp(1.85rem,3.9vw,2.5rem)}
+  h3{font-size:1.25rem; line-height:120%}
+  strong,b{color:var(--white); font-weight:500}
+  code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace; font-size:.9em; color:var(--blue-hell)}
+
+  .container{position:relative; z-index:1; width:100%; max-width:var(--container); margin-inline:auto; padding-inline:var(--rand)}
+  section{position:relative; z-index:1}
+  .abschnitt{padding-block:clamp(4rem,8vw,7.8125rem)}
+  /* Dunkler Verlauf von oben, wie .background-color / .section_footer im CI */
+  .verlauf{background-image:radial-gradient(circle farthest-corner at 50% 0%, #191919, var(--dark))}
+
+  /* ---- Gestrichelte Linien -------------------------------------------
+     Wie auf netfactory.de kein `border: dashed`, sondern ein wiederholter
+     Verlauf: 6 px Strich, 5 px Lücke, Weiß bei 10 %. Ein Rahmen liefe sonst
+     je nach Browser mit anderer Strichlänge, und die Länge muss zu den
+     Kreuzen passen. `backdrop-filter` wie im Original, damit die Linie über
+     einer Leuchtfläche nicht verschwindet. */
+  [data-linie="h"]{height:1px; background-size:11px 1px; background-repeat:repeat-x;
+    background-image:linear-gradient(to right, rgba(255,255,255,.1) 6px, transparent 6px);
+    -webkit-backdrop-filter:blur(10px); backdrop-filter:blur(10px)}
+  [data-linie="v"]{width:1px; background-size:1px 11px; background-repeat:repeat-y;
+    background-image:linear-gradient(to bottom, rgba(255,255,255,.1) 6px, transparent 6px);
+    -webkit-backdrop-filter:blur(10px); backdrop-filter:blur(10px)}
+
+  /* Die senkrechten Schienen laufen über die ganze Seite, je zwei Paare:
+     eines an der Containerkante, eines 4 % weiter außen. */
+  .schienen{position:absolute; inset:0; z-index:0; pointer-events:none}
+  .schienen-feld{position:relative; height:100%; width:min(var(--container), 100% - 2.5rem); margin-inline:auto}
+  .schiene{position:absolute; top:0; bottom:0}
+  .schiene.links{left:0} .schiene.rechts{right:0}
+  .schiene.weit-links{left:-4%} .schiene.weit-rechts{right:-4%}
+  @media(max-width:1200px){.schiene.weit-links,.schiene.weit-rechts{display:none}}
+
+  /* Waagerechte Trennlinie mit den Kreuzen des CI an beiden Enden. */
+  .trennlinie{position:relative; width:min(var(--container), 100% - 2.5rem); margin-inline:auto; z-index:1}
+  .trennlinie::before,.trennlinie::after{content:""; position:absolute; top:50%; width:15px; height:15px;
+    transform:translate(-50%,-50%); opacity:.5;
+    background:no-repeat center/contain url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 15 15'%3E%3Cpath fill='%23fff' d='M14.25 6.75H8.25V.75A.75.75 0 0 0 7.5 0a.75.75 0 0 0-.75.75v6H.75A.75.75 0 0 0 0 7.5c0 .414.336.75.75.75h6v6c0 .414.336.75.75.75s.75-.336.75-.75v-6h6a.75.75 0 0 0 .75-.75.75.75 0 0 0-.75-.75Z'/%3E%3C/svg%3E")}
+  .trennlinie::before{left:0} .trennlinie::after{left:100%}
+
+  /* ---- Leuchtkreise --------------------------------------------------
+     `.glow_circle` im CI: Aqua unten links, Mint unten rechts, je 100 px
+     Unschärfe. Anders als die Leuchtkugel im Held sind das zwei reine
+     Flächen ohne Verlauf dazwischen. */
+  /* Bezugsrahmen ist der Container, nicht der Abschnitt. Das ist der Grund,
+     warum die Kreise auf netfactory.de unten mittig stehen und nicht in den
+     Ecken: -20 % von 1179 px sind 236 px, bei 1000 px Durchmesser liegt der
+     Mittelpunkt damit 264 px innerhalb der Containerkante. Die beiden Kreise
+     überlagern sich in der Mitte — Aqua links, Mint rechts. */
+  /* `overflow-x: clip` am Abschnitt statt `hidden`: Der Kreis ragt seitlich
+     über den Container hinaus und erzeugte sonst 25 px Querlauf — `hidden` auf
+     dem Body hilft nicht, weil der Wert dort auf das Ansichtsfenster übergeht
+     und der Body selbst wieder `visible` ist. `clip` schneidet nur waagerecht,
+     senkrecht darf der Kreis wie im Original in den nächsten Abschnitt laufen. */
+  .hat-leuchtfeld{overflow-x:clip}
+  .leuchtfeld{position:absolute; inset:0; z-index:0; pointer-events:none;
+    width:min(var(--container), 100% - 2.5rem); left:50%; transform:translateX(-50%)}
+  .leuchtkreis{position:absolute; border-radius:100%; filter:blur(100px); width:1000px; aspect-ratio:1}
+  .leuchtkreis.aqua{background-color:var(--blue); inset:auto auto -72% -20%; opacity:.2}
+  .leuchtkreis.mint{background-color:var(--green); inset:auto -20% -72% auto; opacity:.15}
+  @media(max-width:991px){.leuchtkreis{width:500px; filter:blur(70px)}}
+
+  /* Leuchtkugel — .gradient_orb im CI: 90°-Verlauf blau→grün, 300 px Unschärfe */
+  .orb{
+    position:absolute; border-radius:100%; filter:blur(300px); pointer-events:none; z-index:0;
+    background-image:linear-gradient(90deg, var(--blue), #69c688 50%, var(--green));
+    width:min(880px,150vw); aspect-ratio:1; opacity:.55;
+  }
+  .orb.oben{inset:-60% -18% auto auto; opacity:.3}
+  /* Linienmotiv im Kopfbereich (bilder/lines.svg, CI-Grafik).
+     Es sitzt rechts hinter der Leuchtkugel und wird nach links und unten
+     ausgeblendet — die Textspalte bleibt frei, sonst läuft es durch die
+     Überschrift. Kein mix-blend-mode: die überlagerte Fläche färbt sonst
+     auch den Knopf in der festen Kopfleiste ein. */
+  .linien{position:absolute; inset:0; z-index:0; pointer-events:none; opacity:.34;
+    background:url("bilder/lines.svg") no-repeat right -4% top -8%;
+    background-size:68% auto;
+    -webkit-mask-image:linear-gradient(to right, transparent 8%, #000 52%), linear-gradient(to bottom, #000 58%, transparent 92%);
+    mask-image:linear-gradient(to right, transparent 8%, #000 52%), linear-gradient(to bottom, #000 58%, transparent 92%);
+    -webkit-mask-composite:source-in; mask-composite:intersect}
+  @media(max-width:900px){.linien{background-size:120% auto; background-position:right -20% top 4%; opacity:.26;
+    -webkit-mask-image:linear-gradient(to bottom, #000 45%, transparent 85%);
+    mask-image:linear-gradient(to bottom, #000 45%, transparent 85%)}}
+
+  /* Augenbraue — .eyebrow: Punkt + Versalien */
+  .augenbraue{display:flex; align-items:center; gap:5px; margin-bottom:.9375rem}
+  .augenbraue i{width:4px; height:4px; border-radius:100%; background:var(--blue); box-shadow:0 1px 2px #14ada680; flex:none}
+  .augenbraue i.gruen{background:var(--green); box-shadow:0 1px 2px #92e18880}
+  .augenbraue span{color:var(--leise); letter-spacing:.06em; text-transform:uppercase; font-size:.9375rem; font-weight:500; line-height:100%}
+  @media(max-width:480px){.augenbraue span{font-size:.8125rem}}
+
+  .lead{color:var(--paragraph_white); font-size:1rem; line-height:155%; max-width:62ch; text-shadow:0 1px 2px #0000001a}
+  h2 + .lead{margin-top:1.25rem}
+
+  /* Knöpfe — .button: Radius .375rem, Innenlicht, Glasrand */
+  .knopf{
+    display:inline-flex; align-items:center; justify-content:center; gap:.5rem;
+    padding:.75rem 1.375rem; border-radius:var(--radius-knopf);
+    border:1px solid #ffffff0d; font-size:1rem; font-weight:500; line-height:1.4;
+    background-color:var(--blue); color:#fff; box-shadow:var(--schatten-innen);
+    -webkit-backdrop-filter:blur(10px); backdrop-filter:blur(10px);
+    transition:filter .2s ease, transform .2s ease, background-color .2s ease;
+  }
+  .knopf:hover{filter:brightness(1.1); transform:translateY(-1px)}
+  .knopf.hell{background-color:var(--blue); color:#000; text-shadow:0 1px 2px #0003}
+  .knopf.hell:hover{background-color:var(--blue-hell); color:#fff; text-shadow:none}
+  .knopf.glas{background-color:#ffffff1a; color:#fff}
+  .knopf.glas:hover{background-color:#ffffff26}
+  .knopf.klein{padding:.4375rem .875rem; font-size:.9375rem; background-color:#ffffff0f; color:#ffffffe6; box-shadow:var(--schatten-innen)}
+  .knopf.klein:hover{background-color:#ffffff1a}
+
+  /* Kopfleiste — .section_nav: fest, 20 px Unschärfe, Linie unten */
+  header{position:fixed; inset:0 0 auto; z-index:100; background-color:#00000059;
+    -webkit-backdrop-filter:blur(20px); backdrop-filter:blur(20px); border-bottom:1px solid var(--linie)}
+  .kopf{display:flex; align-items:center; gap:1.5rem; min-height:4.375rem}
+  .marke{display:flex; align-items:center; gap:.625rem; font-size:1.375rem; letter-spacing:-.03em; color:var(--white)}
+  .marke svg{width:1.6rem; height:1.6rem; flex:none}
+  .marke b{font-weight:600} .marke span{font-weight:400}
+  .kopf nav{margin-left:auto; display:flex; align-items:center; gap:1.75rem}
+  .kopf nav a:not(.knopf){color:var(--leise); font-size:.9375rem; font-weight:500; transition:color .2s}
+  .kopf nav a:not(.knopf):hover{color:var(--white)}
+  .kopf .knopf{white-space:nowrap; padding:.5625rem 1rem; font-size:.9375rem}
+  .kopf .knopf .kurz{display:none}
+  @media(max-width:900px){.kopf nav a:not(.knopf){display:none} .kopf nav{gap:.75rem}}
+  @media(max-width:600px){.kopf .knopf .lang{display:none} .kopf .knopf .kurz{display:inline} .marke{font-size:1.25rem}}
+
+  /* Held */
+  .held{padding-block:clamp(8.5rem,14vw,11.5rem) clamp(4rem,8vw,6.5rem); overflow:hidden}
+  .held-pille{
+    display:inline-flex; align-items:center; gap:.375rem; padding:.4375rem .75rem;
+    border-radius:99px; border:.0625rem solid #ffffff1a;
+    background-image:linear-gradient(90deg,#ffffff08,#ffffff12);
+    -webkit-backdrop-filter:blur(4px); backdrop-filter:blur(4px);
+    font-size:.9375rem; line-height:100%; color:#fff; margin-bottom:1.5rem;
+  }
+  .held-pille i{width:4px; height:4px; border-radius:100%; background:var(--green); box-shadow:0 1px 2px #92e18880}
+  .held h1{max-width:20ch}
+  .held h1 em{font-style:normal; color:var(--blue-hell)}
+  .held .lead{margin-top:1.5rem; font-size:1.0625rem; max-width:58ch}
+  .aktionen{display:flex; flex-wrap:wrap; gap:.75rem; margin-top:2.25rem}
+  .held-belege{display:flex; flex-wrap:wrap; gap:.5rem 1.75rem; margin-top:2.5rem; font-size:.9375rem; color:var(--leise)}
+  .held-belege span{display:inline-flex; align-items:center; gap:.5rem}
+  .held-belege i{width:4px; height:4px; border-radius:100%; background:var(--blue); box-shadow:0 1px 2px #14ada680; flex:none}
+
+  /* Karten — .feature_card: 225°-Glasverlauf, Rand #191919, Radius .625rem */
+  .karten{display:grid; gap:1.25rem; margin-top:3.25rem}
+  .k3{grid-template-columns:repeat(auto-fit,minmax(17.5rem,1fr))}
+  .k2{grid-template-columns:repeat(auto-fit,minmax(21rem,1fr))}
+  .karte{
+    background-image:linear-gradient(225deg,#ffffff1a,#ffffff12);
+    border:.0625rem solid var(--carbon); border-radius:var(--radius);
+    padding:1.5625rem; display:flex; flex-direction:column;
+    transition:border-color .2s ease;
+  }
+  .karte:hover{border-color:#ffffff26}
+  .karte h3{margin-bottom:.625rem}
+  .karte p{font-size:.9375rem; line-height:145%}
+  /* .feature_icon: 35 px, Glas, Radius 6 px */
+  .zeichen{width:35px; height:35px; padding:6px; border-radius:6px; background-color:var(--glas);
+    border:1px solid #ffffff0d; box-shadow:var(--schatten-innen);
+    -webkit-backdrop-filter:blur(5px); backdrop-filter:blur(5px); margin-bottom:1.125rem}
+  .zeichen svg{width:100%; height:100%; stroke:var(--blue-hell); fill:none; stroke-width:1.6; stroke-linecap:round; stroke-linejoin:round}
+  .zeichen.gruen svg{stroke:var(--green)}
+  .karte .teiler{height:.0625rem; background:var(--linie); margin:1.25rem 0}
+
+  /* Herausforderungen */
+  .herausforderungen{display:grid; gap:1.75rem 2.5rem; margin-top:3.25rem; grid-template-columns:repeat(auto-fit,minmax(18rem,1fr))}
+  .herausforderung{padding-top:1.25rem; border-top:1px solid var(--linie)}
+  .herausforderung h3{font-size:1.0625rem; margin-bottom:.5rem}
+  .herausforderung p{font-size:.9375rem; line-height:145%}
+
+  /* Funktionsraster */
+  .funktionen{display:grid; margin-top:3.25rem; grid-template-columns:repeat(auto-fit,minmax(19.5rem,1fr));
+    border:.0625rem solid var(--carbon); border-radius:var(--radius); overflow:hidden;
+    background-image:linear-gradient(225deg,#ffffff1a,#ffffff12)}
+  .funktion{padding:1.5625rem; border-right:1px solid var(--linie); border-bottom:1px solid var(--linie)}
+  .funktion h3{font-size:1.0625rem; margin:.75rem 0 .5rem}
+  .funktion p{font-size:.9375rem; line-height:145%}
+  .funktion .nr{color:var(--leise); letter-spacing:.06em; text-transform:uppercase; font-size:.8125rem; font-weight:500}
+
+  /* Vorher / Nachher */
+  .gegenueber{display:grid; gap:1.25rem; margin-top:3.25rem; grid-template-columns:repeat(auto-fit,minmax(20rem,1fr))}
+  .spalte{border:.0625rem solid var(--carbon); border-radius:var(--radius); padding:1.5625rem;
+    background-image:linear-gradient(225deg,#ffffff1a,#ffffff12)}
+  .spalte.vorher{background-image:linear-gradient(225deg,#ffffff0d,#ffffff08)}
+  .spalte .kopfzeile{display:flex; align-items:center; gap:.5rem; margin-bottom:1.25rem}
+  .spalte .kopfzeile b{color:var(--white); font-weight:500; font-size:1.0625rem}
+  .spalte ul{list-style:none; margin:0; padding:0}
+  .spalte li{padding:.875rem 0; border-top:1px solid var(--linie); font-size:.9375rem; line-height:145%}
+  .spalte li strong{display:block; font-weight:500; margin-bottom:.125rem}
+  .spalte.vorher li{color:#ffffff80}
+  .haken{width:16px; height:16px; flex:none; stroke:var(--green); fill:none; stroke-width:2; margin-top:.2rem}
+  .kreuz{width:16px; height:16px; flex:none; stroke:#ffffff59; fill:none; stroke-width:2; margin-top:.2rem}
+  .spalte li{display:flex; gap:.625rem; align-items:flex-start}
+
+  /* Datenhoheit */
+  .schutz{display:grid; gap:2.25rem 2.5rem; margin-top:3.25rem; grid-template-columns:repeat(auto-fit,minmax(19rem,1fr))}
+  .schutz h3{font-size:1.0625rem; margin-bottom:.5rem}
+  .schutz p{font-size:.9375rem; line-height:145%}
+  .schutz .strich{width:2rem; height:.125rem; background:var(--blue); margin-bottom:1rem; border-radius:2px}
+  .schutz .strich.gruen{background:var(--green)}
+
+  /* Ablauf */
+  .schritte{display:grid; gap:1.75rem 1.5rem; margin-top:3.25rem; grid-template-columns:repeat(auto-fit,minmax(15rem,1fr))}
+  .schritt{padding-top:1.25rem; border-top:.0625rem solid #ffffff26}
+  .schritt .nr{color:var(--blue-hell); font-size:.875rem; font-weight:500; letter-spacing:.04em}
+  .schritt h3{font-size:1.0625rem; margin:.5rem 0}
+  .schritt p{font-size:.9375rem; line-height:145%}
+
+  /* FAQ */
+  .faq{max-width:52rem; margin-top:2.5rem}
+  details{border-bottom:1px solid var(--linie)}
+  summary{cursor:pointer; list-style:none; padding:1.25rem 2.75rem 1.25rem 0; position:relative;
+    color:var(--white); font-size:1.0625rem; font-weight:500; line-height:135%}
+  summary::-webkit-details-marker{display:none}
+  summary::after{content:""; position:absolute; right:.625rem; top:1.6rem; width:.5rem; height:.5rem;
+    border-right:1.5px solid var(--blue-hell); border-bottom:1.5px solid var(--blue-hell);
+    transform:rotate(45deg); transition:transform .2s ease}
+  details[open] summary::after{transform:rotate(-135deg); top:1.85rem}
+  details p{padding:0 1rem 1.375rem 0; font-size:.9375rem; line-height:150%; max-width:70ch}
+
+  /* Kontakt */
+  .kontakt{position:relative; overflow:hidden; border:.0625rem solid var(--carbon); border-radius:var(--radius);
+    padding:clamp(2rem,5vw,4rem); background-image:linear-gradient(225deg,#ffffff1a,#ffffff12); isolation:isolate}
+  .kontakt .orb{width:min(700px,120vw); inset:auto -25% -85% auto; opacity:.5; z-index:-1}
+  .kontakt h2{max-width:18ch}
+  .kontakt .lead{margin-top:1.25rem}
+  .kontakt-wege{display:flex; flex-wrap:wrap; gap:.75rem; margin-top:2.25rem; align-items:center}
+  .kontakt-fein{margin-top:1.75rem; font-size:.9375rem; color:var(--leise)}
+  .kontakt-fein a{color:var(--paragraph_white); text-decoration:underline; text-underline-offset:3px}
+
+  /* Fuß */
+  footer{position:relative; z-index:1; border-top:1px solid var(--linie); padding-block:3rem 2.5rem; font-size:.9375rem;
+    background-image:radial-gradient(circle farthest-corner at 50% 0%, #191919, var(--dark))}
+  .fuss{display:grid; gap:2rem; grid-template-columns:repeat(auto-fit,minmax(15rem,1fr))}
+  .fuss a{color:var(--paragraph_white)} .fuss a:hover{color:var(--white)}
+  .fuss-marke{display:flex; align-items:center; gap:.625rem; color:var(--white); font-size:1.25rem; margin-bottom:.875rem}
+  .fuss-marke svg{width:1.4rem; height:1.4rem}
+  .absender{margin-top:1.25rem; display:flex; align-items:center; gap:.625rem; font-size:.8125rem; color:#ffffff73}
+  .absender img{width:7.5rem; height:auto; opacity:.85}
+  /* Pflichtverweise. Eigene Zeile über dem Kleingedruckten und in der Textfarbe
+     der Seite — im grauen Fließtext daneben werden sie überlesen. */
+  .fuss-recht{margin-top:2.5rem; padding-top:1.5rem; border-top:1px solid var(--linie);
+    display:flex; flex-wrap:wrap; gap:.5rem 1.5rem; font-size:.9375rem}
+  .fuss-recht a{color:var(--paragraph_white)}
+  .fuss-recht a:hover{color:var(--white)}
+  .rechtlich{margin-top:1.25rem; font-size:.8125rem; color:#ffffff73; line-height:150%; max-width:80ch}
+
+  @media(max-width:700px){.nurgross{display:none}}
+  @media(prefers-reduced-motion:reduce){*{transition:none !important; scroll-behavior:auto}}
+</style>
+</head>
+<body>
+
+<div class="schienen" aria-hidden="true">
+  <div class="schienen-feld">
+    <i class="schiene weit-links" data-linie="v"></i>
+    <i class="schiene links" data-linie="v"></i>
+    <i class="schiene rechts" data-linie="v"></i>
+    <i class="schiene weit-rechts" data-linie="v"></i>
+  </div>
+</div>
+
+<header>
+  <div class="container kopf">
+    <a class="marke" href="#">
+      <svg viewBox="0 0 64 64" aria-hidden="true"><g fill="#1BCCC4"><path d="M32 4 58 19 32 34 6 19Z"/><path d="M6 26 27 38 27 61 6 49Z"/><path d="M37 38 58 26 58 49 37 61Z"/></g></svg>
+      <span><b>NET</b>brain</span>
+    </a>
+    <nav>
+      <a href="#herausforderungen">Herausforderungen</a>
+      <a href="#loesung">Lösung</a>
+      <a href="#datenhoheit">Datenhoheit</a>
+      <a href="#ablauf">Ablauf</a>
+      <a class="knopf hell" href="#kontakt"><span class="lang">Erstgespräch vereinbaren</span><span class="kurz">Kontakt</span></a>
+    </nav>
+  </div>
+</header>
+
+<main>
+
+<!-- Held -->
+<section class="held">
+  <div class="linien" aria-hidden="true"></div>
+  <div class="orb oben" aria-hidden="true"></div>
+  <div class="container">
+    <p class="held-pille"><i></i>Wissensplattform von NETFACTORY</p>
+    <h1>Ihr Firmenwissen gehört <em>Ihnen</em>.<br class="nurgross"> Auch wenn KI mitliest.</h1>
+    <p class="lead">
+      NETbrain bringt kuratiertes Firmenwissen, private Notizen und KI-Chat in einer
+      Oberfläche zusammen — als eine Installation auf Ihrem eigenen Server. Dadurch
+      finden Ihre Mitarbeiter, was im Haus längst gewusst wird, ohne dass Ihre
+      Unterlagen bei einem öffentlichen KI-Dienst landen.
+    </p>
+    <div class="aktionen">
+      <a class="knopf" href="#kontakt">Erstgespräch vereinbaren</a>
+      <a class="knopf glas" href="#loesung">Lösung entdecken</a>
+    </div>
+    <p class="held-belege">
+      <span><i></i>Betrieb auf Ihrem Server</span>
+      <span><i></i>Wissen als offene Markdown-Dateien</span>
+      <span><i></i>Entwicklung und Betreuung aus Fürstenau</span>
+    </p>
+  </div>
+</section>
+
+<div class="trennlinie" data-linie="h"></div>
+
+<!-- Herausforderungen -->
+<section class="abschnitt hat-leuchtfeld" id="herausforderungen">
+  <div class="leuchtfeld" aria-hidden="true">
+    <div class="leuchtkreis aqua"></div>
+    <div class="leuchtkreis mint"></div>
+  </div>
+  <div class="container">
+    <p class="augenbraue"><i></i><span>Herausforderungen</span></p>
+    <h2>Das Wissen ist da. Auffindbar ist es nicht.</h2>
+    <p class="lead">
+      In den meisten Häusern liegt das Wertvollste verstreut — und es fällt erst auf,
+      wenn jemand danach sucht und niemand antworten kann.
+    </p>
+    <div class="herausforderungen">
+      <div class="herausforderung">
+        <h3>Wissen in wenigen Köpfen</h3>
+        <p>Der Kollege, der „das immer gemacht hat“, geht in Urlaub, wechselt oder in Rente. Mit ihm geht der Zusammenhang, den nie jemand aufgeschrieben hat.</p>
+      </div>
+      <div class="herausforderung">
+        <h3>Antworten in Postfächern</h3>
+        <p>Die Lösung von damals existiert — in einem Mailverlauf, den nur die Person kennt, die dabei war. Gesucht wird sie trotzdem jedes Mal neu.</p>
+      </div>
+      <div class="herausforderung">
+        <h3>Ablagen, die niemand mehr durchsucht</h3>
+        <p>Zehn Jahre Ordnerstruktur, drei Generationen Benennungslogik. Dateien sind vorhanden, aber Finden kostet mehr Zeit als Neumachen.</p>
+      </div>
+      <div class="herausforderung">
+        <h3>KI-Nutzung an der IT vorbei</h3>
+        <p>Ihre Mitarbeiter fragen ohnehin eine KI — nur eben eine, die Ihre Unterlagen nicht sehen dürfte. Ein Verbot ändert daran erfahrungsgemäß wenig.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Lösung -->
+<section class="abschnitt verlauf" id="loesung">
+  <div class="container">
+    <p class="augenbraue"><i class="gruen"></i><span>Genau hier setzen wir an</span></p>
+    <h2>Drei Räume, eine Oberfläche — sauber getrennt.</h2>
+    <p class="lead">
+      NETbrain trennt, was getrennt gehört, und verbindet, was zusammengehört. Die
+      Trennung steckt dabei im Aufbau, nicht in einer Einstellung, die jemand
+      versehentlich ändert.
+    </p>
+    <div class="karten k3">
+      <div class="karte">
+        <div class="zeichen"><svg viewBox="0 0 24 24"><path d="M3 7l9-4 9 4-9 4-9-4z"/><path d="M3 12l9 4 9-4"/><path d="M3 17l9 4 9-4"/></svg></div>
+        <h3>Firmenwissen</h3>
+        <p>
+          Ein kuratierter Bestand, für alle Angemeldeten lesbar. Jeder darf einreichen,
+          veröffentlicht wird nur, was ein Kurator freigegeben hat. Dadurch bleibt der
+          Bestand verlässlich statt nur voll.
+        </p>
+      </div>
+      <div class="karte">
+        <div class="zeichen gruen"><svg viewBox="0 0 24 24"><rect x="4" y="10" width="16" height="10" rx="2"/><path d="M8 10V7a4 4 0 018 0v3"/></svg></div>
+        <h3>Privater Vault</h3>
+        <p>
+          Persönliche Notizen bleiben in einem lokalen Ordner auf dem Rechner des
+          Mitarbeiters. Der Server legt sie nicht an, liest sie nicht und löscht sie
+          nicht — er kennt sie schlicht nicht.
+        </p>
+      </div>
+      <div class="karte">
+        <div class="zeichen"><svg viewBox="0 0 24 24"><path d="M21 11.5a8.4 8.4 0 01-.9 3.8A8.5 8.5 0 0112.5 20a8.4 8.4 0 01-3.8-.9L3 21l1.9-5.7A8.4 8.4 0 014 11.5 8.5 8.5 0 018.7 3.9 8.4 8.4 0 0112.5 3h.5a8.5 8.5 0 018 8v.5z"/></svg></div>
+        <h3>KI-Chat</h3>
+        <p>
+          Gespräche mit wählbarem Anbieter — einem Modellserver im eigenen Haus oder
+          einem Cloud-Dienst. Der Verlauf liegt Ende-zu-Ende verschlüsselt: Der Server
+          bewahrt ihn auf, entziffern kann er ihn nicht.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="trennlinie" data-linie="h"></div>
+
+<!-- Funktionen -->
+<section class="abschnitt" id="funktionen">
+  <div class="container">
+    <p class="augenbraue"><i></i><span>Im Alltag</span></p>
+    <h2>Was NETbrain leistet, wenn der erste Schwung vorbei ist.</h2>
+    <p class="lead">
+      Jedes Wissensprojekt startet gut. Die Fragen, an denen es nach drei Monaten
+      scheitert, sind immer dieselben — und genau darauf ist NETbrain gebaut.
+    </p>
+    <div class="funktionen">
+      <div class="funktion">
+        <p class="nr">Erfassen</p>
+        <h3>Aufschreiben dauert Minuten</h3>
+        <p>Text, Link oder Bild hineinwerfen — die KI-Aufbereitung macht daraus einen strukturierten Entwurf mit Titel, Zusammenfassung und Schlagworten. Sie prüfen und senden ab. Ein vollständig KI-freier Weg steht daneben.</p>
+      </div>
+      <div class="funktion">
+        <p class="nr">Kuratieren</p>
+        <h3>Eingang statt Wildwuchs</h3>
+        <p>Einwürfe landen in einer Inbox, die ausschließlich Kuratoren sehen. Veröffentlichen, in eine bestehende Seite übernehmen oder mit Begründung ablehnen. Der Einreicher sieht den Stand seines Beitrags jederzeit.</p>
+      </div>
+      <div class="funktion">
+        <p class="nr">Finden</p>
+        <h3>Suche ohne Kontingent</h3>
+        <p>Die Firmensuche arbeitet stichwortbasiert im freigegebenen Bestand — schnell, ohne externe Übertragung, ohne Kosten je Anfrage. Wer eine formulierte Antwort will, nimmt die Frage per Klick mit in den Chat.</p>
+      </div>
+      <div class="funktion">
+        <p class="nr">Pflegen</p>
+        <h3>Wissen altert. NETbrain sagt es Ihnen</h3>
+        <p>Die Pflegeansicht zeigt, was ohne verantwortliche Person dasteht, wo die fachliche Prüfung überfällig ist und wo Dubletten entstanden sind. Dadurch wird Wissenspflege eine Liste statt eines Vorsatzes.</p>
+      </div>
+      <div class="funktion">
+        <p class="nr">Nachvollziehen</p>
+        <h3>Jede Änderung hat einen Stand</h3>
+        <p>Versionshistorie je Seite mit Zurücksetzen, Änderungsprotokoll, Papierkorb und Bildnachweise. Wer wann was geändert hat, ist damit keine Rekonstruktion aus dem Gedächtnis.</p>
+      </div>
+      <div class="funktion">
+        <p class="nr">Überblicken</p>
+        <h3>Wissenslandkarte</h3>
+        <p>Der Bestand als Karte statt als Ordnerbaum: Welche Themen sind dicht belegt, wo sind die weißen Flecken. Für das Firmenwissen wie für den privaten Vault.</p>
+      </div>
+      <div class="funktion">
+        <p class="nr">Betreiben</p>
+        <h3>Administration ohne Kommandozeile</h3>
+        <p>Benutzer und Rollen, KI-Zugänge und Freigaben, Einstellungen und Aktualisierungen im Browser unter <code>/admin</code>. Der Update-Agent prüft selbstständig, ausgelöst wird per Klick.</p>
+      </div>
+      <div class="funktion">
+        <p class="nr">Nachfragen</p>
+        <h3>Ein Chat, der das Firmenwissen kennt</h3>
+        <p>Rückfragen stellen, das Modell wechseln, Dateien anhängen, Gesprochenes diktieren und Text aus Bildern auslesen — alles in einem Verlauf, der nur für den jeweiligen Benutzer existiert.</p>
+      </div>
+      <div class="funktion">
+        <p class="nr">Sichern</p>
+        <h3>Verschlüsselte Sicherungen</h3>
+        <p>Automatische, mit Ihrer Passphrase verschlüsselte Backups samt Protokoll. Der dokumentierte Wiederherstellungslauf gehört zur Inbetriebnahme — eine Sicherung, die nie zurückgespielt wurde, ist keine.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Vorher / Nachher -->
+<section class="abschnitt verlauf">
+  <div class="container">
+    <p class="augenbraue"><i class="gruen"></i><span>Ihre Vorteile</span></p>
+    <h2>Weniger Suchen. Mehr Weitergeben.</h2>
+    <p class="lead">
+      Was sich im Arbeitsalltag konkret ändert, wenn Wissen einen Ort hat, an dem es
+      gepflegt wird.
+    </p>
+    <div class="gegenueber">
+      <div class="spalte vorher">
+        <div class="kopfzeile"><b>Vorher</b></div>
+        <ul>
+          <li><svg class="kreuz" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg><span><strong>Nachfragen</strong>Die Antwort steht bei einer Person, die gerade nicht da ist.</span></li>
+          <li><svg class="kreuz" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg><span><strong>Einarbeitung</strong>Neue Kollegen lernen durch Zuschauen und wiederholtes Fragen.</span></li>
+          <li><svg class="kreuz" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg><span><strong>Dokumentation</strong>Wird verschoben, weil Aufschreiben länger dauert als Machen.</span></li>
+          <li><svg class="kreuz" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg><span><strong>KI-Nutzung</strong>Findet statt, nur unkontrolliert und mit fremden Diensten.</span></li>
+          <li><svg class="kreuz" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg><span><strong>Aktualität</strong>Niemand weiß, welche Anleitung noch gilt und welche veraltet ist.</span></li>
+        </ul>
+      </div>
+      <div class="spalte">
+        <div class="kopfzeile"><b>Mit NETbrain</b></div>
+        <ul>
+          <li><svg class="haken" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12.5l5 5L20 6.5"/></svg><span><strong>Nachfragen</strong>Die Antwort steht im Firmenwissen und ist in Sekunden gefunden.</span></li>
+          <li><svg class="haken" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12.5l5 5L20 6.5"/></svg><span><strong>Einarbeitung</strong>Neue Kollegen lesen sich selbst ein — im kuratierten Bestand.</span></li>
+          <li><svg class="haken" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12.5l5 5L20 6.5"/></svg><span><strong>Dokumentation</strong>Hineinwerfen genügt, die Aufbereitung übernimmt die KI.</span></li>
+          <li><svg class="haken" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12.5l5 5L20 6.5"/></svg><span><strong>KI-Nutzung</strong>Findet in Ihrer Installation statt, mit dem Anbieter Ihrer Wahl.</span></li>
+          <li><svg class="haken" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12.5l5 5L20 6.5"/></svg><span><strong>Aktualität</strong>Jede Seite hat eine verantwortliche Person und einen Prüftermin.</span></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="trennlinie" data-linie="h"></div>
+
+<!-- Datenhoheit -->
+<section class="abschnitt" id="datenhoheit">
+  <div class="container">
+    <p class="augenbraue"><i></i><span>Datenhoheit</span></p>
+    <h2>Der Server weiß so wenig, wie er kann.</h2>
+    <p class="lead">
+      Das ist kein Werbesatz, sondern die Bauentscheidung, an der sich in NETbrain
+      jede einzelne Funktion messen lassen muss.
+    </p>
+    <div class="schutz">
+      <div>
+        <div class="strich"></div>
+        <h3>Eine Installation je Kunde</h3>
+        <p>NETbrain läuft auf Ihrer Maschine, in Ihrem Netz oder bei Ihrem Hoster. Kein geteilter Mandant, keine fremde Datenbank mit Ihren Inhalten darin.</p>
+      </div>
+      <div>
+        <div class="strich"></div>
+        <h3>Wissen bleibt lesbar</h3>
+        <p>Das Firmenwissen sind gewöhnliche Markdown-Dateien mit Metadaten in einem Ordner. Kein proprietäres Format und damit kein Exportproblem — auch nicht in fünf Jahren.</p>
+      </div>
+      <div>
+        <div class="strich gruen"></div>
+        <h3>Trennung durch Struktur</h3>
+        <p>Firmenwissen, Kuratoren-Eingang und private Notizen liegen getrennt. Die Zugriffsprüfung hängt an dieser Struktur und nicht an einem Schalter in einer Oberfläche.</p>
+      </div>
+      <div>
+        <div class="strich"></div>
+        <h3>Chatverlauf verschlüsselt</h3>
+        <p>Der Schlüssel entsteht im Browser aus Ihrem Passwort und verlässt ihn nicht. Selbst wer den Server hätte, hätte die Gespräche nicht.</p>
+      </div>
+      <div>
+        <div class="strich gruen"></div>
+        <h3>KI nur, wenn Sie es wollen</h3>
+        <p>Sie wählen den Anbieter — eigener Modellserver oder Cloud — und legen fest, wer ihn nutzen darf. Ohne KI-Zugang bleiben Suche und Notizen voll nutzbar.</p>
+      </div>
+      <div>
+        <div class="strich"></div>
+        <h3>Ohne Cookie-Banner</h3>
+        <p>NETbrain setzt nur die für den Betrieb notwendigen Cookies. Keine Werbenetzwerke, keine Analysedienste, keine Weitergabe an Dritte.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Ablauf -->
+<section class="abschnitt verlauf" id="ablauf">
+  <div class="container">
+    <p class="augenbraue"><i></i><span>Unser Prozess</span></p>
+    <h2>Von der ersten Frage zum laufenden Betrieb.</h2>
+    <p class="lead">
+      Kein Monatsprojekt. Was Sie von uns brauchen, ist ein Gespräch und einen
+      Vormittag — den Rest erledigt die Installation.
+    </p>
+    <div class="schritte">
+      <div class="schritt">
+        <p class="nr">01</p>
+        <h3>Erstgespräch</h3>
+        <p>30 Minuten, in denen wir Ihre Ausgangslage aufnehmen und Sie NETbrain live sehen. Danach wissen beide Seiten, ob es passt.</p>
+      </div>
+      <div class="schritt">
+        <p class="nr">02</p>
+        <h3>Vorbereitung</h3>
+        <p>Sie stellen eine VM mit Docker und einen DNS-Namen bereit. Die Checkliste bekommen Sie vorab, damit der Termin keine Proxy-Sitzung wird.</p>
+      </div>
+      <div class="schritt">
+        <p class="nr">03</p>
+        <h3>Einrichtung</h3>
+        <p>Installation gemeinsam in etwa einer Stunde: Lizenz, Administrator, KI-Zugang, Sicherung. Am Ende steht ein abgezeichnetes Abnahmeprotokoll.</p>
+      </div>
+      <div class="schritt">
+        <p class="nr">04</p>
+        <h3>Betrieb</h3>
+        <p>Jährliche Lizenz je Installation, Aktualisierungen und feste Betreuungszeit inklusive. Updates brauchen keinen Termin, sondern einen Klick.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="trennlinie" data-linie="h"></div>
+
+<!-- Passt / passt nicht -->
+<section class="abschnitt">
+  <div class="container">
+    <p class="augenbraue"><i></i><span>Für wen</span></p>
+    <h2>Gebaut für Häuser mit 10 bis 250 Mitarbeitern.</h2>
+    <div class="karten k2">
+      <div class="karte">
+        <h3>Wenn Sie sich hier wiedererkennen</h3>
+        <div class="teiler"></div>
+        <p>
+          Ihr Wissen ist Ihr Geschäft — Beratung, Kanzlei, IT-Dienstleistung, Agentur
+          oder Fertigung mit viel Erfahrungswissen. Sie haben keine eigene
+          Wissensabteilung, aber Menschen, die gerne teilen würden, wenn es schnell
+          ginge. Und Sie haben gute Gründe, Ihre Unterlagen nicht in einen
+          öffentlichen KI-Dienst zu geben.
+        </p>
+      </div>
+      <div class="karte">
+        <h3>Wenn Sie NETbrain nicht brauchen</h3>
+        <div class="teiler"></div>
+        <p>
+          Sie suchen ein Dokumentenmanagement mit Revisionssicherheit nach GoBD, ein
+          Intranet mit Redaktionsworkflow für 2.000 Personen oder ein Ticketsystem.
+          Dafür gibt es Besseres, und wir sagen Ihnen das lieber im ersten Gespräch
+          als im dritten Monat.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="abschnitt verlauf">
+  <div class="container">
+    <p class="augenbraue"><i></i><span>FAQ</span></p>
+    <h2>Häufig gestellte Fragen</h2>
+    <div class="faq">
+      <details open>
+        <summary>Wo liegen unsere Daten?</summary>
+        <p>Auf dem Server, den Sie stellen. NETbrain wird als Container je Kunde installiert — im eigenen Rechenzentrum, bei Ihrem Hoster oder auf einer VM Ihrer Wahl. Es gibt keine zentrale NETbrain-Cloud, in der Ihre Inhalte zusammenliefen.</p>
+      </details>
+      <details>
+        <summary>Was passiert mit unserem Wissen, wenn wir KI nutzen?</summary>
+        <p>Nur das, was Sie entscheiden. Betreiben Sie ein Modell im eigenen Haus, verlässt nichts Ihr Netz. Nutzen Sie einen Cloud-Anbieter, geht ausschließlich der jeweils angefragte Ausschnitt dorthin, nicht der Bestand. Wer KI überhaupt nutzen darf, legen Sie in der Administration fest.</p>
+      </details>
+      <details>
+        <summary>Kommen wir wieder heraus, wenn wir wechseln wollen?</summary>
+        <p>Ja. Das Firmenwissen sind Markdown-Dateien mit Metadaten in einem Ordner — kopierbar, lesbar, in jedem Editor zu öffnen. Ein Export ist deshalb kein Projekt, sondern ein Kopiervorgang.</p>
+      </details>
+      <details>
+        <summary>Was kostet NETbrain?</summary>
+        <p>Abgerechnet wird je Installation und Jahr, inklusive Aktualisierungen und einer festen monatlichen Betreuungszeit. Die Zahl der Benutzerkonten ist nicht begrenzt. Den konkreten Preis nennen wir im Erstgespräch, sobald klar ist, wer die KI-Zugänge stellt — das ist der einzige Posten, der je nach Aufstellung variiert.</p>
+      </details>
+      <details>
+        <summary>Was braucht unsere IT?</summary>
+        <p>Eine VM mit Debian oder Ubuntu, 4 GB RAM, Docker und Docker Compose, einen DNS-Namen und einen Reverse-Proxy, der TLS beendet. Die vollständige Liste bekommen Sie vor dem Termin, damit die gemeinsame Stunde Einrichtung ist und kein Proxy-Workshop.</p>
+      </details>
+      <details>
+        <summary>In welchem Stadium ist das Produkt?</summary>
+        <p>NETbrain ist eine junge Software in der Pilotphase und wird bei NETFACTORY selbst täglich eingesetzt. Wir sagen das offen: Wer heute einsteigt, bekommt kurze Wege zur Entwicklung und Einfluss auf die Reihenfolge der nächsten Ausbauschritte — und arbeitet mit einem Produkt, das an manchen Stellen noch wächst.</p>
+      </details>
+      <details>
+        <summary>Wer steht dahinter?</summary>
+        <p>Die NETFACTORY GmbH Internet Service in Fürstenau, seit über zwei Jahrzehnten IT-Dienstleister. NETbrain ist aus dem eigenen Bedarf entstanden. Entwicklung, Betrieb und Betreuung liegen damit in einer Hand und in Deutschland — Ihre Fragen landen bei jemandem, der die Software gebaut hat.</p>
+      </details>
+    </div>
+  </div>
+</section>
+
+<!-- Kontakt -->
+<section class="container" style="padding-block:clamp(4rem,8vw,7rem)">
+  <div class="kontakt" id="kontakt">
+    <div class="orb" aria-hidden="true"></div>
+    <p class="augenbraue"><i class="gruen"></i><span>Kontakt</span></p>
+    <h2>Sehen Sie es sich einmal an.</h2>
+    <p class="lead">
+      Im Erstgespräch schauen wir, wo Ihr Wissen heute liegt und was Ihre Leute
+      heute suchen. Danach zeigen wir NETbrain an Ihren eigenen Beispielen. Wenn es
+      nicht passt, sagen wir Ihnen das.
+    </p>
+    <div class="kontakt-wege">
+      <a class="knopf hell" href="mailto:info@netfactory.de?subject=NETbrain%20%E2%80%93%20Erstgespr%C3%A4ch%20vereinbaren&amp;body=Guten%20Tag%2C%0A%0Awir%20interessieren%20uns%20f%C3%BCr%20NETbrain%20und%20h%C3%A4tten%20gern%20einen%20Termin%20f%C3%BCr%20ein%20Erstgespr%C3%A4ch.%0A%0AUnternehmen%3A%20%0AAnzahl%20Mitarbeiter%3A%20%0AAnsprechpartner%3A%20%0ATelefon%3A%20%0A%0AUnsere%20Ausgangslage%3A%20%0A%0A">Erstgespräch vereinbaren</a>
+      <a class="knopf glas" href="tel:+4959015173600">+49 5901 51736-0</a>
+    </div>
+    <p class="kontakt-fein">
+      NETFACTORY GmbH Internet Service · Kleine Straße 5 · 49584 Fürstenau ·
+      <a href="https://netfactory.de">netfactory.de</a>
+    </p>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="container">
+    <div class="fuss">
+      <div>
+        <div class="fuss-marke">
+          <svg viewBox="0 0 64 64" aria-hidden="true"><g fill="#1BCCC4"><path d="M32 4 58 19 32 34 6 19Z"/><path d="M6 26 27 38 27 61 6 49Z"/><path d="M37 38 58 26 58 49 37 61Z"/></g></svg>
+          <span><b style="font-weight:600">NET</b>brain</span>
+        </div>
+        <p>Wissensplattform für Unternehmen.</p>
+        <div class="absender">
+          <span>Ein Produkt der</span>
+          <img src="bilder/netfactory-logo.svg" alt="NETFACTORY" width="120" height="13">
+        </div>
+      </div>
+      <div>
+        <p>
+          Kleine Straße 5, 49584 Fürstenau<br>
+          Telefon <a href="tel:+4959015173600">+49 5901 51736-0</a><br>
+          <a href="mailto:info@netfactory.de">info@netfactory.de</a><br>
+          <a href="https://netfactory.de">netfactory.de</a>
+        </p>
+      </div>
+      <div>
+        <p>
+          Geschäftsführung: Fabian Stärke<br>
+          Amtsgericht Osnabrück, HRB 20797<br>
+          USt-IdNr. DE 186 434 904
+        </p>
+      </div>
+    </div>
+    <p class="fuss-recht">
+      <a href="https://www.netfactory.de/impressum">Impressum</a>
+      <a href="https://www.netfactory.de/datenschutz">Datenschutz</a>
+    </p>
+    <p class="rechtlich">
+      NETbrain ist proprietäre Software der NETFACTORY GmbH und
+      befindet sich in der Pilotphase. Die Angaben auf dieser Seite beschreiben den
+      Leistungsumfang und stellen kein Angebot im Rechtssinne dar; Umfang, Vergütung
+      und Laufzeit ergeben sich aus der geschlossenen Nutzungsvereinbarung.
+      © 2026 NETFACTORY GmbH Internet Service.
+    </p>
+  </div>
+</footer>
+
+</body>
+</html>

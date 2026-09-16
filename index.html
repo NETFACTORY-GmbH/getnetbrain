@@ -265,14 +265,22 @@
      Es sitzt rechts hinter der Leuchtkugel und wird nach links und unten
      ausgeblendet — die Textspalte bleibt frei, sonst läuft es durch die
      Überschrift. Kein mix-blend-mode: die überlagerte Fläche färbt sonst
-     auch den Knopf in der festen Kopfleiste ein. */
-  .linien{position:absolute; inset:0; z-index:0; pointer-events:none; opacity:.34;
-    background:url("bilder/lines.svg") no-repeat right -4% top -8%;
-    background-size:68% auto;
+     auch den Knopf in der festen Kopfleiste ein.
+     Die Fläche endet an der äußeren gestrichelten Schiene und bleibt im Held:
+     Breite ist das Schienenfeld plus die 4 %, um die `weit-rechts` außen liegt,
+     `overflow:clip` schneidet den Rest ab. Senkrecht begrenzt das
+     `overflow:hidden` am Held. */
+  .linien{position:absolute; top:0; bottom:0; left:50%; transform:translateX(-50%);
+    width:calc(min(var(--container), 100% - 2.5rem) * 1.08);
+    overflow:clip; z-index:0; pointer-events:none; opacity:.34;
+    background:url("bilder/lines.svg") no-repeat right top -8%;
+    background-size:85% auto;
     -webkit-mask-image:linear-gradient(to right, transparent 8%, #000 52%), linear-gradient(to bottom, #000 58%, transparent 92%);
     mask-image:linear-gradient(to right, transparent 8%, #000 52%), linear-gradient(to bottom, #000 58%, transparent 92%);
     -webkit-mask-composite:source-in; mask-composite:intersect}
-  @media(max-width:900px){.linien{background-size:120% auto; background-position:right -20% top 4%; opacity:.26;
+  /* Unter 1200 px gibt es die äußeren Schienen nicht; dann ist das Schienenfeld die Grenze. */
+  @media(max-width:1200px){.linien{width:min(var(--container), 100% - 2.5rem)}}
+  @media(max-width:900px){.linien{background-size:130% auto; background-position:right top 4%; opacity:.26;
     -webkit-mask-image:linear-gradient(to bottom, #000 45%, transparent 85%);
     mask-image:linear-gradient(to bottom, #000 45%, transparent 85%)}}
 
@@ -480,10 +488,10 @@
 <main id="inhalt">
 
 <!-- Held -->
-<section class="held">
+<section class="held container">
   <div class="linien" aria-hidden="true"></div>
   <div class="orb oben" aria-hidden="true"></div>
-  <div class="container">
+  <div>
     <p class="held-pille"><i></i>Wissensplattform von NETFACTORY</p>
     <h1>Ihr Firmenwissen gehört <em>Ihnen</em>.<br class="nurgross"> Auch wenn KI mitliest.</h1>
     <p class="lead">

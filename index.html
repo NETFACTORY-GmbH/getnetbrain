@@ -344,6 +344,26 @@
   .held-belege span{display:inline-flex; align-items:center; gap:.5rem}
   .held-belege i{width:4px; height:4px; border-radius:100%; background:var(--blue); box-shadow:0 1px 2px #14ada680; flex:none}
 
+  /* Illustrationen: reservierter Bildraum und passende Größen je Bildschirm. */
+  .held-layout,.bild-einstieg{display:grid; grid-template-columns:minmax(0,1.1fr) minmax(0,1fr); align-items:center; gap:2rem}
+  .held-layout>*,.bild-einstieg>*{min-width:0}
+  .illustration{margin:0; width:100%}
+  .illustration img{width:100%; height:auto; aspect-ratio:18/11; object-fit:contain}
+  .held-layout .illustration{position:relative}
+  .bild-einstieg .illustration{max-width:34rem; justify-self:center}
+  .illustration-ablauf{max-width:52rem; margin:2rem auto 0}
+  .illustration-ablauf figcaption{display:flex; justify-content:space-around; gap:.75rem; margin-top:.5rem; color:var(--leise); font-size:.875rem; text-align:center}
+  .illustration-ablauf+.funktionen{margin-top:2rem}
+  @media(max-width:900px){
+    .held-layout,.bild-einstieg{grid-template-columns:minmax(0,1fr); gap:2rem}
+    .held-layout .illustration{max-width:36rem; justify-self:center}
+    .held h1{max-width:22ch}
+  }
+  @media(max-width:600px){
+    :root{--rand:1.25rem}
+    .illustration-ablauf figcaption{font-size:.8125rem; gap:.5rem}
+  }
+
   /* Karten — .feature_card: 225°-Glasverlauf, Rand #191919, Radius .625rem */
   .karten{display:grid; gap:1.25rem; margin-top:3.25rem}
   .k3{grid-template-columns:repeat(auto-fit,minmax(17.5rem,1fr))}
@@ -448,6 +468,11 @@
   .fuss-recht a:hover{color:var(--white)}
   .rechtlich{margin-top:1.25rem; font-size:.8125rem; color:#ffffff73; line-height:150%; max-width:80ch}
 
+  @media(max-width:600px){
+    .k2,.k3,.herausforderungen,.gegenueber,.schutz,.schritte{grid-template-columns:minmax(0,1fr)}
+    .kontakt{padding:1.5rem}
+    .kontakt .knopf{max-width:100%; white-space:normal; text-align:center}
+  }
   @media(max-width:700px){.nurgross{display:none}}
   /* Sprungmarke: nur bei Tastaturfokus sichtbar. */
   .sprung{position:absolute; left:-9999px; top:0; z-index:200; padding:.75rem 1.25rem;
@@ -491,6 +516,7 @@
 <section class="held container">
   <div class="linien" aria-hidden="true"></div>
   <div class="orb oben" aria-hidden="true"></div>
+  <div class="held-layout">
   <div>
     <p class="held-pille"><i></i>Wissensplattform von NETFACTORY</p>
     <h1>Das Wissen Ihres Teams.<br class="nurgross"> Für alle auffindbar.<br class="nurgross"> <em>Unter Ihrer Kontrolle.</em></h1>
@@ -510,6 +536,12 @@
       <span><i></i>Wissen als offene Markdown-Dateien</span>
       <span><i></i>Entwicklung und Betreuung aus Fürstenau</span>
     </p>
+  </div>
+  <figure class="illustration">
+    <img src="bilder/illustrationen/netbrain-wissensfluss.svg"
+        width="720" height="440" fetchpriority="high" decoding="async"
+        alt="Vernetzte Dokumente bilden einen gemeinsamen Wissensbestand.">
+  </figure>
   </div>
 </section>
 
@@ -602,6 +634,12 @@
       Ein Wissensbestand hilft, wenn Menschen ihn nutzen und pflegen. NETbrain
       unterstützt Ihr Team vom ersten Entwurf bis zur nächsten fachlichen Prüfung.
     </p>
+    <figure class="illustration illustration-ablauf">
+      <img src="bilder/illustrationen/netbrain-freigabeprozess.svg"
+        width="960" height="390" loading="lazy" decoding="async"
+        alt="Beiträge durchlaufen eine Prüfung und werden als freigegebenes Wissen gemeinsam nutzbar.">
+      <figcaption><span>Wissen beitragen</span><span>Prüfen &amp; freigeben</span><span>Gemeinsam nutzen</span></figcaption>
+    </figure>
     <div class="funktionen">
       <div class="funktion">
         <p class="nr">Erfassen</p>
@@ -671,12 +709,21 @@
 <!-- Datenhoheit -->
 <section class="abschnitt" id="datenhoheit">
   <div class="container">
+    <div class="bild-einstieg">
+    <div>
     <p class="augenbraue"><i></i><span>Datenhoheit</span></p>
     <h2>Ihr Server. Ihr Wissen. Ihre Entscheidung.</h2>
     <p class="lead">
       Sie bestimmen, wo NETbrain läuft und welche KI-Anbieter Ihr Team nutzen darf.
       Ihr Firmenwissen bleibt in einem offenen Dateiformat auf Ihrem Server.
     </p>
+    </div>
+    <figure class="illustration">
+      <img src="bilder/illustrationen/netbrain-datenhoheit.svg"
+        width="720" height="440" loading="lazy" decoding="async"
+        alt="Server und Firmenwissen innerhalb der eigenen Infrastruktur.">
+    </figure>
+    </div>
     <div class="schutz">
       <div>
         <div class="strich"></div>
@@ -888,3 +935,8 @@
 
 </body>
 </html>
+
+
+Zertifikat für den Namen brauchen wir noch.. aktuell bricht TLS mit unrecognized name ab..
+Forwarded-For setzen und einen vom Client mitgeschickten Wert überschreiben, nicht anhängen.
+Nur /activate, /feedback, /health durchlassen, der Rest 404.

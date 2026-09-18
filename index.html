@@ -454,6 +454,36 @@
   details[open] summary::after{transform:rotate(-135deg); top:1.85rem}
   details p{padding:0 1rem 1.375rem 0; font-size:.9375rem; line-height:150%; max-width:70ch}
 
+  /* Selbst starten */
+  .starten{display:grid; gap:1.875rem; align-items:start; margin-top:3.25rem}
+  /* Ohne min-width:0 waechst ein Rasterkind mit seinem laengsten Inhalt, statt
+     ihn scrollen zu lassen — der Befehl sprengte damit auf dem Telefon die Seite. */
+  .starten > *{min-width:0}
+  @media (min-width:768px){ .starten{grid-template-columns:1.15fr .85fr; gap:2.5rem} }
+  .befehl{
+    background-image:linear-gradient(225deg,#ffffff1a,#ffffff12);
+    border:.0625rem solid var(--carbon); border-radius:var(--radius);
+    padding:1.25rem 1.25rem 1rem; transition:border-color .2s ease;
+  }
+  .befehl:hover{border-color:#ffffff26}
+  .befehl-kopf{display:flex; align-items:center; justify-content:space-between; gap:1rem; margin-bottom:.75rem}
+  .befehl-kopf span{color:var(--leise); font-size:.9375rem; letter-spacing:.06em; text-transform:uppercase; font-weight:500}
+  .befehl pre{margin:0; overflow-x:auto; padding-bottom:.25rem}
+  .befehl code{
+    font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,"Liberation Mono",monospace;
+    font-size:.9375rem; line-height:165%; color:#fff;
+    /* Umbruch nur an den Leerzeichen des Befehls: Sichtbar bleibt alles, und wer
+       von Hand markiert, kopiert trotzdem genau eine Zeile. */
+    white-space:pre-wrap; word-break:normal; overflow-wrap:break-word;
+  }
+  .befehl code .prompt{color:var(--blue); user-select:none}
+  .befehl-fein{margin-top:.875rem; color:var(--leise); font-size:.9375rem; line-height:150%}
+  .voraussetzungen{list-style:none; display:grid; gap:.875rem}
+  .voraussetzungen li{position:relative; padding-left:1.5rem; color:var(--paragraph_white); line-height:155%}
+  .voraussetzungen li::before{content:""; position:absolute; left:0; top:.6em; width:6px; height:6px;
+    border-radius:100%; background:var(--blue); box-shadow:0 1px 2px #14ada680}
+  .voraussetzungen b{color:var(--white); font-weight:500}
+
   /* Kontakt */
   .kontakt{position:relative; overflow:hidden; border:.0625rem solid var(--carbon); border-radius:var(--radius);
     padding:clamp(2rem,5vw,4rem); background-image:linear-gradient(225deg,#ffffff1a,#ffffff12); isolation:isolate}
@@ -518,6 +548,7 @@
       <a href="#loesung">Lösung</a>
       <a href="#datenhoheit">Datenhoheit</a>
       <a href="#ablauf">Ablauf</a>
+      <a href="#selbst-starten">Selbst testen</a>
       <a class="knopf hell" href="#kontakt"><span class="lang">Live-Demo vereinbaren</span><span class="kurz">Kontakt</span></a>
     </nav>
   </div>
@@ -906,6 +937,48 @@
   </div>
 </section>
 
+<div class="trennlinie" data-linie="h"></div>
+
+<!-- Selbst starten -->
+<section class="abschnitt" id="selbst-starten">
+  <div class="container">
+    <p class="augenbraue"><i></i><span>Selbst ausprobieren</span></p>
+    <h2>Sieben Tage testen. Ein Befehl, keine Anmeldung.</h2>
+    <p class="lead">
+      Sie müssen auf nichts warten. NETbrain läuft auf Ihrem eigenen Server, und
+      die ersten sieben Tage brauchen Sie dafür keine Lizenz — nur einen Befehl.
+      Ihre Notizen und Konten bleiben danach erhalten.
+    </p>
+    <div class="starten">
+      <div class="befehl">
+        <div class="befehl-kopf">
+          <span>Auf Ihrem Server</span>
+          <button type="button" class="knopf klein" data-kopieren
+            data-befehl="curl -fsSL https://getnetbrain.netfactory.de/install.sh | sudo bash">Befehl kopieren</button>
+        </div>
+        <pre><code><span class="prompt">$ </span>curl -fsSL https://getnetbrain.netfactory.de/install.sh | sudo bash</code></pre>
+        <p class="befehl-fein">
+          Das Skript lädt NETbrain, richtet den Dienst ein und nennt Ihnen zum
+          Schluss die Adresse und das Einmal-Token für die Ersteinrichtung im
+          Browser. Nichts davon verlässt Ihren Server.
+        </p>
+      </div>
+      <div>
+        <ul class="voraussetzungen">
+          <li><b>Linux-Server mit Docker.</b> Zwei Kerne und 4 GB Arbeitsspeicher genügen für den Anfang.</li>
+          <li><b>Ein Reverse-Proxy mit TLS.</b> NETbrain spricht im Container nur HTTP und ist bewusst nicht selbst aus dem Netz erreichbar.</li>
+          <li><b>Ein DNS-Name</b>, unter dem Ihr Team die Installation aufruft.</li>
+        </ul>
+        <p class="befehl-fein">
+          Nach den sieben Tagen wird eine Lizenz benötigt. Sie erhalten sie von
+          uns; bis dahin bleibt alles erhalten, was Sie angelegt haben. Wenn Sie
+          lieber begleitet einsteigen: <a href="#kontakt">Wir richten es mit Ihnen gemeinsam ein.</a>
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- Kontakt -->
 <section class="container" style="padding-block:clamp(4rem,8vw,7rem)">
   <div class="kontakt" id="kontakt">
@@ -975,10 +1048,24 @@
   </div>
 </footer>
 
+<script>
+  // Kopieren ohne Bibliothek. Schlaegt die Zwischenablage fehl (aelterer Browser,
+  // kein sicherer Kontext), bleibt der Befehl im Markup markierbar — deshalb
+  // steht er dort als Text und nicht nur im data-Attribut.
+  document.querySelectorAll('[data-kopieren]').forEach((knopf) => {
+    knopf.addEventListener('click', async () => {
+      const text = knopf.dataset.befehl;
+      const vorher = knopf.textContent;
+      try {
+        await navigator.clipboard.writeText(text);
+        knopf.textContent = 'Kopiert';
+      } catch {
+        knopf.textContent = 'Bitte von Hand markieren';
+      }
+      setTimeout(() => { knopf.textContent = vorher; }, 2500);
+    });
+  });
+</script>
+
 </body>
 </html>
-
-
-Zertifikat für den Namen brauchen wir noch.. aktuell bricht TLS mit unrecognized name ab..
-Forwarded-For setzen und einen vom Client mitgeschickten Wert überschreiben, nicht anhängen.
-Nur /activate, /feedback, /health durchlassen, der Rest 404.

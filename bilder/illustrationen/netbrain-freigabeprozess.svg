@@ -5,19 +5,34 @@
     <linearGradient id="p" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#202020"/><stop offset="1" stop-color="#0d0d0d"/></linearGradient>
     <filter id="g" x="-80%" y="-80%" width="260%" height="260%"><feGaussianBlur stdDeviation="10"/></filter>
     <pattern id="grid" width="18" height="18" patternUnits="userSpaceOnUse"><path d="M18 0H0V18" fill="none" stroke="#fff" stroke-opacity=".025"/></pattern>
+    <style>
+      .prozesslinie{stroke-dasharray:1;stroke-dashoffset:1;animation:linie 1.65s ease-out .18s both}
+      .station{opacity:0;animation:station .42s ease-out both}
+      .s1{animation-delay:.08s}.s2{animation-delay:.52s}.s3{animation-delay:.96s}.s4{animation-delay:1.4s}
+      .prozesspunkt{opacity:0;animation:punkt .2s ease-out both}
+      .p1{animation-delay:.48s}.p2{animation-delay:.92s}.p3{animation-delay:1.36s}
+      @keyframes linie{to{stroke-dashoffset:0}}
+      @keyframes station{from{opacity:0}to{opacity:1}}
+      @keyframes punkt{from{opacity:0}to{opacity:1}}
+      @media (prefers-reduced-motion:reduce){
+        .prozesslinie{stroke-dashoffset:0;animation:none}
+        .station,.prozesspunkt{opacity:1;animation:none}
+      }
+    </style>
   </defs>
   <rect width="960" height="390" fill="url(#grid)"/>
   <path d="M118 195H842" stroke="#fff" stroke-opacity=".1" stroke-dasharray="4 7"/>
-  <g fill="#1bccc4"><circle cx="230" cy="195" r="4"/><circle cx="480" cy="195" r="4"/><circle cx="730" cy="195" r="4"/></g>
+  <path class="prozesslinie" pathLength="1" d="M118 195H842" stroke="#1bccc4" stroke-opacity=".24"/>
+  <g fill="#1bccc4"><circle class="prozesspunkt p1" cx="230" cy="195" r="4"/><circle class="prozesspunkt p2" cx="480" cy="195" r="4"/><circle class="prozesspunkt p3" cx="730" cy="195" r="4"/></g>
   <g font-family="Arial,Helvetica,sans-serif">
-    <g transform="translate(28 34)">
+    <g class="station s1" transform="translate(28 34)">
       <rect width="204" height="310" rx="10" fill="url(#p)" stroke="#fff" stroke-opacity=".1"/>
       <rect x="16" y="16" width="78" height="24" rx="12" fill="#171717" stroke="#fff" stroke-opacity=".13"/><circle cx="30" cy="28" r="3" fill="#1bccc4"/><text x="40" y="32" fill="#bbb" font-size="10">01 · Beitrag</text>
       <text x="16" y="70" fill="#fff" font-size="16">Wissen einreichen</text><text x="16" y="90" fill="#818181" font-size="11">Text, Link oder Bild hinzufügen</text>
       <g transform="translate(35 125)"><rect width="134" height="112" rx="7" fill="#111" stroke="#fff" stroke-opacity=".12"/><rect x="16" y="17" width="102" height="13" rx="3" fill="#1c1c1c"/><path d="M21 23h45" stroke="#606060" stroke-width="3" stroke-linecap="round"/><rect x="16" y="44" width="102" height="40" rx="4" fill="#171717" stroke="#fff" stroke-opacity=".08"/><path d="M26 72l15-16 12 11 13-13 25 26" fill="none" stroke="#1bccc4" stroke-opacity=".7"/><circle cx="88" cy="55" r="4" fill="#92e188"/><rect x="16" y="94" width="72" height="5" rx="2" fill="#333"/></g>
       <rect x="35" y="256" width="134" height="31" rx="5" fill="#1bccc4" fill-opacity=".12" stroke="#1bccc4" stroke-opacity=".3"/><text x="102" y="276" fill="#1bccc4" font-size="11" text-anchor="middle">Zur Aufbereitung</text>
     </g>
-    <g transform="translate(268 34)">
+    <g class="station s2" transform="translate(268 34)">
       <rect width="204" height="310" rx="10" fill="url(#p)" stroke="#fff" stroke-opacity=".1"/>
       <rect x="16" y="16" width="96" height="24" rx="12" fill="#171717" stroke="#fff" stroke-opacity=".13"/><circle cx="30" cy="28" r="3" fill="#1bccc4"/><text x="40" y="32" fill="#bbb" font-size="11">02 · Entwurf</text>
       <text x="16" y="70" fill="#fff" font-size="16">KI strukturiert</text><text x="16" y="90" fill="#818181" font-size="11">Titel, Zusammenfassung, Tags</text>
@@ -25,14 +40,14 @@
       <g transform="translate(42 116)"><rect width="120" height="139" rx="7" fill="#161616" stroke="#1bccc4" stroke-opacity=".35"/><rect x="15" y="16" width="58" height="7" rx="3" fill="#1bccc4" fill-opacity=".7"/><path d="M15 41h89M15 52h78M15 63h84M15 87h91M15 98h66" stroke="#505050" stroke-width="4" stroke-linecap="round"/><g transform="translate(15 115)"><rect width="32" height="14" rx="7" fill="#1bccc4" fill-opacity=".14"/><rect x="38" width="40" height="14" rx="7" fill="#92e188" fill-opacity=".12"/></g></g>
       <text x="102" y="280" fill="#92e188" font-size="11" text-anchor="middle">Entwurf fertig zur Prüfung</text>
     </g>
-    <g transform="translate(508 34)">
+    <g class="station s3" transform="translate(508 34)">
       <rect width="204" height="310" rx="10" fill="url(#p)" stroke="#fff" stroke-opacity=".1"/>
       <rect x="16" y="16" width="91" height="24" rx="12" fill="#171717" stroke="#fff" stroke-opacity=".13"/><circle cx="30" cy="28" r="3" fill="#92e188"/><text x="40" y="32" fill="#bbb" font-size="11">03 · Prüfung</text>
       <text x="16" y="70" fill="#fff" font-size="16">Kurator entscheidet</text><text x="16" y="90" fill="#818181" font-size="11">prüfen, ergänzen, freigeben</text>
       <g transform="translate(25 120)"><rect width="154" height="119" rx="8" fill="#111" stroke="#fff" stroke-opacity=".12"/><circle cx="33" cy="32" r="15" fill="#1c1c1c" stroke="#fff" stroke-opacity=".12"/><path d="M27 33l4 4 8-10" fill="none" stroke="#92e188" stroke-width="2.5"/><text x="57" y="29" fill="#fff" font-size="12">Inhalt geprüft</text><text x="57" y="45" fill="#777" font-size="10">fachlich korrekt</text><path d="M16 64h122" stroke="#fff" stroke-opacity=".08"/><circle cx="28" cy="84" r="4" fill="#1bccc4"/><text x="41" y="88" fill="#aaa" font-size="10">Verantwortung gesetzt</text><circle cx="28" cy="103" r="4" fill="#1bccc4"/><text x="41" y="107" fill="#aaa" font-size="10">Prüftermin gesetzt</text></g>
       <rect x="25" y="257" width="154" height="31" rx="5" fill="#92e188" fill-opacity=".12" stroke="#92e188" stroke-opacity=".3"/><text x="102" y="277" fill="#92e188" font-size="11" text-anchor="middle">Freigeben</text>
     </g>
-    <g transform="translate(748 34)">
+    <g class="station s4" transform="translate(748 34)">
       <rect width="184" height="310" rx="10" fill="url(#p)" stroke="#92e188" stroke-opacity=".22"/>
       <rect x="16" y="16" width="105" height="24" rx="12" fill="#171717" stroke="#fff" stroke-opacity=".13"/><circle cx="30" cy="28" r="3" fill="#92e188"/><text x="40" y="32" fill="#bbb" font-size="10">04 · Veröffentlicht</text>
       <text x="16" y="70" fill="#fff" font-size="16">Gemeinsam nutzbar</text><text x="16" y="90" fill="#818181" font-size="11">auffindbar für das ganze Team</text>

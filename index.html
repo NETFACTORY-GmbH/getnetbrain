@@ -385,6 +385,19 @@
   .zeichen.gruen svg{stroke:var(--green)}
   .karte .teiler{height:.0625rem; background:var(--linie); margin:1.25rem 0}
 
+  /* Atmosphärische Produktmotive ergänzen die erklärenden SVG-Diagramme. */
+  .produktbilder{display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:1.25rem; margin-top:3.25rem}
+  .produktbild{margin:0; min-width:0; overflow:hidden; border:.0625rem solid var(--carbon);
+    border-radius:var(--radius); background:#000}
+  .produktbild picture,.produktbild img{display:block; width:100%}
+  .produktbild img{height:auto; aspect-ratio:3/2; object-fit:contain}
+  .produktbild figcaption{padding:1.125rem 1.25rem 1.25rem; border-top:1px solid var(--linie);
+    background-image:linear-gradient(225deg,#ffffff12,#ffffff08)}
+  .produktbild strong{display:block; margin-bottom:.25rem; font-size:1rem}
+  .produktbild span{display:block; color:var(--leise); font-size:.875rem; line-height:145%}
+  @media(max-width:900px){.produktbilder{grid-template-columns:repeat(auto-fit,minmax(min(100%,17rem),1fr))}}
+  @media(max-width:600px){.produktbilder{grid-template-columns:minmax(0,1fr)}}
+
   /* Herausforderungen */
   .herausforderungen{display:grid; gap:1.75rem 2.5rem; margin-top:3.25rem; grid-template-columns:repeat(auto-fit,minmax(18rem,1fr))}
   .herausforderung{padding-top:1.25rem; border-top:1px solid var(--linie)}
@@ -619,6 +632,35 @@
           Gespeicherte Chatverläufe sind Ende-zu-Ende verschlüsselt.
         </p>
       </div>
+    </div>
+    <div class="produktbilder" aria-label="NETbrain im Überblick">
+      <figure class="produktbild">
+        <picture>
+          <source media="(max-width:600px)" srcset="bilder/illustrationen/firmenwissen-hero-transparent-v2-600.webp">
+          <img src="bilder/illustrationen/firmenwissen-hero-transparent-v2-1200.webp"
+            width="1200" height="800" loading="lazy" decoding="async"
+            alt="Mehrere Dokumente sind mit einem zentralen Wissensbestand verbunden.">
+        </picture>
+        <figcaption><strong>Gemeinsamer Bestand</strong><span>Wissen wird für das ganze Team auffindbar.</span></figcaption>
+      </figure>
+      <figure class="produktbild">
+        <picture>
+          <source media="(max-width:600px)" srcset="bilder/illustrationen/wissen-freigabe-600.webp">
+          <img src="bilder/illustrationen/wissen-freigabe-1200.webp"
+            width="1200" height="800" loading="lazy" decoding="async"
+            alt="Ein Beitrag wird geprüft und anschließend in den Wissensbestand übernommen.">
+        </picture>
+        <figcaption><strong>Geprüft vor der Freigabe</strong><span>Ein klarer Weg vom Beitrag zum verlässlichen Wissen.</span></figcaption>
+      </figure>
+      <figure class="produktbild">
+        <picture>
+          <source media="(max-width:600px)" srcset="bilder/illustrationen/datenhoheit-server-600.webp">
+          <img src="bilder/illustrationen/datenhoheit-server-1200.webp"
+            width="1200" height="800" loading="lazy" decoding="async"
+            alt="Server und Dokumente befinden sich innerhalb einer geschützten Systemgrenze.">
+        </picture>
+        <figcaption><strong>Betrieb unter Ihrer Kontrolle</strong><span>Installation und Firmenwissen bleiben bei Ihnen.</span></figcaption>
+      </figure>
     </div>
   </div>
 </section>

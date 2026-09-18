@@ -2,15 +2,18 @@
 
 Die Salesseite verwendet drei schematische SVG-Grafiken in der visuellen Sprache der NETFACTORY-Hauptseite: dunkle Interface-Karten, feine Verbindungen und wenige Akzente in Türkis (#1bccc4) und Mint (#92e188). Die Inhalte erklären konkrete NETbrain-Abläufe und bleiben auf jedem Bildschirm scharf.
 
-In index.html eingebunden: Wissensfluss im Einstieg, Freigabeprozess im Abschnitt „Im Alltag“ und Systemgrenze bei „Datenhoheit“.
+In index.html eingebunden: Wissensfluss im Einstieg, Freigabeprozess im Abschnitt „Im Alltag“ und Systemgrenze bei „Datenhoheit“. Die drei zuvor erzeugten 3D-Motive ergänzen den Lösungsabschnitt als atmosphärische Bildstrecke.
 
 | Datei | Einsatz | Alternativtext |
 |---|---|---|
 | [netbrain-wissensfluss.svg](netbrain-wissensfluss.svg) | Einstieg | Vom Beitrag zum geprüften Firmenwissen und zur Nutzung über Suche und KI-Chat. |
 | [netbrain-freigabeprozess.svg](netbrain-freigabeprozess.svg) | Abschnitt „Im Alltag“ | Einreichen, aufbereiten, prüfen und gemeinsam nutzen. |
 | [netbrain-datenhoheit.svg](netbrain-datenhoheit.svg) | Abschnitt „Datenhoheit“ | Eigene Installation, lokale Notizen und frei wählbare KI-Anbindung. |
+| [firmenwissen-hero-transparent-v2.png](firmenwissen-hero-transparent-v2.png) | Bildstrecke im Lösungsabschnitt | Vernetzte Dokumente bilden einen gemeinsamen Wissensbestand. |
+| [wissen-freigabe.png](wissen-freigabe.png) | Bildstrecke im Lösungsabschnitt | Ein Beitrag wird geprüft und in den gemeinsamen Bestand übernommen. |
+| [datenhoheit-server.png](datenhoheit-server.png) | Bildstrecke im Lösungsabschnitt | Server und Firmenwissen innerhalb der eigenen Infrastruktur. |
 
-Die SVGs haben transparente Flächen, feste Seitenverhältnisse und benötigen keinen CSS-Mischmodus. Das Einstiegsbild wird priorisiert, die beiden übrigen Grafiken werden verzögert geladen. Die zuvor erzeugten PNG- und WebP-Motive bleiben als nicht verwendete Entwürfe im Ordner erhalten.
+Die SVGs haben transparente Flächen, feste Seitenverhältnisse und benötigen keinen CSS-Mischmodus. Das Einstiegsbild wird priorisiert, alle weiteren Grafiken werden verzögert geladen. Für die 3D-Motive verwendet die Seite responsive WebP-Fassungen mit 600 und 1200 Pixel Breite; die PNG-Originale bleiben als Quelldateien erhalten.
 
 ## Verwendete Prompts
 

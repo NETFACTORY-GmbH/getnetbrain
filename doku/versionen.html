@@ -27,7 +27,7 @@
     <nav aria-label="Hauptnavigation">
       <a href="../">Produkt</a>
       <a href="../#selbst-starten">Selbst testen</a>
-      <a href="versionen.html">Version 0.4.9</a>
+      <a href="versionen.html">Version 0.4.10</a>
       <a class="knopf" href="mailto:info@netfactory.de?subject=NETbrain%20%E2%80%93%20Frage%20zur%20Dokumentation">Frage stellen</a>
     </nav>
   </div>
@@ -48,6 +48,13 @@
     <p class="brotkrumen"><a href="../">NETbrain</a><span aria-hidden="true">/</span><a href="index.html">Dokumentation</a><span aria-hidden="true">/</span><span>Hilfe</span></p>
     <h1>Versionshinweise</h1>
 <p class="einleitung">Was sich mit jeder Version geändert hat. Steht unter <strong>Status</strong> ein Hinweis, lesen Sie ihn vor dem Update; wie das Update selbst abläuft, steht unter <a href="aktualisieren.html">Aktualisieren</a>.</p>
+<h2 id="v0-4-10">NETbrain 0.4.10<a class="anker" href="#v0-4-10" aria-label="Verweis auf diesen Abschnitt">#</a></h2>
+<p><strong>Stand:</strong> 1. Oktober 2026</p>
+<p><strong>Status:</strong> Keine Eingriffe nötig; Daten und Lizenzen bleiben unverändert.</p>
+<h3 id="kundenportal-schluessel-eintragen">Kundenportal: Schlüssel eintragen<a class="anker" href="#kundenportal-schluessel-eintragen" aria-label="Verweis auf diesen Abschnitt">#</a></h3>
+<p>Der Kopplungsschlüssel lässt sich jetzt auch eintragen statt erzeugen — unter <strong>Verwaltung → Kundenportal → Schlüssel eintragen</strong> und im Einrichtungsassistenten. So kann eine App-Plattform den Schlüssel vorgeben (<code>PORTAL_SYNC_KEY</code>) und mit der Portal-Adresse anzeigen; am Portal selbst ist nichts einzurichten. NETbrain gleicht nach dem Eintragen sofort ab.</p>
+<h3 id="weitere-aenderungen">Weitere Änderungen<a class="anker" href="#weitere-aenderungen" aria-label="Verweis auf diesen Abschnitt">#</a></h3>
+<ul><li>Nach dem Aktivieren einer Lizenz bestätigt die Lizenzseite und leitet zur Anwendung weiter.</li><li>Wissensseiten: Aktionen stehen neben dem Titel, der Portal-Status als Zeile darunter.</li><li>Kundenportal: Das Logo erscheint im richtigen Seitenverhältnis.</li></ul>
 <h2 id="v0-4-9">NETbrain 0.4.9<a class="anker" href="#v0-4-9" aria-label="Verweis auf diesen Abschnitt">#</a></h2>
 <p><strong>Stand:</strong> 1. Oktober 2026</p>
 <p><strong>Status:</strong> Keine Eingriffe nötig; Daten und Lizenzen bleiben unverändert.</p>
@@ -77,7 +84,7 @@
 <p><strong>Status:</strong> Keine Eingriffe nötig; bestehende Installationen und Lizenzen laufen unverändert weiter.</p>
 <h3 id="einrichtung-hinter-einem-https-proxy">Einrichtung hinter einem HTTPS-Proxy<a class="anker" href="#einrichtung-hinter-einem-https-proxy" aria-label="Verweis auf diesen Abschnitt">#</a></h3>
 <p>Hinter einem Reverse-Proxy oder Ingress, der TLS beendet, brach jedes Formular — zuerst die Eingabe des Einrichtungs-Tokens — mit „Cross-site POST form submissions are forbidden" ab. Behoben: NETbrain erkennt die HTTPS-Adresse des eigenen Hostnamens jetzt auch dann als eigene Herkunft, wenn der Proxy per HTTP weiterreicht. Voraussetzung: Der Proxy lässt den <code>Host</code>-Header unverändert. <code>NETBRAIN_ALLOWED_HOSTS</code> ist dafür nicht nötig.</p>
-<h3 id="weitere-aenderungen">Weitere Änderungen<a class="anker" href="#weitere-aenderungen" aria-label="Verweis auf diesen Abschnitt">#</a></h3>
+<h3 id="weitere-aenderungen-2">Weitere Änderungen<a class="anker" href="#weitere-aenderungen-2" aria-label="Verweis auf diesen Abschnitt">#</a></h3>
 <ul><li>Firmenwissen aus dem Gesprächsverlauf geht nur mit Zustimmung an einen Cloud-Anbieter.</li><li>Große Wissensbestände werden langsamer statt unbenutzbar.</li><li>Testlizenz mit dynamischem Ablaufdatum; neue Favicons und Logo.</li></ul>
 <h2 id="v0-4-5">NETbrain 0.4.5<a class="anker" href="#v0-4-5" aria-label="Verweis auf diesen Abschnitt">#</a></h2>
 <p><strong>Stand:</strong> 21. September 2026</p>
@@ -187,9 +194,9 @@
 <h3 id="versionshinweis">Versionshinweis<a class="anker" href="#versionshinweis" aria-label="Verweis auf diesen Abschnitt">#</a></h3>
 <p>Version <strong>0.2.0</strong> ist das erste größere, abwärtskompatible Funktionsupdate nach dem Pilotstand 0.1.0. Bestehende Daten und Konten bleiben beim Update erhalten.</p>
     <nav class="blaettern" aria-label="Weiterblättern"><a class="zurueck" href="fehlerbehebung.html"><span>Zurück</span><b>Fehlerbehebung</b></a></nav>
-    <p class="stand">Stand: NETbrain 0.4.9. Fehlt etwas oder stimmt etwas nicht? <a href="mailto:info@netfactory.de?subject=NETbrain-Dokumentation%3A%20versionen">Schreiben Sie uns.</a></p>
+    <p class="stand">Stand: NETbrain 0.4.10. Fehlt etwas oder stimmt etwas nicht? <a href="mailto:info@netfactory.de?subject=NETbrain-Dokumentation%3A%20versionen">Schreiben Sie uns.</a></p>
   </main>
-  <aside class="auf-dieser-seite" aria-label="Auf dieser Seite"><p>Auf dieser Seite</p><ul><li><a href="#v0-4-9">NETbrain 0.4.9</a></li><li><a href="#v0-4-8">NETbrain 0.4.8</a></li><li><a href="#v0-4-7">NETbrain 0.4.7</a></li><li><a href="#v0-4-6">NETbrain 0.4.6</a></li><li><a href="#v0-4-5">NETbrain 0.4.5</a></li><li><a href="#v0-4-4">NETbrain 0.4.4</a></li><li><a href="#v0-4-3">NETbrain 0.4.3</a></li><li><a href="#v0-4-2">NETbrain 0.4.2</a></li><li><a href="#v0-4-0">NETbrain 0.4.0</a></li><li><a href="#v0-3-0">NETbrain 0.3.0</a></li><li><a href="#v0-2-1">NETbrain 0.2.1</a></li><li><a href="#v0-2-0">NETbrain 0.2.0</a></li></ul></aside>
+  <aside class="auf-dieser-seite" aria-label="Auf dieser Seite"><p>Auf dieser Seite</p><ul><li><a href="#v0-4-10">NETbrain 0.4.10</a></li><li><a href="#v0-4-9">NETbrain 0.4.9</a></li><li><a href="#v0-4-8">NETbrain 0.4.8</a></li><li><a href="#v0-4-7">NETbrain 0.4.7</a></li><li><a href="#v0-4-6">NETbrain 0.4.6</a></li><li><a href="#v0-4-5">NETbrain 0.4.5</a></li><li><a href="#v0-4-4">NETbrain 0.4.4</a></li><li><a href="#v0-4-3">NETbrain 0.4.3</a></li><li><a href="#v0-4-2">NETbrain 0.4.2</a></li><li><a href="#v0-4-0">NETbrain 0.4.0</a></li><li><a href="#v0-3-0">NETbrain 0.3.0</a></li><li><a href="#v0-2-1">NETbrain 0.2.1</a></li><li><a href="#v0-2-0">NETbrain 0.2.0</a></li></ul></aside>
 </div>
 <footer>
   <div class="fuss">

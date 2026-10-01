@@ -328,6 +328,21 @@
   .kopf .knopf .kurz{display:none}
   @media(max-width:1120px){.kopf nav a[href="#herausforderungen"],.kopf nav a[href="#ablauf"]{display:none}}
   @media(max-width:900px){.kopf nav a:not(.knopf){display:none} .kopf nav{gap:.75rem}}
+  /* Menü fürs Telefon: unter 900 px stehen die Abschnitte hinter einem Knopf. */
+  .menue-knopf{display:none; width:2.5rem; height:2.5rem; place-items:center; padding:0; border-radius:var(--radius-knopf);
+    border:1px solid #ffffff0d; background:#ffffff1a; color:#fff; cursor:pointer; box-shadow:var(--schatten-innen); transition:all .3s}
+  .menue-knopf:hover{background-color:#ffffff26}
+  .menue-knopf svg{width:1.25rem; height:1.25rem; fill:none; stroke:currentColor; stroke-width:1.8; stroke-linecap:round}
+  .menue-knopf .auf,.menue-knopf[aria-expanded="true"] .zu{display:none}
+  .menue-knopf[aria-expanded="true"] .auf{display:inline}
+  .menue{display:flex; flex-direction:column; padding-block:.5rem 1.25rem; border-top:1px solid var(--linie)}
+  .menue[hidden]{display:none}
+  header:has(.menue:not([hidden])){background-color:#000000eb}
+  .menue a{padding:.75rem 0; color:var(--paragraph_white); font-size:1.0625rem; border-bottom:1px solid var(--linie); transition:all .3s}
+  .menue a:last-child{border-bottom:0}
+  .menue a:hover{color:var(--white)}
+  @media(max-width:900px){.menue-knopf{display:grid}}
+  @media(min-width:901px){.menue{display:none!important}}
   @media(max-width:600px){.kopf .knopf .lang{display:none} .kopf .knopf .kurz{display:inline} .marke img{width:160px}}
 
   /* Held */
@@ -605,8 +620,19 @@
       <a href="#selbst-starten">Selbst testen</a>
       <a href="doku/">Dokumentation</a>
       <a class="knopf hell" href="#kontakt"><span class="lang">Live-Demo vereinbaren</span><span class="kurz">Kontakt</span></a>
+      <button type="button" class="menue-knopf" aria-expanded="false" aria-controls="menue" aria-label="Menü öffnen">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path class="zu" d="M4 7h16M4 12h16M4 17h16"/><path class="auf" d="M6 6l12 12M18 6L6 18"/></svg>
+      </button>
     </nav>
   </div>
+  <nav class="menue container" id="menue" aria-label="Menü" hidden>
+    <a href="#herausforderungen">Herausforderungen</a>
+    <a href="#loesung">Lösung</a>
+    <a href="#datenhoheit">Datenhoheit</a>
+    <a href="#ablauf">Ablauf</a>
+    <a href="#selbst-starten">Selbst testen</a>
+    <a href="doku/">Dokumentation</a>
+  </nav>
 </header>
 
 <main id="inhalt">
@@ -1143,6 +1169,20 @@
 </footer>
 
 <script>
+  // Menü fürs Telefon
+  (() => {
+    const knopf = document.querySelector('.menue-knopf');
+    const menue = document.getElementById('menue');
+    if (!knopf || !menue) return;
+    const setzen = (offen) => {
+      menue.hidden = !offen;
+      knopf.setAttribute('aria-expanded', String(offen));
+      knopf.setAttribute('aria-label', offen ? 'Menü schließen' : 'Menü öffnen');
+    };
+    knopf.addEventListener('click', () => setzen(menue.hidden));
+    menue.addEventListener('click', (e) => { if (e.target.closest('a')) setzen(false); });
+    document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && !menue.hidden) { setzen(false); knopf.focus(); } });
+  })();
   // Kopieren ohne Bibliothek. Schlaegt die Zwischenablage fehl (aelterer Browser,
   // kein sicherer Kontext), bleibt der Befehl im Markup markierbar — deshalb
   // steht er dort als Text und nicht nur im data-Attribut.

@@ -27,7 +27,7 @@
     <nav aria-label="Hauptnavigation">
       <a href="../">Produkt</a>
       <a href="../#selbst-starten">Selbst testen</a>
-      <a href="versionen.html">Version 0.4.9</a>
+      <a href="versionen.html">Version 0.4.10</a>
       <a class="knopf" href="mailto:info@netfactory.de?subject=NETbrain%20%E2%80%93%20Frage%20zur%20Dokumentation">Frage stellen</a>
     </nav>
   </div>
@@ -53,12 +53,16 @@
 <ul><li>Freigegeben wird <strong>der Stand zum Zeitpunkt der Freigabe</strong>. Ändert jemand die Seite danach, geht die Änderung nicht unbemerkt hinaus: NETbrain zeigt „die Seite wurde seitdem geändert“, und Sie veröffentlichen den neuen Stand bewusst.</li><li>Links zeigen nur auf ebenfalls freigegebene Seiten; Verweise auf Unveröffentlichtes werden zu Text. Nachweise, Anhänge und interne Angaben gehen nicht mit.</li><li>NETbrain gleicht bei jeder Freigabe und alle zehn Minuten ab. Läuft die Lizenz aus und gleicht NETbrain nicht mehr ab, verschwinden die Inhalte nach acht Tagen von selbst.</li></ul>
 <h2 id="portal-container-starten">Portal-Container starten<a class="anker" href="#portal-container-starten" aria-label="Verweis auf diesen Abschnitt">#</a></h2>
 <p>Das Image ist öffentlich: <code>ghcr.io/netfactory-gmbh/netbrain-portal</code>. Es spricht HTTP auf Port 8080; TLS übernimmt Ihr Reverse-Proxy, unter einem eigenen Hostnamen wie <code>wissen.ihre-firma.de</code>.</p>
-<ol><li>In NETbrain unter <strong>Administration → Kundenportal</strong> die künftige Adresse des Portals eintragen, speichern und <strong>Schlüssel erzeugen</strong>. Der Schlüssel erscheint einmal — kopieren Sie ihn gleich.</li><li>Den Container mit diesem Schlüssel starten:</li></ol>
+<p>Der Kopplungsschlüssel verbindet beide Seiten. Er entsteht auf einem von zwei Wegen:</p>
+<ul><li><strong>Sie wählen ihn selbst</strong>, etwa mit <code>openssl rand -base64 32</code>, starten das Portal damit und tragen ihn in NETbrain unter <strong>Schlüssel eintragen</strong> ein. So arbeitet auch eine App-Plattform, die den Schlüssel vorgibt.</li><li><strong>NETbrain erzeugt ihn</strong> über <strong>Schlüssel erzeugen</strong>. Er erscheint einmal; kopieren Sie ihn gleich und setzen Sie ihn im Portal.</li></ul>
+<p>Die Schritte:</p>
+<ol><li>Den Container mit dem Schlüssel starten:</li></ol>
 <div class="codeblock"><pre><code>docker run -d --name netbrain-portal --restart unless-stopped \
   -p 127.0.0.1:8080:8080 -v netbrain-portal-data:/data \
   -e PORTAL_SYNC_KEY=&#x27;&lt;schlüssel&gt;&#x27; \
   ghcr.io/netfactory-gmbh/netbrain-portal:latest</code></pre><button type="button" class="kopieren" aria-label="Befehl kopieren"><svg class="bereit" viewBox="0 0 24 24" aria-hidden="true"><rect x="8" y="8" width="11" height="11" rx="2"/><path d="M16 8V6a2 2 0 00-2-2H6a2 2 0 00-2 2v8a2 2 0 002 2h2"/></svg><svg class="fertig" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7"/></svg></button></div>
-<ol><li>Den Reverse-Proxy für den Portal-Hostnamen auf Port 8080 einrichten.</li><li>Unter <strong>Administration → Kundenportal</strong> auf <strong>Jetzt abgleichen</strong> klicken. Die Meldung nennt, wie viele Seiten übertragen wurden.</li></ol>
+<ol><li>Den Reverse-Proxy für den Portal-Hostnamen auf Port 8080 einrichten.</li><li>In NETbrain unter <strong>Administration → Kundenportal</strong> die Adresse des Portals eintragen und speichern.</li><li>Den Schlüssel unter <strong>Schlüssel eintragen</strong> einfügen und <strong>Schlüssel übernehmen</strong>. NETbrain gleicht sofort ab; die Meldung nennt, wie viele Seiten übertragen wurden.</li></ol>
+<p>Dieselben Felder bietet schon der Einrichtungsassistent im Schritt Kundenportal.</p>
 <p>Läuft das Portal auf demselben Docker-Host wie NETbrain, können Sie beide in ein gemeinsames Netz hängen und als Adresse <code>http://netbrain-portal:8080</code> eintragen; dann geht der Abgleich nicht über den Proxy.</p>
 <h2 id="seiten-freigeben">Seiten freigeben<a class="anker" href="#seiten-freigeben" aria-label="Verweis auf diesen Abschnitt">#</a></h2>
 <p>Mitglieder der Wissenspflege sehen auf jeder Wissensseite unter der Kurzfassung die Zeile <strong>Kundenportal</strong>:</p>
@@ -69,7 +73,7 @@
 <h2 id="auf-einer-app-plattform">Auf einer App-Plattform<a class="anker" href="#auf-einer-app-plattform" aria-label="Verweis auf diesen Abschnitt">#</a></h2>
 <p>Was die Plattform für den Portal-Container bereitstellen muss, steht unter <a href="plattform.html#kundenportal">Kubernetes und App-Plattformen</a>.</p>
     <nav class="blaettern" aria-label="Weiterblättern"><a class="zurueck" href="ki-zugaenge.html"><span>Zurück</span><b>KI-Zugänge und Freigaben</b></a><a class="weiter" href="lizenz.html"><span>Weiter</span><b>Lizenz</b></a></nav>
-    <p class="stand">Stand: NETbrain 0.4.9. Fehlt etwas oder stimmt etwas nicht? <a href="mailto:info@netfactory.de?subject=NETbrain-Dokumentation%3A%20kundenportal">Schreiben Sie uns.</a></p>
+    <p class="stand">Stand: NETbrain 0.4.10. Fehlt etwas oder stimmt etwas nicht? <a href="mailto:info@netfactory.de?subject=NETbrain-Dokumentation%3A%20kundenportal">Schreiben Sie uns.</a></p>
   </main>
   <aside class="auf-dieser-seite" aria-label="Auf dieser Seite"><p>Auf dieser Seite</p><ul><li><a href="#so-funktioniert-es">So funktioniert es</a></li><li><a href="#portal-container-starten">Portal-Container starten</a></li><li><a href="#seiten-freigeben">Seiten freigeben</a></li><li><a href="#suchmaschinen">Suchmaschinen</a></li><li><a href="#auf-einer-app-plattform">Auf einer App-Plattform</a></li></ul></aside>
 </div>

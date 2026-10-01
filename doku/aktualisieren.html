@@ -27,7 +27,7 @@
     <nav aria-label="Hauptnavigation">
       <a href="../">Produkt</a>
       <a href="../#selbst-starten">Selbst testen</a>
-      <a href="versionen.html">Version 0.4.9</a>
+      <a href="versionen.html">Version 0.4.10</a>
       <a class="knopf" href="mailto:info@netfactory.de?subject=NETbrain%20%E2%80%93%20Frage%20zur%20Dokumentation">Frage stellen</a>
     </nav>
   </div>
@@ -59,13 +59,13 @@ sudo docker compose -f netbrain-compose.yml exec netbrain node scripts/backup.mj
 sudo ./install.sh</code></pre><button type="button" class="kopieren" aria-label="Befehl kopieren"><svg class="bereit" viewBox="0 0 24 24" aria-hidden="true"><rect x="8" y="8" width="11" height="11" rx="2"/><path d="M16 8V6a2 2 0 00-2-2H6a2 2 0 00-2 2v8a2 2 0 002 2h2"/></svg><svg class="fertig" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7"/></svg></button></div>
 <p>Der Installer erkennt die vorhandene Installation, lässt die Daten stehen und wartet, bis die Anpassungen am Bestand durch sind. Ihre <code>netbrain-compose.yml</code> bleibt unverändert. Während der Bestand angepasst wird, meldet <code>sudo ./install.sh status</code> den Zustand <code>migriert</code> — das ist normal.</p>
 <p>Eine bestimmte Version installieren Sie mit dem versionierten Link:</p>
-<div class="codeblock"><pre><code>curl -fsSL https://getnetbrain.netfactory.de/install.sh@0.4.9 | sudo bash</code></pre><button type="button" class="kopieren" aria-label="Befehl kopieren"><svg class="bereit" viewBox="0 0 24 24" aria-hidden="true"><rect x="8" y="8" width="11" height="11" rx="2"/><path d="M16 8V6a2 2 0 00-2-2H6a2 2 0 00-2 2v8a2 2 0 002 2h2"/></svg><svg class="fertig" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7"/></svg></button></div>
+<div class="codeblock"><pre><code>curl -fsSL https://getnetbrain.netfactory.de/install.sh@0.4.10 | sudo bash</code></pre><button type="button" class="kopieren" aria-label="Befehl kopieren"><svg class="bereit" viewBox="0 0 24 24" aria-hidden="true"><rect x="8" y="8" width="11" height="11" rx="2"/><path d="M16 8V6a2 2 0 00-2-2H6a2 2 0 00-2 2v8a2 2 0 002 2h2"/></svg><svg class="fertig" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7"/></svg></button></div>
 <h2 id="zurueck-auf-die-vorversion">Zurück auf die Vorversion<a class="anker" href="#zurueck-auf-die-vorversion" aria-label="Verweis auf diesen Abschnitt">#</a></h2>
 <p>Geht über denselben Weg mit der alten Versionsnummer. Ein bereits angepasster Bestand ist von der Vorversion aber nicht immer vollständig lesbar. Der verlässliche Rückweg ist die Sicherung vor dem Update — deshalb steht sie dort.</p>
 <h2 id="auf-einer-app-plattform">Auf einer App-Plattform<a class="anker" href="#auf-einer-app-plattform" aria-label="Verweis auf diesen Abschnitt">#</a></h2>
 <p>Der Update-Helfer braucht einen Docker-Host und greift auf Kubernetes nicht. Dort ziehen Sie den Image-Tag hoch wie bei jeder anderen Anwendung; siehe <a href="plattform.html">Kubernetes und App-Plattformen</a>.</p>
     <nav class="blaettern" aria-label="Weiterblättern"><a class="zurueck" href="sicherung.html"><span>Zurück</span><b>Sicherung und Wiederherstellung</b></a><a class="weiter" href="plattform.html"><span>Weiter</span><b>Kubernetes und App-Plattformen</b></a></nav>
-    <p class="stand">Stand: NETbrain 0.4.9. Fehlt etwas oder stimmt etwas nicht? <a href="mailto:info@netfactory.de?subject=NETbrain-Dokumentation%3A%20aktualisieren">Schreiben Sie uns.</a></p>
+    <p class="stand">Stand: NETbrain 0.4.10. Fehlt etwas oder stimmt etwas nicht? <a href="mailto:info@netfactory.de?subject=NETbrain-Dokumentation%3A%20aktualisieren">Schreiben Sie uns.</a></p>
   </main>
   <aside class="auf-dieser-seite" aria-label="Auf dieser Seite"><p>Auf dieser Seite</p><ul><li><a href="#im-browser">Im Browser</a></li><li><a href="#von-hand-auf-dem-server">Von Hand auf dem Server</a></li><li><a href="#zurueck-auf-die-vorversion">Zurück auf die Vorversion</a></li><li><a href="#auf-einer-app-plattform">Auf einer App-Plattform</a></li></ul></aside>
 </div>

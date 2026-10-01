@@ -27,7 +27,7 @@
     <nav aria-label="Hauptnavigation">
       <a href="../">Produkt</a>
       <a href="../#selbst-starten">Selbst testen</a>
-      <a href="versionen.html">Version 0.4.12</a>
+      <a href="versionen.html">Version 0.4.14</a>
       <a class="knopf" href="mailto:info@netfactory.de?subject=NETbrain%20%E2%80%93%20Frage%20zur%20Dokumentation">Frage stellen</a>
     </nav>
   </div>
@@ -41,13 +41,25 @@
     </div>
     <details open>
       <summary>Inhalt der Dokumentation</summary>
-      <div><div class="gruppe"><p><i></i>Erste Schritte</p><ul><li><a href="index.html">Überblick</a></li><li><a href="voraussetzungen.html">Voraussetzungen</a></li><li><a href="installation.html">Installation</a></li><li><a href="einrichtung.html">Einrichtung im Browser</a></li></ul></div><div class="gruppe"><p><i></i>Arbeiten mit NETbrain</p><ul><li><a href="anmeldung.html">Anmeldung und Konto</a></li><li><a href="firmenwissen.html">Firmenwissen</a></li><li><a href="wissenspflege.html">Wissenspflege</a></li><li><a href="privater-vault.html">Privater Vault</a></li><li><a href="ki-chat.html">KI-Chat</a></li></ul></div><div class="gruppe"><p><i></i>Verwaltung</p><ul><li><a href="benutzer.html">Benutzer und Rollen</a></li><li><a href="ki-zugaenge.html">KI-Zugänge und Freigaben</a></li><li><a href="kundenportal.html">Kundenportal</a></li><li><a href="lizenz.html">Lizenz</a></li></ul></div><div class="gruppe"><p><i></i>Betrieb</p><ul><li><a href="reverse-proxy.html">Reverse-Proxy</a></li><li><a href="sicherung.html">Sicherung und Wiederherstellung</a></li><li><a href="aktualisieren.html">Aktualisieren</a></li><li><a href="plattform.html">Kubernetes und App-Plattformen</a></li><li><a href="datenfluss.html">Was den Server verlässt</a></li></ul></div><div class="gruppe"><p><i></i>Hilfe</p><ul><li><a href="fehlerbehebung.html">Fehlerbehebung</a></li><li><a href="versionen.html" aria-current="page">Versionshinweise</a></li></ul></div></div>
+      <div><div class="gruppe"><p><i></i>Erste Schritte</p><ul><li><a href="index.html">Überblick</a></li><li><a href="voraussetzungen.html">Voraussetzungen</a></li><li><a href="installation.html">Installation</a></li><li><a href="einrichtung.html">Einrichtung im Browser</a></li></ul></div><div class="gruppe"><p><i></i>Arbeiten mit NETbrain</p><ul><li><a href="anmeldung.html">Anmeldung und Konto</a></li><li><a href="firmenwissen.html">Firmenwissen</a></li><li><a href="wissenspflege.html">Wissenspflege</a></li><li><a href="privater-vault.html">Privater Vault</a></li><li><a href="ki-chat.html">KI-Chat</a></li></ul></div><div class="gruppe"><p><i></i>Verwaltung</p><ul><li><a href="benutzer.html">Benutzer und Rollen</a></li><li><a href="ki-zugaenge.html">KI-Zugänge und Freigaben</a></li><li><a href="kundenportal.html">Kundenportal</a></li><li><a href="lizenz.html">Lizenz</a></li></ul></div><div class="gruppe"><p><i></i>Betrieb</p><ul><li><a href="reverse-proxy.html">Reverse-Proxy</a></li><li><a href="sicherung.html">Sicherung und Wiederherstellung</a></li><li><a href="aktualisieren.html">Aktualisieren</a></li><li><a href="ueberwachung.html">Überwachung</a></li><li><a href="plattform.html">Kubernetes und App-Plattformen</a></li><li><a href="datenfluss.html">Was den Server verlässt</a></li></ul></div><div class="gruppe"><p><i></i>Hilfe</p><ul><li><a href="fehlerbehebung.html">Fehlerbehebung</a></li><li><a href="versionen.html" aria-current="page">Versionshinweise</a></li></ul></div></div>
     </details>
   </nav>
   <main class="artikel" id="inhalt">
     <p class="brotkrumen"><a href="../">NETbrain</a><span aria-hidden="true">/</span><a href="index.html">Dokumentation</a><span aria-hidden="true">/</span><span>Hilfe</span></p>
     <h1>Versionshinweise</h1>
 <p class="einleitung">Was sich mit jeder Version geändert hat. Steht unter <strong>Status</strong> ein Hinweis, lesen Sie ihn vor dem Update; wie das Update selbst abläuft, steht unter <a href="aktualisieren.html">Aktualisieren</a>.</p>
+<h2 id="v0-4-14">NETbrain 0.4.14<a class="anker" href="#v0-4-14" aria-label="Verweis auf diesen Abschnitt">#</a></h2>
+<p><strong>Stand:</strong> 1. Oktober 2026</p>
+<p><strong>Status:</strong> Keine Eingriffe nötig.</p>
+<h3 id="betriebszustand-in-der-administration">Betriebszustand in der Administration<a class="anker" href="#betriebszustand-in-der-administration" aria-label="Verweis auf diesen Abschnitt">#</a></h3>
+<p>Unter <strong>Verwaltung → Übersicht</strong> stehen jetzt Speicherplatz, Sicherung, Lizenz und Kundenportal mit Ampel und Klartext — dieselben Prüfungen wie unter <code>/api/monitor/</code>. Den Token für die Überwachung von außen erzeugt NETbrain dort per Knopf; die Compose-Datei muss dafür niemand mehr anfassen. Fehlt das Sicherungsverzeichnis noch, misst die Speicherprüfung den Datenträger, auf dem es entsteht.</p>
+<h2 id="v0-4-13">NETbrain 0.4.13<a class="anker" href="#v0-4-13" aria-label="Verweis auf diesen Abschnitt">#</a></h2>
+<p><strong>Stand:</strong> 1. Oktober 2026</p>
+<p><strong>Status:</strong> Keine Eingriffe nötig. Für die neue Überwachung <code>NETBRAIN_MONITOR_TOKEN</code> setzen.</p>
+<h3 id="ueberwachung-fuer-uptime-kuma-und-co">Überwachung für Uptime Kuma und Co.<a class="anker" href="#ueberwachung-fuer-uptime-kuma-und-co" aria-label="Verweis auf diesen Abschnitt">#</a></h3>
+<p>Vier neue Endpunkte, je 200 oder 503, nur mit Token (<code>NETBRAIN_MONITOR_TOKEN</code>, als <code>Authorization: Bearer …</code>):</p>
+<ul><li><code>/api/monitor/speicher</code> — Belegung von Daten- und Sicherungsablage in Prozent; 503 über 90 % (<code>NETBRAIN_MONITOR_SPEICHER_PROZENT</code>).</li><li><code>/api/monitor/sicherung</code> — letzter Lauf gescheitert oder älter als 26 Stunden.</li><li><code>/api/monitor/lizenz</code> — weniger als 14 Tage Restlaufzeit, gesperrt oder seit 48 Stunden nicht vom Lizenzdienst bestätigt.</li><li><code>/api/monitor/portal</code> — Abgleich mit dem Kundenportal gescheitert oder älter als 30 Minuten.</li></ul>
+<p>Ohne Token gibt es die Endpunkte nicht. Anleitung: https://getnetbrain.netfactory.de/doku/ueberwachung.html</p>
 <h2 id="v0-4-12">NETbrain 0.4.12<a class="anker" href="#v0-4-12" aria-label="Verweis auf diesen Abschnitt">#</a></h2>
 <p><strong>Stand:</strong> 1. Oktober 2026</p>
 <p><strong>Status:</strong> Für Kubernetes und App-Plattformen wichtig: Probes auf <code>/api/live</code> und <code>/api/ready</code> umstellen. Docker-Installationen: keine Eingriffe nötig.</p>
@@ -205,9 +217,9 @@
 <h3 id="versionshinweis">Versionshinweis<a class="anker" href="#versionshinweis" aria-label="Verweis auf diesen Abschnitt">#</a></h3>
 <p>Version <strong>0.2.0</strong> ist das erste größere, abwärtskompatible Funktionsupdate nach dem Pilotstand 0.1.0. Bestehende Daten und Konten bleiben beim Update erhalten.</p>
     <nav class="blaettern" aria-label="Weiterblättern"><a class="zurueck" href="fehlerbehebung.html"><span>Zurück</span><b>Fehlerbehebung</b></a></nav>
-    <p class="stand">Stand: NETbrain 0.4.12. Fehlt etwas oder stimmt etwas nicht? <a href="mailto:info@netfactory.de?subject=NETbrain-Dokumentation%3A%20versionen">Schreiben Sie uns.</a></p>
+    <p class="stand">Stand: NETbrain 0.4.14. Fehlt etwas oder stimmt etwas nicht? <a href="mailto:info@netfactory.de?subject=NETbrain-Dokumentation%3A%20versionen">Schreiben Sie uns.</a></p>
   </main>
-  <aside class="auf-dieser-seite" aria-label="Auf dieser Seite"><p>Auf dieser Seite</p><ul><li><a href="#v0-4-12">NETbrain 0.4.12</a></li><li><a href="#v0-4-11">NETbrain 0.4.11</a></li><li><a href="#v0-4-10">NETbrain 0.4.10</a></li><li><a href="#v0-4-9">NETbrain 0.4.9</a></li><li><a href="#v0-4-8">NETbrain 0.4.8</a></li><li><a href="#v0-4-7">NETbrain 0.4.7</a></li><li><a href="#v0-4-6">NETbrain 0.4.6</a></li><li><a href="#v0-4-5">NETbrain 0.4.5</a></li><li><a href="#v0-4-4">NETbrain 0.4.4</a></li><li><a href="#v0-4-3">NETbrain 0.4.3</a></li><li><a href="#v0-4-2">NETbrain 0.4.2</a></li><li><a href="#v0-4-0">NETbrain 0.4.0</a></li><li><a href="#v0-3-0">NETbrain 0.3.0</a></li><li><a href="#v0-2-1">NETbrain 0.2.1</a></li><li><a href="#v0-2-0">NETbrain 0.2.0</a></li></ul></aside>
+  <aside class="auf-dieser-seite" aria-label="Auf dieser Seite"><p>Auf dieser Seite</p><ul><li><a href="#v0-4-14">NETbrain 0.4.14</a></li><li><a href="#v0-4-13">NETbrain 0.4.13</a></li><li><a href="#v0-4-12">NETbrain 0.4.12</a></li><li><a href="#v0-4-11">NETbrain 0.4.11</a></li><li><a href="#v0-4-10">NETbrain 0.4.10</a></li><li><a href="#v0-4-9">NETbrain 0.4.9</a></li><li><a href="#v0-4-8">NETbrain 0.4.8</a></li><li><a href="#v0-4-7">NETbrain 0.4.7</a></li><li><a href="#v0-4-6">NETbrain 0.4.6</a></li><li><a href="#v0-4-5">NETbrain 0.4.5</a></li><li><a href="#v0-4-4">NETbrain 0.4.4</a></li><li><a href="#v0-4-3">NETbrain 0.4.3</a></li><li><a href="#v0-4-2">NETbrain 0.4.2</a></li><li><a href="#v0-4-0">NETbrain 0.4.0</a></li><li><a href="#v0-3-0">NETbrain 0.3.0</a></li><li><a href="#v0-2-1">NETbrain 0.2.1</a></li><li><a href="#v0-2-0">NETbrain 0.2.0</a></li></ul></aside>
 </div>
 <footer>
   <div class="fuss">

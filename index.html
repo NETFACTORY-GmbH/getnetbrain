@@ -341,9 +341,9 @@
   .menue{display:flex; flex-direction:column; padding-block:.5rem 1.25rem; border-top:1px solid var(--linie)}
   .menue[hidden]{display:none}
   header:has(.menue:not([hidden])){background-color:#000000eb}
-  /* Über hellen Abschnitten bleibt die Kopfleiste dunkel; sonst scheint das Weiß durch. */
+  /* Nach dem ersten Scrollen wird die Kopfleiste dunkel. */
   header{transition:background-color .3s}
-  header.ueber-weiss{background-color:#000000e6}
+  header.gescrollt{background-color:#000000e6}
   .menue a{padding:.75rem 0; color:var(--paragraph_white); font-size:1.0625rem; border-bottom:1px solid var(--linie); transition:all .3s}
   .menue a:last-child{border-bottom:0}
   .menue a:hover{color:var(--white)}
@@ -1206,20 +1206,12 @@
     menue.addEventListener('click', (e) => { if (e.target.closest('a')) setzen(false); });
     document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && !menue.hidden) { setzen(false); knopf.focus(); } });
   })();
-  // Kopfleiste über hellen Abschnitten abdunkeln.
+  // Kopfleiste nach dem ersten Scrollen abdunkeln.
   (() => {
     const kopf = document.querySelector('header');
-    const helle = [...document.querySelectorAll('section.weiss')];
-    if (!kopf || !helle.length) return;
-    let geplant = false;
-    const pruefen = () => {
-      geplant = false;
-      const unterkante = kopf.getBoundingClientRect().bottom;
-      kopf.classList.toggle('ueber-weiss', helle.some((a) => { const r = a.getBoundingClientRect(); return r.top < unterkante && r.bottom > 0; }));
-    };
-    const planen = () => { if (!geplant) { geplant = true; requestAnimationFrame(pruefen); } };
-    addEventListener('scroll', planen, { passive: true });
-    addEventListener('resize', planen);
+    if (!kopf) return;
+    const pruefen = () => kopf.classList.toggle('gescrollt', scrollY > 8);
+    addEventListener('scroll', pruefen, { passive: true });
     pruefen();
   })();
   // Kopieren ohne Bibliothek. Schlaegt die Zwischenablage fehl (aelterer Browser,

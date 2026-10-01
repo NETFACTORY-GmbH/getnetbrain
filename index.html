@@ -229,12 +229,18 @@
     background-size:1px 11px; background-repeat:repeat-y; background-position:left top, right top}
   main > section::after, footer::after{width:calc(min(var(--container), 100% - 2.5rem) * 1.08)}
   @media(max-width:1300px){main > section::after, footer::after{display:none}}
-  /* Waagerechte Trennlinie mit den Kreuzen des CI an beiden Enden. */
-  .trennlinie{position:relative; width:min(var(--container), 100% - 2.5rem); margin-inline:auto; z-index:1}
+  /* Waagerechte Linie über die volle Breite; die Kreuze sitzen auf den inneren Schienen. */
+  .trennlinie{position:relative; width:100%; z-index:3}
   .trennlinie::before,.trennlinie::after{content:""; position:absolute; top:50%; width:15px; height:15px;
     transform:translate(-50%,-50%); opacity:.5;
     background:no-repeat center/contain url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 15 15'%3E%3Cpath fill='%23fff' d='M14.25 6.75H8.25V.75A.75.75 0 0 0 7.5 0a.75.75 0 0 0-.75.75v6H.75A.75.75 0 0 0 0 7.5c0 .414.336.75.75.75h6v6c0 .414.336.75.75.75s.75-.336.75-.75v-6h6a.75.75 0 0 0 .75-.75.75.75 0 0 0-.75-.75Z'/%3E%3C/svg%3E")}
-  .trennlinie::before{left:0} .trennlinie::after{left:100%}
+  .trennlinie::before{left:calc((100% - min(var(--container), 100% - 2.5rem)) / 2)}
+  .trennlinie::after{left:calc((100% + min(var(--container), 100% - 2.5rem)) / 2)}
+  /* Schraffiertes Band zwischen zwei Linien, wie zwischen den hellen Abschnitten im CI. */
+  .schraffur-band{--schraffur:rgba(255,255,255,.05)}
+  .schraffur-band.weiss{--schraffur:rgba(0,0,0,.05)}
+  .schraffur{height:4.375rem; width:min(var(--container), 100% - 2.5rem); margin-inline:auto;
+    background-image:repeating-linear-gradient(144.5deg, var(--schraffur) 0 1px, transparent 1px 10px)}
 
   /* ---- Leuchtkreise --------------------------------------------------
      `.glow_circle` im CI: Aqua unten links, Mint unten rechts, je 100 px
@@ -297,42 +303,43 @@
 
   .lead{color:var(--paragraph_white); font-size:1rem; line-height:155%; max-width:62ch; text-shadow:0 1px 2px #0000001a}
   h2 + .lead{margin-top:1.25rem}
+  /* Zentrierter Abschnittskopf — .header_group.is-center */
+  .zentriert > .container > .augenbraue{justify-content:center}
+  .zentriert > .container > h2{text-align:center; max-width:44rem; margin-inline:auto; text-wrap:balance}
+  .zentriert > .container > .lead{text-align:center; max-width:37.5rem; margin-inline:auto}
 
-  /* Knöpfe — .button: Radius .375rem, Innenlicht, Glasrand */
+  /* Knöpfe — .button: Radius .375rem, Innenlicht, Glasrand; Hover nur Deckkraft */
   .knopf{
     display:inline-flex; align-items:center; justify-content:center; gap:.5rem;
-    padding:.75rem 1.375rem; border-radius:var(--radius-knopf);
-    border:1px solid #ffffff0d; font-size:1rem; font-weight:500; line-height:1.4;
+    padding:.6875rem 1.125rem; border-radius:var(--radius-knopf);
+    border:1px solid #ffffff0d; font-size:.9375rem; font-weight:500; line-height:1.2;
     background-color:var(--blue); color:#fff; box-shadow:var(--schatten-innen);
-    -webkit-backdrop-filter:blur(10px); backdrop-filter:blur(10px);
-    transition:filter .2s ease, transform .2s ease, background-color .2s ease;
+    -webkit-backdrop-filter:blur(10px); backdrop-filter:blur(10px); transition:all .3s;
   }
-  .knopf:hover{filter:brightness(1.1); transform:translateY(-1px)}
-  .knopf.hell{background-color:var(--blue); color:#000; text-shadow:0 1px 2px #0003}
-  .knopf.hell:hover{background-color:var(--blue-hell); color:#fff; text-shadow:none}
+  .knopf:hover{opacity:.9}
   .knopf.licht{background-color:var(--white); color:#000; text-shadow:0 1px 2px #0003; box-shadow:none}
-  .knopf.licht:hover{filter:none; opacity:.9}
   .knopf.glas{background-color:#ffffff1a; color:#fff}
-  .knopf.glas:hover{background-color:#ffffff26}
-  .knopf.klein{padding:.4375rem .875rem; font-size:.9375rem; background-color:#ffffff0f; color:#ffffffe6; box-shadow:var(--schatten-innen)}
-  .knopf.klein:hover{background-color:#ffffff1a}
+  .knopf.glas:hover{opacity:1; box-shadow:inset 0 4px 12px #ffffff26}
+  .knopf.klein{padding:.4375rem .625rem; border-radius:.3125rem; border-color:transparent; line-height:1.2rem;
+    background-color:#ffffff0f; color:#ffffffe6; box-shadow:inset 0 4px 12px #ffffff26}
+  .knopf.klein:hover{opacity:1; background-color:#ffffff1a}
 
   /* Kopfleiste — .section_nav: fest, 20 px Unschärfe, Linie unten */
   header{position:fixed; inset:0 0 auto; z-index:100; background-color:#00000059;
     -webkit-backdrop-filter:blur(20px); backdrop-filter:blur(20px); border-bottom:1px solid var(--linie)}
-  .kopf{display:flex; align-items:center; gap:1.5rem; min-height:4.375rem}
+  .kopf{display:flex; align-items:center; gap:1.25rem; min-height:4.375rem}
+  .kopf-teiler{flex:none; width:1px; height:1.25rem; border-radius:99px; background:#fff3}
+  .kopf-rechts{margin-left:auto; display:flex; align-items:center; gap:1.25rem}
   .marke{display:flex; align-items:center; gap:.625rem; font-size:1.375rem; letter-spacing:-.03em; color:var(--white)}
   .marke img{display:block; width:210px; height:auto}
   .marke b{font-weight:600} .marke span{font-weight:400}
-  .kopf nav{margin-left:auto; display:flex; align-items:center; gap:clamp(1rem,1.6vw,1.75rem)}
-  .kopf nav a:not(.knopf){position:relative; color:var(--leise); font-size:.9375rem; font-weight:500; transition:color .2s; white-space:nowrap}
-  .kopf nav a:not(.knopf):hover{color:var(--white)}
-  .kopf nav a:not(.knopf).aktiv{color:var(--white)}
-  .kopf nav a:not(.knopf).aktiv::after{content:""; position:absolute; left:0; right:0; bottom:-.45rem; height:1px; background:var(--blue-hell)}
-  .kopf .knopf{white-space:nowrap; padding:.5625rem 1rem; font-size:.9375rem}
-  .kopf .knopf .kurz{display:none}
-  @media(max-width:1120px){.kopf nav a[href="#herausforderungen"],.kopf nav a[href="#ablauf"]{display:none}}
-  @media(max-width:900px){.kopf nav a:not(.knopf){display:none} .kopf nav{gap:.75rem}}
+  .kopf nav{display:flex; align-items:center; gap:clamp(1rem,1.6vw,1.75rem)}
+  .kopf nav a,.kopf-link{position:relative; color:#ffffffb3; font-size:.9375rem; line-height:145%; transition:all .3s; white-space:nowrap}
+  .kopf nav a:hover,.kopf-link:hover,.kopf nav a.aktiv{color:var(--white)}
+  .kopf nav a.aktiv::after{content:""; position:absolute; left:0; right:0; bottom:-.45rem; height:1px; background:var(--blue)}
+  .kopf .knopf{white-space:nowrap}
+  @media(max-width:1200px){.kopf nav a[href="#herausforderungen"],.kopf nav a[href="#ablauf"]{display:none}}
+  @media(max-width:900px){.kopf nav,.kopf-teiler,.kopf-link{display:none}}
   /* Menü fürs Telefon: unter 900 px stehen die Abschnitte hinter einem Knopf. */
   .menue-knopf{display:none; width:2.5rem; height:2.5rem; place-items:center; padding:0; border-radius:var(--radius-knopf);
     border:1px solid #ffffff0d; background:#ffffff1a; color:#fff; cursor:pointer; box-shadow:var(--schatten-innen); transition:all .3s}
@@ -351,7 +358,7 @@
   .menue a:hover{color:var(--white)}
   @media(max-width:900px){.menue-knopf{display:grid}}
   @media(min-width:901px){.menue{display:none!important}}
-  @media(max-width:600px){.kopf .knopf .lang{display:none} .kopf .knopf .kurz{display:inline} .marke img{width:160px}}
+  @media(max-width:600px){.marke img{width:160px} .kopf-rechts{gap:.625rem}}
 
   /* Held */
   .held-innen{padding-block:clamp(8.5rem,14vw,11.5rem) clamp(4rem,8vw,6.5rem); overflow:hidden}
@@ -576,14 +583,14 @@
     background:linear-gradient(90deg,#92e1880d,transparent 72%)}
   @media(max-width:800px){.voraussetzungen{grid-template-columns:minmax(0,1fr)} .voraussetzungen li{min-height:0}}
 
-  /* Kontakt */
-  .kontakt-abschnitt{padding-block:clamp(4rem,8vw,7rem)}
-  .kontakt{position:relative; overflow:hidden; border:.0625rem solid var(--carbon); border-radius:var(--radius);
-    padding:clamp(2rem,5vw,4rem); background-image:linear-gradient(225deg,#ffffff1a,#ffffff12); isolation:isolate}
-  .kontakt .orb{width:min(700px,120vw); inset:auto -25% -85% auto; opacity:.5; z-index:-1}
-  .kontakt h2{max-width:18ch}
-  .kontakt .lead{margin-top:1.25rem}
-  .kontakt-wege{display:flex; flex-wrap:wrap; gap:.75rem; margin-top:2.25rem; align-items:center}
+  /* Kontakt — vollbreites Band mit Linienmotiv und Leuchten von unten */
+  .kontakt-band{overflow:hidden; padding-block:clamp(5rem,9vw,8rem)}
+  .kontakt-band .leuchtkreis.aqua{inset:auto auto -700px -20%; opacity:.45}
+  .kontakt-band .leuchtkreis.mint{inset:auto -20% -700px auto; opacity:.35}
+  @media(max-width:991px){.kontakt-band .leuchtkreis.aqua,.kontakt-band .leuchtkreis.mint{bottom:-330px}}
+  .kontakt-inhalt{max-width:40rem}
+  .kontakt-band h2{max-width:18ch}
+  .kontakt-wege{display:flex; flex-wrap:wrap; gap:.5rem; margin-top:2rem; align-items:center}
   .kontakt-fein{margin-top:1.75rem; font-size:.9375rem; color:var(--leise)}
   .kontakt-fein a{color:var(--paragraph_white); text-decoration:underline; text-underline-offset:3px}
 
@@ -595,36 +602,59 @@
   .weiss p,.weiss .lead,.weiss .kontakt-fein{color:#0009; text-shadow:none}
   .weiss .augenbraue span{color:#0009; font-weight:600}
   .weiss [data-linie="h"]{background-image:linear-gradient(to right, rgba(0,0,0,.1) 6px, transparent 6px)}
-  .weiss > .trennlinie{position:absolute; top:2.1875rem; left:0; right:0; z-index:2}
+  .weiss > .trennlinie{position:absolute; top:2.1875rem; left:0; right:0}
+  .schraffur-band > .trennlinie{position:relative; top:auto}
   .weiss .trennlinie::before,.weiss .trennlinie::after{filter:invert(1); opacity:.2}
-  .weiss .karte,.weiss .spalte{background:#fff; border:1px solid #0000000f; border-radius:.75rem;
+  .weiss .karte{background:#fff; border:1px solid #0000000f; border-radius:.75rem;
     box-shadow:0 4px 12px #0000000d; transition:all .3s}
   .weiss .karte:hover{transform:translateY(-3px); border-color:#0000000f}
   .weiss .karte .teiler{background:#0000001a}
-  .weiss .spalte .kopfzeile b{color:#000}
-  .weiss .spalte.vorher{background:transparent; box-shadow:none; border:1px dashed #0000001a}
-  .weiss .spalte li{border-top-color:#0000001a}
-  .weiss .spalte.vorher li,.weiss .spalte.vorher li strong{color:#00000080}
-  .weiss .kreuz{stroke:#0000004d}
-  .weiss .haken{stroke:var(--blue)}
+  /* Vorher/Nachher — .comparison_before im CI: Vorher blass ohne Rahmen,
+     Nachher weiß mit hellem Rand und Leuchten von Aqua nach Mint. */
+  .weiss .spalte{position:relative; background:#fff; border:1px solid #0000000d; border-radius:.75rem;
+    padding:1.25rem 1.5625rem; box-shadow:0 8px 18px #0000000d}
+  .weiss .spalte.nachher::before,.weiss .spalte.nachher::after{content:""; position:absolute; z-index:-1; pointer-events:none}
+  .weiss .spalte.nachher::before{inset:-7px; border-radius:1rem; background:linear-gradient(135deg, var(--blue), var(--green));
+    opacity:.45; filter:blur(8px)}
+  .weiss .spalte.nachher::after{inset:-5px; border-radius:.9375rem; background:#fffc; box-shadow:inset 0 4px 12px #ffffff1a}
+  .weiss .spalte.vorher{background:transparent; border-color:transparent; box-shadow:none; opacity:.6}
+  .weiss .spalte .kopfzeile{margin-bottom:0; padding-bottom:1.125rem}
+  .weiss .spalte .kopfzeile b{color:#000; font-size:1.5rem; font-weight:500; line-height:120%}
+  .weiss .spalte li{display:block; padding:1.125rem 0; border-top:1px dashed #0000001a}
+  .weiss .spalte li:last-child{padding-bottom:0}
+  .weiss .spalte li strong{display:block; margin:0 0 .5625rem .8125rem; color:#000; font-size:.75rem; font-weight:500;
+    letter-spacing:.04em; line-height:110%; text-transform:uppercase}
+  .weiss .spalte li span{position:relative; display:block; padding-left:.8125rem; color:#000; font-size:1.125rem;
+    letter-spacing:-.02em; line-height:135%}
+  .weiss .spalte li span::before{content:""; position:absolute; left:0; top:.55em; width:4px; height:4px; border-radius:100%;
+    background:var(--blue); box-shadow:0 1px 2px #14ada680}
+  @media(max-width:767px){.weiss .spalte .kopfzeile b{font-size:1.0625rem} .weiss .spalte li span{font-size:1rem}}
   .weiss .schritt{border-top-color:#0000001a}
   .weiss .schritt .nr{color:#0009}
-  /* Fuß */
-  footer{position:relative; z-index:1; border-top:1px solid var(--linie); padding-block:3rem 2.5rem; font-size:.9375rem;
+  /* Fuß — .section_footer: Marke oben, Linkspalten, Leiste mit © und Rechtslinks */
+  footer{position:relative; z-index:1; font-size:.875rem;
     background-image:radial-gradient(circle farthest-corner at 50% 0%, #191919, var(--dark))}
-  .fuss{display:grid; gap:2rem; grid-template-columns:repeat(auto-fit,minmax(15rem,1fr))}
-  .fuss a{color:var(--paragraph_white)} .fuss a:hover{color:var(--white)}
-  .fuss-marke{display:flex; align-items:center; gap:.625rem; color:var(--white); font-size:1.25rem; margin-bottom:.875rem}
-  .fuss-marke img{display:block; width:180px; height:auto}
+  .fuss-oben{padding-block:2.5rem}
+  .fuss-logo{display:block; width:180px; height:auto}
+  .fuss-claim{margin-top:.6875rem; max-width:34rem; color:var(--paragraph_white); font-size:1rem; font-weight:300; line-height:155%}
   .absender{margin-top:1.25rem; display:flex; align-items:center; gap:.625rem; font-size:.8125rem; color:#ffffff73}
-  .absender img{width:7.5rem; height:auto; opacity:.85}
-  /* Pflichtverweise. Eigene Zeile über dem Kleingedruckten und in der Textfarbe
-     der Seite — im grauen Fließtext daneben werden sie überlesen. */
-  .fuss-recht{margin-top:2.5rem; padding-top:1.5rem; border-top:1px solid var(--linie);
-    display:flex; flex-wrap:wrap; gap:.5rem 1.5rem; font-size:.9375rem}
-  .fuss-recht a{color:var(--paragraph_white)}
+  .absender img{width:7.5rem; height:auto; opacity:.85; transition:all .3s}
+  .absender a:hover img{opacity:1}
+  .fuss-nav{display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:2rem; padding-block:3.125rem 4.375rem}
+  .f-titel{margin-bottom:.5rem; color:#fff; opacity:.5; letter-spacing:.04em; text-transform:uppercase; font-size:.875rem; line-height:160%}
+  .f-links{list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:.625rem}
+  .f-links a,.f-links span{color:#fff; opacity:.7; font-size:.875rem; line-height:160%; transition:all .3s}
+  .f-links a:hover{opacity:1}
+  .fuss-unten{display:flex; flex-wrap:wrap; justify-content:space-between; align-items:center; gap:1rem; padding-block:2.1875rem 1.25rem}
+  .copyright{color:#fff6; font-size:1rem; letter-spacing:-.01em; line-height:100%}
+  .fuss-recht{display:flex; flex-wrap:wrap; gap:1.875rem}
+  .fuss-recht a{color:#fff6; font-size:.875rem; letter-spacing:-.02em; line-height:100%; transition:all .3s}
   .fuss-recht a:hover{color:var(--white)}
-  .rechtlich{margin-top:1.25rem; font-size:.8125rem; color:#ffffff73; line-height:150%; max-width:80ch}
+  .rechtlich{padding-bottom:2.1875rem; font-size:.8125rem; color:#ffffff59; line-height:150%; max-width:80ch}
+  @media(max-width:767px){
+    .fuss-nav{grid-template-columns:repeat(2,minmax(0,1fr)); padding-block:2.5rem 3rem}
+    .copyright{font-size:.875rem} .fuss-recht{gap:1.25rem} .fuss-recht a{font-size:.75rem}
+  }
 
   /* Bewegung dient der Orientierung: Inhalte treten beim ersten Sichtkontakt
      leicht hervor. Ohne JavaScript bleiben sie von Anfang an sichtbar. */
@@ -633,8 +663,7 @@
 
   @media(max-width:600px){
     .k2,.k3,.herausforderungen,.gegenueber,.schutz,.schritte{grid-template-columns:minmax(0,1fr)}
-    .kontakt{padding:1.5rem}
-    .kontakt .knopf{max-width:100%; white-space:normal; text-align:center}
+    .kontakt-wege .knopf{max-width:100%; white-space:normal; text-align:center}
   }
   @media(max-width:700px){.nurgross{display:none}}
   /* Sprungmarke: nur bei Tastaturfokus sichtbar. */
@@ -657,18 +686,21 @@
     <a class="marke" href="#">
       <img src="bilder/netbrain-logo.png" alt="NETbrain" width="1928" height="352" decoding="async">
     </a>
+    <span class="kopf-teiler" aria-hidden="true"></span>
     <nav aria-label="Hauptnavigation">
       <a href="#herausforderungen">Herausforderungen</a>
       <a href="#loesung">Lösung</a>
       <a href="#datenhoheit">Datenhoheit</a>
       <a href="#ablauf">Ablauf</a>
       <a href="#selbst-starten">Selbst testen</a>
-      <a href="doku/">Dokumentation</a>
-      <a class="knopf hell" href="#kontakt"><span class="lang">Live-Demo vereinbaren</span><span class="kurz">Kontakt</span></a>
+    </nav>
+    <div class="kopf-rechts">
+      <a class="kopf-link" href="doku/">Dokumentation</a>
+      <a class="knopf klein" href="#kontakt">Kontakt</a>
       <button type="button" class="menue-knopf" aria-expanded="false" aria-controls="menue" aria-label="Menü öffnen">
         <svg viewBox="0 0 24 24" aria-hidden="true"><path class="zu" d="M4 7h16M4 12h16M4 17h16"/><path class="auf" d="M6 6l12 12M18 6L6 18"/></svg>
       </button>
-    </nav>
+    </div>
   </div>
   <nav class="menue container" id="menue" aria-label="Menü" hidden>
     <a href="#herausforderungen">Herausforderungen</a>
@@ -720,7 +752,7 @@
 <div class="trennlinie" data-linie="h"></div>
 
 <!-- Herausforderungen -->
-<section class="abschnitt hat-leuchtfeld" id="herausforderungen">
+<section class="abschnitt zentriert hat-leuchtfeld" id="herausforderungen">
   <div class="leuchtfeld" aria-hidden="true">
     <div class="leuchtkreis aqua"></div>
     <div class="leuchtkreis mint"></div>
@@ -754,7 +786,7 @@
 </section>
 
 <!-- Lösung -->
-<section class="abschnitt verlauf" id="loesung">
+<section class="abschnitt zentriert verlauf" id="loesung">
   <div class="container">
     <p class="augenbraue"><i class="gruen"></i><span>Genau hier setzen wir an</span></p>
     <h2>Firmenwissen, persönliche Notizen und KI an einem Ort.</h2>
@@ -852,7 +884,7 @@
 <div class="trennlinie" data-linie="h"></div>
 
 <!-- Funktionen -->
-<section class="abschnitt" id="funktionen">
+<section class="abschnitt zentriert" id="funktionen">
   <div class="container">
     <p class="augenbraue"><i></i><span>Im Alltag</span></p>
     <h2>Wissen einfach erfassen. Gemeinsam aktuell halten.</h2>
@@ -897,7 +929,7 @@
 </section>
 
 <!-- Vorher / Nachher -->
-<section class="abschnitt weiss">
+<section class="abschnitt zentriert weiss">
   <div class="trennlinie" data-linie="h"></div>
   <div class="container">
     <p class="augenbraue"><i class="gruen"></i><span>Ihre Vorteile</span></p>
@@ -910,21 +942,21 @@
       <div class="spalte vorher">
         <div class="kopfzeile"><b>Vorher</b></div>
         <ul>
-          <li><svg class="kreuz" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg><span><strong>Nachfragen</strong>Die Antwort steht bei einer Person, die gerade nicht da ist.</span></li>
-          <li><svg class="kreuz" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg><span><strong>Einarbeitung</strong>Neue Kollegen lernen durch Zuschauen und wiederholtes Fragen.</span></li>
-          <li><svg class="kreuz" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg><span><strong>Dokumentation</strong>Wird verschoben, weil Aufschreiben länger dauert als Machen.</span></li>
-          <li><svg class="kreuz" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg><span><strong>KI-Nutzung</strong>Findet statt, nur unkontrolliert und mit fremden Diensten.</span></li>
-          <li><svg class="kreuz" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg><span><strong>Aktualität</strong>Niemand weiß, welche Anleitung noch gilt und welche veraltet ist.</span></li>
+          <li><strong>Nachfragen</strong><span>Die Antwort steht bei einer Person, die gerade nicht da ist.</span></li>
+          <li><strong>Einarbeitung</strong><span>Neue Kollegen lernen durch Zuschauen und wiederholtes Fragen.</span></li>
+          <li><strong>Dokumentation</strong><span>Wird verschoben, weil Aufschreiben länger dauert als Machen.</span></li>
+          <li><strong>KI-Nutzung</strong><span>Findet statt, nur unkontrolliert und mit fremden Diensten.</span></li>
+          <li><strong>Aktualität</strong><span>Niemand weiß, welche Anleitung noch gilt und welche veraltet ist.</span></li>
         </ul>
       </div>
-      <div class="spalte">
+      <div class="spalte nachher">
         <div class="kopfzeile"><b>Mit NETbrain</b></div>
         <ul>
-          <li><svg class="haken" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12.5l5 5L20 6.5"/></svg><span><strong>Nachfragen</strong>Dokumentierte Antworten sind für das Team im Firmenwissen auffindbar.</span></li>
-          <li><svg class="haken" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12.5l5 5L20 6.5"/></svg><span><strong>Einarbeitung</strong>Neue Kollegen lesen sich selbst ein — im kuratierten Bestand.</span></li>
-          <li><svg class="haken" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12.5l5 5L20 6.5"/></svg><span><strong>Dokumentation</strong>Material hinzufügen, KI-Entwurf prüfen und zur Freigabe einreichen.</span></li>
-          <li><svg class="haken" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12.5l5 5L20 6.5"/></svg><span><strong>KI-Nutzung</strong>Ihr Team nutzt die freigegebenen KI-Anbieter über NETbrain.</span></li>
-          <li><svg class="haken" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12.5l5 5L20 6.5"/></svg><span><strong>Aktualität</strong>Überfällige Prüfungen und fehlende Verantwortliche werden sichtbar.</span></li>
+          <li><strong>Nachfragen</strong><span>Dokumentierte Antworten sind für das Team im Firmenwissen auffindbar.</span></li>
+          <li><strong>Einarbeitung</strong><span>Neue Kollegen lesen sich selbst ein — im kuratierten Bestand.</span></li>
+          <li><strong>Dokumentation</strong><span>Material hinzufügen, KI-Entwurf prüfen und zur Freigabe einreichen.</span></li>
+          <li><strong>KI-Nutzung</strong><span>Ihr Team nutzt die freigegebenen KI-Anbieter über NETbrain.</span></li>
+          <li><strong>Aktualität</strong><span>Überfällige Prüfungen und fehlende Verantwortliche werden sichtbar.</span></li>
         </ul>
       </div>
     </div>
@@ -985,7 +1017,7 @@
 </section>
 
 <!-- Ablauf -->
-<section class="abschnitt weiss" id="ablauf">
+<section class="abschnitt zentriert weiss" id="ablauf">
   <div class="trennlinie" data-linie="h"></div>
   <div class="container">
     <p class="augenbraue"><i></i><span>Ihr Einstieg</span></p>
@@ -1019,9 +1051,13 @@
   </div>
 </section>
 
-<!-- Passt / passt nicht -->
-<section class="abschnitt weiss">
+<section class="schraffur-band weiss" aria-hidden="true">
   <div class="trennlinie" data-linie="h"></div>
+  <div class="schraffur"></div>
+  <div class="trennlinie" data-linie="h"></div>
+</section>
+<!-- Passt / passt nicht -->
+<section class="abschnitt zentriert weiss">
   <div class="container">
     <p class="augenbraue"><i></i><span>Für wen</span></p>
     <h2>Für Unternehmen mit 10 bis 250 Mitarbeitern.</h2>
@@ -1092,7 +1128,11 @@
   </div>
 </section>
 
-<div class="trennlinie" data-linie="h"></div>
+<section class="schraffur-band" aria-hidden="true">
+  <div class="trennlinie" data-linie="h"></div>
+  <div class="schraffur"></div>
+  <div class="trennlinie" data-linie="h"></div>
+</section>
 
 <!-- Selbst starten -->
 <section class="abschnitt" id="selbst-starten">
@@ -1147,74 +1187,104 @@
 </section>
 
 <!-- Kontakt -->
-<section class="kontakt-abschnitt">
-  <div class="container">
-  <div class="kontakt" id="kontakt">
-    <div class="orb" aria-hidden="true"></div>
-    <p class="augenbraue"><i class="gruen"></i><span>Kontakt</span></p>
-    <h2>Erleben Sie NETbrain an Ihren eigenen Beispielen.</h2>
-    <p class="lead">
-      Welche Frage beantwortet Ihr Team immer wieder? Bringen Sie ein Beispiel mit.
-      Wir zeigen Ihnen in 30 Minuten, wie Sie Wissen in NETbrain festhalten,
-      prüfen und wiederfinden.
-    </p>
-    <p class="kontakt-fein">NETbrain befindet sich aktuell in der Pilotphase (Alpha). Wir begleiten Ihren Einstieg persönlich.</p>
-    <div class="kontakt-wege">
-      <a class="knopf hell" href="mailto:info@netfactory.de?subject=NETbrain%20%E2%80%93%20Live-Demo%20vereinbaren&amp;body=Guten%20Tag%2C%0A%0Awir%20interessieren%20uns%20f%C3%BCr%20NETbrain%20und%20h%C3%A4tten%20gern%20einen%20Termin%20f%C3%BCr%20eine%20Live-Demo.%0A%0AUnternehmen%3A%20%0AAnzahl%20Mitarbeiter%3A%20%0AAnsprechpartner%3A%20%0ATelefon%3A%20%0A%0AUnser%20Anwendungsfall%3A%20%0A%0A">Live-Demo vereinbaren</a>
-      <a class="knopf glas" href="tel:+4959015173600">+49 5901 51736-0</a>
-    </div>
-    <p class="kontakt-fein">
-      NETFACTORY GmbH Internet Service · Kleine Straße 5 · 49584 Fürstenau ·
-      <a href="https://netfactory.de">netfactory.de</a>
-    </p>
+<section class="kontakt-band" id="kontakt">
+  <div class="linien" aria-hidden="true"></div>
+  <div class="leuchtfeld" aria-hidden="true">
+    <div class="leuchtkreis aqua"></div>
+    <div class="leuchtkreis mint"></div>
   </div>
+  <div class="container">
+    <div class="kontakt-inhalt">
+      <p class="augenbraue"><i class="gruen"></i><span>Kontakt</span></p>
+      <h2>Erleben Sie NETbrain an Ihren eigenen Beispielen.</h2>
+      <p class="lead">
+        Welche Frage beantwortet Ihr Team immer wieder? Bringen Sie ein Beispiel mit.
+        Wir zeigen Ihnen in 30 Minuten, wie Sie Wissen in NETbrain festhalten,
+        prüfen und wiederfinden.
+      </p>
+      <p class="kontakt-fein">NETbrain befindet sich aktuell in der Pilotphase (Alpha). Wir begleiten Ihren Einstieg persönlich.</p>
+      <div class="kontakt-wege">
+        <a class="knopf licht" href="mailto:info@netfactory.de?subject=NETbrain%20%E2%80%93%20Live-Demo%20vereinbaren&amp;body=Guten%20Tag%2C%0A%0Awir%20interessieren%20uns%20f%C3%BCr%20NETbrain%20und%20h%C3%A4tten%20gern%20einen%20Termin%20f%C3%BCr%20eine%20Live-Demo.%0A%0AUnternehmen%3A%20%0AAnzahl%20Mitarbeiter%3A%20%0AAnsprechpartner%3A%20%0ATelefon%3A%20%0A%0AUnser%20Anwendungsfall%3A%20%0A%0A">Live-Demo vereinbaren</a>
+        <a class="knopf glas" href="tel:+4959015173600">+49 5901 51736-0</a>
+      </div>
+      <p class="kontakt-fein">
+        NETFACTORY GmbH Internet Service · Kleine Straße 5 · 49584 Fürstenau ·
+        <a href="https://netfactory.de">netfactory.de</a>
+      </p>
+    </div>
   </div>
 </section>
 
 </main>
 
 <footer>
-  <div class="container">
-    <div class="fuss">
-      <div>
-        <div class="fuss-marke">
-          <img src="bilder/netbrain-logo.png" alt="NETbrain" width="1928" height="352" loading="lazy" decoding="async">
-        </div>
-        <p>Wissensplattform für Unternehmen.</p>
-        <div class="absender">
-          <span>Ein Produkt der</span>
-          <a href="https://netfactory.de" target="_blank" rel="noopener noreferrer">
-            <img src="bilder/netfactory-logo.svg" alt="NETFACTORY" width="120" height="13" loading="lazy" decoding="async">
-          </a>
-        </div>
-      </div>
-      <div>
-        <p>
-          Kleine Straße 5, 49584 Fürstenau<br>
-          Telefon <a href="tel:+4959015173600">+49 5901 51736-0</a><br>
-          <a href="mailto:info@netfactory.de">info@netfactory.de</a><br>
-          <a href="https://netfactory.de">netfactory.de</a>
-        </p>
-      </div>
-      <div>
-        <p>
-          Geschäftsführung: Fabian Stärke<br>
-          Amtsgericht Osnabrück, HRB 20797<br>
-          USt-IdNr. DE 186 434 904
-        </p>
-      </div>
+  <div class="container fuss-oben">
+    <img class="fuss-logo" src="bilder/netbrain-logo.png" alt="NETbrain" width="1928" height="352" loading="lazy" decoding="async">
+    <p class="fuss-claim">Wissensplattform für Unternehmen: Firmenwissen, persönliche Notizen und KI auf Ihrem eigenen Server.</p>
+    <div class="absender">
+      <span>Ein Produkt der</span>
+      <a href="https://netfactory.de" target="_blank" rel="noopener noreferrer">
+        <img src="bilder/netfactory-logo.svg" alt="NETFACTORY" width="120" height="13" loading="lazy" decoding="async">
+      </a>
     </div>
+  </div>
+  <div class="trennlinie" data-linie="h"></div>
+  <div class="container fuss-nav">
+    <div>
+      <p class="f-titel">Produkt</p>
+      <ul class="f-links">
+        <li><a href="#herausforderungen">Herausforderungen</a></li>
+        <li><a href="#loesung">Lösung</a></li>
+        <li><a href="#datenhoheit">Datenhoheit</a></li>
+        <li><a href="#ablauf">Ablauf</a></li>
+        <li><a href="#selbst-starten">Selbst testen</a></li>
+      </ul>
+    </div>
+    <div>
+      <p class="f-titel">Dokumentation</p>
+      <ul class="f-links">
+        <li><a href="doku/">Übersicht</a></li>
+        <li><a href="doku/installation.html">Installation</a></li>
+        <li><a href="doku/einrichtung.html">Einrichtung</a></li>
+        <li><a href="doku/fehlerbehebung.html">Fehlerbehebung</a></li>
+        <li><a href="doku/versionen.html">Versionen</a></li>
+      </ul>
+    </div>
+    <div>
+      <p class="f-titel">Unternehmen</p>
+      <ul class="f-links">
+        <li><a href="https://netfactory.de">NETFACTORY</a></li>
+        <li><a href="#kontakt">Kontakt</a></li>
+        <li><span>Geschäftsführung: Fabian Stärke</span></li>
+        <li><span>Amtsgericht Osnabrück, HRB 20797</span></li>
+        <li><span>USt-IdNr. DE 186 434 904</span></li>
+      </ul>
+    </div>
+    <div>
+      <p class="f-titel">Büro</p>
+      <ul class="f-links">
+        <li><span>NETFACTORY GmbH Internet Service</span></li>
+        <li><span>Kleine Straße 5</span></li>
+        <li><span>49584 Fürstenau</span></li>
+        <li><a href="tel:+4959015173600">+49 5901 51736-0</a></li>
+        <li><a href="mailto:info@netfactory.de">info@netfactory.de</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="trennlinie" data-linie="h"></div>
+  <div class="container fuss-unten">
+    <p class="copyright">© 2026 NETFACTORY GmbH</p>
     <p class="fuss-recht">
-      <a href="doku/">Dokumentation</a>
       <a href="https://www.netfactory.de/impressum">Impressum</a>
       <a href="https://www.netfactory.de/datenschutz">Datenschutz</a>
     </p>
+  </div>
+  <div class="container">
     <p class="rechtlich">
       NETbrain ist proprietäre Software der NETFACTORY GmbH und
       befindet sich in der Pilotphase. Die Angaben auf dieser Seite beschreiben den
       Leistungsumfang und stellen kein Angebot im Rechtssinne dar; Umfang, Vergütung
       und Laufzeit ergeben sich aus der geschlossenen Nutzungsvereinbarung.
-      © 2026 NETFACTORY GmbH Internet Service.
     </p>
   </div>
 </footer>
@@ -1288,7 +1358,7 @@
     '.schritte',
     '.faq',
     '.starten',
-    '.kontakt'
+    '.kontakt-inhalt'
   ].join(','));
 
   if (!bewegungReduziert && 'IntersectionObserver' in window) {

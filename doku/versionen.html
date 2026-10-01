@@ -27,7 +27,7 @@
     <nav aria-label="Hauptnavigation">
       <a href="../">Produkt</a>
       <a href="../#selbst-starten">Selbst testen</a>
-      <a href="versionen.html">Version 0.4.11</a>
+      <a href="versionen.html">Version 0.4.12</a>
       <a class="knopf" href="mailto:info@netfactory.de?subject=NETbrain%20%E2%80%93%20Frage%20zur%20Dokumentation">Frage stellen</a>
     </nav>
   </div>
@@ -48,6 +48,12 @@
     <p class="brotkrumen"><a href="../">NETbrain</a><span aria-hidden="true">/</span><a href="index.html">Dokumentation</a><span aria-hidden="true">/</span><span>Hilfe</span></p>
     <h1>Versionshinweise</h1>
 <p class="einleitung">Was sich mit jeder Version geändert hat. Steht unter <strong>Status</strong> ein Hinweis, lesen Sie ihn vor dem Update; wie das Update selbst abläuft, steht unter <a href="aktualisieren.html">Aktualisieren</a>.</p>
+<h2 id="v0-4-12">NETbrain 0.4.12<a class="anker" href="#v0-4-12" aria-label="Verweis auf diesen Abschnitt">#</a></h2>
+<p><strong>Stand:</strong> 1. Oktober 2026</p>
+<p><strong>Status:</strong> Für Kubernetes und App-Plattformen wichtig: Probes auf <code>/api/live</code> und <code>/api/ready</code> umstellen. Docker-Installationen: keine Eingriffe nötig.</p>
+<h3 id="eigene-endpunkte-fuer-container-probes">Eigene Endpunkte für Container-Probes<a class="anker" href="#eigene-endpunkte-fuer-container-probes" aria-label="Verweis auf diesen Abschnitt">#</a></h3>
+<ul><li>**<code>/api/live</code>** (Liveness) antwortet, solange der Prozess lebt.</li><li>**<code>/api/ready</code>** (Readiness) prüft Ablage und Migration.</li></ul>
+<p>Beide antworten unabhängig vom Host-Header, von Einrichtung und Lizenz. Bisher diente <code>/api/health</code> als Probe; es meldet 503, solange die Lizenz fehlt. Auf Kubernetes führte das zu einer Neustart-Schleife, und eine Installation ohne Lizenz erreichte ihre eigene Lizenzseite nicht. <code>/api/health</code> bleibt unverändert und dient der Überwachung. Auch die Healthprobe eines Reverse-Proxys gehört auf <code>/api/ready</code>.</p>
 <h2 id="v0-4-11">NETbrain 0.4.11<a class="anker" href="#v0-4-11" aria-label="Verweis auf diesen Abschnitt">#</a></h2>
 <p><strong>Stand:</strong> 1. Oktober 2026</p>
 <p><strong>Status:</strong> Keine Eingriffe nötig. Für das neue Erscheinungsbild auch den Portal-Container auf 0.4.11 bringen.</p>
@@ -199,9 +205,9 @@
 <h3 id="versionshinweis">Versionshinweis<a class="anker" href="#versionshinweis" aria-label="Verweis auf diesen Abschnitt">#</a></h3>
 <p>Version <strong>0.2.0</strong> ist das erste größere, abwärtskompatible Funktionsupdate nach dem Pilotstand 0.1.0. Bestehende Daten und Konten bleiben beim Update erhalten.</p>
     <nav class="blaettern" aria-label="Weiterblättern"><a class="zurueck" href="fehlerbehebung.html"><span>Zurück</span><b>Fehlerbehebung</b></a></nav>
-    <p class="stand">Stand: NETbrain 0.4.11. Fehlt etwas oder stimmt etwas nicht? <a href="mailto:info@netfactory.de?subject=NETbrain-Dokumentation%3A%20versionen">Schreiben Sie uns.</a></p>
+    <p class="stand">Stand: NETbrain 0.4.12. Fehlt etwas oder stimmt etwas nicht? <a href="mailto:info@netfactory.de?subject=NETbrain-Dokumentation%3A%20versionen">Schreiben Sie uns.</a></p>
   </main>
-  <aside class="auf-dieser-seite" aria-label="Auf dieser Seite"><p>Auf dieser Seite</p><ul><li><a href="#v0-4-11">NETbrain 0.4.11</a></li><li><a href="#v0-4-10">NETbrain 0.4.10</a></li><li><a href="#v0-4-9">NETbrain 0.4.9</a></li><li><a href="#v0-4-8">NETbrain 0.4.8</a></li><li><a href="#v0-4-7">NETbrain 0.4.7</a></li><li><a href="#v0-4-6">NETbrain 0.4.6</a></li><li><a href="#v0-4-5">NETbrain 0.4.5</a></li><li><a href="#v0-4-4">NETbrain 0.4.4</a></li><li><a href="#v0-4-3">NETbrain 0.4.3</a></li><li><a href="#v0-4-2">NETbrain 0.4.2</a></li><li><a href="#v0-4-0">NETbrain 0.4.0</a></li><li><a href="#v0-3-0">NETbrain 0.3.0</a></li><li><a href="#v0-2-1">NETbrain 0.2.1</a></li><li><a href="#v0-2-0">NETbrain 0.2.0</a></li></ul></aside>
+  <aside class="auf-dieser-seite" aria-label="Auf dieser Seite"><p>Auf dieser Seite</p><ul><li><a href="#v0-4-12">NETbrain 0.4.12</a></li><li><a href="#v0-4-11">NETbrain 0.4.11</a></li><li><a href="#v0-4-10">NETbrain 0.4.10</a></li><li><a href="#v0-4-9">NETbrain 0.4.9</a></li><li><a href="#v0-4-8">NETbrain 0.4.8</a></li><li><a href="#v0-4-7">NETbrain 0.4.7</a></li><li><a href="#v0-4-6">NETbrain 0.4.6</a></li><li><a href="#v0-4-5">NETbrain 0.4.5</a></li><li><a href="#v0-4-4">NETbrain 0.4.4</a></li><li><a href="#v0-4-3">NETbrain 0.4.3</a></li><li><a href="#v0-4-2">NETbrain 0.4.2</a></li><li><a href="#v0-4-0">NETbrain 0.4.0</a></li><li><a href="#v0-3-0">NETbrain 0.3.0</a></li><li><a href="#v0-2-1">NETbrain 0.2.1</a></li><li><a href="#v0-2-0">NETbrain 0.2.0</a></li></ul></aside>
 </div>
 <footer>
   <div class="fuss">

@@ -27,7 +27,7 @@
     <nav aria-label="Hauptnavigation">
       <a href="../">Produkt</a>
       <a href="../#selbst-starten">Selbst testen</a>
-      <a href="versionen.html">Version 0.4.11</a>
+      <a href="versionen.html">Version 0.4.12</a>
       <a class="knopf" href="mailto:info@netfactory.de?subject=NETbrain%20%E2%80%93%20Frage%20zur%20Dokumentation">Frage stellen</a>
     </nav>
   </div>
@@ -49,11 +49,24 @@
     <h1>Kubernetes und App-Plattformen</h1>
 <p class="einleitung">Diese Seite richtet sich an Betreiber von Kubernetes- oder App-Plattformen. Gemeint ist der Fall, dass ein Kunde NETbrain selbst startet und niemand dabei etwas von Hand einrichtet. Installer und Update-Helfer werden hier nicht gebraucht.</p>
 <h2 id="netbrain">NETbrain<a class="anker" href="#netbrain" aria-label="Verweis auf diesen Abschnitt">#</a></h2>
-<div class="tabelle"><table><tbody><tr><td>Image</td><td><code>ghcr.io/netfactory-gmbh/netbrain:&lt;version&gt;</code> (öffentlich)</td></tr><tr><td>Port</td><td>HTTP auf <strong>4321</strong>, TLS am Ingress</td></tr><tr><td>Prüfpfad</td><td><code>/api/health</code></td></tr><tr><td>Benutzer</td><td><code>10001</code>, beide Volumes müssen ihm gehören</td></tr><tr><td>Repliken</td><td>genau <strong>1</strong>, kein Autoscaling</td></tr></tbody></table></div>
+<div class="tabelle"><table><tbody><tr><td>Image</td><td><code>ghcr.io/netfactory-gmbh/netbrain:&lt;version&gt;</code> (öffentlich)</td></tr><tr><td>Port</td><td>HTTP auf <strong>4321</strong>, TLS am Ingress</td></tr><tr><td>Liveness</td><td><code>/api/live</code> — antwortet, solange der Prozess lebt</td></tr><tr><td>Readiness</td><td><code>/api/ready</code> — Ablage beschreibbar, keine Migration im Gange</td></tr><tr><td>Benutzer</td><td><code>10001</code>, beide Volumes müssen ihm gehören</td></tr><tr><td>Repliken</td><td>genau <strong>1</strong>, kein Autoscaling</td></tr></tbody></table></div>
 <h3 id="umgebungsvariablen">Umgebungsvariablen<a class="anker" href="#umgebungsvariablen" aria-label="Verweis auf diesen Abschnitt">#</a></h3>
 <div class="tabelle"><table><thead><tr><th>Variable</th><th>Wert</th><th>Ohne sie</th></tr></thead><tbody><tr><td><code>NETBRAIN_ALLOWED_HOSTS</code></td><td>der vergebene Hostname (empfohlen)</td><td>Jeder Hostname wird angenommen, bis der Assistent den Namen speichert</td></tr><tr><td><code>NETBRAIN_SETUP_TOKEN</code></td><td>Zufallswert, mindestens 24 Zeichen</td><td>Das Token steht nur im Pod-Log; der Kunde kommt nicht an seine Einrichtung</td></tr><tr><td><code>NETBRAIN_SECRET_KEY</code></td><td>Zufallswert, <code>openssl rand -base64 32</code></td><td>Der Kunde kann keine KI-Zugänge hinterlegen</td></tr><tr><td><code>NETBRAIN_TRUSTED_PROXY_HOPS</code></td><td>Zahl der Proxys davor, meist <code>1</code></td><td>Anmeldedrossel und Protokoll sehen die Proxy-Adresse</td></tr></tbody></table></div>
 <p><code>NETBRAIN_SETUP_TOKEN</code> und <code>NETBRAIN_SECRET_KEY</code> gehören in den Geheimnisspeicher der Plattform und müssen <strong>über Neustarts gleich bleiben</strong>. Ein neuer <code>NETBRAIN_SECRET_KEY</code> macht hinterlegte KI-Schlüssel unlesbar.</p>
 <p>Zeigen Sie das Einrichtungs-Token auf der Kachel an, so wie das Startpasswort anderer Anwendungen. Der Kunde braucht es genau einmal.</p>
+<h3 id="probes">Probes<a class="anker" href="#probes" aria-label="Verweis auf diesen Abschnitt">#</a></h3>
+<p><code>/api/live</code> und <code>/api/ready</code> antworten unabhängig vom Host-Header, von Einrichtung und Lizenz. Das ist Absicht: Eine noch nicht eingerichtete oder gesperrte Installation muss weiterlaufen und ihre Einrichtungs- bzw. Lizenzseite ausliefern.</p>
+<div class="kasten wichtig"><p class="kasten-titel"><i></i><code>/api/health</code> nicht als Probe verwenden</p><p><code>/api/health</code> meldet <strong>503</strong>, solange die Lizenz fehlt oder abgelaufen ist. Als Liveness-Probe führt das zu einer Neustart-Schleife, als Readiness-Probe nimmt es die Installation aus dem Verkehr — der Kunde erreicht dann nicht einmal die Seite, auf der er die Lizenz einträgt. <code>/api/health</code> eignet sich für die Überwachung, nicht für Probes.</p></div>
+<div class="codeblock"><pre><code>livenessProbe:
+  httpGet: { path: /api/live, port: 4321 }
+  periodSeconds: 30
+readinessProbe:
+  httpGet: { path: /api/ready, port: 4321 }
+  periodSeconds: 10
+startupProbe:
+  httpGet: { path: /api/live, port: 4321 }
+  failureThreshold: 30
+  periodSeconds: 5</code></pre><button type="button" class="kopieren" aria-label="Befehl kopieren"><svg class="bereit" viewBox="0 0 24 24" aria-hidden="true"><rect x="8" y="8" width="11" height="11" rx="2"/><path d="M16 8V6a2 2 0 00-2-2H6a2 2 0 00-2 2v8a2 2 0 002 2h2"/></svg><svg class="fertig" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7"/></svg></button></div>
 <h3 id="volumes">Volumes<a class="anker" href="#volumes" aria-label="Verweis auf diesen Abschnitt">#</a></h3>
 <ul><li><code>/data</code> — Wissensbestand, Konten, Chats, Lizenz. Der einzige unersetzliche Zustand.</li><li><code>/backups</code> — die von NETbrain erzeugten verschlüsselten Sicherungen.</li></ul>
 <p>Sichert die Plattform das Volume ohnehin, genügt das. Planen Sie dann nicht zusätzlich NETbrains eigene Sicherung mit Aufbewahrung im selben Verzeichnis — zwei Zeitpläne räumen sich die Dateien gegenseitig weg.</p>
@@ -75,7 +88,7 @@
 <h2 id="updates">Updates<a class="anker" href="#updates" aria-label="Verweis auf diesen Abschnitt">#</a></h2>
 <p>Ziehen Sie den Image-Tag hoch wie bei jeder anderen Anwendung; die <a href="versionen.html">Versionshinweise</a> nennen, ob vorher etwas zu tun ist. Den mitgelieferten Update-Helfer und <code>install.sh</code> bitte nicht im Pod aufrufen — beide richten einen Docker-Host ein und haben im Pod nichts verloren.</p>
     <nav class="blaettern" aria-label="Weiterblättern"><a class="zurueck" href="aktualisieren.html"><span>Zurück</span><b>Aktualisieren</b></a><a class="weiter" href="datenfluss.html"><span>Weiter</span><b>Was den Server verlässt</b></a></nav>
-    <p class="stand">Stand: NETbrain 0.4.11. Fehlt etwas oder stimmt etwas nicht? <a href="mailto:info@netfactory.de?subject=NETbrain-Dokumentation%3A%20plattform">Schreiben Sie uns.</a></p>
+    <p class="stand">Stand: NETbrain 0.4.12. Fehlt etwas oder stimmt etwas nicht? <a href="mailto:info@netfactory.de?subject=NETbrain-Dokumentation%3A%20plattform">Schreiben Sie uns.</a></p>
   </main>
   <aside class="auf-dieser-seite" aria-label="Auf dieser Seite"><p>Auf dieser Seite</p><ul><li><a href="#netbrain">NETbrain</a></li><li><a href="#kundenportal">Kundenportal</a></li><li><a href="#zwei-faktor-anmeldung">Zwei-Faktor-Anmeldung</a></li><li><a href="#lizenz">Lizenz</a></li><li><a href="#updates">Updates</a></li></ul></aside>
 </div>

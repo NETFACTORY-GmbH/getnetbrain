@@ -27,7 +27,7 @@
     <nav aria-label="Hauptnavigation">
       <a href="../">Produkt</a>
       <a href="../#selbst-starten">Selbst testen</a>
-      <a href="versionen.html">Version 0.4.11</a>
+      <a href="versionen.html">Version 0.4.12</a>
       <a class="knopf" href="mailto:info@netfactory.de?subject=NETbrain%20%E2%80%93%20Frage%20zur%20Dokumentation">Frage stellen</a>
     </nav>
   </div>
@@ -55,7 +55,7 @@
 <p>Am Ende stehen das <strong>Einrichtungs-Token</strong> und die Adresse, unter der es weitergeht.</p>
 <h3 id="eine-bestimmte-version-installieren">Eine bestimmte Version installieren<a class="anker" href="#eine-bestimmte-version-installieren" aria-label="Verweis auf diesen Abschnitt">#</a></h3>
 <p>Die Version steckt im Link:</p>
-<div class="codeblock"><pre><code>curl -fsSL https://getnetbrain.netfactory.de/install.sh@0.4.11 | sudo bash</code></pre><button type="button" class="kopieren" aria-label="Befehl kopieren"><svg class="bereit" viewBox="0 0 24 24" aria-hidden="true"><rect x="8" y="8" width="11" height="11" rx="2"/><path d="M16 8V6a2 2 0 00-2-2H6a2 2 0 00-2 2v8a2 2 0 002 2h2"/></svg><svg class="fertig" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7"/></svg></button></div>
+<div class="codeblock"><pre><code>curl -fsSL https://getnetbrain.netfactory.de/install.sh@0.4.12 | sudo bash</code></pre><button type="button" class="kopieren" aria-label="Befehl kopieren"><svg class="bereit" viewBox="0 0 24 24" aria-hidden="true"><rect x="8" y="8" width="11" height="11" rx="2"/><path d="M16 8V6a2 2 0 00-2-2H6a2 2 0 00-2 2v8a2 2 0 002 2h2"/></svg><svg class="fertig" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7"/></svg></button></div>
 <h3 id="proxy-auf-einem-anderen-rechner">Proxy auf einem anderen Rechner<a class="anker" href="#proxy-auf-einem-anderen-rechner" aria-label="Verweis auf diesen Abschnitt">#</a></h3>
 <p>Steht Ihr Reverse-Proxy nicht auf demselben Server, muss NETbrain auf allen Netzwerkschnittstellen lauschen. Dann gehört zwingend eine Firewallregel dazu, die Port 4321 auf die Adresse des Proxys beschränkt (siehe <a href="reverse-proxy.html#firewall">Reverse-Proxy, Punkt 6</a>):</p>
 <div class="codeblock"><pre><code>curl -fsSL https://getnetbrain.netfactory.de/install.sh | sudo NETBRAIN_BIND=0.0.0.0 bash</code></pre><button type="button" class="kopieren" aria-label="Befehl kopieren"><svg class="bereit" viewBox="0 0 24 24" aria-hidden="true"><rect x="8" y="8" width="11" height="11" rx="2"/><path d="M16 8V6a2 2 0 00-2-2H6a2 2 0 00-2 2v8a2 2 0 002 2h2"/></svg><svg class="fertig" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7"/></svg></button></div>
@@ -82,7 +82,7 @@ sudo ./install.sh token</code></pre><button type="button" class="kopieren" aria-
 <p>Einen Löschbefehl hat der Installer bewusst nicht.</p>
 <div class="kasten hinweis"><p class="kasten-titel"><i></i>Das Token gilt nur bis zum nächsten Neustart</p><p>Nach jedem Neustart des Containers steht ein neues Token im Protokoll. Ein „falsches“ Token ist fast immer ein altes — <code>sudo ./install.sh token</code> zeigt das aktuelle.</p></div>
     <nav class="blaettern" aria-label="Weiterblättern"><a class="zurueck" href="voraussetzungen.html"><span>Zurück</span><b>Voraussetzungen</b></a><a class="weiter" href="einrichtung.html"><span>Weiter</span><b>Einrichtung im Browser</b></a></nav>
-    <p class="stand">Stand: NETbrain 0.4.11. Fehlt etwas oder stimmt etwas nicht? <a href="mailto:info@netfactory.de?subject=NETbrain-Dokumentation%3A%20installation">Schreiben Sie uns.</a></p>
+    <p class="stand">Stand: NETbrain 0.4.12. Fehlt etwas oder stimmt etwas nicht? <a href="mailto:info@netfactory.de?subject=NETbrain-Dokumentation%3A%20installation">Schreiben Sie uns.</a></p>
   </main>
   <aside class="auf-dieser-seite" aria-label="Auf dieser Seite"><p>Auf dieser Seite</p><ul><li><a href="#installieren">Installieren</a></li><li><a href="#dns-name-und-proxy-kette-eintragen">DNS-Name und Proxy-Kette eintragen</a></li><li><a href="#weiter-im-browser">Weiter im Browser</a></li><li><a href="#befehle-fuer-spaeter">Befehle für später</a></li></ul></aside>
 </div>

@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Installation — NETbrain-Dokumentation</title>
+<meta name="description" content="NETbrain mit einem Befehl auf einem Linux-Server mit Docker installieren.">
+<link rel="canonical" href="https://getnetbrain.netfactory.de/doku/installation.html">
+<meta name="theme-color" content="#000000">
+<link rel="icon" href="../bilder/favicon-32.png" sizes="32x32">
+<link rel="icon" href="../bilder/favicon-16.png" sizes="16x16">
+<link rel="apple-touch-icon" href="../bilder/favicon-180.png">
+<meta property="og:type" content="article">
+<meta property="og:locale" content="de_DE">
+<meta property="og:site_name" content="NETbrain">
+<meta property="og:title" content="Installation — NETbrain-Dokumentation">
+<meta property="og:description" content="NETbrain mit einem Befehl auf einem Linux-Server mit Docker installieren.">
+<meta property="og:image" content="https://getnetbrain.netfactory.de/bilder/og-image-v2.png">
+<link rel="preload" href="../schriften/geist-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="doku.css">
+</head>
+<body>
+<a class="sprung" href="#inhalt">Zum Inhalt springen</a>
+<header>
+  <div class="kopf">
+    <a class="marke" href="index.html"><img src="../bilder/netbrain-logo.png" alt="NETbrain" width="1928" height="352" decoding="async"><span>Dokumentation</span></a>
+    <nav aria-label="Hauptnavigation">
+      <a href="../">Produkt</a>
+      <a href="../#selbst-starten">Selbst testen</a>
+      <a href="versionen.html">Version 0.4.9</a>
+      <a class="knopf" href="mailto:info@netfactory.de?subject=NETbrain%20%E2%80%93%20Frage%20zur%20Dokumentation">Frage stellen</a>
+    </nav>
+  </div>
+</header>
+<div class="raster">
+  <nav class="seitennav" aria-label="Dokumentation">
+    <div class="suche" role="search">
+      <label class="nur-screenreader" for="suchfeld">Dokumentation durchsuchen</label>
+      <input id="suchfeld" type="search" placeholder="Suchen …  ( / )" autocomplete="off" data-index="suche.json" data-basis="">
+      <ul class="treffer" hidden></ul>
+    </div>
+    <details open>
+      <summary>Inhalt der Dokumentation</summary>
+      <div><div class="gruppe"><p><i></i>Erste Schritte</p><ul><li><a href="index.html">Überblick</a></li><li><a href="voraussetzungen.html">Voraussetzungen</a></li><li><a href="installation.html" aria-current="page">Installation</a></li><li><a href="einrichtung.html">Einrichtung im Browser</a></li></ul></div><div class="gruppe"><p><i></i>Arbeiten mit NETbrain</p><ul><li><a href="anmeldung.html">Anmeldung und Konto</a></li><li><a href="firmenwissen.html">Firmenwissen</a></li><li><a href="wissenspflege.html">Wissenspflege</a></li><li><a href="privater-vault.html">Privater Vault</a></li><li><a href="ki-chat.html">KI-Chat</a></li></ul></div><div class="gruppe"><p><i></i>Verwaltung</p><ul><li><a href="benutzer.html">Benutzer und Rollen</a></li><li><a href="ki-zugaenge.html">KI-Zugänge und Freigaben</a></li><li><a href="kundenportal.html">Kundenportal</a></li><li><a href="lizenz.html">Lizenz</a></li></ul></div><div class="gruppe"><p><i></i>Betrieb</p><ul><li><a href="reverse-proxy.html">Reverse-Proxy</a></li><li><a href="sicherung.html">Sicherung und Wiederherstellung</a></li><li><a href="aktualisieren.html">Aktualisieren</a></li><li><a href="plattform.html">Kubernetes und App-Plattformen</a></li><li><a href="datenfluss.html">Was den Server verlässt</a></li></ul></div><div class="gruppe"><p><i></i>Hilfe</p><ul><li><a href="fehlerbehebung.html">Fehlerbehebung</a></li><li><a href="versionen.html">Versionshinweise</a></li></ul></div></div>
+    </details>
+  </nav>
+  <main class="artikel" id="inhalt">
+    <p class="brotkrumen"><a href="../">NETbrain</a><span aria-hidden="true">/</span><a href="index.html">Dokumentation</a><span aria-hidden="true">/</span><span>Erste Schritte</span></p>
+    <h1>Installation</h1>
+<p class="einleitung">Die Installation besteht aus einem Befehl auf dem Server und einer kleinen Anpassung danach. Rechnen Sie mit rund zehn Minuten auf der Kommandozeile; die Einrichtung im Browser folgt im nächsten Kapitel.</p>
+<h2 id="installieren">Installieren<a class="anker" href="#installieren" aria-label="Verweis auf diesen Abschnitt">#</a></h2>
+<p>Melden Sie sich auf dem Server an und führen Sie aus:</p>
+<div class="codeblock"><pre><code>curl -fsSL https://getnetbrain.netfactory.de/install.sh | sudo bash</code></pre><button type="button" class="kopieren" aria-label="Befehl kopieren"><svg class="bereit" viewBox="0 0 24 24" aria-hidden="true"><rect x="8" y="8" width="11" height="11" rx="2"/><path d="M16 8V6a2 2 0 00-2-2H6a2 2 0 00-2 2v8a2 2 0 002 2h2"/></svg><svg class="fertig" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7"/></svg></button></div>
+<p>Das Skript prüft Docker, bezieht das NETbrain-Image (öffentlich, ohne Anmeldung), legt die Installation unter <code>/opt/netbrain</code> an und startet sie. Es wartet, bis NETbrain antwortet — beim ersten Mal bis zu zwei Minuten. Auf einem systemd-Server richtet es zusätzlich den lokalen Update-Helfer ein, über den Administratoren später Updates im Browser auslösen.</p>
+<p>Am Ende stehen das <strong>Einrichtungs-Token</strong> und die Adresse, unter der es weitergeht.</p>
+<h3 id="eine-bestimmte-version-installieren">Eine bestimmte Version installieren<a class="anker" href="#eine-bestimmte-version-installieren" aria-label="Verweis auf diesen Abschnitt">#</a></h3>
+<p>Die Version steckt im Link:</p>
+<div class="codeblock"><pre><code>curl -fsSL https://getnetbrain.netfactory.de/install.sh@0.4.9 | sudo bash</code></pre><button type="button" class="kopieren" aria-label="Befehl kopieren"><svg class="bereit" viewBox="0 0 24 24" aria-hidden="true"><rect x="8" y="8" width="11" height="11" rx="2"/><path d="M16 8V6a2 2 0 00-2-2H6a2 2 0 00-2 2v8a2 2 0 002 2h2"/></svg><svg class="fertig" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7"/></svg></button></div>
+<h3 id="proxy-auf-einem-anderen-rechner">Proxy auf einem anderen Rechner<a class="anker" href="#proxy-auf-einem-anderen-rechner" aria-label="Verweis auf diesen Abschnitt">#</a></h3>
+<p>Steht Ihr Reverse-Proxy nicht auf demselben Server, muss NETbrain auf allen Netzwerkschnittstellen lauschen. Dann gehört zwingend eine Firewallregel dazu, die Port 4321 auf die Adresse des Proxys beschränkt (siehe <a href="reverse-proxy.html#firewall">Reverse-Proxy, Punkt 6</a>):</p>
+<div class="codeblock"><pre><code>curl -fsSL https://getnetbrain.netfactory.de/install.sh | sudo NETBRAIN_BIND=0.0.0.0 bash</code></pre><button type="button" class="kopieren" aria-label="Befehl kopieren"><svg class="bereit" viewBox="0 0 24 24" aria-hidden="true"><rect x="8" y="8" width="11" height="11" rx="2"/><path d="M16 8V6a2 2 0 00-2-2H6a2 2 0 00-2 2v8a2 2 0 002 2h2"/></svg><svg class="fertig" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7"/></svg></button></div>
+<p>Ist Port 4321 belegt, wählen Sie mit <code>NETBRAIN_PORT=4330</code> einen anderen; der Proxy leitet dann dorthin weiter.</p>
+<h2 id="dns-name-und-proxy-kette-eintragen">DNS-Name und Proxy-Kette eintragen<a class="anker" href="#dns-name-und-proxy-kette-eintragen" aria-label="Verweis auf diesen Abschnitt">#</a></h2>
+<p>Dieser Schritt gehört zu jeder Installation. Der Installer erlaubt zunächst nur <code>localhost</code> und <code>127.0.0.1</code>. Ruft Ihr Proxy NETbrain unter dem DNS-Namen auf, antwortet NETbrain mit <strong>421</strong> — das sieht wie ein Defekt aus und ist eine Zeile.</p>
+<div class="codeblock"><pre><code>sudo nano /opt/netbrain/netbrain-compose.yml</code></pre><button type="button" class="kopieren" aria-label="Befehl kopieren"><svg class="bereit" viewBox="0 0 24 24" aria-hidden="true"><rect x="8" y="8" width="11" height="11" rx="2"/><path d="M16 8V6a2 2 0 00-2-2H6a2 2 0 00-2 2v8a2 2 0 002 2h2"/></svg><svg class="fertig" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7"/></svg></button></div>
+<p>In der Zeile <code>NETBRAIN_ALLOWED_HOSTS</code> den Namen ergänzen und im selben <code>environment:</code>-Block die Zahl der Proxys vor NETbrain eintragen:</p>
+<div class="codeblock"><pre><code>      NETBRAIN_ALLOWED_HOSTS: &quot;localhost,127.0.0.1,netbrain.ihre-firma.de&quot;
+      NETBRAIN_TRUSTED_PROXY_HOPS: &quot;1&quot;</code></pre><button type="button" class="kopieren" aria-label="Befehl kopieren"><svg class="bereit" viewBox="0 0 24 24" aria-hidden="true"><rect x="8" y="8" width="11" height="11" rx="2"/><path d="M16 8V6a2 2 0 00-2-2H6a2 2 0 00-2 2v8a2 2 0 002 2h2"/></svg><svg class="fertig" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7"/></svg></button></div>
+<p>Steht ein Proxy davor, gehört dort <code>1</code> hin, nicht <code>0</code>. Sonst sieht die Anmeldedrossel alle Besucher als die Adresse des Proxys, und ein einziger Fehlversuch sperrt alle gemeinsam aus. Die Zahl können Sie alternativ im Einrichtungsassistenten eintragen — aber nur an einer der beiden Stellen; was in der Datei steht, hat Vorrang.</p>
+<p>Danach die Änderung übernehmen und das neue Token abrufen:</p>
+<div class="codeblock"><pre><code>cd /opt/netbrain
+sudo ./install.sh
+sudo ./install.sh token</code></pre><button type="button" class="kopieren" aria-label="Befehl kopieren"><svg class="bereit" viewBox="0 0 24 24" aria-hidden="true"><rect x="8" y="8" width="11" height="11" rx="2"/><path d="M16 8V6a2 2 0 00-2-2H6a2 2 0 00-2 2v8a2 2 0 002 2h2"/></svg><svg class="fertig" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7"/></svg></button></div>
+<p>Die Compose-Datei gehört Ihnen: Kein Update überschreibt sie.</p>
+<h2 id="weiter-im-browser">Weiter im Browser<a class="anker" href="#weiter-im-browser" aria-label="Verweis auf diesen Abschnitt">#</a></h2>
+<p>Rufen Sie <code>https://netbrain.ihre-firma.de</code> auf. Jeder Aufruf landet auf der Einrichtung — weiter mit <a href="einrichtung.html">Einrichtung im Browser</a>.</p>
+<h2 id="befehle-fuer-spaeter">Befehle für später<a class="anker" href="#befehle-fuer-spaeter" aria-label="Verweis auf diesen Abschnitt">#</a></h2>
+<p>Alle im Verzeichnis <code>/opt/netbrain</code>:</p>
+<div class="tabelle"><table><thead><tr><th>Befehl</th><th>Wirkung</th></tr></thead><tbody><tr><td><code>sudo ./install.sh status</code></td><td>Läuft NETbrain, ist es bereit, welche Version</td></tr><tr><td><code>sudo ./install.sh token</code></td><td>Einrichtungs-Token anzeigen, solange nicht eingerichtet</td></tr><tr><td><code>sudo ./install.sh logs</code></td><td>Protokoll mitlesen, <code>Strg+C</code> beendet</td></tr><tr><td><code>sudo ./install.sh stop</code> / <code>start</code></td><td>Anhalten und wieder starten</td></tr><tr><td><code>sudo ./install.sh</code></td><td>Änderungen an der Compose-Datei übernehmen, Version aktualisieren</td></tr></tbody></table></div>
+<p>Einen Löschbefehl hat der Installer bewusst nicht.</p>
+<div class="kasten hinweis"><p class="kasten-titel"><i></i>Das Token gilt nur bis zum nächsten Neustart</p><p>Nach jedem Neustart des Containers steht ein neues Token im Protokoll. Ein „falsches“ Token ist fast immer ein altes — <code>sudo ./install.sh token</code> zeigt das aktuelle.</p></div>
+    <nav class="blaettern" aria-label="Weiterblättern"><a class="zurueck" href="voraussetzungen.html"><span>Zurück</span><b>Voraussetzungen</b></a><a class="weiter" href="einrichtung.html"><span>Weiter</span><b>Einrichtung im Browser</b></a></nav>
+    <p class="stand">Stand: NETbrain 0.4.9. Fehlt etwas oder stimmt etwas nicht? <a href="mailto:info@netfactory.de?subject=NETbrain-Dokumentation%3A%20installation">Schreiben Sie uns.</a></p>
+  </main>
+  <aside class="auf-dieser-seite" aria-label="Auf dieser Seite"><p>Auf dieser Seite</p><ul><li><a href="#installieren">Installieren</a></li><li><a href="#dns-name-und-proxy-kette-eintragen">DNS-Name und Proxy-Kette eintragen</a></li><li><a href="#weiter-im-browser">Weiter im Browser</a></li><li><a href="#befehle-fuer-spaeter">Befehle für später</a></li></ul></aside>
+</div>
+<footer>
+  <div class="fuss">
+    <span>© NETFACTORY GmbH · NETbrain ist proprietäre Software und befindet sich in der Pilotphase.</span>
+    <nav aria-label="Rechtliches">
+      <a href="../">Produktseite</a>
+      <a href="mailto:info@netfactory.de">info@netfactory.de</a>
+      <a href="https://www.netfactory.de/impressum">Impressum</a>
+      <a href="https://www.netfactory.de/datenschutz">Datenschutz</a>
+    </nav>
+  </div>
+</footer>
+<script src="doku.js" defer></script>
+</body>
+</html>

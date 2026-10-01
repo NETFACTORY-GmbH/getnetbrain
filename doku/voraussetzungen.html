@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Voraussetzungen — NETbrain-Dokumentation</title>
+<meta name="description" content="Was Server, Netz und IT vor der Installation von NETbrain bereitstellen müssen.">
+<link rel="canonical" href="https://getnetbrain.netfactory.de/doku/voraussetzungen.html">
+<meta name="theme-color" content="#000000">
+<link rel="icon" href="../bilder/favicon-32.png" sizes="32x32">
+<link rel="icon" href="../bilder/favicon-16.png" sizes="16x16">
+<link rel="apple-touch-icon" href="../bilder/favicon-180.png">
+<meta property="og:type" content="article">
+<meta property="og:locale" content="de_DE">
+<meta property="og:site_name" content="NETbrain">
+<meta property="og:title" content="Voraussetzungen — NETbrain-Dokumentation">
+<meta property="og:description" content="Was Server, Netz und IT vor der Installation von NETbrain bereitstellen müssen.">
+<meta property="og:image" content="https://getnetbrain.netfactory.de/bilder/og-image-v2.png">
+<link rel="preload" href="../schriften/geist-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="doku.css">
+</head>
+<body>
+<a class="sprung" href="#inhalt">Zum Inhalt springen</a>
+<header>
+  <div class="kopf">
+    <a class="marke" href="index.html"><img src="../bilder/netbrain-logo.png" alt="NETbrain" width="1928" height="352" decoding="async"><span>Dokumentation</span></a>
+    <nav aria-label="Hauptnavigation">
+      <a href="../">Produkt</a>
+      <a href="../#selbst-starten">Selbst testen</a>
+      <a href="versionen.html">Version 0.4.9</a>
+      <a class="knopf" href="mailto:info@netfactory.de?subject=NETbrain%20%E2%80%93%20Frage%20zur%20Dokumentation">Frage stellen</a>
+    </nav>
+  </div>
+</header>
+<div class="raster">
+  <nav class="seitennav" aria-label="Dokumentation">
+    <div class="suche" role="search">
+      <label class="nur-screenreader" for="suchfeld">Dokumentation durchsuchen</label>
+      <input id="suchfeld" type="search" placeholder="Suchen …  ( / )" autocomplete="off" data-index="suche.json" data-basis="">
+      <ul class="treffer" hidden></ul>
+    </div>
+    <details open>
+      <summary>Inhalt der Dokumentation</summary>
+      <div><div class="gruppe"><p><i></i>Erste Schritte</p><ul><li><a href="index.html">Überblick</a></li><li><a href="voraussetzungen.html" aria-current="page">Voraussetzungen</a></li><li><a href="installation.html">Installation</a></li><li><a href="einrichtung.html">Einrichtung im Browser</a></li></ul></div><div class="gruppe"><p><i></i>Arbeiten mit NETbrain</p><ul><li><a href="anmeldung.html">Anmeldung und Konto</a></li><li><a href="firmenwissen.html">Firmenwissen</a></li><li><a href="wissenspflege.html">Wissenspflege</a></li><li><a href="privater-vault.html">Privater Vault</a></li><li><a href="ki-chat.html">KI-Chat</a></li></ul></div><div class="gruppe"><p><i></i>Verwaltung</p><ul><li><a href="benutzer.html">Benutzer und Rollen</a></li><li><a href="ki-zugaenge.html">KI-Zugänge und Freigaben</a></li><li><a href="kundenportal.html">Kundenportal</a></li><li><a href="lizenz.html">Lizenz</a></li></ul></div><div class="gruppe"><p><i></i>Betrieb</p><ul><li><a href="reverse-proxy.html">Reverse-Proxy</a></li><li><a href="sicherung.html">Sicherung und Wiederherstellung</a></li><li><a href="aktualisieren.html">Aktualisieren</a></li><li><a href="plattform.html">Kubernetes und App-Plattformen</a></li><li><a href="datenfluss.html">Was den Server verlässt</a></li></ul></div><div class="gruppe"><p><i></i>Hilfe</p><ul><li><a href="fehlerbehebung.html">Fehlerbehebung</a></li><li><a href="versionen.html">Versionshinweise</a></li></ul></div></div>
+    </details>
+  </nav>
+  <main class="artikel" id="inhalt">
+    <p class="brotkrumen"><a href="../">NETbrain</a><span aria-hidden="true">/</span><a href="index.html">Dokumentation</a><span aria-hidden="true">/</span><span>Erste Schritte</span></p>
+    <h1>Voraussetzungen</h1>
+<p class="einleitung">Bitte gehen Sie diese Liste vor der Installation durch. Jeder Punkt kostet hinterher mehr Zeit als jetzt.</p>
+<h2 id="server">Server<a class="anker" href="#server" aria-label="Verweis auf diesen Abschnitt">#</a></h2>
+<ul><li>Linux-Server oder VM, aktuelles LTS (Debian oder Ubuntu empfohlen).</li><li><strong>Docker Engine</strong> und <strong>Docker Compose v2</strong> (<code>docker compose version</code> — mit Leerzeichen). Fehlt Docker, bietet der Installer an, es über das offizielle Skript von Docker einzurichten.</li><li><strong>2 vCPU und 4 GB RAM</strong> als Richtwert. NETbrain rechnet kaum selbst; die Sprachmodelle laufen beim KI-Anbieter.</li><li><strong>40 GB Platte</strong> als Start. Wissensbestand und Sicherungen wachsen unabhängig voneinander; NETbrain hebt in der Vorgabe 14 Sicherungsstände auf.</li><li><code>sudo</code>-Rechte.</li></ul>
+<h2 id="netz">Netz<a class="anker" href="#netz" aria-label="Verweis auf diesen Abschnitt">#</a></h2>
+<ul><li>Ein <strong>DNS-Name</strong>, der auf den Server zeigt, zum Beispiel <code>netbrain.ihre-firma.de</code>. Ein reiner Intranet-Name genügt.</li><li><strong>Ausgehend Port 443</strong> zur Container-Registry <code>ghcr.io</code> (Installation und Updates), zum Lizenzdienst <code>lizenz-netbrain.netfactory.de</code> und zu Ihrem KI-Anbieter. Was genau übertragen wird, steht unter <a href="datenfluss.html">Was den Server verlässt</a>.</li><li><strong>Eingehend</strong> nur auf Ihren Reverse-Proxy (443, dazu 80 für die Weiterleitung). Auf dem NETbrain-Server selbst muss von außen nichts offen sein.</li></ul>
+<h2 id="reverse-proxy-mit-tls">Reverse-Proxy mit TLS<a class="anker" href="#reverse-proxy-mit-tls" aria-label="Verweis auf diesen Abschnitt">#</a></h2>
+<p>NETbrain spricht im Container HTTP und ist nur auf <code>127.0.0.1</code> erreichbar. Davor gehört ein Reverse-Proxy, den Sie stellen: Er nimmt HTTPS an, beendet TLS und reicht an NETbrain weiter.</p>
+<div class="kasten wichtig"><p class="kasten-titel"><i></i>Ohne HTTPS keine Anmeldung</p><p>Das Sitzungscookie von NETbrain ist <code>secure</code>. Über reines HTTP verwirft es der Browser, und die Anmeldung scheitert trotz richtigem Passwort.</p></div>
+<p>Was der Proxy genau leisten muss — acht Punkte samt nginx-Beispiel — steht unter <a href="reverse-proxy.html">Reverse-Proxy</a>. Klären Sie vorab mit Ihrem Netzbetrieb, wer was einrichtet.</p>
+<h2 id="unterlagen-und-zugaenge">Unterlagen und Zugänge<a class="anker" href="#unterlagen-und-zugaenge" aria-label="Verweis auf diesen Abschnitt">#</a></h2>
+<ul><li>Ein <strong>Passwortmanager</strong>, offen und bereit: Bei der Einrichtung erzeugt NETbrain eine Sicherungs-Passphrase und zeigt sie genau einmal.</li><li>Zugangsdaten zu Ihrem <strong>KI-Anbieter</strong> (Adresse und Schlüssel), sofern Sie den KI-Chat nutzen.</li><li>Ihre <strong>Lizenzdatei</strong>, falls schon vorhanden. Ohne sie läuft NETbrain sieben Tage; danach genügt eine Testlizenz, die Sie im Assistenten selbst anfordern.</li><li>Für Sicherungen außerhalb des Servers: ein Ziel in Ihrem bestehenden Sicherungsverfahren.</li></ul>
+<h2 id="auf-einer-app-plattform-statt-auf-eigenem-server">Auf einer App-Plattform statt auf eigenem Server<a class="anker" href="#auf-einer-app-plattform-statt-auf-eigenem-server" aria-label="Verweis auf diesen Abschnitt">#</a></h2>
+<p>Betreiben Sie NETbrain auf Kubernetes oder einer App-Plattform, entfallen Installer und Reverse-Proxy-Einrichtung. Was die Plattform stattdessen bereitstellen muss, steht unter <a href="plattform.html">Kubernetes und App-Plattformen</a>.</p>
+    <nav class="blaettern" aria-label="Weiterblättern"><a class="zurueck" href="index.html"><span>Zurück</span><b>Überblick</b></a><a class="weiter" href="installation.html"><span>Weiter</span><b>Installation</b></a></nav>
+    <p class="stand">Stand: NETbrain 0.4.9. Fehlt etwas oder stimmt etwas nicht? <a href="mailto:info@netfactory.de?subject=NETbrain-Dokumentation%3A%20voraussetzungen">Schreiben Sie uns.</a></p>
+  </main>
+  <aside class="auf-dieser-seite" aria-label="Auf dieser Seite"><p>Auf dieser Seite</p><ul><li><a href="#server">Server</a></li><li><a href="#netz">Netz</a></li><li><a href="#reverse-proxy-mit-tls">Reverse-Proxy mit TLS</a></li><li><a href="#unterlagen-und-zugaenge">Unterlagen und Zugänge</a></li><li><a href="#auf-einer-app-plattform-statt-auf-eigenem-server">Auf einer App-Plattform statt auf eigenem Server</a></li></ul></aside>
+</div>
+<footer>
+  <div class="fuss">
+    <span>© NETFACTORY GmbH · NETbrain ist proprietäre Software und befindet sich in der Pilotphase.</span>
+    <nav aria-label="Rechtliches">
+      <a href="../">Produktseite</a>
+      <a href="mailto:info@netfactory.de">info@netfactory.de</a>
+      <a href="https://www.netfactory.de/impressum">Impressum</a>
+      <a href="https://www.netfactory.de/datenschutz">Datenschutz</a>
+    </nav>
+  </div>
+</footer>
+<script src="doku.js" defer></script>
+</body>
+</html>

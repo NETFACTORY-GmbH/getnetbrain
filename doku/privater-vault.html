@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Privater Vault — NETbrain-Dokumentation</title>
+<meta name="description" content="Persönliche Notizen in einem Ordner auf Ihrem eigenen Rechner — ohne Speicherung auf dem Server.">
+<link rel="canonical" href="https://getnetbrain.netfactory.de/doku/privater-vault.html">
+<meta name="theme-color" content="#000000">
+<link rel="icon" href="../bilder/favicon-32.png" sizes="32x32">
+<link rel="icon" href="../bilder/favicon-16.png" sizes="16x16">
+<link rel="apple-touch-icon" href="../bilder/favicon-180.png">
+<meta property="og:type" content="article">
+<meta property="og:locale" content="de_DE">
+<meta property="og:site_name" content="NETbrain">
+<meta property="og:title" content="Privater Vault — NETbrain-Dokumentation">
+<meta property="og:description" content="Persönliche Notizen in einem Ordner auf Ihrem eigenen Rechner — ohne Speicherung auf dem Server.">
+<meta property="og:image" content="https://getnetbrain.netfactory.de/bilder/og-image-v2.png">
+<link rel="preload" href="../schriften/geist-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="doku.css">
+</head>
+<body>
+<a class="sprung" href="#inhalt">Zum Inhalt springen</a>
+<header>
+  <div class="kopf">
+    <a class="marke" href="index.html"><img src="../bilder/netbrain-logo.png" alt="NETbrain" width="1928" height="352" decoding="async"><span>Dokumentation</span></a>
+    <nav aria-label="Hauptnavigation">
+      <a href="../">Produkt</a>
+      <a href="../#selbst-starten">Selbst testen</a>
+      <a href="versionen.html">Version 0.4.9</a>
+      <a class="knopf" href="mailto:info@netfactory.de?subject=NETbrain%20%E2%80%93%20Frage%20zur%20Dokumentation">Frage stellen</a>
+    </nav>
+  </div>
+</header>
+<div class="raster">
+  <nav class="seitennav" aria-label="Dokumentation">
+    <div class="suche" role="search">
+      <label class="nur-screenreader" for="suchfeld">Dokumentation durchsuchen</label>
+      <input id="suchfeld" type="search" placeholder="Suchen …  ( / )" autocomplete="off" data-index="suche.json" data-basis="">
+      <ul class="treffer" hidden></ul>
+    </div>
+    <details open>
+      <summary>Inhalt der Dokumentation</summary>
+      <div><div class="gruppe"><p><i></i>Erste Schritte</p><ul><li><a href="index.html">Überblick</a></li><li><a href="voraussetzungen.html">Voraussetzungen</a></li><li><a href="installation.html">Installation</a></li><li><a href="einrichtung.html">Einrichtung im Browser</a></li></ul></div><div class="gruppe"><p><i></i>Arbeiten mit NETbrain</p><ul><li><a href="anmeldung.html">Anmeldung und Konto</a></li><li><a href="firmenwissen.html">Firmenwissen</a></li><li><a href="wissenspflege.html">Wissenspflege</a></li><li><a href="privater-vault.html" aria-current="page">Privater Vault</a></li><li><a href="ki-chat.html">KI-Chat</a></li></ul></div><div class="gruppe"><p><i></i>Verwaltung</p><ul><li><a href="benutzer.html">Benutzer und Rollen</a></li><li><a href="ki-zugaenge.html">KI-Zugänge und Freigaben</a></li><li><a href="kundenportal.html">Kundenportal</a></li><li><a href="lizenz.html">Lizenz</a></li></ul></div><div class="gruppe"><p><i></i>Betrieb</p><ul><li><a href="reverse-proxy.html">Reverse-Proxy</a></li><li><a href="sicherung.html">Sicherung und Wiederherstellung</a></li><li><a href="aktualisieren.html">Aktualisieren</a></li><li><a href="plattform.html">Kubernetes und App-Plattformen</a></li><li><a href="datenfluss.html">Was den Server verlässt</a></li></ul></div><div class="gruppe"><p><i></i>Hilfe</p><ul><li><a href="fehlerbehebung.html">Fehlerbehebung</a></li><li><a href="versionen.html">Versionshinweise</a></li></ul></div></div>
+    </details>
+  </nav>
+  <main class="artikel" id="inhalt">
+    <p class="brotkrumen"><a href="../">NETbrain</a><span aria-hidden="true">/</span><a href="index.html">Dokumentation</a><span aria-hidden="true">/</span><span>Arbeiten mit NETbrain</span></p>
+    <h1>Privater Vault</h1>
+<p class="einleitung">Der private Vault ist Ihr persönlicher Notizbereich. Die Notizen liegen als Markdown-Dateien in einem <strong>Ordner auf Ihrem eigenen Rechner</strong>. Auf dem Server wird nichts davon gespeichert, und niemand sonst sieht sie.</p>
+<h2 id="ordner-verbinden">Ordner verbinden<a class="anker" href="#ordner-verbinden" aria-label="Verweis auf diesen Abschnitt">#</a></h2>
+<p>Beim ersten Öffnen von <strong>Privater Vault</strong> wählen Sie mit <strong>Ordner auswählen</strong> einen Ordner aus, etwa in Ihren Dokumenten. Der Browser fragt einmal, ob NETbrain darauf zugreifen darf, und merkt sich die Wahl.</p>
+<div class="kasten hinweis"><p class="kasten-titel"><i></i>Nur in Chrome und Edge</p><p>Der Zugriff auf einen lokalen Ordner braucht eine Browserfunktion, die es derzeit nur in Chrome und Edge gibt. In anderen Browsern erscheint „In diesem Browser nicht verfügbar“.</p></div>
+<p>Mit <strong>Trennen</strong> lösen Sie die Verbindung; die Dateien bleiben im Ordner.</p>
+<h2 id="notizen-anlegen">Notizen anlegen<a class="anker" href="#notizen-anlegen" aria-label="Verweis auf diesen Abschnitt">#</a></h2>
+<ul><li><strong>Neue Notiz</strong> — eine leere Notiz.</li><li><strong>Privat erfassen</strong> — wie beim Firmenwissen: Text, Link oder Datei einwerfen und auf Wunsch von der KI aufbereiten lassen. Das Ergebnis schreibt Ihr Browser in den Ordner; der Server speichert es nicht.</li></ul>
+<p>Anhänge liegen im Unterordner <code>anhaenge</code>. Da alles gewöhnliche Dateien sind, können Sie sie auch mit jedem anderen Editor öffnen und mit Ihren üblichen Mitteln sichern. NETbrains Sicherung erfasst sie nicht.</p>
+<h2 id="finden">Finden<a class="anker" href="#finden" aria-label="Verweis auf diesen Abschnitt">#</a></h2>
+<p>Übersicht, Wissenslandkarte und <strong>Alle Notizen</strong> wie im Firmenwissen. Die Suche bleibt lokal in Ihrem Browser. <strong>Im KI-Chat fragen</strong> übergibt die Frage an den Chat.</p>
+<h2 id="im-ki-chat-nutzen">Im KI-Chat nutzen<a class="anker" href="#im-ki-chat-nutzen" aria-label="Verweis auf diesen Abschnitt">#</a></h2>
+<p>Im <a href="ki-chat.html">KI-Chat</a> können Sie den Vault über <strong>Ordner verbinden</strong> einbeziehen. Dann gehen passende Auszüge Ihrer Notizen mit der Frage an den KI-Anbieter — an Cloud-Anbieter nur, wenn Ihr Administrator das erlaubt.</p>
+    <nav class="blaettern" aria-label="Weiterblättern"><a class="zurueck" href="wissenspflege.html"><span>Zurück</span><b>Wissenspflege</b></a><a class="weiter" href="ki-chat.html"><span>Weiter</span><b>KI-Chat</b></a></nav>
+    <p class="stand">Stand: NETbrain 0.4.9. Fehlt etwas oder stimmt etwas nicht? <a href="mailto:info@netfactory.de?subject=NETbrain-Dokumentation%3A%20privater-vault">Schreiben Sie uns.</a></p>
+  </main>
+  <aside class="auf-dieser-seite" aria-label="Auf dieser Seite"><p>Auf dieser Seite</p><ul><li><a href="#ordner-verbinden">Ordner verbinden</a></li><li><a href="#notizen-anlegen">Notizen anlegen</a></li><li><a href="#finden">Finden</a></li><li><a href="#im-ki-chat-nutzen">Im KI-Chat nutzen</a></li></ul></aside>
+</div>
+<footer>
+  <div class="fuss">
+    <span>© NETFACTORY GmbH · NETbrain ist proprietäre Software und befindet sich in der Pilotphase.</span>
+    <nav aria-label="Rechtliches">
+      <a href="../">Produktseite</a>
+      <a href="mailto:info@netfactory.de">info@netfactory.de</a>
+      <a href="https://www.netfactory.de/impressum">Impressum</a>
+      <a href="https://www.netfactory.de/datenschutz">Datenschutz</a>
+    </nav>
+  </div>
+</footer>
+<script src="doku.js" defer></script>
+</body>
+</html>

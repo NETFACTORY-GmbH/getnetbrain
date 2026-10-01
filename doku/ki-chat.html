@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>KI-Chat — NETbrain-Dokumentation</title>
+<meta name="description" content="Fragen an das Firmenwissen stellen, mit verschlüsseltem Verlauf und einem KI-Anbieter Ihrer Wahl.">
+<link rel="canonical" href="https://getnetbrain.netfactory.de/doku/ki-chat.html">
+<meta name="theme-color" content="#000000">
+<link rel="icon" href="../bilder/favicon-32.png" sizes="32x32">
+<link rel="icon" href="../bilder/favicon-16.png" sizes="16x16">
+<link rel="apple-touch-icon" href="../bilder/favicon-180.png">
+<meta property="og:type" content="article">
+<meta property="og:locale" content="de_DE">
+<meta property="og:site_name" content="NETbrain">
+<meta property="og:title" content="KI-Chat — NETbrain-Dokumentation">
+<meta property="og:description" content="Fragen an das Firmenwissen stellen, mit verschlüsseltem Verlauf und einem KI-Anbieter Ihrer Wahl.">
+<meta property="og:image" content="https://getnetbrain.netfactory.de/bilder/og-image-v2.png">
+<link rel="preload" href="../schriften/geist-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="doku.css">
+</head>
+<body>
+<a class="sprung" href="#inhalt">Zum Inhalt springen</a>
+<header>
+  <div class="kopf">
+    <a class="marke" href="index.html"><img src="../bilder/netbrain-logo.png" alt="NETbrain" width="1928" height="352" decoding="async"><span>Dokumentation</span></a>
+    <nav aria-label="Hauptnavigation">
+      <a href="../">Produkt</a>
+      <a href="../#selbst-starten">Selbst testen</a>
+      <a href="versionen.html">Version 0.4.9</a>
+      <a class="knopf" href="mailto:info@netfactory.de?subject=NETbrain%20%E2%80%93%20Frage%20zur%20Dokumentation">Frage stellen</a>
+    </nav>
+  </div>
+</header>
+<div class="raster">
+  <nav class="seitennav" aria-label="Dokumentation">
+    <div class="suche" role="search">
+      <label class="nur-screenreader" for="suchfeld">Dokumentation durchsuchen</label>
+      <input id="suchfeld" type="search" placeholder="Suchen …  ( / )" autocomplete="off" data-index="suche.json" data-basis="">
+      <ul class="treffer" hidden></ul>
+    </div>
+    <details open>
+      <summary>Inhalt der Dokumentation</summary>
+      <div><div class="gruppe"><p><i></i>Erste Schritte</p><ul><li><a href="index.html">Überblick</a></li><li><a href="voraussetzungen.html">Voraussetzungen</a></li><li><a href="installation.html">Installation</a></li><li><a href="einrichtung.html">Einrichtung im Browser</a></li></ul></div><div class="gruppe"><p><i></i>Arbeiten mit NETbrain</p><ul><li><a href="anmeldung.html">Anmeldung und Konto</a></li><li><a href="firmenwissen.html">Firmenwissen</a></li><li><a href="wissenspflege.html">Wissenspflege</a></li><li><a href="privater-vault.html">Privater Vault</a></li><li><a href="ki-chat.html" aria-current="page">KI-Chat</a></li></ul></div><div class="gruppe"><p><i></i>Verwaltung</p><ul><li><a href="benutzer.html">Benutzer und Rollen</a></li><li><a href="ki-zugaenge.html">KI-Zugänge und Freigaben</a></li><li><a href="kundenportal.html">Kundenportal</a></li><li><a href="lizenz.html">Lizenz</a></li></ul></div><div class="gruppe"><p><i></i>Betrieb</p><ul><li><a href="reverse-proxy.html">Reverse-Proxy</a></li><li><a href="sicherung.html">Sicherung und Wiederherstellung</a></li><li><a href="aktualisieren.html">Aktualisieren</a></li><li><a href="plattform.html">Kubernetes und App-Plattformen</a></li><li><a href="datenfluss.html">Was den Server verlässt</a></li></ul></div><div class="gruppe"><p><i></i>Hilfe</p><ul><li><a href="fehlerbehebung.html">Fehlerbehebung</a></li><li><a href="versionen.html">Versionshinweise</a></li></ul></div></div>
+    </details>
+  </nav>
+  <main class="artikel" id="inhalt">
+    <p class="brotkrumen"><a href="../">NETbrain</a><span aria-hidden="true">/</span><a href="index.html">Dokumentation</a><span aria-hidden="true">/</span><span>Arbeiten mit NETbrain</span></p>
+    <h1>KI-Chat</h1>
+<p class="einleitung">Im KI-Chat stellen Sie Fragen in eigenen Worten. NETbrain zieht passende Seiten aus dem Firmenwissen heran und zeigt an jeder Antwort, welche es waren. Der Verlauf ist verschlüsselt; lesen können ihn nur Sie.</p>
+<h2 id="verschluesselte-historie">Verschlüsselte Historie<a class="anker" href="#verschluesselte-historie" aria-label="Verweis auf diesen Abschnitt">#</a></h2>
+<p>Beim ersten Öffnen klicken Sie auf <strong>Chat einrichten</strong> und geben Ihr Anmeldepasswort ein. Ihr Browser leitet daraus einen Schlüssel ab; der Server speichert nur verschlüsselte Daten und kann sie nicht lesen.</p>
+<p>Danach zeigt NETbrain einmal <strong>Ihren Wiederherstellungscode</strong>. Bewahren Sie ihn auf: Mit ihm entsperren Sie den Verlauf, falls das Passwort nicht mehr passt. Bei späteren Besuchen entsperren Sie die Historie mit Passwort oder Wiederherstellungscode.</p>
+<div class="kasten wichtig"><p class="kasten-titel"><i></i>Passwort und Code weg heißt Verlauf weg</p><p>Ohne Passwort und Wiederherstellungscode kann niemand den Verlauf entschlüsseln — auch kein Administrator. Der Notausgang „Passwort und Wiederherstellungscode verloren?“ löscht den Verlauf und beginnt neu.</p></div>
+<h2 id="fragen-stellen">Fragen stellen<a class="anker" href="#fragen-stellen" aria-label="Verweis auf diesen Abschnitt">#</a></h2>
+<ul><li><strong>Anbieter und Modell</strong> wählen Sie oben im Chat aus dem, was Ihr Administrator freigegeben hat.</li><li><code>Enter</code> sendet, <code>Umschalt</code> + <code>Enter</code> macht einen Zeilenumbruch.</li><li>Über <strong>+</strong> hängen Sie Dateien an (Bild, PDF oder Text, bis 10 MB, bis zu vier Bilder und vier Dateien je Nachricht), schalten die <strong>Websuche</strong> zu, diktieren oder wechseln zwischen den Modi <strong>Antwort</strong> und <strong>Plan</strong>.</li></ul>
+<h2 id="firmenwissen-und-vault-einbeziehen">Firmenwissen und Vault einbeziehen<a class="anker" href="#firmenwissen-und-vault-einbeziehen" aria-label="Verweis auf diesen Abschnitt">#</a></h2>
+<p>Im Kontextmenü stellen Sie ein, ob das Firmenwissen einbezogen wird: <strong>Auto</strong>, <strong>An</strong> oder <strong>Aus</strong>. Unter jeder Antwort steht, wie viele Seiten herangezogen wurden, mit <strong>Ohne Firmenwissen wiederholen</strong> bzw. <strong>Mit Firmenwissen wiederholen</strong>.</p>
+<p>Mit <strong>Ordner verbinden</strong> beziehen Sie zusätzlich Ihren <a href="privater-vault.html">privaten Vault</a> ein.</p>
+<h2 id="wechsel-zu-einem-cloud-anbieter">Wechsel zu einem Cloud-Anbieter<a class="anker" href="#wechsel-zu-einem-cloud-anbieter" aria-label="Verweis auf diesen Abschnitt">#</a></h2>
+<p>Enthält das Gespräch schon Firmenwissen und Sie wechseln zu einem Cloud-Anbieter, fragt NETbrain vorher: <strong>Verlauf an … senden?</strong> Die Zustimmung gilt für dieses Gespräch und diesen Anbieter und wird protokolliert. Was Ihr Administrator grundsätzlich nicht erlaubt, lässt sich auch so nicht freigeben.</p>
+<h2 id="eigener-zugang">Eigener Zugang<a class="anker" href="#eigener-zugang" aria-label="Verweis auf diesen Abschnitt">#</a></h2>
+<p>Haben Sie einen eigenen API-Schlüssel bei einem Anbieter, hinterlegen Sie ihn unter <strong>Eigener Zugang</strong>. Er hat dann Vorrang vor dem Firmenzugang, die Modellwahl ist frei, und die Kosten laufen über Ihr eigenes Konto. Administratoren können eigene Zugänge je Rolle sperren.</p>
+<h2 id="grenzen">Grenzen<a class="anker" href="#grenzen" aria-label="Verweis auf diesen Abschnitt">#</a></h2>
+<p>Damit niemand versehentlich das Kontingent des ganzen Hauses verbraucht, gelten je Konto Grenzen — in der Vorgabe sechs KI-Aufrufe pro Minute, 30 pro Tag und zwei gleichzeitig, dazu 256 MB Chat-Anhänge. Ihr Administrator kann sie anpassen.</p>
+    <nav class="blaettern" aria-label="Weiterblättern"><a class="zurueck" href="privater-vault.html"><span>Zurück</span><b>Privater Vault</b></a><a class="weiter" href="benutzer.html"><span>Weiter</span><b>Benutzer und Rollen</b></a></nav>
+    <p class="stand">Stand: NETbrain 0.4.9. Fehlt etwas oder stimmt etwas nicht? <a href="mailto:info@netfactory.de?subject=NETbrain-Dokumentation%3A%20ki-chat">Schreiben Sie uns.</a></p>
+  </main>
+  <aside class="auf-dieser-seite" aria-label="Auf dieser Seite"><p>Auf dieser Seite</p><ul><li><a href="#verschluesselte-historie">Verschlüsselte Historie</a></li><li><a href="#fragen-stellen">Fragen stellen</a></li><li><a href="#firmenwissen-und-vault-einbeziehen">Firmenwissen und Vault einbeziehen</a></li><li><a href="#wechsel-zu-einem-cloud-anbieter">Wechsel zu einem Cloud-Anbieter</a></li><li><a href="#eigener-zugang">Eigener Zugang</a></li><li><a href="#grenzen">Grenzen</a></li></ul></aside>
+</div>
+<footer>
+  <div class="fuss">
+    <span>© NETFACTORY GmbH · NETbrain ist proprietäre Software und befindet sich in der Pilotphase.</span>
+    <nav aria-label="Rechtliches">
+      <a href="../">Produktseite</a>
+      <a href="mailto:info@netfactory.de">info@netfactory.de</a>
+      <a href="https://www.netfactory.de/impressum">Impressum</a>
+      <a href="https://www.netfactory.de/datenschutz">Datenschutz</a>
+    </nav>
+  </div>
+</footer>
+<script src="doku.js" defer></script>
+</body>
+</html>

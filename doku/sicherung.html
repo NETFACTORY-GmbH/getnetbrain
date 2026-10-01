@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sicherung und Wiederherstellung — NETbrain-Dokumentation</title>
+<meta name="description" content="Wie NETbrain verschlüsselt sichert, wie Sie Sicherungen vom Server holen und im Ernstfall zurückspielen.">
+<link rel="canonical" href="https://getnetbrain.netfactory.de/doku/sicherung.html">
+<meta name="theme-color" content="#000000">
+<link rel="icon" href="../bilder/favicon-32.png" sizes="32x32">
+<link rel="icon" href="../bilder/favicon-16.png" sizes="16x16">
+<link rel="apple-touch-icon" href="../bilder/favicon-180.png">
+<meta property="og:type" content="article">
+<meta property="og:locale" content="de_DE">
+<meta property="og:site_name" content="NETbrain">
+<meta property="og:title" content="Sicherung und Wiederherstellung — NETbrain-Dokumentation">
+<meta property="og:description" content="Wie NETbrain verschlüsselt sichert, wie Sie Sicherungen vom Server holen und im Ernstfall zurückspielen.">
+<meta property="og:image" content="https://getnetbrain.netfactory.de/bilder/og-image-v2.png">
+<link rel="preload" href="../schriften/geist-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="doku.css">
+</head>
+<body>
+<a class="sprung" href="#inhalt">Zum Inhalt springen</a>
+<header>
+  <div class="kopf">
+    <a class="marke" href="index.html"><img src="../bilder/netbrain-logo.png" alt="NETbrain" width="1928" height="352" decoding="async"><span>Dokumentation</span></a>
+    <nav aria-label="Hauptnavigation">
+      <a href="../">Produkt</a>
+      <a href="../#selbst-starten">Selbst testen</a>
+      <a href="versionen.html">Version 0.4.9</a>
+      <a class="knopf" href="mailto:info@netfactory.de?subject=NETbrain%20%E2%80%93%20Frage%20zur%20Dokumentation">Frage stellen</a>
+    </nav>
+  </div>
+</header>
+<div class="raster">
+  <nav class="seitennav" aria-label="Dokumentation">
+    <div class="suche" role="search">
+      <label class="nur-screenreader" for="suchfeld">Dokumentation durchsuchen</label>
+      <input id="suchfeld" type="search" placeholder="Suchen …  ( / )" autocomplete="off" data-index="suche.json" data-basis="">
+      <ul class="treffer" hidden></ul>
+    </div>
+    <details open>
+      <summary>Inhalt der Dokumentation</summary>
+      <div><div class="gruppe"><p><i></i>Erste Schritte</p><ul><li><a href="index.html">Überblick</a></li><li><a href="voraussetzungen.html">Voraussetzungen</a></li><li><a href="installation.html">Installation</a></li><li><a href="einrichtung.html">Einrichtung im Browser</a></li></ul></div><div class="gruppe"><p><i></i>Arbeiten mit NETbrain</p><ul><li><a href="anmeldung.html">Anmeldung und Konto</a></li><li><a href="firmenwissen.html">Firmenwissen</a></li><li><a href="wissenspflege.html">Wissenspflege</a></li><li><a href="privater-vault.html">Privater Vault</a></li><li><a href="ki-chat.html">KI-Chat</a></li></ul></div><div class="gruppe"><p><i></i>Verwaltung</p><ul><li><a href="benutzer.html">Benutzer und Rollen</a></li><li><a href="ki-zugaenge.html">KI-Zugänge und Freigaben</a></li><li><a href="kundenportal.html">Kundenportal</a></li><li><a href="lizenz.html">Lizenz</a></li></ul></div><div class="gruppe"><p><i></i>Betrieb</p><ul><li><a href="reverse-proxy.html">Reverse-Proxy</a></li><li><a href="sicherung.html" aria-current="page">Sicherung und Wiederherstellung</a></li><li><a href="aktualisieren.html">Aktualisieren</a></li><li><a href="plattform.html">Kubernetes und App-Plattformen</a></li><li><a href="datenfluss.html">Was den Server verlässt</a></li></ul></div><div class="gruppe"><p><i></i>Hilfe</p><ul><li><a href="fehlerbehebung.html">Fehlerbehebung</a></li><li><a href="versionen.html">Versionshinweise</a></li></ul></div></div>
+    </details>
+  </nav>
+  <main class="artikel" id="inhalt">
+    <p class="brotkrumen"><a href="../">NETbrain</a><span aria-hidden="true">/</span><a href="index.html">Dokumentation</a><span aria-hidden="true">/</span><span>Betrieb</span></p>
+    <h1>Sicherung und Wiederherstellung</h1>
+<p class="einleitung">NETbrain sichert sich selbst: täglich, verschlüsselt und mit anschließender Prüfung. Ihre Aufgabe ist zweierlei — die Sicherungen vom Server herunterholen und das Zurückspielen gelegentlich üben.</p>
+<h2 id="was-gesichert-wird">Was gesichert wird<a class="anker" href="#was-gesichert-wird" aria-label="Verweis auf diesen Abschnitt">#</a></h2>
+<p>Eine Sicherung ist eine einzelne, mit AES-256-GCM verschlüsselte Datei (<code>.nbk</code>). Sie enthält:</p>
+<ul><li>den Wissensbestand samt Anhängen,</li><li>die Benutzerkonten,</li><li>die Chat-Daten samt Anhängen (sie sind zusätzlich Ende-zu-Ende-verschlüsselt),</li><li>die KI-Freigaben,</li><li>die Freigaben für das Kundenportal.</li></ul>
+<p>Alles liegt in einem Bündel, weil die Teile zusammengehören: Die Chat-Schlüssel eines Kontos sind mit dessen Passwort verpackt. Ein Bündel aus verschiedenen Zeitpunkten wäre teilweise unlesbar.</p>
+<div class="kasten wichtig"><p class="kasten-titel"><i></i>Ohne Passphrase keine Wiederherstellung</p><p>Die Sicherungen öffnen sich nur mit der Sicherungs-Passphrase aus der Einrichtung. Wir haben sie nicht und können sie nicht wiederherstellen.</p></div>
+<h2 id="zeitplan-und-letzter-lauf">Zeitplan und letzter Lauf<a class="anker" href="#zeitplan-und-letzter-lauf" aria-label="Verweis auf diesen Abschnitt">#</a></h2>
+<p>Unter <strong>Administration → Einstellungen → Sicherungen</strong> stehen Uhrzeit (Vorgabe 02:00, leer heißt aus), die Zahl der aufbewahrten Stände (Vorgabe 14) und der Knopf <strong>Jetzt sichern</strong>. Unter <strong>Administration → Übersicht</strong> sehen Sie den letzten Lauf und sein Ergebnis. Ein ausbleibender Lauf meldet sich sonst nirgends — werfen Sie gelegentlich einen Blick darauf.</p>
+<p>Von Hand auf dem Server, etwa vor einem Eingriff:</p>
+<div class="codeblock"><pre><code>cd /opt/netbrain
+sudo docker compose -f netbrain-compose.yml exec netbrain node scripts/backup.mjs</code></pre><button type="button" class="kopieren" aria-label="Befehl kopieren"><svg class="bereit" viewBox="0 0 24 24" aria-hidden="true"><rect x="8" y="8" width="11" height="11" rx="2"/><path d="M16 8V6a2 2 0 00-2-2H6a2 2 0 00-2 2v8a2 2 0 002 2h2"/></svg><svg class="fertig" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7"/></svg></button></div>
+<h2 id="sicherungen-vom-server-holen">Sicherungen vom Server holen<a class="anker" href="#sicherungen-vom-server-holen" aria-label="Verweis auf diesen Abschnitt">#</a></h2>
+<p>Die Sicherungen liegen zunächst auf demselben Rechner wie die Daten. Gegen einen gelöschten Beitrag hilft das, gegen einen Ausfall des Servers nicht. Zwei Wege:</p>
+<p><strong>Aus dem Volume kopieren</strong>, per Auftrag Ihres Sicherungssystems:</p>
+<div class="codeblock"><pre><code>sudo docker compose -f /opt/netbrain/netbrain-compose.yml cp netbrain:/backups/ /pfad/zu/ihrem/sicherungsziel/</code></pre><button type="button" class="kopieren" aria-label="Befehl kopieren"><svg class="bereit" viewBox="0 0 24 24" aria-hidden="true"><rect x="8" y="8" width="11" height="11" rx="2"/><path d="M16 8V6a2 2 0 00-2-2H6a2 2 0 00-2 2v8a2 2 0 002 2h2"/></svg><svg class="fertig" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7"/></svg></button></div>
+<p><strong>Ein Verzeichnis des Servers einhängen.</strong> In der <code>netbrain-compose.yml</code> die Zeile <code>- netbrain-backups:/backups</code> durch Ihr Verzeichnis ersetzen, etwa <code>- /srv/sicherung/netbrain:/backups</code>, dann <code>sudo ./install.sh</code>. NETbrain schreibt danach direkt dorthin.</p>
+<p>Die Bündel sind verschlüsselt und dürfen auf ein Ziel, das andere lesen können — solange die Passphrase nicht danebenliegt.</p>
+<h2 id="eine-sicherung-pruefen">Eine Sicherung prüfen<a class="anker" href="#eine-sicherung-pruefen" aria-label="Verweis auf diesen Abschnitt">#</a></h2>
+<div class="codeblock"><pre><code>cd /opt/netbrain
+sudo docker compose -f netbrain-compose.yml exec netbrain sh -c &#x27;ls -lh /backups | tail -5&#x27;
+sudo docker compose -f netbrain-compose.yml exec netbrain node scripts/backup.mjs --verify /backups/&lt;datei&gt;.nbk</code></pre><button type="button" class="kopieren" aria-label="Befehl kopieren"><svg class="bereit" viewBox="0 0 24 24" aria-hidden="true"><rect x="8" y="8" width="11" height="11" rx="2"/><path d="M16 8V6a2 2 0 00-2-2H6a2 2 0 00-2 2v8a2 2 0 002 2h2"/></svg><svg class="fertig" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7"/></svg></button></div>
+<h2 id="wiederherstellen">Wiederherstellen<a class="anker" href="#wiederherstellen" aria-label="Verweis auf diesen Abschnitt">#</a></h2>
+<p>Die Wiederherstellung schreibt <strong>ausschließlich auf ein leeres Ziel</strong>; ein bestehender Bestand wird nie überschrieben. Spielen Sie deshalb erst in ein Prüfverzeichnis zurück, sehen Sie es an, und entscheiden Sie dann.</p>
+<div class="codeblock"><pre><code>sudo docker compose -f netbrain-compose.yml exec netbrain \
+  node scripts/backup.mjs --restore /backups/&lt;datei&gt;.nbk \
+    --vault /tmp/probe/vault --users /tmp/probe/users.json \
+    --chat /tmp/probe/ai-chat --policy /tmp/probe/ai-policy.json \
+    --portal /tmp/probe/portal.json</code></pre><button type="button" class="kopieren" aria-label="Befehl kopieren"><svg class="bereit" viewBox="0 0 24 24" aria-hidden="true"><rect x="8" y="8" width="11" height="11" rx="2"/><path d="M16 8V6a2 2 0 00-2-2H6a2 2 0 00-2 2v8a2 2 0 002 2h2"/></svg><svg class="fertig" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7"/></svg></button></div>
+<p>Enthält das Bündel einen Teil, für den Sie kein Ziel angeben, bricht die Wiederherstellung ab, statt ihn stillschweigend wegzulassen. Ältere Bündel ohne Portal-Freigaben brauchen <code>--portal</code> nicht.</p>
+<p>Die Passphrase nimmt der Lauf aus der Installation. Auf einem fremden Rechner — dem Ernstfall — geben Sie sie mit: <code>NETBRAIN_BACKUP_PASSPHRASE=&#x27;…&#x27;</code>.</p>
+<h3 id="auf-einen-neuen-server">Auf einen neuen Server<a class="anker" href="#auf-einen-neuen-server" aria-label="Verweis auf diesen Abschnitt">#</a></h3>
+<p>NETbrain nach <a href="installation.html">Installation</a> aufsetzen, <strong>nicht</strong> einrichten, und stattdessen die Sicherung nach <code>/data</code> zurückspielen. Wenden Sie sich dafür gern an uns; wir gehen den Weg mit Ihnen durch.</p>
+<h2 id="einmal-im-quartal-die-probe">Einmal im Quartal: die Probe<a class="anker" href="#einmal-im-quartal-die-probe" aria-label="Verweis auf diesen Abschnitt">#</a></h2>
+<p>Spielen Sie vierteljährlich eine Sicherung testweise in ein Prüfverzeichnis zurück und sehen Sie hinein. Mit Termin im Kalender, sonst findet es nicht statt. Eine Sicherung, aus der nie jemand zurückgespielt hat, ist kein Nachweis, sondern eine Vermutung.</p>
+<h2 id="volumes">Volumes<a class="anker" href="#volumes" aria-label="Verweis auf diesen Abschnitt">#</a></h2>
+<div class="tabelle"><table><thead><tr><th>Volume</th><th>Inhalt</th></tr></thead><tbody><tr><td><code>netbrain-data</code> (<code>/data</code>)</td><td>Wissensbestand, Anhänge, Konten, Einstellungen, Lizenz — der einzige unersetzliche Zustand</td></tr><tr><td><code>netbrain-backups</code> (<code>/backups</code>)</td><td>die verschlüsselten Sicherungen</td></tr></tbody></table></div>
+<p>Zwei Installationen dürfen niemals dasselbe Datenvolume benutzen. Es gibt keine Sperre dagegen, und der Schaden zeigt sich erst später als widersprüchlicher Bestand.</p>
+    <nav class="blaettern" aria-label="Weiterblättern"><a class="zurueck" href="reverse-proxy.html"><span>Zurück</span><b>Reverse-Proxy</b></a><a class="weiter" href="aktualisieren.html"><span>Weiter</span><b>Aktualisieren</b></a></nav>
+    <p class="stand">Stand: NETbrain 0.4.9. Fehlt etwas oder stimmt etwas nicht? <a href="mailto:info@netfactory.de?subject=NETbrain-Dokumentation%3A%20sicherung">Schreiben Sie uns.</a></p>
+  </main>
+  <aside class="auf-dieser-seite" aria-label="Auf dieser Seite"><p>Auf dieser Seite</p><ul><li><a href="#was-gesichert-wird">Was gesichert wird</a></li><li><a href="#zeitplan-und-letzter-lauf">Zeitplan und letzter Lauf</a></li><li><a href="#sicherungen-vom-server-holen">Sicherungen vom Server holen</a></li><li><a href="#eine-sicherung-pruefen">Eine Sicherung prüfen</a></li><li><a href="#wiederherstellen">Wiederherstellen</a></li><li><a href="#einmal-im-quartal-die-probe">Einmal im Quartal: die Probe</a></li><li><a href="#volumes">Volumes</a></li></ul></aside>
+</div>
+<footer>
+  <div class="fuss">
+    <span>© NETFACTORY GmbH · NETbrain ist proprietäre Software und befindet sich in der Pilotphase.</span>
+    <nav aria-label="Rechtliches">
+      <a href="../">Produktseite</a>
+      <a href="mailto:info@netfactory.de">info@netfactory.de</a>
+      <a href="https://www.netfactory.de/impressum">Impressum</a>
+      <a href="https://www.netfactory.de/datenschutz">Datenschutz</a>
+    </nav>
+  </div>
+</footer>
+<script src="doku.js" defer></script>
+</body>
+</html>

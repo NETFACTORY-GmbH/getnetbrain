@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Firmenwissen — NETbrain-Dokumentation</title>
+<meta name="description" content="Wissen einreichen, prüfen lassen und wiederfinden — der gemeinsame Bestand Ihres Teams.">
+<link rel="canonical" href="https://getnetbrain.netfactory.de/doku/firmenwissen.html">
+<meta name="theme-color" content="#000000">
+<link rel="icon" href="../bilder/favicon-32.png" sizes="32x32">
+<link rel="icon" href="../bilder/favicon-16.png" sizes="16x16">
+<link rel="apple-touch-icon" href="../bilder/favicon-180.png">
+<meta property="og:type" content="article">
+<meta property="og:locale" content="de_DE">
+<meta property="og:site_name" content="NETbrain">
+<meta property="og:title" content="Firmenwissen — NETbrain-Dokumentation">
+<meta property="og:description" content="Wissen einreichen, prüfen lassen und wiederfinden — der gemeinsame Bestand Ihres Teams.">
+<meta property="og:image" content="https://getnetbrain.netfactory.de/bilder/og-image-v2.png">
+<link rel="preload" href="../schriften/geist-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="doku.css">
+</head>
+<body>
+<a class="sprung" href="#inhalt">Zum Inhalt springen</a>
+<header>
+  <div class="kopf">
+    <a class="marke" href="index.html"><img src="../bilder/netbrain-logo.png" alt="NETbrain" width="1928" height="352" decoding="async"><span>Dokumentation</span></a>
+    <nav aria-label="Hauptnavigation">
+      <a href="../">Produkt</a>
+      <a href="../#selbst-starten">Selbst testen</a>
+      <a href="versionen.html">Version 0.4.9</a>
+      <a class="knopf" href="mailto:info@netfactory.de?subject=NETbrain%20%E2%80%93%20Frage%20zur%20Dokumentation">Frage stellen</a>
+    </nav>
+  </div>
+</header>
+<div class="raster">
+  <nav class="seitennav" aria-label="Dokumentation">
+    <div class="suche" role="search">
+      <label class="nur-screenreader" for="suchfeld">Dokumentation durchsuchen</label>
+      <input id="suchfeld" type="search" placeholder="Suchen …  ( / )" autocomplete="off" data-index="suche.json" data-basis="">
+      <ul class="treffer" hidden></ul>
+    </div>
+    <details open>
+      <summary>Inhalt der Dokumentation</summary>
+      <div><div class="gruppe"><p><i></i>Erste Schritte</p><ul><li><a href="index.html">Überblick</a></li><li><a href="voraussetzungen.html">Voraussetzungen</a></li><li><a href="installation.html">Installation</a></li><li><a href="einrichtung.html">Einrichtung im Browser</a></li></ul></div><div class="gruppe"><p><i></i>Arbeiten mit NETbrain</p><ul><li><a href="anmeldung.html">Anmeldung und Konto</a></li><li><a href="firmenwissen.html" aria-current="page">Firmenwissen</a></li><li><a href="wissenspflege.html">Wissenspflege</a></li><li><a href="privater-vault.html">Privater Vault</a></li><li><a href="ki-chat.html">KI-Chat</a></li></ul></div><div class="gruppe"><p><i></i>Verwaltung</p><ul><li><a href="benutzer.html">Benutzer und Rollen</a></li><li><a href="ki-zugaenge.html">KI-Zugänge und Freigaben</a></li><li><a href="kundenportal.html">Kundenportal</a></li><li><a href="lizenz.html">Lizenz</a></li></ul></div><div class="gruppe"><p><i></i>Betrieb</p><ul><li><a href="reverse-proxy.html">Reverse-Proxy</a></li><li><a href="sicherung.html">Sicherung und Wiederherstellung</a></li><li><a href="aktualisieren.html">Aktualisieren</a></li><li><a href="plattform.html">Kubernetes und App-Plattformen</a></li><li><a href="datenfluss.html">Was den Server verlässt</a></li></ul></div><div class="gruppe"><p><i></i>Hilfe</p><ul><li><a href="fehlerbehebung.html">Fehlerbehebung</a></li><li><a href="versionen.html">Versionshinweise</a></li></ul></div></div>
+    </details>
+  </nav>
+  <main class="artikel" id="inhalt">
+    <p class="brotkrumen"><a href="../">NETbrain</a><span aria-hidden="true">/</span><a href="index.html">Dokumentation</a><span aria-hidden="true">/</span><span>Arbeiten mit NETbrain</span></p>
+    <h1>Firmenwissen</h1>
+<p class="einleitung">Das Firmenwissen ist der gemeinsame Bestand Ihres Teams. Jeder darf lesen und einreichen; was veröffentlicht wird, entscheidet die Wissenspflege. So bleibt der Bestand verlässlich, ohne dass Einreichen kompliziert wird.</p>
+<h2 id="wissen-einreichen">Wissen einreichen<a class="anker" href="#wissen-einreichen" aria-label="Verweis auf diesen Abschnitt">#</a></h2>
+<p><strong>Firmenwissen erfassen</strong> in der Seitenleiste. Eines genügt, Kombinieren ist erlaubt:</p>
+<ul><li><strong>Eigener Text</strong> — getippt oder diktiert, sofern die Spracheingabe eingerichtet ist.</li><li><strong>Ein Link</strong> — NETbrain ruft die Seite ab und bewahrt eine Kopie als Nachweis auf. Direkte Links auf PDF, Text oder Bilder gehen auch.</li><li><strong>Eine Datei</strong> bis 10 MB: PDF, PNG, JPEG, WebP, TXT, MD oder CSV. Bildschirmfotos fügen Sie mit <code>Strg</code> + <code>V</code> ein.</li></ul>
+<p>Dazu wählen Sie, wie es weitergeht:</p>
+<ul><li><strong>Aufbereiten lassen</strong> — die KI formt aus dem Material eine Wissensseite mit Titel, Kurzfassung, Tags und Kategorie.</li><li><strong>Text bleibt, wie er ist</strong> — nur Titel, Kurzfassung, Tags und Kategorie werden ergänzt.</li></ul>
+<p>Gescannte PDFs liest ein Modell als Bild (bis vier Seiten); Zahlen daraus bitte gegenlesen.</p>
+<h2 id="entwurf-pruefen-und-einreichen">Entwurf prüfen und einreichen<a class="anker" href="#entwurf-pruefen-und-einreichen" aria-label="Verweis auf diesen Abschnitt">#</a></h2>
+<p>Im zweiten Schritt sehen Sie den Entwurf und können Titel, Kurzfassung, Tags, Kategorie und Inhalt anpassen. <strong>So wird es aussehen</strong> zeigt die Vorschau. Gibt es schon ähnliche Seiten, weist NETbrain darauf hin.</p>
+<p><strong>Beitrag einreichen</strong> schickt ihn an die Wissenspflege. Den Stand sehen Sie unter <strong>Mein Konto → Meine Beiträge</strong>.</p>
+<h2 id="wissen-finden">Wissen finden<a class="anker" href="#wissen-finden" aria-label="Verweis auf diesen Abschnitt">#</a></h2>
+<ul><li><strong>Suche</strong> auf der Übersicht — eine Stichwortsuche ohne KI. Ein zweiter Knopf übernimmt die Frage in den <a href="ki-chat.html">KI-Chat</a>.</li><li><strong>Alle Seiten</strong> — was neu ist und was sich geändert hat.</li><li><strong>Wissenslandkarte</strong> — der Bestand als Netz verknüpfter Seiten.</li><li><strong>Nachweise</strong> — alle Seiten mit Originaldokument.</li><li><strong>Seiten filtern</strong> in der Seitenleiste, mit <code>Strg</code> + <code>K</code>.</li></ul>
+<h2 id="eine-wissensseite-lesen">Eine Wissensseite lesen<a class="anker" href="#eine-wissensseite-lesen" aria-label="Verweis auf diesen Abschnitt">#</a></h2>
+<p>Über dem Inhalt stehen Tags, wann die Seite geändert und geprüft wurde, wann die nächste Prüfung fällig ist und wer verantwortlich ist. Ist die Prüfung überfällig, steht es dabei.</p>
+<ul><li><strong>Originaldokument</strong> — die eingereichte Datei, mit Vorschau, Herkunft und Prüfsumme (SHA-256).</li><li><strong>Gespeicherte Quellkopie</strong> — der Stand einer verlinkten Webseite zum Zeitpunkt des Abrufs.</li><li><strong>Ähnliche Seiten</strong> und <strong>Verweise hierher</strong> am Ende der Seite.</li></ul>
+<h2 id="fehler-melden">Fehler melden<a class="anker" href="#fehler-melden" aria-label="Verweis auf diesen Abschnitt">#</a></h2>
+<p>Stimmt etwas nicht? Unten auf jeder Seite: <strong>Veraltet oder fehlerhaft melden</strong>. Die Meldung geht als Korrekturanfrage an die Wissenspflege.</p>
+<h2 id="wer-was-darf">Wer was darf<a class="anker" href="#wer-was-darf" aria-label="Verweis auf diesen Abschnitt">#</a></h2>
+<div class="tabelle"><table><thead><tr><th></th><th>Benutzer</th><th>Wissenspflege</th></tr></thead><tbody><tr><td>Lesen, suchen, einreichen, melden</td><td>✓</td><td>✓</td></tr><tr><td>Einreichungen veröffentlichen oder ablehnen</td><td></td><td>✓</td></tr><tr><td>Seiten bearbeiten, verschieben, löschen</td><td></td><td>✓</td></tr><tr><td>Im Kundenportal veröffentlichen</td><td></td><td>✓</td></tr></tbody></table></div>
+<p>Was die Wissenspflege im Einzelnen tut, steht unter <a href="wissenspflege.html">Wissenspflege</a>.</p>
+    <nav class="blaettern" aria-label="Weiterblättern"><a class="zurueck" href="anmeldung.html"><span>Zurück</span><b>Anmeldung und Konto</b></a><a class="weiter" href="wissenspflege.html"><span>Weiter</span><b>Wissenspflege</b></a></nav>
+    <p class="stand">Stand: NETbrain 0.4.9. Fehlt etwas oder stimmt etwas nicht? <a href="mailto:info@netfactory.de?subject=NETbrain-Dokumentation%3A%20firmenwissen">Schreiben Sie uns.</a></p>
+  </main>
+  <aside class="auf-dieser-seite" aria-label="Auf dieser Seite"><p>Auf dieser Seite</p><ul><li><a href="#wissen-einreichen">Wissen einreichen</a></li><li><a href="#entwurf-pruefen-und-einreichen">Entwurf prüfen und einreichen</a></li><li><a href="#wissen-finden">Wissen finden</a></li><li><a href="#eine-wissensseite-lesen">Eine Wissensseite lesen</a></li><li><a href="#fehler-melden">Fehler melden</a></li><li><a href="#wer-was-darf">Wer was darf</a></li></ul></aside>
+</div>
+<footer>
+  <div class="fuss">
+    <span>© NETFACTORY GmbH · NETbrain ist proprietäre Software und befindet sich in der Pilotphase.</span>
+    <nav aria-label="Rechtliches">
+      <a href="../">Produktseite</a>
+      <a href="mailto:info@netfactory.de">info@netfactory.de</a>
+      <a href="https://www.netfactory.de/impressum">Impressum</a>
+      <a href="https://www.netfactory.de/datenschutz">Datenschutz</a>
+    </nav>
+  </div>
+</footer>
+<script src="doku.js" defer></script>
+</body>
+</html>

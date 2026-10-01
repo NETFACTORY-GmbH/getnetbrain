@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>KI-Zugänge und Freigaben — NETbrain-Dokumentation</title>
+<meta name="description" content="KI-Anbieter einrichten, Modelle je Rolle freigeben und festlegen, was an Cloud-Anbieter gehen darf.">
+<link rel="canonical" href="https://getnetbrain.netfactory.de/doku/ki-zugaenge.html">
+<meta name="theme-color" content="#000000">
+<link rel="icon" href="../bilder/favicon-32.png" sizes="32x32">
+<link rel="icon" href="../bilder/favicon-16.png" sizes="16x16">
+<link rel="apple-touch-icon" href="../bilder/favicon-180.png">
+<meta property="og:type" content="article">
+<meta property="og:locale" content="de_DE">
+<meta property="og:site_name" content="NETbrain">
+<meta property="og:title" content="KI-Zugänge und Freigaben — NETbrain-Dokumentation">
+<meta property="og:description" content="KI-Anbieter einrichten, Modelle je Rolle freigeben und festlegen, was an Cloud-Anbieter gehen darf.">
+<meta property="og:image" content="https://getnetbrain.netfactory.de/bilder/og-image-v2.png">
+<link rel="preload" href="../schriften/geist-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="doku.css">
+</head>
+<body>
+<a class="sprung" href="#inhalt">Zum Inhalt springen</a>
+<header>
+  <div class="kopf">
+    <a class="marke" href="index.html"><img src="../bilder/netbrain-logo.png" alt="NETbrain" width="1928" height="352" decoding="async"><span>Dokumentation</span></a>
+    <nav aria-label="Hauptnavigation">
+      <a href="../">Produkt</a>
+      <a href="../#selbst-starten">Selbst testen</a>
+      <a href="versionen.html">Version 0.4.9</a>
+      <a class="knopf" href="mailto:info@netfactory.de?subject=NETbrain%20%E2%80%93%20Frage%20zur%20Dokumentation">Frage stellen</a>
+    </nav>
+  </div>
+</header>
+<div class="raster">
+  <nav class="seitennav" aria-label="Dokumentation">
+    <div class="suche" role="search">
+      <label class="nur-screenreader" for="suchfeld">Dokumentation durchsuchen</label>
+      <input id="suchfeld" type="search" placeholder="Suchen …  ( / )" autocomplete="off" data-index="suche.json" data-basis="">
+      <ul class="treffer" hidden></ul>
+    </div>
+    <details open>
+      <summary>Inhalt der Dokumentation</summary>
+      <div><div class="gruppe"><p><i></i>Erste Schritte</p><ul><li><a href="index.html">Überblick</a></li><li><a href="voraussetzungen.html">Voraussetzungen</a></li><li><a href="installation.html">Installation</a></li><li><a href="einrichtung.html">Einrichtung im Browser</a></li></ul></div><div class="gruppe"><p><i></i>Arbeiten mit NETbrain</p><ul><li><a href="anmeldung.html">Anmeldung und Konto</a></li><li><a href="firmenwissen.html">Firmenwissen</a></li><li><a href="wissenspflege.html">Wissenspflege</a></li><li><a href="privater-vault.html">Privater Vault</a></li><li><a href="ki-chat.html">KI-Chat</a></li></ul></div><div class="gruppe"><p><i></i>Verwaltung</p><ul><li><a href="benutzer.html">Benutzer und Rollen</a></li><li><a href="ki-zugaenge.html" aria-current="page">KI-Zugänge und Freigaben</a></li><li><a href="kundenportal.html">Kundenportal</a></li><li><a href="lizenz.html">Lizenz</a></li></ul></div><div class="gruppe"><p><i></i>Betrieb</p><ul><li><a href="reverse-proxy.html">Reverse-Proxy</a></li><li><a href="sicherung.html">Sicherung und Wiederherstellung</a></li><li><a href="aktualisieren.html">Aktualisieren</a></li><li><a href="plattform.html">Kubernetes und App-Plattformen</a></li><li><a href="datenfluss.html">Was den Server verlässt</a></li></ul></div><div class="gruppe"><p><i></i>Hilfe</p><ul><li><a href="fehlerbehebung.html">Fehlerbehebung</a></li><li><a href="versionen.html">Versionshinweise</a></li></ul></div></div>
+    </details>
+  </nav>
+  <main class="artikel" id="inhalt">
+    <p class="brotkrumen"><a href="../">NETbrain</a><span aria-hidden="true">/</span><a href="index.html">Dokumentation</a><span aria-hidden="true">/</span><span>Verwaltung</span></p>
+    <h1>KI-Zugänge und Freigaben</h1>
+<p class="einleitung">Welche KI NETbrain nutzt und wer welches Modell verwenden darf, legen Administratoren unter <strong>Administration → KI &amp; Zugriffsrechte</strong> fest. Sie können einen Modellserver im eigenen Netz, einen Cloud-Anbieter oder beides einrichten.</p>
+<h2 id="anbieter-und-modelle">Anbieter und Modelle<a class="anker" href="#anbieter-und-modelle" aria-label="Verweis auf diesen Abschnitt">#</a></h2>
+<p>Je Anbieter tragen Sie die Server-Adresse und einen zentralen Schlüssel ein. Der Schlüssel wird verschlüsselt gespeichert. <strong>Modelle jetzt prüfen</strong> ruft jedes eingestellte Modell einmal wirklich auf — das beantwortet die Frage „liegt es an uns oder am Anbieter?“ in Sekunden.</p>
+<h2 id="interne-ki-aufgaben">Interne KI-Aufgaben<a class="anker" href="#interne-ki-aufgaben" aria-label="Verweis auf diesen Abschnitt">#</a></h2>
+<p>NETbrain nutzt die KI auch selbst: zum Aufbereiten eingereichten Wissens, für Rückfragen und zum Lesen von Bildern und Scans. Welches Modell das jeweils übernimmt, stellen Sie hier ein, ebenso die Spracheingabe.</p>
+<h2 id="freigaben-je-rolle-und-konto">Freigaben je Rolle und Konto<a class="anker" href="#freigaben-je-rolle-und-konto" aria-label="Verweis auf diesen Abschnitt">#</a></h2>
+<ul><li><strong>Freigabe je Rolle</strong> — welche Modelle Benutzer, Wissenspflege und Admins im Chat wählen dürfen.</li><li><strong>Ausnahmen je Konto</strong> — abweichende Modelle für einzelne Personen, und ob jemand einen eigenen Zugang hinterlegen darf.</li></ul>
+<h2 id="wissen-und-cloud">Wissen und Cloud<a class="anker" href="#wissen-und-cloud" aria-label="Verweis auf diesen Abschnitt">#</a></h2>
+<p>Zwei Schalter regeln, ob <strong>Firmenwissen</strong> und ob <strong>private Auszüge</strong> aus dem Vault an Cloud-Anbieter gehen dürfen. Ein Modellserver im eigenen Netz ist davon nicht betroffen. Unter <strong>Freigaben aus Gesprächen</strong> sehen Sie, wo Nutzer im Einzelfall der Übermittlung zugestimmt haben.</p>
+<p>Was dabei genau übertragen wird, steht unter <a href="datenfluss.html">Was den Server verlässt</a>.</p>
+<h2 id="weitere-einstellungen">Weitere Einstellungen<a class="anker" href="#weitere-einstellungen" aria-label="Verweis auf diesen Abschnitt">#</a></h2>
+<ul><li><strong>Markenschreibweisen</strong> — wie Produkt- und Firmennamen geschrieben werden, damit die Aufbereitung sie nicht verändert.</li><li><strong>Nutzungsgrenzen</strong> unter <strong>Administration → Einstellungen</strong> — KI-Aufrufe je Minute und Tag, gleichzeitige Aufrufe, Dateien und Datenmenge je Tag.</li><li><strong>Letzte Änderungen</strong> — das Protokoll aller Änderungen an diesen Einstellungen.</li></ul>
+    <nav class="blaettern" aria-label="Weiterblättern"><a class="zurueck" href="benutzer.html"><span>Zurück</span><b>Benutzer und Rollen</b></a><a class="weiter" href="kundenportal.html"><span>Weiter</span><b>Kundenportal</b></a></nav>
+    <p class="stand">Stand: NETbrain 0.4.9. Fehlt etwas oder stimmt etwas nicht? <a href="mailto:info@netfactory.de?subject=NETbrain-Dokumentation%3A%20ki-zugaenge">Schreiben Sie uns.</a></p>
+  </main>
+  <aside class="auf-dieser-seite" aria-label="Auf dieser Seite"><p>Auf dieser Seite</p><ul><li><a href="#anbieter-und-modelle">Anbieter und Modelle</a></li><li><a href="#interne-ki-aufgaben">Interne KI-Aufgaben</a></li><li><a href="#freigaben-je-rolle-und-konto">Freigaben je Rolle und Konto</a></li><li><a href="#wissen-und-cloud">Wissen und Cloud</a></li><li><a href="#weitere-einstellungen">Weitere Einstellungen</a></li></ul></aside>
+</div>
+<footer>
+  <div class="fuss">
+    <span>© NETFACTORY GmbH · NETbrain ist proprietäre Software und befindet sich in der Pilotphase.</span>
+    <nav aria-label="Rechtliches">
+      <a href="../">Produktseite</a>
+      <a href="mailto:info@netfactory.de">info@netfactory.de</a>
+      <a href="https://www.netfactory.de/impressum">Impressum</a>
+      <a href="https://www.netfactory.de/datenschutz">Datenschutz</a>
+    </nav>
+  </div>
+</footer>
+<script src="doku.js" defer></script>
+</body>
+</html>

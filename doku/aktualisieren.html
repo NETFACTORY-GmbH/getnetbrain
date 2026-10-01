@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Aktualisieren — NETbrain-Dokumentation</title>
+<meta name="description" content="NETbrain-Updates mit einem Klick im Browser oder von Hand auf dem Server.">
+<link rel="canonical" href="https://getnetbrain.netfactory.de/doku/aktualisieren.html">
+<meta name="theme-color" content="#000000">
+<link rel="icon" href="../bilder/favicon-32.png" sizes="32x32">
+<link rel="icon" href="../bilder/favicon-16.png" sizes="16x16">
+<link rel="apple-touch-icon" href="../bilder/favicon-180.png">
+<meta property="og:type" content="article">
+<meta property="og:locale" content="de_DE">
+<meta property="og:site_name" content="NETbrain">
+<meta property="og:title" content="Aktualisieren — NETbrain-Dokumentation">
+<meta property="og:description" content="NETbrain-Updates mit einem Klick im Browser oder von Hand auf dem Server.">
+<meta property="og:image" content="https://getnetbrain.netfactory.de/bilder/og-image-v2.png">
+<link rel="preload" href="../schriften/geist-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="doku.css">
+</head>
+<body>
+<a class="sprung" href="#inhalt">Zum Inhalt springen</a>
+<header>
+  <div class="kopf">
+    <a class="marke" href="index.html"><img src="../bilder/netbrain-logo.png" alt="NETbrain" width="1928" height="352" decoding="async"><span>Dokumentation</span></a>
+    <nav aria-label="Hauptnavigation">
+      <a href="../">Produkt</a>
+      <a href="../#selbst-starten">Selbst testen</a>
+      <a href="versionen.html">Version 0.4.9</a>
+      <a class="knopf" href="mailto:info@netfactory.de?subject=NETbrain%20%E2%80%93%20Frage%20zur%20Dokumentation">Frage stellen</a>
+    </nav>
+  </div>
+</header>
+<div class="raster">
+  <nav class="seitennav" aria-label="Dokumentation">
+    <div class="suche" role="search">
+      <label class="nur-screenreader" for="suchfeld">Dokumentation durchsuchen</label>
+      <input id="suchfeld" type="search" placeholder="Suchen …  ( / )" autocomplete="off" data-index="suche.json" data-basis="">
+      <ul class="treffer" hidden></ul>
+    </div>
+    <details open>
+      <summary>Inhalt der Dokumentation</summary>
+      <div><div class="gruppe"><p><i></i>Erste Schritte</p><ul><li><a href="index.html">Überblick</a></li><li><a href="voraussetzungen.html">Voraussetzungen</a></li><li><a href="installation.html">Installation</a></li><li><a href="einrichtung.html">Einrichtung im Browser</a></li></ul></div><div class="gruppe"><p><i></i>Arbeiten mit NETbrain</p><ul><li><a href="anmeldung.html">Anmeldung und Konto</a></li><li><a href="firmenwissen.html">Firmenwissen</a></li><li><a href="wissenspflege.html">Wissenspflege</a></li><li><a href="privater-vault.html">Privater Vault</a></li><li><a href="ki-chat.html">KI-Chat</a></li></ul></div><div class="gruppe"><p><i></i>Verwaltung</p><ul><li><a href="benutzer.html">Benutzer und Rollen</a></li><li><a href="ki-zugaenge.html">KI-Zugänge und Freigaben</a></li><li><a href="kundenportal.html">Kundenportal</a></li><li><a href="lizenz.html">Lizenz</a></li></ul></div><div class="gruppe"><p><i></i>Betrieb</p><ul><li><a href="reverse-proxy.html">Reverse-Proxy</a></li><li><a href="sicherung.html">Sicherung und Wiederherstellung</a></li><li><a href="aktualisieren.html" aria-current="page">Aktualisieren</a></li><li><a href="plattform.html">Kubernetes und App-Plattformen</a></li><li><a href="datenfluss.html">Was den Server verlässt</a></li></ul></div><div class="gruppe"><p><i></i>Hilfe</p><ul><li><a href="fehlerbehebung.html">Fehlerbehebung</a></li><li><a href="versionen.html">Versionshinweise</a></li></ul></div></div>
+    </details>
+  </nav>
+  <main class="artikel" id="inhalt">
+    <p class="brotkrumen"><a href="../">NETbrain</a><span aria-hidden="true">/</span><a href="index.html">Dokumentation</a><span aria-hidden="true">/</span><span>Betrieb</span></p>
+    <h1>Aktualisieren</h1>
+<p class="einleitung">Neue Versionen erscheinen regelmäßig. Administratoren sehen sie am Zahnrad oben rechts und ausführlich unter <strong>Administration → Übersicht → Systemaktualisierung</strong>. Was sich geändert hat und ob vorher etwas zu tun ist, steht in den <a href="versionen.html">Versionshinweisen</a>.</p>
+<h2 id="im-browser">Im Browser<a class="anker" href="#im-browser" aria-label="Verweis auf diesen Abschnitt">#</a></h2>
+<p><strong>Jetzt aktualisieren</strong> führt vier Schritte in dieser Reihenfolge aus:</p>
+<ol><li>eine verschlüsselte Sicherung anlegen — schlägt sie fehl, beginnt das Update nicht;</li><li>das neue NETbrain-Image beziehen;</li><li>den Container neu starten und die Selbstprüfung abwarten;</li><li>bei fehlgeschlagener Prüfung automatisch zur bisherigen Version zurückkehren.</li></ol>
+<p>NETbrain selbst hat dabei keinen Zugriff auf Docker. Ein lokaler Helfer auf dem Server, den der Installer eingerichtet hat, übernimmt genau diesen Ablauf und sonst nichts. Er prüft alle sechs Stunden, ob es eine neue Version gibt.</p>
+<h2 id="von-hand-auf-dem-server">Von Hand auf dem Server<a class="anker" href="#von-hand-auf-dem-server" aria-label="Verweis auf diesen Abschnitt">#</a></h2>
+<p>Für Wartung und den Notfall:</p>
+<div class="codeblock"><pre><code>cd /opt/netbrain
+sudo docker compose -f netbrain-compose.yml exec netbrain node scripts/backup.mjs
+sudo ./install.sh</code></pre><button type="button" class="kopieren" aria-label="Befehl kopieren"><svg class="bereit" viewBox="0 0 24 24" aria-hidden="true"><rect x="8" y="8" width="11" height="11" rx="2"/><path d="M16 8V6a2 2 0 00-2-2H6a2 2 0 00-2 2v8a2 2 0 002 2h2"/></svg><svg class="fertig" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7"/></svg></button></div>
+<p>Der Installer erkennt die vorhandene Installation, lässt die Daten stehen und wartet, bis die Anpassungen am Bestand durch sind. Ihre <code>netbrain-compose.yml</code> bleibt unverändert. Während der Bestand angepasst wird, meldet <code>sudo ./install.sh status</code> den Zustand <code>migriert</code> — das ist normal.</p>
+<p>Eine bestimmte Version installieren Sie mit dem versionierten Link:</p>
+<div class="codeblock"><pre><code>curl -fsSL https://getnetbrain.netfactory.de/install.sh@0.4.9 | sudo bash</code></pre><button type="button" class="kopieren" aria-label="Befehl kopieren"><svg class="bereit" viewBox="0 0 24 24" aria-hidden="true"><rect x="8" y="8" width="11" height="11" rx="2"/><path d="M16 8V6a2 2 0 00-2-2H6a2 2 0 00-2 2v8a2 2 0 002 2h2"/></svg><svg class="fertig" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7"/></svg></button></div>
+<h2 id="zurueck-auf-die-vorversion">Zurück auf die Vorversion<a class="anker" href="#zurueck-auf-die-vorversion" aria-label="Verweis auf diesen Abschnitt">#</a></h2>
+<p>Geht über denselben Weg mit der alten Versionsnummer. Ein bereits angepasster Bestand ist von der Vorversion aber nicht immer vollständig lesbar. Der verlässliche Rückweg ist die Sicherung vor dem Update — deshalb steht sie dort.</p>
+<h2 id="auf-einer-app-plattform">Auf einer App-Plattform<a class="anker" href="#auf-einer-app-plattform" aria-label="Verweis auf diesen Abschnitt">#</a></h2>
+<p>Der Update-Helfer braucht einen Docker-Host und greift auf Kubernetes nicht. Dort ziehen Sie den Image-Tag hoch wie bei jeder anderen Anwendung; siehe <a href="plattform.html">Kubernetes und App-Plattformen</a>.</p>
+    <nav class="blaettern" aria-label="Weiterblättern"><a class="zurueck" href="sicherung.html"><span>Zurück</span><b>Sicherung und Wiederherstellung</b></a><a class="weiter" href="plattform.html"><span>Weiter</span><b>Kubernetes und App-Plattformen</b></a></nav>
+    <p class="stand">Stand: NETbrain 0.4.9. Fehlt etwas oder stimmt etwas nicht? <a href="mailto:info@netfactory.de?subject=NETbrain-Dokumentation%3A%20aktualisieren">Schreiben Sie uns.</a></p>
+  </main>
+  <aside class="auf-dieser-seite" aria-label="Auf dieser Seite"><p>Auf dieser Seite</p><ul><li><a href="#im-browser">Im Browser</a></li><li><a href="#von-hand-auf-dem-server">Von Hand auf dem Server</a></li><li><a href="#zurueck-auf-die-vorversion">Zurück auf die Vorversion</a></li><li><a href="#auf-einer-app-plattform">Auf einer App-Plattform</a></li></ul></aside>
+</div>
+<footer>
+  <div class="fuss">
+    <span>© NETFACTORY GmbH · NETbrain ist proprietäre Software und befindet sich in der Pilotphase.</span>
+    <nav aria-label="Rechtliches">
+      <a href="../">Produktseite</a>
+      <a href="mailto:info@netfactory.de">info@netfactory.de</a>
+      <a href="https://www.netfactory.de/impressum">Impressum</a>
+      <a href="https://www.netfactory.de/datenschutz">Datenschutz</a>
+    </nav>
+  </div>
+</footer>
+<script src="doku.js" defer></script>
+</body>
+</html>

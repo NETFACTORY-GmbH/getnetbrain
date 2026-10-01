@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Was den Server verlässt — NETbrain-Dokumentation</title>
+<meta name="description" content="Welche Daten NETbrain an wen überträgt — für Ihre Datenschutzprüfung.">
+<link rel="canonical" href="https://getnetbrain.netfactory.de/doku/datenfluss.html">
+<meta name="theme-color" content="#000000">
+<link rel="icon" href="../bilder/favicon-32.png" sizes="32x32">
+<link rel="icon" href="../bilder/favicon-16.png" sizes="16x16">
+<link rel="apple-touch-icon" href="../bilder/favicon-180.png">
+<meta property="og:type" content="article">
+<meta property="og:locale" content="de_DE">
+<meta property="og:site_name" content="NETbrain">
+<meta property="og:title" content="Was den Server verlässt — NETbrain-Dokumentation">
+<meta property="og:description" content="Welche Daten NETbrain an wen überträgt — für Ihre Datenschutzprüfung.">
+<meta property="og:image" content="https://getnetbrain.netfactory.de/bilder/og-image-v2.png">
+<link rel="preload" href="../schriften/geist-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="doku.css">
+</head>
+<body>
+<a class="sprung" href="#inhalt">Zum Inhalt springen</a>
+<header>
+  <div class="kopf">
+    <a class="marke" href="index.html"><img src="../bilder/netbrain-logo.png" alt="NETbrain" width="1928" height="352" decoding="async"><span>Dokumentation</span></a>
+    <nav aria-label="Hauptnavigation">
+      <a href="../">Produkt</a>
+      <a href="../#selbst-starten">Selbst testen</a>
+      <a href="versionen.html">Version 0.4.9</a>
+      <a class="knopf" href="mailto:info@netfactory.de?subject=NETbrain%20%E2%80%93%20Frage%20zur%20Dokumentation">Frage stellen</a>
+    </nav>
+  </div>
+</header>
+<div class="raster">
+  <nav class="seitennav" aria-label="Dokumentation">
+    <div class="suche" role="search">
+      <label class="nur-screenreader" for="suchfeld">Dokumentation durchsuchen</label>
+      <input id="suchfeld" type="search" placeholder="Suchen …  ( / )" autocomplete="off" data-index="suche.json" data-basis="">
+      <ul class="treffer" hidden></ul>
+    </div>
+    <details open>
+      <summary>Inhalt der Dokumentation</summary>
+      <div><div class="gruppe"><p><i></i>Erste Schritte</p><ul><li><a href="index.html">Überblick</a></li><li><a href="voraussetzungen.html">Voraussetzungen</a></li><li><a href="installation.html">Installation</a></li><li><a href="einrichtung.html">Einrichtung im Browser</a></li></ul></div><div class="gruppe"><p><i></i>Arbeiten mit NETbrain</p><ul><li><a href="anmeldung.html">Anmeldung und Konto</a></li><li><a href="firmenwissen.html">Firmenwissen</a></li><li><a href="wissenspflege.html">Wissenspflege</a></li><li><a href="privater-vault.html">Privater Vault</a></li><li><a href="ki-chat.html">KI-Chat</a></li></ul></div><div class="gruppe"><p><i></i>Verwaltung</p><ul><li><a href="benutzer.html">Benutzer und Rollen</a></li><li><a href="ki-zugaenge.html">KI-Zugänge und Freigaben</a></li><li><a href="kundenportal.html">Kundenportal</a></li><li><a href="lizenz.html">Lizenz</a></li></ul></div><div class="gruppe"><p><i></i>Betrieb</p><ul><li><a href="reverse-proxy.html">Reverse-Proxy</a></li><li><a href="sicherung.html">Sicherung und Wiederherstellung</a></li><li><a href="aktualisieren.html">Aktualisieren</a></li><li><a href="plattform.html">Kubernetes und App-Plattformen</a></li><li><a href="datenfluss.html" aria-current="page">Was den Server verlässt</a></li></ul></div><div class="gruppe"><p><i></i>Hilfe</p><ul><li><a href="fehlerbehebung.html">Fehlerbehebung</a></li><li><a href="versionen.html">Versionshinweise</a></li></ul></div></div>
+    </details>
+  </nav>
+  <main class="artikel" id="inhalt">
+    <p class="brotkrumen"><a href="../">NETbrain</a><span aria-hidden="true">/</span><a href="index.html">Dokumentation</a><span aria-hidden="true">/</span><span>Betrieb</span></p>
+    <h1>Was den Server verlässt</h1>
+<p class="einleitung">NETbrain läuft auf Ihrem Server. Diese Seite listet vollständig, welche Verbindungen nach außen es aufbaut, damit Ihre Datenschutzprüfung nicht raten muss.</p>
+<h2 id="an-ihren-ki-anbieter">An Ihren KI-Anbieter<a class="anker" href="#an-ihren-ki-anbieter" aria-label="Verweis auf diesen Abschnitt">#</a></h2>
+<p>Wenn jemand den KI-Chat nutzt oder Wissen aufbereiten lässt, geht an den gewählten Anbieter:</p>
+<ul><li>die Frage oder der eingeworfene Text samt beigefügter Dateien und Bilder,</li><li>die Ausschnitte aus dem Firmenwissen, die für die Antwort herangezogen werden — sofern Firmenwissen für diesen Anbieter freigegeben ist,</li><li>bei verbundenem privaten Vault die passenden lokalen Auszüge — sofern freigegeben.</li></ul>
+<p>Welcher Anbieter das ist, bestimmen Sie. Bei einem Modell in Ihrem eigenen Netz bleibt die Verarbeitung intern. Ob Firmenwissen oder private Auszüge an <strong>Cloud</strong>-Anbieter gehen dürfen, regeln zwei Schalter unter <strong>Administration → KI &amp; Zugriffsrechte → Wissen und Cloud</strong>. Wechselt jemand mitten im Gespräch zu einem Cloud-Anbieter, fragt NETbrain vorher nach; die Zustimmung wird protokolliert. Siehe <a href="ki-zugaenge.html">KI-Zugänge und Freigaben</a>.</p>
+<h2 id="websuche-und-abgerufene-links">Websuche und abgerufene Links<a class="anker" href="#websuche-und-abgerufene-links" aria-label="Verweis auf diesen Abschnitt">#</a></h2>
+<ul><li>Fügt jemand beim Erfassen einen <strong>Link</strong> ein, ruft NETbrain diese Seite ab und speichert eine Kopie als Nachweis.</li><li>Nutzt jemand im Chat die <strong>Websuche</strong>, gehen daraus geformte Suchanfragen an die Suche des KI-Anbieters oder an eine eigene Suchmaschine, falls Sie eine eingerichtet haben; die besten Treffer werden abgerufen.</li></ul>
+<h2 id="an-den-lizenzdienst">An den Lizenzdienst<a class="anker" href="#an-den-lizenzdienst" aria-label="Verweis auf diesen Abschnitt">#</a></h2>
+<p><code>lizenz-netbrain.netfactory.de</code>, betrieben von NETFACTORY:</p>
+<ul><li><strong>Aktivierung und regelmäßige Bestätigung</strong>: die Lizenzdatei und der technische Installationsschlüssel. Keine Inhalte, keine Konten.</li><li><strong>Testlizenz</strong>, wenn Sie eine anfordern: Firma, Name und Mailadresse, zur Ausstellung und Zustellung der Lizenz.</li><li><strong>Feedback</strong>, wenn jemand über „Feedback geben“ etwas schickt: der Text, die freiwillige Kontaktangabe, die NETbrain-Version und die Installationskennung — ohne Benutzername oder Konto. Die Meldung wird in NETbrain nicht gespeichert, sondern per Mail an uns zugestellt.</li></ul>
+<h2 id="an-die-container-registry">An die Container-Registry<a class="anker" href="#an-die-container-registry" aria-label="Verweis auf diesen Abschnitt">#</a></h2>
+<p><code>ghcr.io</code>: bei Installation und Update der Bezug des Images, beim Update-Helfer alle sechs Stunden die Frage nach einer neuen Version. Das belegt, welche Version Sie beziehen — mehr nicht.</p>
+<h2 id="an-das-kundenportal">An das Kundenportal<a class="anker" href="#an-das-kundenportal" aria-label="Verweis auf diesen Abschnitt">#</a></h2>
+<p>Nur wenn Sie es einrichten: die freigegebenen Seiten als fertiges HTML samt ihren Abbildungen, an den Portal-Container unter der von Ihnen eingetragenen Adresse.</p>
+<h2 id="sonst-nichts">Sonst nichts<a class="anker" href="#sonst-nichts" aria-label="Verweis auf diesen Abschnitt">#</a></h2>
+<p>Keine Nutzungsstatistik, kein Tracking, keine automatische Fehlerübermittlung. Sicherungen bleiben auf Ihrem Server, verschlüsselt mit Ihrer Passphrase. Der Chatverlauf liegt Ende-zu-Ende-verschlüsselt auf dem Server; der Schlüssel entsteht im Browser aus dem Passwort des Nutzers.</p>
+<p>Persönliche Notizen im privaten Vault liegen in einem Ordner auf dem Rechner des Mitarbeiters und werden nicht auf dem Server gespeichert.</p>
+    <nav class="blaettern" aria-label="Weiterblättern"><a class="zurueck" href="plattform.html"><span>Zurück</span><b>Kubernetes und App-Plattformen</b></a><a class="weiter" href="fehlerbehebung.html"><span>Weiter</span><b>Fehlerbehebung</b></a></nav>
+    <p class="stand">Stand: NETbrain 0.4.9. Fehlt etwas oder stimmt etwas nicht? <a href="mailto:info@netfactory.de?subject=NETbrain-Dokumentation%3A%20datenfluss">Schreiben Sie uns.</a></p>
+  </main>
+  <aside class="auf-dieser-seite" aria-label="Auf dieser Seite"><p>Auf dieser Seite</p><ul><li><a href="#an-ihren-ki-anbieter">An Ihren KI-Anbieter</a></li><li><a href="#websuche-und-abgerufene-links">Websuche und abgerufene Links</a></li><li><a href="#an-den-lizenzdienst">An den Lizenzdienst</a></li><li><a href="#an-die-container-registry">An die Container-Registry</a></li><li><a href="#an-das-kundenportal">An das Kundenportal</a></li><li><a href="#sonst-nichts">Sonst nichts</a></li></ul></aside>
+</div>
+<footer>
+  <div class="fuss">
+    <span>© NETFACTORY GmbH · NETbrain ist proprietäre Software und befindet sich in der Pilotphase.</span>
+    <nav aria-label="Rechtliches">
+      <a href="../">Produktseite</a>
+      <a href="mailto:info@netfactory.de">info@netfactory.de</a>
+      <a href="https://www.netfactory.de/impressum">Impressum</a>
+      <a href="https://www.netfactory.de/datenschutz">Datenschutz</a>
+    </nav>
+  </div>
+</footer>
+<script src="doku.js" defer></script>
+</body>
+</html>

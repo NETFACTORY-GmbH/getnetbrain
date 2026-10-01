@@ -319,13 +319,14 @@
   .marke{display:flex; align-items:center; gap:.625rem; font-size:1.375rem; letter-spacing:-.03em; color:var(--white)}
   .marke img{display:block; width:210px; height:auto}
   .marke b{font-weight:600} .marke span{font-weight:400}
-  .kopf nav{margin-left:auto; display:flex; align-items:center; gap:1.75rem}
-  .kopf nav a:not(.knopf){position:relative; color:var(--leise); font-size:.9375rem; font-weight:500; transition:color .2s}
+  .kopf nav{margin-left:auto; display:flex; align-items:center; gap:clamp(1rem,1.6vw,1.75rem)}
+  .kopf nav a:not(.knopf){position:relative; color:var(--leise); font-size:.9375rem; font-weight:500; transition:color .2s; white-space:nowrap}
   .kopf nav a:not(.knopf):hover{color:var(--white)}
   .kopf nav a:not(.knopf).aktiv{color:var(--white)}
   .kopf nav a:not(.knopf).aktiv::after{content:""; position:absolute; left:0; right:0; bottom:-.45rem; height:1px; background:var(--blue-hell)}
   .kopf .knopf{white-space:nowrap; padding:.5625rem 1rem; font-size:.9375rem}
   .kopf .knopf .kurz{display:none}
+  @media(max-width:1120px){.kopf nav a[href="#herausforderungen"],.kopf nav a[href="#ablauf"]{display:none}}
   @media(max-width:900px){.kopf nav a:not(.knopf){display:none} .kopf nav{gap:.75rem}}
   @media(max-width:600px){.kopf .knopf .lang{display:none} .kopf .knopf .kurz{display:inline} .marke img{width:160px}}
 
@@ -602,6 +603,7 @@
       <a href="#datenhoheit">Datenhoheit</a>
       <a href="#ablauf">Ablauf</a>
       <a href="#selbst-starten">Selbst testen</a>
+      <a href="doku/">Dokumentation</a>
       <a class="knopf hell" href="#kontakt"><span class="lang">Live-Demo vereinbaren</span><span class="kurz">Kontakt</span></a>
     </nav>
   </div>
@@ -1060,6 +1062,10 @@
           uns; bis dahin bleibt alles erhalten, was Sie angelegt haben. Wenn Sie
           lieber begleitet einsteigen: <a href="#kontakt">Wir richten es mit Ihnen gemeinsam ein.</a>
         </p>
+        <p class="befehl-fein starten-hinweis">
+          Schritt für Schritt: <a href="doku/installation.html">Installation</a> und
+          <a href="doku/einrichtung.html">Einrichtung</a> in der <a href="doku/">Dokumentation</a>.
+        </p>
       </div>
     </div>
   </div>
@@ -1122,6 +1128,7 @@
       </div>
     </div>
     <p class="fuss-recht">
+      <a href="doku/">Dokumentation</a>
       <a href="https://www.netfactory.de/impressum">Impressum</a>
       <a href="https://www.netfactory.de/datenschutz">Datenschutz</a>
     </p>

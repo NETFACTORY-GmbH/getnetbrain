@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Einrichtung im Browser — NETbrain-Dokumentation</title>
+<meta name="description" content="Der Einrichtungsassistent von NETbrain Schritt für Schritt — vom Token bis zum ersten Administrator.">
+<link rel="canonical" href="https://getnetbrain.netfactory.de/doku/einrichtung.html">
+<meta name="theme-color" content="#000000">
+<link rel="icon" href="../bilder/favicon-32.png" sizes="32x32">
+<link rel="icon" href="../bilder/favicon-16.png" sizes="16x16">
+<link rel="apple-touch-icon" href="../bilder/favicon-180.png">
+<meta property="og:type" content="article">
+<meta property="og:locale" content="de_DE">
+<meta property="og:site_name" content="NETbrain">
+<meta property="og:title" content="Einrichtung im Browser — NETbrain-Dokumentation">
+<meta property="og:description" content="Der Einrichtungsassistent von NETbrain Schritt für Schritt — vom Token bis zum ersten Administrator.">
+<meta property="og:image" content="https://getnetbrain.netfactory.de/bilder/og-image-v2.png">
+<link rel="preload" href="../schriften/geist-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="doku.css">
+</head>
+<body>
+<a class="sprung" href="#inhalt">Zum Inhalt springen</a>
+<header>
+  <div class="kopf">
+    <a class="marke" href="index.html"><img src="../bilder/netbrain-logo.png" alt="NETbrain" width="1928" height="352" decoding="async"><span>Dokumentation</span></a>
+    <nav aria-label="Hauptnavigation">
+      <a href="../">Produkt</a>
+      <a href="../#selbst-starten">Selbst testen</a>
+      <a href="versionen.html">Version 0.4.9</a>
+      <a class="knopf" href="mailto:info@netfactory.de?subject=NETbrain%20%E2%80%93%20Frage%20zur%20Dokumentation">Frage stellen</a>
+    </nav>
+  </div>
+</header>
+<div class="raster">
+  <nav class="seitennav" aria-label="Dokumentation">
+    <div class="suche" role="search">
+      <label class="nur-screenreader" for="suchfeld">Dokumentation durchsuchen</label>
+      <input id="suchfeld" type="search" placeholder="Suchen …  ( / )" autocomplete="off" data-index="suche.json" data-basis="">
+      <ul class="treffer" hidden></ul>
+    </div>
+    <details open>
+      <summary>Inhalt der Dokumentation</summary>
+      <div><div class="gruppe"><p><i></i>Erste Schritte</p><ul><li><a href="index.html">Überblick</a></li><li><a href="voraussetzungen.html">Voraussetzungen</a></li><li><a href="installation.html">Installation</a></li><li><a href="einrichtung.html" aria-current="page">Einrichtung im Browser</a></li></ul></div><div class="gruppe"><p><i></i>Arbeiten mit NETbrain</p><ul><li><a href="anmeldung.html">Anmeldung und Konto</a></li><li><a href="firmenwissen.html">Firmenwissen</a></li><li><a href="wissenspflege.html">Wissenspflege</a></li><li><a href="privater-vault.html">Privater Vault</a></li><li><a href="ki-chat.html">KI-Chat</a></li></ul></div><div class="gruppe"><p><i></i>Verwaltung</p><ul><li><a href="benutzer.html">Benutzer und Rollen</a></li><li><a href="ki-zugaenge.html">KI-Zugänge und Freigaben</a></li><li><a href="kundenportal.html">Kundenportal</a></li><li><a href="lizenz.html">Lizenz</a></li></ul></div><div class="gruppe"><p><i></i>Betrieb</p><ul><li><a href="reverse-proxy.html">Reverse-Proxy</a></li><li><a href="sicherung.html">Sicherung und Wiederherstellung</a></li><li><a href="aktualisieren.html">Aktualisieren</a></li><li><a href="plattform.html">Kubernetes und App-Plattformen</a></li><li><a href="datenfluss.html">Was den Server verlässt</a></li></ul></div><div class="gruppe"><p><i></i>Hilfe</p><ul><li><a href="fehlerbehebung.html">Fehlerbehebung</a></li><li><a href="versionen.html">Versionshinweise</a></li></ul></div></div>
+    </details>
+  </nav>
+  <main class="artikel" id="inhalt">
+    <p class="brotkrumen"><a href="../">NETbrain</a><span aria-hidden="true">/</span><a href="index.html">Dokumentation</a><span aria-hidden="true">/</span><span>Erste Schritte</span></p>
+    <h1>Einrichtung im Browser</h1>
+<p class="einleitung">Nach der Installation landet jeder Aufruf auf <code>/einrichtung</code>. Der Assistent führt in neun Schritten durch alles, was eine Installation braucht. Was Sie hier eintragen, wird gespeichert; eine Konfigurationsdatei müssen Sie nicht pflegen.</p>
+<div class="kasten wichtig"><p class="kasten-titel"><i></i>Halten Sie Ihren Passwortmanager bereit</p><p>In Schritt 2 erzeugt NETbrain eine <strong>Sicherungs-Passphrase</strong> und zeigt sie genau einmal. Ohne sie lässt sich keine Ihrer Sicherungen mehr öffnen — auch nicht durch uns, denn wir haben sie nie. Legen Sie sie ab, sobald sie erscheint, sodass mindestens zwei Personen herankommen.</p></div>
+<h2 id="1-token">1. Token<a class="anker" href="#1-token" aria-label="Verweis auf diesen Abschnitt">#</a></h2>
+<p>Fügen Sie das Einrichtungs-Token aus der Ausgabe des Installers ein. Es belegt, dass Sie Zugriff auf den Server haben; ohne diesen Nachweis wäre die Einrichtungsseite ein offenes Tor. Ein abgewiesenes Token ist fast immer ein altes: <code>sudo ./install.sh token</code> zeigt das aktuelle.</p>
+<h2 id="2-geheimnisse">2. Geheimnisse<a class="anker" href="#2-geheimnisse" aria-label="Verweis auf diesen Abschnitt">#</a></h2>
+<p>NETbrain erzeugt die nötigen Schlüssel und die Sicherungs-Passphrase selbst. Die Passphrase erscheint einmal und muss zur Bestätigung noch einmal eingegeben werden. Was hier weggeklickt wird, ist weg.</p>
+<h2 id="3-erreichbarkeit-und-name">3. Erreichbarkeit und Name<a class="anker" href="#3-erreichbarkeit-und-name" aria-label="Verweis auf diesen Abschnitt">#</a></h2>
+<ul><li><strong>Hostname</strong> — der DNS-Name, unter dem Ihr Team NETbrain aufruft.</li><li><strong>Zahl der Reverse-Proxys</strong> vor NETbrain, meist <code>1</code>. Nicht auf <code>0</code> lassen, wenn ein Proxy davorsteht.</li><li><strong>Name Ihrer Organisation</strong> — erscheint im Seitentitel und in den Datenschutzhinweisen.</li></ul>
+<p>Steht ein Wert schon in der <code>netbrain-compose.yml</code>, zeigt die Seite ihn als fest an: Die Datei hat Vorrang.</p>
+<h2 id="4-ki-anbieter">4. KI-Anbieter<a class="anker" href="#4-ki-anbieter" aria-label="Verweis auf diesen Abschnitt">#</a></h2>
+<p>Adresse und Schlüssel Ihres Anbieters. Der Zugang wird sofort getestet, bevor es weitergeht — ein Tippfehler fällt hier auf und nicht beim ersten Nutzer. Welche Anbieter und Modelle wer nutzen darf, legen Sie später unter <a href="ki-zugaenge.html">KI-Zugänge und Freigaben</a> fest.</p>
+<h2 id="5-sicherung">5. Sicherung<a class="anker" href="#5-sicherung" aria-label="Verweis auf diesen Abschnitt">#</a></h2>
+<p>Uhrzeit des täglichen Laufs (Vorgabe 02:00) und wie viele Stände aufgehoben werden (Vorgabe 14). Lösen Sie den <strong>Probelauf</strong> aus: Er schreibt sofort eine Sicherung und beweist, dass Zeitplan und Passphrase zusammenpassen. Der Zeitplan läuft im Container; auf Ihrem Server entsteht kein Cronjob.</p>
+<h2 id="6-lizenz">6. Lizenz<a class="anker" href="#6-lizenz" aria-label="Verweis auf diesen Abschnitt">#</a></h2>
+<p>Fügen Sie den Inhalt Ihrer Lizenzdatei ein. NETbrain bindet sie dabei beim Lizenzdienst an diese Installation. Haben Sie noch keine Lizenz, gibt es zwei Wege:</p>
+<ul><li><strong>Ohne Lizenz weitermachen</strong> — eine neue Installation ist ab dem ersten Start sieben Tage vollständig nutzbar.</li><li><strong>Testlizenz anfordern</strong> — Firma, Name und Mailadresse eintragen; die Lizenz kommt per Mail und wird hier eingefügt. Je Mailadresse gibt es eine.</li></ul>
+<p>Mehr dazu unter <a href="lizenz.html">Lizenz</a>.</p>
+<h2 id="7-kundenportal">7. Kundenportal<a class="anker" href="#7-kundenportal" aria-label="Verweis auf diesen Abschnitt">#</a></h2>
+<p>Optional und überspringbar. Ist ein Portal-Container schon vorhanden, tragen Sie hier seine Adresse ein und erzeugen den Kopplungsschlüssel. Das geht genauso später unter <strong>Verwaltung → Kundenportal</strong> — siehe <a href="kundenportal.html">Kundenportal</a>. Der Schritt erscheint nur, wenn Ihre Lizenz das Portal enthält.</p>
+<h2 id="8-pruefung">8. Prüfung<a class="anker" href="#8-pruefung" aria-label="Verweis auf diesen Abschnitt">#</a></h2>
+<p>NETbrain sieht sich selbst durch und meldet, was fehlt oder unsicher eingestellt ist. Arbeiten Sie jeden Befund ab, statt ihn zu übergehen; die Liste meldet sich nur zu echten Lücken.</p>
+<h2 id="9-administrator">9. Administrator<a class="anker" href="#9-administrator" aria-label="Verweis auf diesen Abschnitt">#</a></h2>
+<p>Das erste Konto: Benutzername und Passwort, dazu gleich die <strong>Zwei-Faktor-Anmeldung</strong>. Scannen Sie den QR-Code mit einer Authenticator-App (zum Beispiel Microsoft Authenticator, Google Authenticator oder 1Password) und geben Sie den sechsstelligen Code ein. Ohne gültigen Code entsteht kein Konto.</p>
+<p>Nach der ersten Anmeldung zeigt NETbrain einmalig zehn <strong>Wiederherstellungscodes</strong>. Notieren Sie sie — sie sind der Weg zurück, wenn das Handy verloren geht.</p>
+<p>Damit endet der Einrichtungsmodus: <code>/einrichtung</code> ist danach nicht mehr erreichbar. Weitere Konten legen Sie unter <a href="benutzer.html">Benutzer und Rollen</a> an.</p>
+<h2 id="danach">Danach<a class="anker" href="#danach" aria-label="Verweis auf diesen Abschnitt">#</a></h2>
+<ul><li>Den Proxy und die Sicherung einmal nachweisen statt annehmen: Zertifikat gültig, Port 4321 von außen gesperrt, eine 12-MB-Datei geht durch, eine Sicherung lässt sich öffnen. Siehe <a href="reverse-proxy.html#nachweisen">Reverse-Proxy</a> und <a href="sicherung.html">Sicherung</a>.</li><li>Eine Kopie der Sicherungen auf ein Ziel außerhalb des Servers einrichten.</li></ul>
+    <nav class="blaettern" aria-label="Weiterblättern"><a class="zurueck" href="installation.html"><span>Zurück</span><b>Installation</b></a><a class="weiter" href="anmeldung.html"><span>Weiter</span><b>Anmeldung und Konto</b></a></nav>
+    <p class="stand">Stand: NETbrain 0.4.9. Fehlt etwas oder stimmt etwas nicht? <a href="mailto:info@netfactory.de?subject=NETbrain-Dokumentation%3A%20einrichtung">Schreiben Sie uns.</a></p>
+  </main>
+  <aside class="auf-dieser-seite" aria-label="Auf dieser Seite"><p>Auf dieser Seite</p><ul><li><a href="#1-token">1. Token</a></li><li><a href="#2-geheimnisse">2. Geheimnisse</a></li><li><a href="#3-erreichbarkeit-und-name">3. Erreichbarkeit und Name</a></li><li><a href="#4-ki-anbieter">4. KI-Anbieter</a></li><li><a href="#5-sicherung">5. Sicherung</a></li><li><a href="#6-lizenz">6. Lizenz</a></li><li><a href="#7-kundenportal">7. Kundenportal</a></li><li><a href="#8-pruefung">8. Prüfung</a></li><li><a href="#9-administrator">9. Administrator</a></li><li><a href="#danach">Danach</a></li></ul></aside>
+</div>
+<footer>
+  <div class="fuss">
+    <span>© NETFACTORY GmbH · NETbrain ist proprietäre Software und befindet sich in der Pilotphase.</span>
+    <nav aria-label="Rechtliches">
+      <a href="../">Produktseite</a>
+      <a href="mailto:info@netfactory.de">info@netfactory.de</a>
+      <a href="https://www.netfactory.de/impressum">Impressum</a>
+      <a href="https://www.netfactory.de/datenschutz">Datenschutz</a>
+    </nav>
+  </div>
+</footer>
+<script src="doku.js" defer></script>
+</body>
+</html>

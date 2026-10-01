@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Reverse-Proxy — NETbrain-Dokumentation</title>
+<meta name="description" content="Acht Anforderungen an den Reverse-Proxy vor NETbrain, mit vollständigem nginx-Beispiel.">
+<link rel="canonical" href="https://getnetbrain.netfactory.de/doku/reverse-proxy.html">
+<meta name="theme-color" content="#000000">
+<link rel="icon" href="../bilder/favicon-32.png" sizes="32x32">
+<link rel="icon" href="../bilder/favicon-16.png" sizes="16x16">
+<link rel="apple-touch-icon" href="../bilder/favicon-180.png">
+<meta property="og:type" content="article">
+<meta property="og:locale" content="de_DE">
+<meta property="og:site_name" content="NETbrain">
+<meta property="og:title" content="Reverse-Proxy — NETbrain-Dokumentation">
+<meta property="og:description" content="Acht Anforderungen an den Reverse-Proxy vor NETbrain, mit vollständigem nginx-Beispiel.">
+<meta property="og:image" content="https://getnetbrain.netfactory.de/bilder/og-image-v2.png">
+<link rel="preload" href="../schriften/geist-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="doku.css">
+</head>
+<body>
+<a class="sprung" href="#inhalt">Zum Inhalt springen</a>
+<header>
+  <div class="kopf">
+    <a class="marke" href="index.html"><img src="../bilder/netbrain-logo.png" alt="NETbrain" width="1928" height="352" decoding="async"><span>Dokumentation</span></a>
+    <nav aria-label="Hauptnavigation">
+      <a href="../">Produkt</a>
+      <a href="../#selbst-starten">Selbst testen</a>
+      <a href="versionen.html">Version 0.4.9</a>
+      <a class="knopf" href="mailto:info@netfactory.de?subject=NETbrain%20%E2%80%93%20Frage%20zur%20Dokumentation">Frage stellen</a>
+    </nav>
+  </div>
+</header>
+<div class="raster">
+  <nav class="seitennav" aria-label="Dokumentation">
+    <div class="suche" role="search">
+      <label class="nur-screenreader" for="suchfeld">Dokumentation durchsuchen</label>
+      <input id="suchfeld" type="search" placeholder="Suchen …  ( / )" autocomplete="off" data-index="suche.json" data-basis="">
+      <ul class="treffer" hidden></ul>
+    </div>
+    <details open>
+      <summary>Inhalt der Dokumentation</summary>
+      <div><div class="gruppe"><p><i></i>Erste Schritte</p><ul><li><a href="index.html">Überblick</a></li><li><a href="voraussetzungen.html">Voraussetzungen</a></li><li><a href="installation.html">Installation</a></li><li><a href="einrichtung.html">Einrichtung im Browser</a></li></ul></div><div class="gruppe"><p><i></i>Arbeiten mit NETbrain</p><ul><li><a href="anmeldung.html">Anmeldung und Konto</a></li><li><a href="firmenwissen.html">Firmenwissen</a></li><li><a href="wissenspflege.html">Wissenspflege</a></li><li><a href="privater-vault.html">Privater Vault</a></li><li><a href="ki-chat.html">KI-Chat</a></li></ul></div><div class="gruppe"><p><i></i>Verwaltung</p><ul><li><a href="benutzer.html">Benutzer und Rollen</a></li><li><a href="ki-zugaenge.html">KI-Zugänge und Freigaben</a></li><li><a href="kundenportal.html">Kundenportal</a></li><li><a href="lizenz.html">Lizenz</a></li></ul></div><div class="gruppe"><p><i></i>Betrieb</p><ul><li><a href="reverse-proxy.html" aria-current="page">Reverse-Proxy</a></li><li><a href="sicherung.html">Sicherung und Wiederherstellung</a></li><li><a href="aktualisieren.html">Aktualisieren</a></li><li><a href="plattform.html">Kubernetes und App-Plattformen</a></li><li><a href="datenfluss.html">Was den Server verlässt</a></li></ul></div><div class="gruppe"><p><i></i>Hilfe</p><ul><li><a href="fehlerbehebung.html">Fehlerbehebung</a></li><li><a href="versionen.html">Versionshinweise</a></li></ul></div></div>
+    </details>
+  </nav>
+  <main class="artikel" id="inhalt">
+    <p class="brotkrumen"><a href="../">NETbrain</a><span aria-hidden="true">/</span><a href="index.html">Dokumentation</a><span aria-hidden="true">/</span><span>Betrieb</span></p>
+    <h1>Reverse-Proxy</h1>
+<p class="einleitung">NETbrain spricht im Container HTTP und wird nur auf <code>127.0.0.1:4321</code> veröffentlicht. Zwischen Ihren Anwendern und NETbrain steht ein Reverse-Proxy, den Sie stellen — nginx, Apache, HAProxy, Traefik oder die Appliance, die bei Ihnen ohnehin davorsteht. NETbrain bringt keinen mit und beschafft kein Zertifikat.</p>
+<h2 id="die-acht-punkte">Die acht Punkte<a class="anker" href="#die-acht-punkte" aria-label="Verweis auf diesen Abschnitt">#</a></h2>
+<p>Hinter jedem steht, was passiert, wenn er fehlt.</p>
+<h3 id="1-tls-beenden-zertifikat-beschaffen-und-erneuern">1. TLS beenden, Zertifikat beschaffen und erneuern<a class="anker" href="#1-tls-beenden-zertifikat-beschaffen-und-erneuern" aria-label="Verweis auf diesen Abschnitt">#</a></h3>
+<p>NETbrain setzt sein Sitzungscookie als <code>secure</code>; über HTTP verwirft der Browser es wortlos. Die Anmeldeseite erscheint dann nach richtigem Passwort einfach wieder. Ein abgelaufenes Zertifikat wirkt genauso — die Erneuerung gehört in Ihre Überwachung.</p>
+<h3 id="2-port-80-auf-443-weiterleiten">2. Port 80 auf 443 weiterleiten<a class="anker" href="#2-port-80-auf-443-weiterleiten" aria-label="Verweis auf diesen Abschnitt">#</a></h3>
+<p>Anwender tippen den Namen ohne <code>https://</code>.</p>
+<h3 id="3-hsts-setzen">3. HSTS setzen<a class="anker" href="#3-hsts-setzen" aria-label="Verweis auf diesen Abschnitt">#</a></h3>
+<p>Der Header <code>Strict-Transport-Security: max-age=31536000; includeSubDomains</code> kommt entweder vom Proxy oder von NETbrain, mit <code>NETBRAIN_HSTS: &quot;true&quot;</code> in der Compose-Datei. Erst einschalten, wenn HTTPS unter dem endgültigen Namen funktioniert: Ein HSTS-Header unter falschem Namen sperrt diesen Namen ein Jahr lang in jedem Browser, der ihn gesehen hat.</p>
+<h3 id="4-mindestens-12-mb-request-body-durchlassen">4. Mindestens 12 MB Request-Body durchlassen<a class="anker" href="#4-mindestens-12-mb-request-body-durchlassen" aria-label="Verweis auf diesen Abschnitt">#</a></h3>
+<p>In nginx: <code>client_max_body_size 12m</code>. Ein engerer Deckel lässt einen eingeworfenen Scan in einer Fehlerseite Ihres Proxys enden, die dem Anwender nicht sagt, was los ist.</p>
+<h3 id="5-x-forwarded-for-setzen-und-die-zahl-der-proxys-hinterlegen">5. <code>X-Forwarded-For</code> setzen und die Zahl der Proxys hinterlegen<a class="anker" href="#5-x-forwarded-for-setzen-und-die-zahl-der-proxys-hinterlegen" aria-label="Verweis auf diesen Abschnitt">#</a></h3>
+<p><code>NETBRAIN_TRUSTED_PROXY_HOPS</code> in der Compose-Datei oder im Assistenten, bei einem Proxy <code>1</code>. Fehlt der Wert, sieht die Anmeldedrossel alle Anwender als eine Adresse, und ein Fehlversuch sperrt alle aus.</p>
+<h3 id="firewall">6. Port 4321 auf den Proxy beschränken<a class="anker" href="#firewall" aria-label="Verweis auf diesen Abschnitt">#</a></h3>
+<p>Steht der Proxy auf demselben Server, erledigt das der Installer. Steht er auf einem anderen Rechner (<code>NETBRAIN_BIND=0.0.0.0</code>), brauchen Sie eine Firewallregel — sonst kann jeder am Proxy vorbei <code>X-Forwarded-For</code> selbst setzen und gezielt fremde Konten aussperren.</p>
+<h3 id="7-den-dns-namen-bei-netbrain-hinterlegen">7. Den DNS-Namen bei NETbrain hinterlegen<a class="anker" href="#7-den-dns-namen-bei-netbrain-hinterlegen" aria-label="Verweis auf diesen Abschnitt">#</a></h3>
+<p>(<code>NETBRAIN_ALLOWED_HOSTS</code>, siehe <a href="installation.html#dns-name-und-proxy-kette-eintragen">Installation</a>). Fehlt er, antwortet NETbrain mit <strong>421</strong>. Den <code>Host</code>-Header reicht der Proxy unverändert weiter.</p>
+<h3 id="8-node-env-production-nicht-ueberschreiben">8. <code>NODE_ENV=production</code> nicht überschreiben<a class="anker" href="#8-node-env-production-nicht-ueberschreiben" aria-label="Verweis auf diesen Abschnitt">#</a></h3>
+<p>Das Image setzt den Wert; ohne ihn ist das Sitzungscookie nicht <code>secure</code>.</p>
+<p>Empfohlen: Richten Sie die Healthprobe des Proxys auf <code>/api/health</code>. Dann nimmt er NETbrain während eines Updates kurz aus dem Verkehr.</p>
+<h2 id="beispiel-fuer-nginx">Beispiel für nginx<a class="anker" href="#beispiel-fuer-nginx" aria-label="Verweis auf diesen Abschnitt">#</a></h2>
+<p>Deckt die Punkte 1 bis 5 ab:</p>
+<div class="codeblock"><pre><code>server {
+  listen 443 ssl;
+  server_name netbrain.ihre-firma.de;
+
+  ssl_certificate     /etc/ssl/certs/netbrain.crt;
+  ssl_certificate_key /etc/ssl/private/netbrain.key;
+
+  add_header Strict-Transport-Security &quot;max-age=31536000; includeSubDomains&quot; always;
+  client_max_body_size 12m;
+
+  location / {
+    proxy_pass http://127.0.0.1:4321;
+    proxy_set_header Host              $host;
+    proxy_set_header X-Forwarded-For   $proxy_add_x_forwarded_for;
+    proxy_set_header X-Forwarded-Proto $scheme;
+  }
+}
+
+server {
+  listen 80;
+  server_name netbrain.ihre-firma.de;
+  return 308 https://$host$request_uri;
+}</code></pre><button type="button" class="kopieren" aria-label="Befehl kopieren"><svg class="bereit" viewBox="0 0 24 24" aria-hidden="true"><rect x="8" y="8" width="11" height="11" rx="2"/><path d="M16 8V6a2 2 0 00-2-2H6a2 2 0 00-2 2v8a2 2 0 002 2h2"/></svg><svg class="fertig" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7"/></svg></button></div>
+<h2 id="firewall-wenn-der-proxy-woanders-steht">Firewall, wenn der Proxy woanders steht<a class="anker" href="#firewall-wenn-der-proxy-woanders-steht" aria-label="Verweis auf diesen Abschnitt">#</a></h2>
+<p>Die Regel gehört in die iptables-Kette <code>DOCKER-USER</code>. <code>ufw</code> und <code>firewalld</code> greifen hier <strong>nicht</strong> — Docker hängt seine eigenen Regeln davor, und <code>ufw status</code> meldet „aktiv“, obwohl der Port offen ist.</p>
+<div class="codeblock"><pre><code>sudo iptables -I DOCKER-USER -i &lt;externes-interface&gt; -p tcp --dport 4321 -j DROP
+sudo iptables -I DOCKER-USER -i &lt;externes-interface&gt; -s &lt;ip-des-proxys&gt; -p tcp --dport 4321 -j ACCEPT
+sudo iptables -I DOCKER-USER -i &lt;externes-interface&gt; -p tcp --dport 4321 -m conntrack --ctstate ESTABLISHED,RELATED -j ACCEPT</code></pre><button type="button" class="kopieren" aria-label="Befehl kopieren"><svg class="bereit" viewBox="0 0 24 24" aria-hidden="true"><rect x="8" y="8" width="11" height="11" rx="2"/><path d="M16 8V6a2 2 0 00-2-2H6a2 2 0 00-2 2v8a2 2 0 002 2h2"/></svg><svg class="fertig" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7"/></svg></button></div>
+<p><code>-I</code> fügt vorn ein; die zuletzt gesetzte Regel gilt zuerst. Docker legt die Kette bei jedem Start neu an — machen Sie die Regeln mit dem Mittel Ihrer Distribution dauerhaft, und zwar nach <code>docker.service</code>.</p>
+<h2 id="nachweisen">Nachweisen statt annehmen<a class="anker" href="#nachweisen" aria-label="Verweis auf diesen Abschnitt">#</a></h2>
+<p>Vier Punkte lassen sich in je einer Minute belegen:</p>
+<div class="codeblock"><pre><code># Zertifikat gültig und HSTS kommt an
+curl -sI https://netbrain.ihre-firma.de/login | grep -i strict-transport
+
+# Anwendungsport von außen gesperrt (von einem anderen Rechner aus, muss scheitern)
+curl -m 5 http://&lt;server-ip&gt;:4321/api/health
+
+# Healthprobe über den Proxy
+curl -s https://netbrain.ihre-firma.de/api/health</code></pre><button type="button" class="kopieren" aria-label="Befehl kopieren"><svg class="bereit" viewBox="0 0 24 24" aria-hidden="true"><rect x="8" y="8" width="11" height="11" rx="2"/><path d="M16 8V6a2 2 0 00-2-2H6a2 2 0 00-2 2v8a2 2 0 002 2h2"/></svg><svg class="fertig" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7"/></svg></button></div>
+<p>Den vierten Punkt prüfen Sie im Browser: Werfen Sie eine Datei von etwa 10 MB als Firmenwissen ein. Kommt eine Fehlerseite Ihres Proxys statt einer Meldung von NETbrain, ist das Body-Limit zu eng.</p>
+    <nav class="blaettern" aria-label="Weiterblättern"><a class="zurueck" href="lizenz.html"><span>Zurück</span><b>Lizenz</b></a><a class="weiter" href="sicherung.html"><span>Weiter</span><b>Sicherung und Wiederherstellung</b></a></nav>
+    <p class="stand">Stand: NETbrain 0.4.9. Fehlt etwas oder stimmt etwas nicht? <a href="mailto:info@netfactory.de?subject=NETbrain-Dokumentation%3A%20reverse-proxy">Schreiben Sie uns.</a></p>
+  </main>
+  <aside class="auf-dieser-seite" aria-label="Auf dieser Seite"><p>Auf dieser Seite</p><ul><li><a href="#die-acht-punkte">Die acht Punkte</a></li><li><a href="#beispiel-fuer-nginx">Beispiel für nginx</a></li><li><a href="#firewall-wenn-der-proxy-woanders-steht">Firewall, wenn der Proxy woanders steht</a></li><li><a href="#nachweisen">Nachweisen statt annehmen</a></li></ul></aside>
+</div>
+<footer>
+  <div class="fuss">
+    <span>© NETFACTORY GmbH · NETbrain ist proprietäre Software und befindet sich in der Pilotphase.</span>
+    <nav aria-label="Rechtliches">
+      <a href="../">Produktseite</a>
+      <a href="mailto:info@netfactory.de">info@netfactory.de</a>
+      <a href="https://www.netfactory.de/impressum">Impressum</a>
+      <a href="https://www.netfactory.de/datenschutz">Datenschutz</a>
+    </nav>
+  </div>
+</footer>
+<script src="doku.js" defer></script>
+</body>
+</html>

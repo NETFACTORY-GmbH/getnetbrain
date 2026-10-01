@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Kubernetes und App-Plattformen — NETbrain-Dokumentation</title>
+<meta name="description" content="Was eine Kubernetes- oder App-Plattform bereitstellen muss, damit Kunden NETbrain und das Kundenportal per Knopfdruck starten.">
+<link rel="canonical" href="https://getnetbrain.netfactory.de/doku/plattform.html">
+<meta name="theme-color" content="#000000">
+<link rel="icon" href="../bilder/favicon-32.png" sizes="32x32">
+<link rel="icon" href="../bilder/favicon-16.png" sizes="16x16">
+<link rel="apple-touch-icon" href="../bilder/favicon-180.png">
+<meta property="og:type" content="article">
+<meta property="og:locale" content="de_DE">
+<meta property="og:site_name" content="NETbrain">
+<meta property="og:title" content="Kubernetes und App-Plattformen — NETbrain-Dokumentation">
+<meta property="og:description" content="Was eine Kubernetes- oder App-Plattform bereitstellen muss, damit Kunden NETbrain und das Kundenportal per Knopfdruck starten.">
+<meta property="og:image" content="https://getnetbrain.netfactory.de/bilder/og-image-v2.png">
+<link rel="preload" href="../schriften/geist-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="doku.css">
+</head>
+<body>
+<a class="sprung" href="#inhalt">Zum Inhalt springen</a>
+<header>
+  <div class="kopf">
+    <a class="marke" href="index.html"><img src="../bilder/netbrain-logo.png" alt="NETbrain" width="1928" height="352" decoding="async"><span>Dokumentation</span></a>
+    <nav aria-label="Hauptnavigation">
+      <a href="../">Produkt</a>
+      <a href="../#selbst-starten">Selbst testen</a>
+      <a href="versionen.html">Version 0.4.9</a>
+      <a class="knopf" href="mailto:info@netfactory.de?subject=NETbrain%20%E2%80%93%20Frage%20zur%20Dokumentation">Frage stellen</a>
+    </nav>
+  </div>
+</header>
+<div class="raster">
+  <nav class="seitennav" aria-label="Dokumentation">
+    <div class="suche" role="search">
+      <label class="nur-screenreader" for="suchfeld">Dokumentation durchsuchen</label>
+      <input id="suchfeld" type="search" placeholder="Suchen …  ( / )" autocomplete="off" data-index="suche.json" data-basis="">
+      <ul class="treffer" hidden></ul>
+    </div>
+    <details open>
+      <summary>Inhalt der Dokumentation</summary>
+      <div><div class="gruppe"><p><i></i>Erste Schritte</p><ul><li><a href="index.html">Überblick</a></li><li><a href="voraussetzungen.html">Voraussetzungen</a></li><li><a href="installation.html">Installation</a></li><li><a href="einrichtung.html">Einrichtung im Browser</a></li></ul></div><div class="gruppe"><p><i></i>Arbeiten mit NETbrain</p><ul><li><a href="anmeldung.html">Anmeldung und Konto</a></li><li><a href="firmenwissen.html">Firmenwissen</a></li><li><a href="wissenspflege.html">Wissenspflege</a></li><li><a href="privater-vault.html">Privater Vault</a></li><li><a href="ki-chat.html">KI-Chat</a></li></ul></div><div class="gruppe"><p><i></i>Verwaltung</p><ul><li><a href="benutzer.html">Benutzer und Rollen</a></li><li><a href="ki-zugaenge.html">KI-Zugänge und Freigaben</a></li><li><a href="kundenportal.html">Kundenportal</a></li><li><a href="lizenz.html">Lizenz</a></li></ul></div><div class="gruppe"><p><i></i>Betrieb</p><ul><li><a href="reverse-proxy.html">Reverse-Proxy</a></li><li><a href="sicherung.html">Sicherung und Wiederherstellung</a></li><li><a href="aktualisieren.html">Aktualisieren</a></li><li><a href="plattform.html" aria-current="page">Kubernetes und App-Plattformen</a></li><li><a href="datenfluss.html">Was den Server verlässt</a></li></ul></div><div class="gruppe"><p><i></i>Hilfe</p><ul><li><a href="fehlerbehebung.html">Fehlerbehebung</a></li><li><a href="versionen.html">Versionshinweise</a></li></ul></div></div>
+    </details>
+  </nav>
+  <main class="artikel" id="inhalt">
+    <p class="brotkrumen"><a href="../">NETbrain</a><span aria-hidden="true">/</span><a href="index.html">Dokumentation</a><span aria-hidden="true">/</span><span>Betrieb</span></p>
+    <h1>Kubernetes und App-Plattformen</h1>
+<p class="einleitung">Diese Seite richtet sich an Betreiber von Kubernetes- oder App-Plattformen. Gemeint ist der Fall, dass ein Kunde NETbrain selbst startet und niemand dabei etwas von Hand einrichtet. Installer und Update-Helfer werden hier nicht gebraucht.</p>
+<h2 id="netbrain">NETbrain<a class="anker" href="#netbrain" aria-label="Verweis auf diesen Abschnitt">#</a></h2>
+<div class="tabelle"><table><tbody><tr><td>Image</td><td><code>ghcr.io/netfactory-gmbh/netbrain:&lt;version&gt;</code> (öffentlich)</td></tr><tr><td>Port</td><td>HTTP auf <strong>4321</strong>, TLS am Ingress</td></tr><tr><td>Prüfpfad</td><td><code>/api/health</code></td></tr><tr><td>Benutzer</td><td><code>10001</code>, beide Volumes müssen ihm gehören</td></tr><tr><td>Repliken</td><td>genau <strong>1</strong>, kein Autoscaling</td></tr></tbody></table></div>
+<h3 id="umgebungsvariablen">Umgebungsvariablen<a class="anker" href="#umgebungsvariablen" aria-label="Verweis auf diesen Abschnitt">#</a></h3>
+<div class="tabelle"><table><thead><tr><th>Variable</th><th>Wert</th><th>Ohne sie</th></tr></thead><tbody><tr><td><code>NETBRAIN_ALLOWED_HOSTS</code></td><td>der vergebene Hostname (empfohlen)</td><td>Jeder Hostname wird angenommen, bis der Assistent den Namen speichert</td></tr><tr><td><code>NETBRAIN_SETUP_TOKEN</code></td><td>Zufallswert, mindestens 24 Zeichen</td><td>Das Token steht nur im Pod-Log; der Kunde kommt nicht an seine Einrichtung</td></tr><tr><td><code>NETBRAIN_SECRET_KEY</code></td><td>Zufallswert, <code>openssl rand -base64 32</code></td><td>Der Kunde kann keine KI-Zugänge hinterlegen</td></tr><tr><td><code>NETBRAIN_TRUSTED_PROXY_HOPS</code></td><td>Zahl der Proxys davor, meist <code>1</code></td><td>Anmeldedrossel und Protokoll sehen die Proxy-Adresse</td></tr></tbody></table></div>
+<p><code>NETBRAIN_SETUP_TOKEN</code> und <code>NETBRAIN_SECRET_KEY</code> gehören in den Geheimnisspeicher der Plattform und müssen <strong>über Neustarts gleich bleiben</strong>. Ein neuer <code>NETBRAIN_SECRET_KEY</code> macht hinterlegte KI-Schlüssel unlesbar.</p>
+<p>Zeigen Sie das Einrichtungs-Token auf der Kachel an, so wie das Startpasswort anderer Anwendungen. Der Kunde braucht es genau einmal.</p>
+<h3 id="volumes">Volumes<a class="anker" href="#volumes" aria-label="Verweis auf diesen Abschnitt">#</a></h3>
+<ul><li><code>/data</code> — Wissensbestand, Konten, Chats, Lizenz. Der einzige unersetzliche Zustand.</li><li><code>/backups</code> — die von NETbrain erzeugten verschlüsselten Sicherungen.</li></ul>
+<p>Sichert die Plattform das Volume ohnehin, genügt das. Planen Sie dann nicht zusätzlich NETbrains eigene Sicherung mit Aufbewahrung im selben Verzeichnis — zwei Zeitpläne räumen sich die Dateien gegenseitig weg.</p>
+<h3 id="ingress">Ingress<a class="anker" href="#ingress" aria-label="Verweis auf diesen Abschnitt">#</a></h3>
+<p>Der Ingress beendet TLS und reicht per HTTP weiter; den <code>Host</code>-Header lässt er unverändert. Ein umgeschriebener <code>Host</code> (Service-Name, <code>localhost</code>) führt zu <strong>421</strong>, sobald ein Hostname gesetzt ist. Request-Bodys bis 12 MB müssen durchgehen.</p>
+<h3 id="warum-genau-eine-replik">Warum genau eine Replik<a class="anker" href="#warum-genau-eine-replik" aria-label="Verweis auf diesen Abschnitt">#</a></h3>
+<p>NETbrain ist für einen Knoten gebaut: Der Bestand liegt als Dateien vor, Schreibzugriffe werden im Prozess serialisiert, die Anmeldedrosseln zählen im Arbeitsspeicher. Eine zweite Replik hebt das auf. Also <code>replicas: 1</code> und eine Update-Strategie, die den alten Pod vor dem neuen beendet (<code>Recreate</code>).</p>
+<h2 id="kundenportal">Kundenportal<a class="anker" href="#kundenportal" aria-label="Verweis auf diesen Abschnitt">#</a></h2>
+<p>Optional, nur für Kunden, deren Lizenz das Portal enthält.</p>
+<div class="tabelle"><table><tbody><tr><td>Image</td><td><code>ghcr.io/netfactory-gmbh/netbrain-portal:&lt;version&gt;</code> (öffentlich)</td></tr><tr><td>Port</td><td>HTTP auf <strong>8080</strong>, eigener Hostname, TLS am Ingress</td></tr><tr><td>Prüfpfad</td><td><code>/health</code></td></tr><tr><td>Benutzer</td><td><code>10001</code>, Volume <code>/data</code> muss ihm gehören; das übrige Dateisystem darf schreibgeschützt sein</td></tr><tr><td>Repliken</td><td><strong>1</strong></td></tr><tr><td>Variable</td><td><code>PORTAL_SYNC_KEY</code> — Kopplungsschlüssel, mindestens 32 Zeichen</td></tr></tbody></table></div>
+<p>NETbrain muss das Portal erreichen können, umgekehrt nicht. Der Kopplungsschlüssel wird heute in NETbrain unter <strong>Administration → Kundenportal</strong> erzeugt und dann als <code>PORTAL_SYNC_KEY</code> gesetzt; siehe <a href="kundenportal.html">Kundenportal</a>.</p>
+<h2 id="zwei-faktor-anmeldung">Zwei-Faktor-Anmeldung<a class="anker" href="#zwei-faktor-anmeldung" aria-label="Verweis auf diesen Abschnitt">#</a></h2>
+<p>Pflicht für jedes Konto. Sperrt sich der letzte Administrator aus:</p>
+<div class="codeblock"><pre><code>kubectl exec &lt;pod&gt; -- node scripts/user.mjs --2fa-reset &lt;benutzername&gt;</code></pre><button type="button" class="kopieren" aria-label="Befehl kopieren"><svg class="bereit" viewBox="0 0 24 24" aria-hidden="true"><rect x="8" y="8" width="11" height="11" rx="2"/><path d="M16 8V6a2 2 0 00-2-2H6a2 2 0 00-2 2v8a2 2 0 002 2h2"/></svg><svg class="fertig" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7"/></svg></button></div>
+<p><code>NETBRAIN_2FA_OPTIONAL=true</code> macht die Zwei-Faktor-Anmeldung freiwillig.</p>
+<h2 id="lizenz">Lizenz<a class="anker" href="#lizenz" aria-label="Verweis auf diesen Abschnitt">#</a></h2>
+<p>Eine frische Installation läuft sieben Tage ohne Lizenz. Danach fordert der Kunde im Assistenten selbst eine Testlizenz an oder fügt seine Lizenz ein. Der Pod braucht dafür ausgehend HTTPS zu <code>lizenz-netbrain.netfactory.de</code>. Niemand auf der Plattform muss etwas freischalten.</p>
+<h2 id="updates">Updates<a class="anker" href="#updates" aria-label="Verweis auf diesen Abschnitt">#</a></h2>
+<p>Ziehen Sie den Image-Tag hoch wie bei jeder anderen Anwendung; die <a href="versionen.html">Versionshinweise</a> nennen, ob vorher etwas zu tun ist. Den mitgelieferten Update-Helfer und <code>install.sh</code> bitte nicht im Pod aufrufen — beide richten einen Docker-Host ein und haben im Pod nichts verloren.</p>
+    <nav class="blaettern" aria-label="Weiterblättern"><a class="zurueck" href="aktualisieren.html"><span>Zurück</span><b>Aktualisieren</b></a><a class="weiter" href="datenfluss.html"><span>Weiter</span><b>Was den Server verlässt</b></a></nav>
+    <p class="stand">Stand: NETbrain 0.4.9. Fehlt etwas oder stimmt etwas nicht? <a href="mailto:info@netfactory.de?subject=NETbrain-Dokumentation%3A%20plattform">Schreiben Sie uns.</a></p>
+  </main>
+  <aside class="auf-dieser-seite" aria-label="Auf dieser Seite"><p>Auf dieser Seite</p><ul><li><a href="#netbrain">NETbrain</a></li><li><a href="#kundenportal">Kundenportal</a></li><li><a href="#zwei-faktor-anmeldung">Zwei-Faktor-Anmeldung</a></li><li><a href="#lizenz">Lizenz</a></li><li><a href="#updates">Updates</a></li></ul></aside>
+</div>
+<footer>
+  <div class="fuss">
+    <span>© NETFACTORY GmbH · NETbrain ist proprietäre Software und befindet sich in der Pilotphase.</span>
+    <nav aria-label="Rechtliches">
+      <a href="../">Produktseite</a>
+      <a href="mailto:info@netfactory.de">info@netfactory.de</a>
+      <a href="https://www.netfactory.de/impressum">Impressum</a>
+      <a href="https://www.netfactory.de/datenschutz">Datenschutz</a>
+    </nav>
+  </div>
+</footer>
+<script src="doku.js" defer></script>
+</body>
+</html>

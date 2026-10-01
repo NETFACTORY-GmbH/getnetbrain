@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Anmeldung und Konto — NETbrain-Dokumentation</title>
+<meta name="description" content="Anmelden mit Zwei-Faktor-Code, Wiederherstellungscodes, Passwort ändern und Zugang anfragen.">
+<link rel="canonical" href="https://getnetbrain.netfactory.de/doku/anmeldung.html">
+<meta name="theme-color" content="#000000">
+<link rel="icon" href="../bilder/favicon-32.png" sizes="32x32">
+<link rel="icon" href="../bilder/favicon-16.png" sizes="16x16">
+<link rel="apple-touch-icon" href="../bilder/favicon-180.png">
+<meta property="og:type" content="article">
+<meta property="og:locale" content="de_DE">
+<meta property="og:site_name" content="NETbrain">
+<meta property="og:title" content="Anmeldung und Konto — NETbrain-Dokumentation">
+<meta property="og:description" content="Anmelden mit Zwei-Faktor-Code, Wiederherstellungscodes, Passwort ändern und Zugang anfragen.">
+<meta property="og:image" content="https://getnetbrain.netfactory.de/bilder/og-image-v2.png">
+<link rel="preload" href="../schriften/geist-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="doku.css">
+</head>
+<body>
+<a class="sprung" href="#inhalt">Zum Inhalt springen</a>
+<header>
+  <div class="kopf">
+    <a class="marke" href="index.html"><img src="../bilder/netbrain-logo.png" alt="NETbrain" width="1928" height="352" decoding="async"><span>Dokumentation</span></a>
+    <nav aria-label="Hauptnavigation">
+      <a href="../">Produkt</a>
+      <a href="../#selbst-starten">Selbst testen</a>
+      <a href="versionen.html">Version 0.4.9</a>
+      <a class="knopf" href="mailto:info@netfactory.de?subject=NETbrain%20%E2%80%93%20Frage%20zur%20Dokumentation">Frage stellen</a>
+    </nav>
+  </div>
+</header>
+<div class="raster">
+  <nav class="seitennav" aria-label="Dokumentation">
+    <div class="suche" role="search">
+      <label class="nur-screenreader" for="suchfeld">Dokumentation durchsuchen</label>
+      <input id="suchfeld" type="search" placeholder="Suchen …  ( / )" autocomplete="off" data-index="suche.json" data-basis="">
+      <ul class="treffer" hidden></ul>
+    </div>
+    <details open>
+      <summary>Inhalt der Dokumentation</summary>
+      <div><div class="gruppe"><p><i></i>Erste Schritte</p><ul><li><a href="index.html">Überblick</a></li><li><a href="voraussetzungen.html">Voraussetzungen</a></li><li><a href="installation.html">Installation</a></li><li><a href="einrichtung.html">Einrichtung im Browser</a></li></ul></div><div class="gruppe"><p><i></i>Arbeiten mit NETbrain</p><ul><li><a href="anmeldung.html" aria-current="page">Anmeldung und Konto</a></li><li><a href="firmenwissen.html">Firmenwissen</a></li><li><a href="wissenspflege.html">Wissenspflege</a></li><li><a href="privater-vault.html">Privater Vault</a></li><li><a href="ki-chat.html">KI-Chat</a></li></ul></div><div class="gruppe"><p><i></i>Verwaltung</p><ul><li><a href="benutzer.html">Benutzer und Rollen</a></li><li><a href="ki-zugaenge.html">KI-Zugänge und Freigaben</a></li><li><a href="kundenportal.html">Kundenportal</a></li><li><a href="lizenz.html">Lizenz</a></li></ul></div><div class="gruppe"><p><i></i>Betrieb</p><ul><li><a href="reverse-proxy.html">Reverse-Proxy</a></li><li><a href="sicherung.html">Sicherung und Wiederherstellung</a></li><li><a href="aktualisieren.html">Aktualisieren</a></li><li><a href="plattform.html">Kubernetes und App-Plattformen</a></li><li><a href="datenfluss.html">Was den Server verlässt</a></li></ul></div><div class="gruppe"><p><i></i>Hilfe</p><ul><li><a href="fehlerbehebung.html">Fehlerbehebung</a></li><li><a href="versionen.html">Versionshinweise</a></li></ul></div></div>
+    </details>
+  </nav>
+  <main class="artikel" id="inhalt">
+    <p class="brotkrumen"><a href="../">NETbrain</a><span aria-hidden="true">/</span><a href="index.html">Dokumentation</a><span aria-hidden="true">/</span><span>Arbeiten mit NETbrain</span></p>
+    <h1>Anmeldung und Konto</h1>
+<p class="einleitung">Jedes Konto meldet sich mit Benutzername, Passwort und einem sechsstelligen Code aus einer Authenticator-App an. Unter <strong>Mein Konto</strong> verwalten Sie Passwort und Zwei-Faktor-Anmeldung selbst.</p>
+<h2 id="zugang-bekommen">Zugang bekommen<a class="anker" href="#zugang-bekommen" aria-label="Verweis auf diesen Abschnitt">#</a></h2>
+<p>Ihr Administrator legt Ihr Konto an und nennt Ihnen ein <strong>vorläufiges Passwort</strong>. Bei der ersten Anmeldung setzen Sie ein eigenes; bis dahin sind die übrigen Seiten gesperrt.</p>
+<p>Alternativ fragen Sie unter <strong>Zugang anfragen</strong> (<code>/registrieren</code>) selbst an: Benutzername (3 bis 64 Zeichen), Anzeigename und ein Passwort mit mindestens 12 Zeichen. Das Konto bleibt gesperrt, bis ein Administrator es freigibt.</p>
+<h2 id="zwei-faktor-anmeldung-einrichten">Zwei-Faktor-Anmeldung einrichten<a class="anker" href="#zwei-faktor-anmeldung-einrichten" aria-label="Verweis auf diesen Abschnitt">#</a></h2>
+<p>Die Zwei-Faktor-Anmeldung ist Pflicht. Beim ersten Anmelden richten Sie sie ein:</p>
+<ol><li>Eine Authenticator-App auf dem Handy öffnen, etwa Microsoft Authenticator, Google Authenticator oder 1Password.</li><li>Den angezeigten QR-Code scannen. Geht das nicht, den Schlüssel darunter von Hand eingeben.</li><li>Den sechsstelligen Code aus der App eingeben.</li><li>Die <strong>zehn Wiederherstellungscodes</strong> notieren und sicher aufbewahren.</li></ol>
+<p>Danach fragt NETbrain bei jeder Anmeldung nach dem Passwort den aktuellen Code ab.</p>
+<h2 id="handy-verloren-oder-gewechselt">Handy verloren oder gewechselt<a class="anker" href="#handy-verloren-oder-gewechselt" aria-label="Verweis auf diesen Abschnitt">#</a></h2>
+<ul><li><strong>Neues Handy, altes noch da:</strong> Unter <strong>Mein Konto → Zwei-Faktor-Anmeldung</strong> auf <strong>Neues Gerät einrichten</strong> klicken und den neuen QR-Code scannen.</li><li><strong>Handy weg:</strong> Statt des Codes einen der Wiederherstellungscodes eingeben. Jeder gilt einmal. Danach ein neues Gerät einrichten.</li><li><strong>Keine Codes mehr:</strong> Ein Administrator setzt Ihre Zwei-Faktor-Anmeldung in der Benutzerverwaltung zurück; beim nächsten Anmelden richten Sie sie neu ein.</li></ul>
+<p>Unter <strong>Neue Codes erzeugen</strong> erhalten Sie zehn frische Wiederherstellungscodes; die alten werden ungültig.</p>
+<h2 id="passwort-aendern">Passwort ändern<a class="anker" href="#passwort-aendern" aria-label="Verweis auf diesen Abschnitt">#</a></h2>
+<p><strong>Mein Konto → Passwort ändern</strong>, mindestens 12 Zeichen. Ihr Passwort schützt auch Ihren verschlüsselten Chatverlauf; siehe <a href="ki-chat.html#verschluesselte-historie">KI-Chat</a>.</p>
+<h2 id="meine-beitraege">Meine Beiträge<a class="anker" href="#meine-beitraege" aria-label="Verweis auf diesen Abschnitt">#</a></h2>
+<p>Unter <strong>Mein Konto → Meine Beiträge</strong> sehen Sie, was Sie als Firmenwissen eingereicht haben, mit Status: In Prüfung, Veröffentlicht, Übernommen oder Abgelehnt — bei Ablehnung samt Begründung.</p>
+<h2 id="netbrain-als-app">NETbrain als App<a class="anker" href="#netbrain-als-app" aria-label="Verweis auf diesen Abschnitt">#</a></h2>
+<p>NETbrain lässt sich im Browser als App installieren (Chrome, Edge, Android; auf iOS über „Zum Home-Bildschirm“). Gespeichert werden dabei nur Programmdateien, keine Inhalte. Ohne Netz zeigt die App eine Hinweisseite.</p>
+<h2 id="tastenkuerzel">Tastenkürzel<a class="anker" href="#tastenkuerzel" aria-label="Verweis auf diesen Abschnitt">#</a></h2>
+<div class="tabelle"><table><thead><tr><th>Kürzel</th><th>Wirkung</th></tr></thead><tbody><tr><td><code>Strg</code> + <code>K</code></td><td>Suche im Firmenwissen bzw. Seitenfilter</td></tr><tr><td><code>Strg</code> + <code>V</code></td><td>Bild oder Bildschirmfoto einfügen (Erfassen, Bearbeiten, Chat)</td></tr><tr><td><code>Enter</code> / <code>Umschalt</code> + <code>Enter</code></td><td>Im Chat senden / Zeilenumbruch</td></tr><tr><td><code>Esc</code></td><td>Dialoge, Seitenleiste und Suchtreffer schließen</td></tr></tbody></table></div>
+    <nav class="blaettern" aria-label="Weiterblättern"><a class="zurueck" href="einrichtung.html"><span>Zurück</span><b>Einrichtung im Browser</b></a><a class="weiter" href="firmenwissen.html"><span>Weiter</span><b>Firmenwissen</b></a></nav>
+    <p class="stand">Stand: NETbrain 0.4.9. Fehlt etwas oder stimmt etwas nicht? <a href="mailto:info@netfactory.de?subject=NETbrain-Dokumentation%3A%20anmeldung">Schreiben Sie uns.</a></p>
+  </main>
+  <aside class="auf-dieser-seite" aria-label="Auf dieser Seite"><p>Auf dieser Seite</p><ul><li><a href="#zugang-bekommen">Zugang bekommen</a></li><li><a href="#zwei-faktor-anmeldung-einrichten">Zwei-Faktor-Anmeldung einrichten</a></li><li><a href="#handy-verloren-oder-gewechselt">Handy verloren oder gewechselt</a></li><li><a href="#passwort-aendern">Passwort ändern</a></li><li><a href="#meine-beitraege">Meine Beiträge</a></li><li><a href="#netbrain-als-app">NETbrain als App</a></li><li><a href="#tastenkuerzel">Tastenkürzel</a></li></ul></aside>
+</div>
+<footer>
+  <div class="fuss">
+    <span>© NETFACTORY GmbH · NETbrain ist proprietäre Software und befindet sich in der Pilotphase.</span>
+    <nav aria-label="Rechtliches">
+      <a href="../">Produktseite</a>
+      <a href="mailto:info@netfactory.de">info@netfactory.de</a>
+      <a href="https://www.netfactory.de/impressum">Impressum</a>
+      <a href="https://www.netfactory.de/datenschutz">Datenschutz</a>
+    </nav>
+  </div>
+</footer>
+<script src="doku.js" defer></script>
+</body>
+</html>

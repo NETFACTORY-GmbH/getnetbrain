@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Kundenportal — NETbrain-Dokumentation</title>
+<meta name="description" content="Ausgewählte Wissensseiten öffentlich bereitstellen — mit eigenem Portal-Container, ohne Anmeldung, mit Suche.">
+<link rel="canonical" href="https://getnetbrain.netfactory.de/doku/kundenportal.html">
+<meta name="theme-color" content="#000000">
+<link rel="icon" href="../bilder/favicon-32.png" sizes="32x32">
+<link rel="icon" href="../bilder/favicon-16.png" sizes="16x16">
+<link rel="apple-touch-icon" href="../bilder/favicon-180.png">
+<meta property="og:type" content="article">
+<meta property="og:locale" content="de_DE">
+<meta property="og:site_name" content="NETbrain">
+<meta property="og:title" content="Kundenportal — NETbrain-Dokumentation">
+<meta property="og:description" content="Ausgewählte Wissensseiten öffentlich bereitstellen — mit eigenem Portal-Container, ohne Anmeldung, mit Suche.">
+<meta property="og:image" content="https://getnetbrain.netfactory.de/bilder/og-image-v2.png">
+<link rel="preload" href="../schriften/geist-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="doku.css">
+</head>
+<body>
+<a class="sprung" href="#inhalt">Zum Inhalt springen</a>
+<header>
+  <div class="kopf">
+    <a class="marke" href="index.html"><img src="../bilder/netbrain-logo.png" alt="NETbrain" width="1928" height="352" decoding="async"><span>Dokumentation</span></a>
+    <nav aria-label="Hauptnavigation">
+      <a href="../">Produkt</a>
+      <a href="../#selbst-starten">Selbst testen</a>
+      <a href="versionen.html">Version 0.4.9</a>
+      <a class="knopf" href="mailto:info@netfactory.de?subject=NETbrain%20%E2%80%93%20Frage%20zur%20Dokumentation">Frage stellen</a>
+    </nav>
+  </div>
+</header>
+<div class="raster">
+  <nav class="seitennav" aria-label="Dokumentation">
+    <div class="suche" role="search">
+      <label class="nur-screenreader" for="suchfeld">Dokumentation durchsuchen</label>
+      <input id="suchfeld" type="search" placeholder="Suchen …  ( / )" autocomplete="off" data-index="suche.json" data-basis="">
+      <ul class="treffer" hidden></ul>
+    </div>
+    <details open>
+      <summary>Inhalt der Dokumentation</summary>
+      <div><div class="gruppe"><p><i></i>Erste Schritte</p><ul><li><a href="index.html">Überblick</a></li><li><a href="voraussetzungen.html">Voraussetzungen</a></li><li><a href="installation.html">Installation</a></li><li><a href="einrichtung.html">Einrichtung im Browser</a></li></ul></div><div class="gruppe"><p><i></i>Arbeiten mit NETbrain</p><ul><li><a href="anmeldung.html">Anmeldung und Konto</a></li><li><a href="firmenwissen.html">Firmenwissen</a></li><li><a href="wissenspflege.html">Wissenspflege</a></li><li><a href="privater-vault.html">Privater Vault</a></li><li><a href="ki-chat.html">KI-Chat</a></li></ul></div><div class="gruppe"><p><i></i>Verwaltung</p><ul><li><a href="benutzer.html">Benutzer und Rollen</a></li><li><a href="ki-zugaenge.html">KI-Zugänge und Freigaben</a></li><li><a href="kundenportal.html" aria-current="page">Kundenportal</a></li><li><a href="lizenz.html">Lizenz</a></li></ul></div><div class="gruppe"><p><i></i>Betrieb</p><ul><li><a href="reverse-proxy.html">Reverse-Proxy</a></li><li><a href="sicherung.html">Sicherung und Wiederherstellung</a></li><li><a href="aktualisieren.html">Aktualisieren</a></li><li><a href="plattform.html">Kubernetes und App-Plattformen</a></li><li><a href="datenfluss.html">Was den Server verlässt</a></li></ul></div><div class="gruppe"><p><i></i>Hilfe</p><ul><li><a href="fehlerbehebung.html">Fehlerbehebung</a></li><li><a href="versionen.html">Versionshinweise</a></li></ul></div></div>
+    </details>
+  </nav>
+  <main class="artikel" id="inhalt">
+    <p class="brotkrumen"><a href="../">NETbrain</a><span aria-hidden="true">/</span><a href="index.html">Dokumentation</a><span aria-hidden="true">/</span><span>Verwaltung</span></p>
+    <h1>Kundenportal</h1>
+<p class="einleitung">Mit dem Kundenportal geben Sie einzelne Wissensseiten für Ihre Kunden frei: Anleitungen, Antworten auf häufige Fragen, Produktwissen. Das Portal zeigt sie ohne Anmeldung, mit Suche, unter einer eigenen Adresse. Es ist Teil Ihrer Lizenz, sofern diese das Portal enthält; die Testlizenz enthält es.</p>
+<h2 id="so-funktioniert-es">So funktioniert es<a class="anker" href="#so-funktioniert-es" aria-label="Verweis auf diesen Abschnitt">#</a></h2>
+<p>Das Portal ist ein <strong>eigener, kleiner Container</strong>. Er enthält keinen NETbrain-Code und hat keinen Zugriff auf Ihre Installation. NETbrain schiebt den freigegebenen Stand zu ihm hin — signiert mit einem Kopplungsschlüssel —, das Portal holt nichts ab. NETbrain muss das Portal also erreichen können, umgekehrt nicht.</p>
+<ul><li>Freigegeben wird <strong>der Stand zum Zeitpunkt der Freigabe</strong>. Ändert jemand die Seite danach, geht die Änderung nicht unbemerkt hinaus: NETbrain zeigt „die Seite wurde seitdem geändert“, und Sie veröffentlichen den neuen Stand bewusst.</li><li>Links zeigen nur auf ebenfalls freigegebene Seiten; Verweise auf Unveröffentlichtes werden zu Text. Nachweise, Anhänge und interne Angaben gehen nicht mit.</li><li>NETbrain gleicht bei jeder Freigabe und alle zehn Minuten ab. Läuft die Lizenz aus und gleicht NETbrain nicht mehr ab, verschwinden die Inhalte nach acht Tagen von selbst.</li></ul>
+<h2 id="portal-container-starten">Portal-Container starten<a class="anker" href="#portal-container-starten" aria-label="Verweis auf diesen Abschnitt">#</a></h2>
+<p>Das Image ist öffentlich: <code>ghcr.io/netfactory-gmbh/netbrain-portal</code>. Es spricht HTTP auf Port 8080; TLS übernimmt Ihr Reverse-Proxy, unter einem eigenen Hostnamen wie <code>wissen.ihre-firma.de</code>.</p>
+<ol><li>In NETbrain unter <strong>Administration → Kundenportal</strong> die künftige Adresse des Portals eintragen, speichern und <strong>Schlüssel erzeugen</strong>. Der Schlüssel erscheint einmal — kopieren Sie ihn gleich.</li><li>Den Container mit diesem Schlüssel starten:</li></ol>
+<div class="codeblock"><pre><code>docker run -d --name netbrain-portal --restart unless-stopped \
+  -p 127.0.0.1:8080:8080 -v netbrain-portal-data:/data \
+  -e PORTAL_SYNC_KEY=&#x27;&lt;schlüssel&gt;&#x27; \
+  ghcr.io/netfactory-gmbh/netbrain-portal:latest</code></pre><button type="button" class="kopieren" aria-label="Befehl kopieren"><svg class="bereit" viewBox="0 0 24 24" aria-hidden="true"><rect x="8" y="8" width="11" height="11" rx="2"/><path d="M16 8V6a2 2 0 00-2-2H6a2 2 0 00-2 2v8a2 2 0 002 2h2"/></svg><svg class="fertig" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7"/></svg></button></div>
+<ol><li>Den Reverse-Proxy für den Portal-Hostnamen auf Port 8080 einrichten.</li><li>Unter <strong>Administration → Kundenportal</strong> auf <strong>Jetzt abgleichen</strong> klicken. Die Meldung nennt, wie viele Seiten übertragen wurden.</li></ol>
+<p>Läuft das Portal auf demselben Docker-Host wie NETbrain, können Sie beide in ein gemeinsames Netz hängen und als Adresse <code>http://netbrain-portal:8080</code> eintragen; dann geht der Abgleich nicht über den Proxy.</p>
+<h2 id="seiten-freigeben">Seiten freigeben<a class="anker" href="#seiten-freigeben" aria-label="Verweis auf diesen Abschnitt">#</a></h2>
+<p>Mitglieder der Wissenspflege sehen auf jeder Wissensseite unter der Kurzfassung die Zeile <strong>Kundenportal</strong>:</p>
+<ul><li><strong>Im Kundenportal veröffentlichen</strong> — nach einer Bestätigung ist die Seite öffentlich lesbar.</li><li><strong>Aktuellen Stand veröffentlichen</strong> — erscheint, wenn die Seite seit der Freigabe geändert wurde.</li><li><strong>Zurückziehen</strong> — die Seite verschwindet beim nächsten Abgleich aus dem Portal.</li></ul>
+<p>Unter <strong>Administration → Kundenportal</strong> stehen alle freigegebenen Seiten, ebenfalls mit <strong>Zurückziehen</strong>. Legt jemand eine freigegebene Seite in den Papierkorb, wird auch die Freigabe zurückgezogen.</p>
+<h2 id="suchmaschinen">Suchmaschinen<a class="anker" href="#suchmaschinen" aria-label="Verweis auf diesen Abschnitt">#</a></h2>
+<p>Standardmäßig bittet das Portal Suchmaschinen, es nicht aufzunehmen. Sollen Ihre Inhalte gefunden werden, setzen Sie unter <strong>Administration → Kundenportal</strong> das Häkchen für Suchmaschinen.</p>
+<h2 id="auf-einer-app-plattform">Auf einer App-Plattform<a class="anker" href="#auf-einer-app-plattform" aria-label="Verweis auf diesen Abschnitt">#</a></h2>
+<p>Was die Plattform für den Portal-Container bereitstellen muss, steht unter <a href="plattform.html#kundenportal">Kubernetes und App-Plattformen</a>.</p>
+    <nav class="blaettern" aria-label="Weiterblättern"><a class="zurueck" href="ki-zugaenge.html"><span>Zurück</span><b>KI-Zugänge und Freigaben</b></a><a class="weiter" href="lizenz.html"><span>Weiter</span><b>Lizenz</b></a></nav>
+    <p class="stand">Stand: NETbrain 0.4.9. Fehlt etwas oder stimmt etwas nicht? <a href="mailto:info@netfactory.de?subject=NETbrain-Dokumentation%3A%20kundenportal">Schreiben Sie uns.</a></p>
+  </main>
+  <aside class="auf-dieser-seite" aria-label="Auf dieser Seite"><p>Auf dieser Seite</p><ul><li><a href="#so-funktioniert-es">So funktioniert es</a></li><li><a href="#portal-container-starten">Portal-Container starten</a></li><li><a href="#seiten-freigeben">Seiten freigeben</a></li><li><a href="#suchmaschinen">Suchmaschinen</a></li><li><a href="#auf-einer-app-plattform">Auf einer App-Plattform</a></li></ul></aside>
+</div>
+<footer>
+  <div class="fuss">
+    <span>© NETFACTORY GmbH · NETbrain ist proprietäre Software und befindet sich in der Pilotphase.</span>
+    <nav aria-label="Rechtliches">
+      <a href="../">Produktseite</a>
+      <a href="mailto:info@netfactory.de">info@netfactory.de</a>
+      <a href="https://www.netfactory.de/impressum">Impressum</a>
+      <a href="https://www.netfactory.de/datenschutz">Datenschutz</a>
+    </nav>
+  </div>
+</footer>
+<script src="doku.js" defer></script>
+</body>
+</html>

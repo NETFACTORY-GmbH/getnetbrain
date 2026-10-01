@@ -341,6 +341,9 @@
   .menue{display:flex; flex-direction:column; padding-block:.5rem 1.25rem; border-top:1px solid var(--linie)}
   .menue[hidden]{display:none}
   header:has(.menue:not([hidden])){background-color:#000000eb}
+  /* Über hellen Abschnitten bleibt die Kopfleiste dunkel; sonst scheint das Weiß durch. */
+  header{transition:background-color .3s}
+  header.ueber-weiss{background-color:#000000e6}
   .menue a{padding:.75rem 0; color:var(--paragraph_white); font-size:1.0625rem; border-bottom:1px solid var(--linie); transition:all .3s}
   .menue a:last-child{border-bottom:0}
   .menue a:hover{color:var(--white)}
@@ -561,27 +564,27 @@
   .kontakt-fein a{color:var(--paragraph_white); text-decoration:underline; text-underline-offset:3px}
 
   /* ---- Helle Abschnitte — .section_story / .section_advantages im CI ---- */
-  .hell{--strich:rgba(0,0,0,.1); background-color:#fcfcfd; background-image:linear-gradient(#fcfcfd,#fff); color:#0009}
-  .hell + .hell{background:#fff}
-  .hell h2,.hell h3,.hell strong,.hell b{color:#000}
-  .hell h2{font-weight:500}
-  .hell p,.hell .lead,.hell .kontakt-fein{color:#0009; text-shadow:none}
-  .hell .augenbraue span{color:#0009; font-weight:600}
-  .hell [data-linie="h"]{background-image:linear-gradient(to right, rgba(0,0,0,.1) 6px, transparent 6px)}
-  .hell > .trennlinie{position:absolute; top:2.1875rem; left:0; right:0; z-index:2}
-  .hell .trennlinie::before,.hell .trennlinie::after{filter:invert(1); opacity:.2}
-  .hell .karte,.hell .spalte{background:#fff; border:1px solid #0000000f; border-radius:.75rem;
+  .weiss{--strich:rgba(0,0,0,.1); background-color:#fcfcfd; background-image:linear-gradient(#fcfcfd,#fff); color:#0009}
+  .weiss + .weiss{background:#fff}
+  .weiss h2,.weiss h3,.weiss strong,.weiss b{color:#000}
+  .weiss h2{font-weight:500}
+  .weiss p,.weiss .lead,.weiss .kontakt-fein{color:#0009; text-shadow:none}
+  .weiss .augenbraue span{color:#0009; font-weight:600}
+  .weiss [data-linie="h"]{background-image:linear-gradient(to right, rgba(0,0,0,.1) 6px, transparent 6px)}
+  .weiss > .trennlinie{position:absolute; top:2.1875rem; left:0; right:0; z-index:2}
+  .weiss .trennlinie::before,.weiss .trennlinie::after{filter:invert(1); opacity:.2}
+  .weiss .karte,.weiss .spalte{background:#fff; border:1px solid #0000000f; border-radius:.75rem;
     box-shadow:0 4px 12px #0000000d; transition:all .3s}
-  .hell .karte:hover{transform:translateY(-3px); border-color:#0000000f}
-  .hell .karte .teiler{background:#0000001a}
-  .hell .spalte .kopfzeile b{color:#000}
-  .hell .spalte.vorher{background:transparent; box-shadow:none; border:1px dashed #0000001a}
-  .hell .spalte li{border-top-color:#0000001a}
-  .hell .spalte.vorher li,.hell .spalte.vorher li strong{color:#00000080}
-  .hell .kreuz{stroke:#0000004d}
-  .hell .haken{stroke:var(--blue)}
-  .hell .schritt{border-top-color:#0000001a}
-  .hell .schritt .nr{color:#0009}
+  .weiss .karte:hover{transform:translateY(-3px); border-color:#0000000f}
+  .weiss .karte .teiler{background:#0000001a}
+  .weiss .spalte .kopfzeile b{color:#000}
+  .weiss .spalte.vorher{background:transparent; box-shadow:none; border:1px dashed #0000001a}
+  .weiss .spalte li{border-top-color:#0000001a}
+  .weiss .spalte.vorher li,.weiss .spalte.vorher li strong{color:#00000080}
+  .weiss .kreuz{stroke:#0000004d}
+  .weiss .haken{stroke:var(--blue)}
+  .weiss .schritt{border-top-color:#0000001a}
+  .weiss .schritt .nr{color:#0009}
   /* Fuß */
   footer{position:relative; z-index:1; border-top:1px solid var(--linie); padding-block:3rem 2.5rem; font-size:.9375rem;
     background-image:radial-gradient(circle farthest-corner at 50% 0%, #191919, var(--dark))}
@@ -869,7 +872,7 @@
 </section>
 
 <!-- Vorher / Nachher -->
-<section class="abschnitt hell">
+<section class="abschnitt weiss">
   <div class="trennlinie" data-linie="h"></div>
   <div class="container">
     <p class="augenbraue"><i class="gruen"></i><span>Ihre Vorteile</span></p>
@@ -957,7 +960,7 @@
 </section>
 
 <!-- Ablauf -->
-<section class="abschnitt hell" id="ablauf">
+<section class="abschnitt weiss" id="ablauf">
   <div class="trennlinie" data-linie="h"></div>
   <div class="container">
     <p class="augenbraue"><i></i><span>Ihr Einstieg</span></p>
@@ -992,7 +995,7 @@
 </section>
 
 <!-- Passt / passt nicht -->
-<section class="abschnitt hell">
+<section class="abschnitt weiss">
   <div class="trennlinie" data-linie="h"></div>
   <div class="container">
     <p class="augenbraue"><i></i><span>Für wen</span></p>
@@ -1202,6 +1205,22 @@
     knopf.addEventListener('click', () => setzen(menue.hidden));
     menue.addEventListener('click', (e) => { if (e.target.closest('a')) setzen(false); });
     document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && !menue.hidden) { setzen(false); knopf.focus(); } });
+  })();
+  // Kopfleiste über hellen Abschnitten abdunkeln.
+  (() => {
+    const kopf = document.querySelector('header');
+    const helle = [...document.querySelectorAll('section.weiss')];
+    if (!kopf || !helle.length) return;
+    let geplant = false;
+    const pruefen = () => {
+      geplant = false;
+      const unterkante = kopf.getBoundingClientRect().bottom;
+      kopf.classList.toggle('ueber-weiss', helle.some((a) => { const r = a.getBoundingClientRect(); return r.top < unterkante && r.bottom > 0; }));
+    };
+    const planen = () => { if (!geplant) { geplant = true; requestAnimationFrame(pruefen); } };
+    addEventListener('scroll', planen, { passive: true });
+    addEventListener('resize', planen);
+    pruefen();
   })();
   // Kopieren ohne Bibliothek. Schlaegt die Zwischenablage fehl (aelterer Browser,
   // kein sicherer Kontext), bleibt der Befehl im Markup markierbar — deshalb

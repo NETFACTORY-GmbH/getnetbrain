@@ -217,15 +217,18 @@
     background-image:linear-gradient(to bottom, rgba(255,255,255,.1) 6px, transparent 6px);
     -webkit-backdrop-filter:blur(10px); backdrop-filter:blur(10px)}
 
-  /* Die senkrechten Schienen laufen über die ganze Seite, je zwei Paare:
-     eines an der Containerkante, eines 4 % weiter außen. */
-  .schienen{position:absolute; inset:0; z-index:0; pointer-events:none}
-  .schienen-feld{position:relative; height:100%; width:min(var(--container), 100% - 2.5rem); margin-inline:auto}
-  .schiene{position:absolute; top:0; bottom:0}
-  .schiene.links{left:0} .schiene.rechts{right:0}
-  .schiene.weit-links{left:-4%} .schiene.weit-rechts{right:-4%}
-  @media(max-width:1200px){.schiene.weit-links,.schiene.weit-rechts{display:none}}
-
+  /* Senkrechte Schienen zieht jeder Abschnitt selbst, wie auf netfactory.de:
+     Sie laufen über graue und weiße Flächen und nehmen deren Linienfarbe an.
+     ::before ist das Paar an der Containerkante, ::after das 4 % weiter außen;
+     unter 1300 px fällt es weg, sonst ragt es über das Fenster hinaus. */
+  main > section, footer{--strich:rgba(255,255,255,.1)}
+  main > section::before, main > section::after, footer::before, footer::after{
+    content:""; position:absolute; top:0; bottom:0; left:50%; transform:translateX(-50%);
+    z-index:2; pointer-events:none; width:min(var(--container), 100% - 2.5rem);
+    background-image:linear-gradient(to bottom, var(--strich) 6px, transparent 6px), linear-gradient(to bottom, var(--strich) 6px, transparent 6px);
+    background-size:1px 11px; background-repeat:repeat-y; background-position:left top, right top}
+  main > section::after, footer::after{width:calc(min(var(--container), 100% - 2.5rem) * 1.08)}
+  @media(max-width:1300px){main > section::after, footer::after{display:none}}
   /* Waagerechte Trennlinie mit den Kreuzen des CI an beiden Enden. */
   .trennlinie{position:relative; width:min(var(--container), 100% - 2.5rem); margin-inline:auto; z-index:1}
   .trennlinie::before,.trennlinie::after{content:""; position:absolute; top:50%; width:15px; height:15px;
@@ -279,8 +282,8 @@
     -webkit-mask-image:linear-gradient(to right, transparent 8%, #000 52%), linear-gradient(to bottom, #000 58%, transparent 92%);
     mask-image:linear-gradient(to right, transparent 8%, #000 52%), linear-gradient(to bottom, #000 58%, transparent 92%);
     -webkit-mask-composite:source-in; mask-composite:intersect}
-  /* Unter 1200 px gibt es die äußeren Schienen nicht; dann ist das Schienenfeld die Grenze. */
-  @media(max-width:1200px){.linien{width:min(var(--container), 100% - 2.5rem)}}
+  /* Unter 1300 px gibt es die äußeren Schienen nicht; dann ist das Schienenfeld die Grenze. */
+  @media(max-width:1300px){.linien{width:min(var(--container), 100% - 2.5rem)}}
   @media(max-width:900px){.linien{background-size:130% auto; background-position:right top 4%; opacity:.26;
     -webkit-mask-image:linear-gradient(to bottom, #000 45%, transparent 85%);
     mask-image:linear-gradient(to bottom, #000 45%, transparent 85%)}}
@@ -346,7 +349,7 @@
   @media(max-width:600px){.kopf .knopf .lang{display:none} .kopf .knopf .kurz{display:inline} .marke img{width:160px}}
 
   /* Held */
-  .held{padding-block:clamp(8.5rem,14vw,11.5rem) clamp(4rem,8vw,6.5rem); overflow:hidden}
+  .held-innen{padding-block:clamp(8.5rem,14vw,11.5rem) clamp(4rem,8vw,6.5rem); overflow:hidden}
   .held-pille{
     display:inline-flex; align-items:center; gap:.375rem; padding:.4375rem .75rem;
     border-radius:99px; border:.0625rem solid #ffffff1a;
@@ -547,6 +550,7 @@
   @media(max-width:800px){.voraussetzungen{grid-template-columns:minmax(0,1fr)} .voraussetzungen li{min-height:0}}
 
   /* Kontakt */
+  .kontakt-abschnitt{padding-block:clamp(4rem,8vw,7rem)}
   .kontakt{position:relative; overflow:hidden; border:.0625rem solid var(--carbon); border-radius:var(--radius);
     padding:clamp(2rem,5vw,4rem); background-image:linear-gradient(225deg,#ffffff1a,#ffffff12); isolation:isolate}
   .kontakt .orb{width:min(700px,120vw); inset:auto -25% -85% auto; opacity:.5; z-index:-1}
@@ -556,6 +560,28 @@
   .kontakt-fein{margin-top:1.75rem; font-size:.9375rem; color:var(--leise)}
   .kontakt-fein a{color:var(--paragraph_white); text-decoration:underline; text-underline-offset:3px}
 
+  /* ---- Helle Abschnitte — .section_story / .section_advantages im CI ---- */
+  .hell{--strich:rgba(0,0,0,.1); background-color:#fcfcfd; background-image:linear-gradient(#fcfcfd,#fff); color:#0009}
+  .hell + .hell{background:#fff}
+  .hell h2,.hell h3,.hell strong,.hell b{color:#000}
+  .hell h2{font-weight:500}
+  .hell p,.hell .lead,.hell .kontakt-fein{color:#0009; text-shadow:none}
+  .hell .augenbraue span{color:#0009; font-weight:600}
+  .hell [data-linie="h"]{background-image:linear-gradient(to right, rgba(0,0,0,.1) 6px, transparent 6px)}
+  .hell > .trennlinie{position:absolute; top:2.1875rem; left:0; right:0; z-index:2}
+  .hell .trennlinie::before,.hell .trennlinie::after{filter:invert(1); opacity:.2}
+  .hell .karte,.hell .spalte{background:#fff; border:1px solid #0000000f; border-radius:.75rem;
+    box-shadow:0 4px 12px #0000000d; transition:all .3s}
+  .hell .karte:hover{transform:translateY(-3px); border-color:#0000000f}
+  .hell .karte .teiler{background:#0000001a}
+  .hell .spalte .kopfzeile b{color:#000}
+  .hell .spalte.vorher{background:transparent; box-shadow:none; border:1px dashed #0000001a}
+  .hell .spalte li{border-top-color:#0000001a}
+  .hell .spalte.vorher li,.hell .spalte.vorher li strong{color:#00000080}
+  .hell .kreuz{stroke:#0000004d}
+  .hell .haken{stroke:var(--blue)}
+  .hell .schritt{border-top-color:#0000001a}
+  .hell .schritt .nr{color:#0009}
   /* Fuß */
   footer{position:relative; z-index:1; border-top:1px solid var(--linie); padding-block:3rem 2.5rem; font-size:.9375rem;
     background-image:radial-gradient(circle farthest-corner at 50% 0%, #191919, var(--dark))}
@@ -598,15 +624,6 @@
 
 <a class="sprung" href="#inhalt">Zum Inhalt springen</a>
 
-<div class="schienen" aria-hidden="true">
-  <div class="schienen-feld">
-    <i class="schiene weit-links" data-linie="v"></i>
-    <i class="schiene links" data-linie="v"></i>
-    <i class="schiene rechts" data-linie="v"></i>
-    <i class="schiene weit-rechts" data-linie="v"></i>
-  </div>
-</div>
-
 <header>
   <div class="container kopf">
     <a class="marke" href="#">
@@ -638,7 +655,8 @@
 <main id="inhalt">
 
 <!-- Held -->
-<section class="held container">
+<section class="held">
+  <div class="container held-innen">
   <div class="linien" aria-hidden="true"></div>
   <div class="orb oben" aria-hidden="true"></div>
   <div class="held-layout">
@@ -667,6 +685,7 @@
         width="720" height="440" fetchpriority="high" decoding="async"
         alt="Vernetzte Dokumente bilden einen gemeinsamen Wissensbestand.">
   </figure>
+  </div>
   </div>
 </section>
 
@@ -850,7 +869,8 @@
 </section>
 
 <!-- Vorher / Nachher -->
-<section class="abschnitt verlauf">
+<section class="abschnitt hell">
+  <div class="trennlinie" data-linie="h"></div>
   <div class="container">
     <p class="augenbraue"><i class="gruen"></i><span>Ihre Vorteile</span></p>
     <h2>Weniger Suchen. Mehr Weitergeben.</h2>
@@ -882,8 +902,6 @@
     </div>
   </div>
 </section>
-
-<div class="trennlinie" data-linie="h"></div>
 
 <!-- Datenhoheit -->
 <section class="abschnitt" id="datenhoheit">
@@ -939,7 +957,8 @@
 </section>
 
 <!-- Ablauf -->
-<section class="abschnitt verlauf" id="ablauf">
+<section class="abschnitt hell" id="ablauf">
+  <div class="trennlinie" data-linie="h"></div>
   <div class="container">
     <p class="augenbraue"><i></i><span>Ihr Einstieg</span></p>
     <h2>Von der ersten Frage zum laufenden Betrieb.</h2>
@@ -972,10 +991,9 @@
   </div>
 </section>
 
-<div class="trennlinie" data-linie="h"></div>
-
 <!-- Passt / passt nicht -->
-<section class="abschnitt">
+<section class="abschnitt hell">
+  <div class="trennlinie" data-linie="h"></div>
   <div class="container">
     <p class="augenbraue"><i></i><span>Für wen</span></p>
     <h2>Für Unternehmen mit 10 bis 250 Mitarbeitern.</h2>
@@ -1098,7 +1116,8 @@
 </section>
 
 <!-- Kontakt -->
-<section class="container" style="padding-block:clamp(4rem,8vw,7rem)">
+<section class="kontakt-abschnitt">
+  <div class="container">
   <div class="kontakt" id="kontakt">
     <div class="orb" aria-hidden="true"></div>
     <p class="augenbraue"><i class="gruen"></i><span>Kontakt</span></p>
@@ -1117,6 +1136,7 @@
       NETFACTORY GmbH Internet Service · Kleine Straße 5 · 49584 Fürstenau ·
       <a href="https://netfactory.de">netfactory.de</a>
     </p>
+  </div>
   </div>
 </section>
 

@@ -1,12 +1,34 @@
 # getnetbrain.netfactory.de
-# Produktseite zu NETbrain und Auslieferungsort des Installationsskripts.
+# Produktseite und Dokumentation zu NETbrain, Auslieferungsort des Installationsskripts.
+# Für Sprachmodelle: https://getnetbrain.netfactory.de/llms.txt
+#                    https://getnetbrain.netfactory.de/llms-full.txt
 
 User-agent: *
 Allow: /
-
-# Das Installationsskript gehört nicht in den Index — es ist ein Endpunkt für
-# curl, keine Seite. Über den Link in der Anleitung bleibt es erreichbar.
 Disallow: /install.sh
-Disallow: /install.sh@
+
+# Suchmaschinen indexieren die HTML-Seiten; die Markdown-Fassungen sind Doubletten.
+User-agent: Googlebot
+User-agent: Bingbot
+Allow: /
+Disallow: /install.sh
+Disallow: /doku/*.md$
+Disallow: /llms-full.txt
+
+# KI-Assistenten und -Suchdienste sind ausdrücklich willkommen.
+User-agent: GPTBot
+User-agent: OAI-SearchBot
+User-agent: ChatGPT-User
+User-agent: ClaudeBot
+User-agent: Claude-SearchBot
+User-agent: Claude-User
+User-agent: PerplexityBot
+User-agent: Perplexity-User
+User-agent: Google-Extended
+User-agent: Applebot-Extended
+User-agent: Meta-ExternalAgent
+User-agent: CCBot
+Allow: /
+Disallow: /install.sh
 
 Sitemap: https://getnetbrain.netfactory.de/sitemap.xml

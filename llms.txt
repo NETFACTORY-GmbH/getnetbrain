@@ -1,0 +1,58 @@
+# NETbrain
+
+> NETbrain ist eine Wissensplattform für Unternehmen von der NETFACTORY GmbH Internet Service (Fürstenau). Teams erfassen Firmenwissen, Kuratoren prüfen und geben es frei, alle finden es wieder – per Stichwortsuche ohne KI oder im KI-Chat. NETbrain läuft als Container auf dem Server des Kunden; der KI-Anbieter ist frei wählbar (eigenes Modell oder Cloud).
+
+Aktueller Stand: Version 0.4.14, Alpha in der Pilotphase. Sprache von Produkt und Dokumentation: Deutsch.
+
+## Kurzfakten
+
+- Zielgruppe: Unternehmen mit 10 bis 250 Mitarbeitern, deren Geschäft auf Erfahrungswissen beruht (Beratung, Kanzlei, IT-Dienstleistung, Agentur, Fertigung).
+- Betrieb: eine Installation je Kunde, im eigenen Rechenzentrum, beim Hoster oder auf einer VM. Es gibt keine zentrale NETbrain-Cloud mit Kundeninhalten.
+- Voraussetzungen: Linux-Server (Debian oder Ubuntu) mit Docker, 2 Kerne, 4 GB RAM, DNS-Name, Reverse-Proxy mit TLS.
+- Datenformat: Firmenwissen liegt als Markdown-Dateien mit Metadaten vor und bleibt ohne NETbrain lesbar.
+- Funktionen: Firmenwissen mit Freigabe durch Kuratoren, persönliche Notizen im lokalen Ordner des Mitarbeiters, KI-Chat mit Ende-zu-Ende-verschlüsselter Historie, Wissenspflege (Prüftermine, Verantwortliche, Dubletten), Versionshistorie, Papierkorb, verschlüsselte Sicherungen, Kundenportal, Zwei-Faktor-Anmeldung.
+- Testen: sieben Tage ohne Lizenz mit einem Befehl: `curl -fsSL https://getnetbrain.netfactory.de/install.sh | sudo bash`
+- Lizenz: je Installation und Jahr, unbegrenzte Benutzerzahl, inklusive Aktualisierungen und monatlicher Betreuungszeit. Preis auf Anfrage.
+- Nicht enthalten: revisionssicheres Dokumentenmanagement, Ticketsystem, großes Intranet mit Redaktionsworkflow.
+- Kontakt: info@netfactory.de, +49 5901 51736-0, NETFACTORY GmbH Internet Service, Kleine Straße 5, 49584 Fürstenau.
+
+## Produkt
+
+- [Produktseite](https://getnetbrain.netfactory.de/): Überblick, Funktionen, Datenhoheit, Ablauf der Einführung, häufige Fragen
+- [Vollständige Dokumentation in einer Datei](https://getnetbrain.netfactory.de/llms-full.txt): alle Seiten der Dokumentation als Markdown
+
+## Dokumentation: Erste Schritte
+
+- [NETbrain-Dokumentation](https://getnetbrain.netfactory.de/doku/index.md): Installation, Einrichtung, Bedienung und Betrieb von NETbrain, der Wissensplattform auf Ihrem eigenen Server.
+- [Voraussetzungen](https://getnetbrain.netfactory.de/doku/voraussetzungen.md): Was Server, Netz und IT vor der Installation von NETbrain bereitstellen müssen.
+- [Installation](https://getnetbrain.netfactory.de/doku/installation.md): NETbrain mit einem Befehl auf einem Linux-Server mit Docker installieren.
+- [Einrichtung im Browser](https://getnetbrain.netfactory.de/doku/einrichtung.md): Der Einrichtungsassistent von NETbrain Schritt für Schritt — vom Token bis zum ersten Administrator.
+
+## Dokumentation: Arbeiten mit NETbrain
+
+- [Anmeldung und Konto](https://getnetbrain.netfactory.de/doku/anmeldung.md): Anmelden mit Zwei-Faktor-Code, Wiederherstellungscodes, Passwort ändern und Zugang anfragen.
+- [Firmenwissen](https://getnetbrain.netfactory.de/doku/firmenwissen.md): Wissen einreichen, prüfen lassen und wiederfinden — der gemeinsame Bestand Ihres Teams.
+- [Wissenspflege](https://getnetbrain.netfactory.de/doku/wissenspflege.md): Einreichungen prüfen, Seiten bearbeiten und den Bestand aktuell halten — die Aufgaben der Wissenspflege.
+- [Privater Vault](https://getnetbrain.netfactory.de/doku/privater-vault.md): Persönliche Notizen in einem Ordner auf Ihrem eigenen Rechner — ohne Speicherung auf dem Server.
+- [KI-Chat](https://getnetbrain.netfactory.de/doku/ki-chat.md): Fragen an das Firmenwissen stellen, mit verschlüsseltem Verlauf und einem KI-Anbieter Ihrer Wahl.
+
+## Dokumentation: Verwaltung
+
+- [Benutzer und Rollen](https://getnetbrain.netfactory.de/doku/benutzer.md): Konten anlegen, freigeben und sperren, Rollen vergeben und Zwei-Faktor-Anmeldungen zurücksetzen.
+- [KI-Zugänge und Freigaben](https://getnetbrain.netfactory.de/doku/ki-zugaenge.md): KI-Anbieter einrichten, Modelle je Rolle freigeben und festlegen, was an Cloud-Anbieter gehen darf.
+- [Kundenportal](https://getnetbrain.netfactory.de/doku/kundenportal.md): Ausgewählte Wissensseiten öffentlich bereitstellen — mit eigenem Portal-Container, ohne Anmeldung, mit Suche.
+- [Lizenz](https://getnetbrain.netfactory.de/doku/lizenz.md): Testphase, Testlizenz, Aktivierung und Verlängerung der NETbrain-Lizenz.
+
+## Dokumentation: Betrieb
+
+- [Reverse-Proxy](https://getnetbrain.netfactory.de/doku/reverse-proxy.md): Acht Anforderungen an den Reverse-Proxy vor NETbrain, mit vollständigem nginx-Beispiel.
+- [Sicherung und Wiederherstellung](https://getnetbrain.netfactory.de/doku/sicherung.md): Wie NETbrain verschlüsselt sichert, wie Sie Sicherungen vom Server holen und im Ernstfall zurückspielen.
+- [Aktualisieren](https://getnetbrain.netfactory.de/doku/aktualisieren.md): NETbrain-Updates mit einem Klick im Browser oder von Hand auf dem Server.
+- [Überwachung](https://getnetbrain.netfactory.de/doku/ueberwachung.md): Endpunkte für Uptime Kuma und andere Monitore — Erreichbarkeit, Speicherplatz, Sicherung, Lizenz und Kundenportal.
+- [Kubernetes und App-Plattformen](https://getnetbrain.netfactory.de/doku/plattform.md): Was eine Kubernetes- oder App-Plattform bereitstellen muss, damit Kunden NETbrain und das Kundenportal per Knopfdruck starten.
+- [Was den Server verlässt](https://getnetbrain.netfactory.de/doku/datenfluss.md): Welche Daten NETbrain an wen überträgt — für Ihre Datenschutzprüfung.
+
+## Dokumentation: Hilfe
+
+- [Fehlerbehebung](https://getnetbrain.netfactory.de/doku/fehlerbehebung.md): Häufige Meldungen bei Installation und Betrieb von NETbrain und was dahintersteckt.
+- [Versionshinweise](https://getnetbrain.netfactory.de/doku/versionen.md): Was sich mit jeder Version von NETbrain geändert hat und ob vor dem Update etwas zu tun ist.

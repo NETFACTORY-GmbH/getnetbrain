@@ -1,0 +1,14 @@
+{
+  "name": "NETbrain",
+  "short_name": "NETbrain",
+  "description": "Wissensplattform für Unternehmen auf Ihrem eigenen Server.",
+  "lang": "de",
+  "start_url": "/",
+  "display": "browser",
+  "background_color": "#000000",
+  "theme_color": "#000000",
+  "icons": [
+    { "src": "/bilder/favicon-180.png", "sizes": "180x180", "type": "image/png" },
+    { "src": "/bilder/netbrain_fav.png", "sizes": "422x422", "type": "image/png" }
+  ]
+}

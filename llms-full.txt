@@ -1,0 +1,1919 @@
+# NETbrain
+
+> NETbrain ist eine Wissensplattform für Unternehmen von der NETFACTORY GmbH Internet Service (Fürstenau). Teams erfassen Firmenwissen, Kuratoren prüfen und geben es frei, alle finden es wieder – per Stichwortsuche ohne KI oder im KI-Chat. NETbrain läuft als Container auf dem Server des Kunden; der KI-Anbieter ist frei wählbar (eigenes Modell oder Cloud).
+
+Aktueller Stand: Version 0.4.14, Alpha in der Pilotphase. Sprache von Produkt und Dokumentation: Deutsch.
+
+## Kurzfakten
+
+- Zielgruppe: Unternehmen mit 10 bis 250 Mitarbeitern, deren Geschäft auf Erfahrungswissen beruht (Beratung, Kanzlei, IT-Dienstleistung, Agentur, Fertigung).
+- Betrieb: eine Installation je Kunde, im eigenen Rechenzentrum, beim Hoster oder auf einer VM. Es gibt keine zentrale NETbrain-Cloud mit Kundeninhalten.
+- Voraussetzungen: Linux-Server (Debian oder Ubuntu) mit Docker, 2 Kerne, 4 GB RAM, DNS-Name, Reverse-Proxy mit TLS.
+- Datenformat: Firmenwissen liegt als Markdown-Dateien mit Metadaten vor und bleibt ohne NETbrain lesbar.
+- Funktionen: Firmenwissen mit Freigabe durch Kuratoren, persönliche Notizen im lokalen Ordner des Mitarbeiters, KI-Chat mit Ende-zu-Ende-verschlüsselter Historie, Wissenspflege (Prüftermine, Verantwortliche, Dubletten), Versionshistorie, Papierkorb, verschlüsselte Sicherungen, Kundenportal, Zwei-Faktor-Anmeldung.
+- Testen: sieben Tage ohne Lizenz mit einem Befehl: `curl -fsSL https://getnetbrain.netfactory.de/install.sh | sudo bash`
+- Lizenz: je Installation und Jahr, unbegrenzte Benutzerzahl, inklusive Aktualisierungen und monatlicher Betreuungszeit. Preis auf Anfrage.
+- Nicht enthalten: revisionssicheres Dokumentenmanagement, Ticketsystem, großes Intranet mit Redaktionsworkflow.
+- Kontakt: info@netfactory.de, +49 5901 51736-0, NETFACTORY GmbH Internet Service, Kleine Straße 5, 49584 Fürstenau.
+
+## Produkt
+
+- [Produktseite](https://getnetbrain.netfactory.de/): Überblick, Funktionen, Datenhoheit, Ablauf der Einführung, häufige Fragen
+- [Vollständige Dokumentation in einer Datei](https://getnetbrain.netfactory.de/llms-full.txt): alle Seiten der Dokumentation als Markdown
+
+---
+
+<!-- Quelle: https://getnetbrain.netfactory.de/doku/ -->
+
+# NETbrain-Dokumentation
+
+Hier finden Sie alles, um NETbrain zu installieren, einzurichten, im Team zu nutzen und dauerhaft zu betreiben. Die Dokumentation beschreibt NETbrain 0.4.14.
+
+<div class="karten">
+<a class="karte" href="installation.html"><b>In 45 Minuten startklar</b><span>Ein Befehl auf dem Server, danach führt ein Assistent im Browser durch die Einrichtung.</span></a>
+<a class="karte" href="firmenwissen.html"><b>Firmenwissen nutzen</b><span>Wissen einwerfen, prüfen lassen, wiederfinden — für alle im Team.</span></a>
+<a class="karte" href="sicherung.html"><b>Sicher betreiben</b><span>Verschlüsselte Sicherungen, Wiederherstellung und Updates mit einem Klick.</span></a>
+<a class="karte" href="fehlerbehebung.html"><b>Etwas klappt nicht?</b><span>Die häufigsten Meldungen und was dahintersteckt.</span></a>
+</div>
+
+## Was NETbrain ist
+
+NETbrain ist eine Wissensplattform für Unternehmen. Sie läuft als **ein Container auf Ihrem Server** und wird im Browser bedient. Drei Bereiche gehören dazu:
+
+- **Firmenwissen** — der gemeinsame, geprüfte Bestand. Jeder darf einwerfen, die Wissenspflege gibt frei.
+- **Privater Vault** — persönliche Notizen in einem Ordner auf dem Rechner des Mitarbeiters.
+- **KI-Chat** — Fragen an das Firmenwissen, mit einem KI-Anbieter Ihrer Wahl. Der Verlauf ist verschlüsselt.
+
+Optional kommt ein **Kundenportal** hinzu: Ausgewählte Wissensseiten erscheinen dort öffentlich, ohne Anmeldung.
+
+## Der Weg zur laufenden Installation
+
+1. [Voraussetzungen](voraussetzungen.html) klären: Linux-Server mit Docker, DNS-Name, Reverse-Proxy mit TLS.
+2. [Installieren](installation.html): ein Befehl, rund zehn Minuten.
+3. [Im Browser einrichten](einrichtung.html): Token, Geheimnisse, KI-Anbieter, Sicherung, Lizenz, erster Administrator.
+4. [Benutzer anlegen](benutzer.html) und loslegen.
+
+Die ersten **sieben Tage** läuft NETbrain ohne Lizenz. Danach fordern Sie im Assistenten selbst eine Testlizenz an oder hinterlegen Ihre gekaufte — siehe [Lizenz](lizenz.html).
+
+## Für wen welche Seite
+
+| Sie sind … | Lesen Sie zuerst |
+|---|---|
+| IT / Betrieb | [Voraussetzungen](voraussetzungen.html), [Reverse-Proxy](reverse-proxy.html), [Sicherung](sicherung.html) |
+| Administrator in NETbrain | [Einrichtung](einrichtung.html), [Benutzer und Rollen](benutzer.html), [KI-Zugänge](ki-zugaenge.html) |
+| Wissenspflege | [Firmenwissen](firmenwissen.html), [Wissenspflege](wissenspflege.html) |
+| Mitarbeiter | [Anmeldung und Konto](anmeldung.html), [Firmenwissen](firmenwissen.html), [KI-Chat](ki-chat.html) |
+| Plattformbetreiber (Kubernetes) | [Kubernetes und App-Plattformen](plattform.html) |
+| Datenschutz | [Was den Server verlässt](datenfluss.html) |
+
+## Hilfe
+
+Fragen zur Installation, zum Betrieb oder zur Lizenz beantworten wir unter [info@netfactory.de](mailto:info@netfactory.de). Bitte schicken Sie bei technischen Fragen die Ausgabe von `sudo ./install.sh status` mit — das spart meist die erste Rückfrage.
+
+---
+
+<!-- Quelle: https://getnetbrain.netfactory.de/doku/voraussetzungen.html -->
+
+# Voraussetzungen
+
+Bitte gehen Sie diese Liste vor der Installation durch. Jeder Punkt kostet hinterher mehr Zeit als jetzt.
+
+## Server
+
+- Linux-Server oder VM, aktuelles LTS (Debian oder Ubuntu empfohlen).
+- **Docker Engine** und **Docker Compose v2** (`docker compose version` — mit Leerzeichen). Fehlt Docker, bietet der Installer an, es über das offizielle Skript von Docker einzurichten.
+- **2 vCPU und 4 GB RAM** als Richtwert. NETbrain rechnet kaum selbst; die Sprachmodelle laufen beim KI-Anbieter.
+- **40 GB Platte** als Start. Wissensbestand und Sicherungen wachsen unabhängig voneinander; NETbrain hebt in der Vorgabe 14 Sicherungsstände auf.
+- `sudo`-Rechte.
+
+## Netz
+
+- Ein **DNS-Name**, der auf den Server zeigt, zum Beispiel `netbrain.ihre-firma.de`. Ein reiner Intranet-Name genügt.
+- **Ausgehend Port 443** zur Container-Registry `ghcr.io` (Installation und Updates), zum Lizenzdienst `lizenz-netbrain.netfactory.de` und zu Ihrem KI-Anbieter. Was genau übertragen wird, steht unter [Was den Server verlässt](datenfluss.html).
+- **Eingehend** nur auf Ihren Reverse-Proxy (443, dazu 80 für die Weiterleitung). Auf dem NETbrain-Server selbst muss von außen nichts offen sein.
+
+## Reverse-Proxy mit TLS
+
+NETbrain spricht im Container HTTP und ist nur auf `127.0.0.1` erreichbar. Davor gehört ein Reverse-Proxy, den Sie stellen: Er nimmt HTTPS an, beendet TLS und reicht an NETbrain weiter.
+
+> [!WICHTIG] Ohne HTTPS keine Anmeldung
+> Das Sitzungscookie von NETbrain ist `secure`. Über reines HTTP verwirft es der Browser, und die Anmeldung scheitert trotz richtigem Passwort.
+
+Was der Proxy genau leisten muss — acht Punkte samt nginx-Beispiel — steht unter [Reverse-Proxy](reverse-proxy.html). Klären Sie vorab mit Ihrem Netzbetrieb, wer was einrichtet.
+
+## Unterlagen und Zugänge
+
+- Ein **Passwortmanager**, offen und bereit: Bei der Einrichtung erzeugt NETbrain eine Sicherungs-Passphrase und zeigt sie genau einmal.
+- Zugangsdaten zu Ihrem **KI-Anbieter** (Adresse und Schlüssel), sofern Sie den KI-Chat nutzen.
+- Ihre **Lizenzdatei**, falls schon vorhanden. Ohne sie läuft NETbrain sieben Tage; danach genügt eine Testlizenz, die Sie im Assistenten selbst anfordern.
+- Für Sicherungen außerhalb des Servers: ein Ziel in Ihrem bestehenden Sicherungsverfahren.
+
+## Auf einer App-Plattform statt auf eigenem Server
+
+Betreiben Sie NETbrain auf Kubernetes oder einer App-Plattform, entfallen Installer und Reverse-Proxy-Einrichtung. Was die Plattform stattdessen bereitstellen muss, steht unter [Kubernetes und App-Plattformen](plattform.html).
+
+---
+
+<!-- Quelle: https://getnetbrain.netfactory.de/doku/installation.html -->
+
+# Installation
+
+Die Installation besteht aus einem Befehl auf dem Server und einer kleinen Anpassung danach. Rechnen Sie mit rund zehn Minuten auf der Kommandozeile; die Einrichtung im Browser folgt im nächsten Kapitel.
+
+## Installieren
+
+Melden Sie sich auf dem Server an und führen Sie aus:
+
+```
+curl -fsSL https://getnetbrain.netfactory.de/install.sh | sudo bash
+```
+
+Das Skript prüft Docker, bezieht das NETbrain-Image (öffentlich, ohne Anmeldung), legt die Installation unter `/opt/netbrain` an und startet sie. Es wartet, bis NETbrain antwortet — beim ersten Mal bis zu zwei Minuten. Auf einem systemd-Server richtet es zusätzlich den lokalen Update-Helfer ein, über den Administratoren später Updates im Browser auslösen.
+
+Am Ende stehen das **Einrichtungs-Token** und die Adresse, unter der es weitergeht.
+
+### Eine bestimmte Version installieren
+
+Die Version steckt im Link:
+
+```
+curl -fsSL https://getnetbrain.netfactory.de/install.sh@0.4.14 | sudo bash
+```
+
+### Proxy auf einem anderen Rechner
+
+Steht Ihr Reverse-Proxy nicht auf demselben Server, muss NETbrain auf allen Netzwerkschnittstellen lauschen. Dann gehört zwingend eine Firewallregel dazu, die Port 4321 auf die Adresse des Proxys beschränkt (siehe [Reverse-Proxy, Punkt 6](reverse-proxy.html#firewall)):
+
+```
+curl -fsSL https://getnetbrain.netfactory.de/install.sh | sudo NETBRAIN_BIND=0.0.0.0 bash
+```
+
+Ist Port 4321 belegt, wählen Sie einen anderen; der Proxy leitet dann dorthin weiter:
+
+```
+curl -fsSL https://getnetbrain.netfactory.de/install.sh | sudo NETBRAIN_PORT=4330 bash
+```
+
+Die Variablen stehen dabei **hinter** `sudo`: Davor gesetzt, verwirft `sudo` sie.
+
+## DNS-Name und Proxy-Kette eintragen
+
+Dieser Schritt gehört zu jeder Installation. Der Installer erlaubt zunächst nur `localhost` und `127.0.0.1`. Ruft Ihr Proxy NETbrain unter dem DNS-Namen auf, antwortet NETbrain mit **421** — das sieht wie ein Defekt aus und ist eine Zeile.
+
+```
+sudo nano /opt/netbrain/netbrain-compose.yml
+```
+
+In der Zeile `NETBRAIN_ALLOWED_HOSTS` den Namen ergänzen und im selben `environment:`-Block die Zahl der Proxys vor NETbrain eintragen:
+
+```
+      NETBRAIN_ALLOWED_HOSTS: "localhost,127.0.0.1,netbrain.ihre-firma.de"
+      NETBRAIN_TRUSTED_PROXY_HOPS: "1"
+```
+
+Steht ein Proxy davor, gehört dort `1` hin, nicht `0`. Sonst sieht die Anmeldedrossel alle Besucher als die Adresse des Proxys, und ein einziger Fehlversuch sperrt alle gemeinsam aus. Die Zahl können Sie alternativ im Einrichtungsassistenten eintragen — aber nur an einer der beiden Stellen; was in der Datei steht, hat Vorrang.
+
+Danach die Änderung übernehmen und das neue Token abrufen:
+
+```
+cd /opt/netbrain
+sudo ./install.sh
+sudo ./install.sh token
+```
+
+Die Compose-Datei gehört Ihnen: Kein Update überschreibt sie.
+
+## Weiter im Browser
+
+Rufen Sie `https://netbrain.ihre-firma.de` auf. Jeder Aufruf landet auf der Einrichtung — weiter mit [Einrichtung im Browser](einrichtung.html).
+
+## Befehle für später
+
+Alle im Verzeichnis `/opt/netbrain`:
+
+| Befehl | Wirkung |
+|---|---|
+| `sudo ./install.sh status` | Läuft NETbrain, ist es bereit, welche Version |
+| `sudo ./install.sh token` | Einrichtungs-Token anzeigen, solange nicht eingerichtet |
+| `sudo ./install.sh logs` | Protokoll mitlesen, `Strg+C` beendet |
+| `sudo ./install.sh stop` / `start` | Anhalten und wieder starten |
+| `sudo ./install.sh` | Änderungen an der Compose-Datei übernehmen, Version aktualisieren |
+
+Einen Löschbefehl hat der Installer bewusst nicht.
+
+> [!HINWEIS] Das Token gilt nur bis zum nächsten Neustart
+> Nach jedem Neustart des Containers steht ein neues Token im Protokoll. Ein „falsches“ Token ist fast immer ein altes — `sudo ./install.sh token` zeigt das aktuelle.
+
+---
+
+<!-- Quelle: https://getnetbrain.netfactory.de/doku/einrichtung.html -->
+
+# Einrichtung im Browser
+
+Nach der Installation landet jeder Aufruf auf `/einrichtung`. Der Assistent führt in neun Schritten durch alles, was eine Installation braucht. Was Sie hier eintragen, wird gespeichert; eine Konfigurationsdatei müssen Sie nicht pflegen.
+
+> [!WICHTIG] Halten Sie Ihren Passwortmanager bereit
+> In Schritt 2 erzeugt NETbrain eine **Sicherungs-Passphrase** und zeigt sie genau einmal. Ohne sie lässt sich keine Ihrer Sicherungen mehr öffnen — auch nicht durch uns, denn wir haben sie nie. Legen Sie sie ab, sobald sie erscheint, sodass mindestens zwei Personen herankommen.
+
+## 1. Token
+
+Fügen Sie das Einrichtungs-Token aus der Ausgabe des Installers ein. Es belegt, dass Sie Zugriff auf den Server haben; ohne diesen Nachweis wäre die Einrichtungsseite ein offenes Tor. Ein abgewiesenes Token ist fast immer ein altes: `sudo ./install.sh token` zeigt das aktuelle.
+
+## 2. Geheimnisse
+
+NETbrain erzeugt die nötigen Schlüssel und die Sicherungs-Passphrase selbst. Die Passphrase erscheint einmal und muss zur Bestätigung noch einmal eingegeben werden. Was hier weggeklickt wird, ist weg.
+
+## 3. Erreichbarkeit und Name
+
+- **Hostname** — der DNS-Name, unter dem Ihr Team NETbrain aufruft.
+- **Zahl der Reverse-Proxys** vor NETbrain, meist `1`. Nicht auf `0` lassen, wenn ein Proxy davorsteht.
+- **Name Ihrer Organisation** — erscheint im Seitentitel und in den Datenschutzhinweisen.
+
+Steht ein Wert schon in der `netbrain-compose.yml`, zeigt die Seite ihn als fest an: Die Datei hat Vorrang.
+
+## 4. KI-Anbieter
+
+Adresse und Schlüssel Ihres Anbieters. Der Zugang wird sofort getestet, bevor es weitergeht — ein Tippfehler fällt hier auf und nicht beim ersten Nutzer. Welche Anbieter und Modelle wer nutzen darf, legen Sie später unter [KI-Zugänge und Freigaben](ki-zugaenge.html) fest.
+
+## 5. Sicherung
+
+Uhrzeit des täglichen Laufs (Vorgabe 02:00) und wie viele Stände aufgehoben werden (Vorgabe 14). Lösen Sie den **Probelauf** aus: Er schreibt sofort eine Sicherung und beweist, dass Zeitplan und Passphrase zusammenpassen. Der Zeitplan läuft im Container; auf Ihrem Server entsteht kein Cronjob.
+
+## 6. Lizenz
+
+Fügen Sie den Inhalt Ihrer Lizenzdatei ein. NETbrain bindet sie dabei beim Lizenzdienst an diese Installation. Haben Sie noch keine Lizenz, gibt es zwei Wege:
+
+- **Ohne Lizenz weitermachen** — eine neue Installation ist ab dem ersten Start sieben Tage vollständig nutzbar.
+- **Testlizenz anfordern** — Firma, Name und Mailadresse eintragen; die Lizenz kommt per Mail und wird hier eingefügt. Je Mailadresse gibt es eine.
+
+Mehr dazu unter [Lizenz](lizenz.html).
+
+## 7. Kundenportal
+
+Optional und überspringbar. Ist ein Portal-Container schon vorhanden, tragen Sie hier seine Adresse ein und erzeugen den Kopplungsschlüssel. Das geht genauso später unter **Verwaltung → Kundenportal** — siehe [Kundenportal](kundenportal.html). Der Schritt erscheint nur, wenn Ihre Lizenz das Portal enthält.
+
+## 8. Prüfung
+
+NETbrain sieht sich selbst durch und meldet, was fehlt oder unsicher eingestellt ist. Arbeiten Sie jeden Befund ab, statt ihn zu übergehen; die Liste meldet sich nur zu echten Lücken.
+
+## 9. Administrator
+
+Das erste Konto: Benutzername und Passwort, dazu gleich die **Zwei-Faktor-Anmeldung**. Scannen Sie den QR-Code mit einer Authenticator-App (zum Beispiel Microsoft Authenticator, Google Authenticator oder 1Password) und geben Sie den sechsstelligen Code ein. Ohne gültigen Code entsteht kein Konto.
+
+Nach der ersten Anmeldung zeigt NETbrain einmalig zehn **Wiederherstellungscodes**. Notieren Sie sie — sie sind der Weg zurück, wenn das Handy verloren geht.
+
+Damit endet der Einrichtungsmodus: `/einrichtung` ist danach nicht mehr erreichbar. Weitere Konten legen Sie unter [Benutzer und Rollen](benutzer.html) an.
+
+## Danach
+
+- Den Proxy und die Sicherung einmal nachweisen statt annehmen: Zertifikat gültig, Port 4321 von außen gesperrt, eine 12-MB-Datei geht durch, eine Sicherung lässt sich öffnen. Siehe [Reverse-Proxy](reverse-proxy.html#nachweisen) und [Sicherung](sicherung.html).
+- Eine Kopie der Sicherungen auf ein Ziel außerhalb des Servers einrichten.
+
+---
+
+<!-- Quelle: https://getnetbrain.netfactory.de/doku/anmeldung.html -->
+
+# Anmeldung und Konto
+
+Jedes Konto meldet sich mit Benutzername, Passwort und einem sechsstelligen Code aus einer Authenticator-App an. Unter **Mein Konto** verwalten Sie Passwort und Zwei-Faktor-Anmeldung selbst.
+
+## Zugang bekommen
+
+Ihr Administrator legt Ihr Konto an und nennt Ihnen ein **vorläufiges Passwort**. Bei der ersten Anmeldung setzen Sie ein eigenes; bis dahin sind die übrigen Seiten gesperrt.
+
+Alternativ fragen Sie unter **Zugang anfragen** (`/registrieren`) selbst an: Benutzername (3 bis 64 Zeichen), Anzeigename und ein Passwort mit mindestens 12 Zeichen. Das Konto bleibt gesperrt, bis ein Administrator es freigibt.
+
+## Zwei-Faktor-Anmeldung einrichten
+
+Die Zwei-Faktor-Anmeldung ist Pflicht. Beim ersten Anmelden richten Sie sie ein:
+
+1. Eine Authenticator-App auf dem Handy öffnen, etwa Microsoft Authenticator, Google Authenticator oder 1Password.
+2. Den angezeigten QR-Code scannen. Geht das nicht, den Schlüssel darunter von Hand eingeben.
+3. Den sechsstelligen Code aus der App eingeben.
+4. Die **zehn Wiederherstellungscodes** notieren und sicher aufbewahren.
+
+Danach fragt NETbrain bei jeder Anmeldung nach dem Passwort den aktuellen Code ab.
+
+## Handy verloren oder gewechselt
+
+- **Neues Handy, altes noch da:** Unter **Mein Konto → Zwei-Faktor-Anmeldung** auf **Neues Gerät einrichten** klicken und den neuen QR-Code scannen.
+- **Handy weg:** Statt des Codes einen der Wiederherstellungscodes eingeben. Jeder gilt einmal. Danach ein neues Gerät einrichten.
+- **Keine Codes mehr:** Ein Administrator setzt Ihre Zwei-Faktor-Anmeldung in der Benutzerverwaltung zurück; beim nächsten Anmelden richten Sie sie neu ein.
+
+Unter **Neue Codes erzeugen** erhalten Sie zehn frische Wiederherstellungscodes; die alten werden ungültig.
+
+## Passwort ändern
+
+**Mein Konto → Passwort ändern**, mindestens 12 Zeichen. Ihr Passwort schützt auch Ihren verschlüsselten Chatverlauf; siehe [KI-Chat](ki-chat.html#verschluesselte-historie).
+
+## Meine Beiträge
+
+Unter **Mein Konto → Meine Beiträge** sehen Sie, was Sie als Firmenwissen eingereicht haben, mit Status: In Prüfung, Veröffentlicht, Übernommen oder Abgelehnt — bei Ablehnung samt Begründung.
+
+## NETbrain als App
+
+NETbrain lässt sich im Browser als App installieren (Chrome, Edge, Android; auf iOS über „Zum Home-Bildschirm“). Gespeichert werden dabei nur Programmdateien, keine Inhalte. Ohne Netz zeigt die App eine Hinweisseite.
+
+## Tastenkürzel
+
+| Kürzel | Wirkung |
+|---|---|
+| `Strg` + `K` | Suche im Firmenwissen bzw. Seitenfilter |
+| `Strg` + `V` | Bild oder Bildschirmfoto einfügen (Erfassen, Bearbeiten, Chat) |
+| `Enter` / `Umschalt` + `Enter` | Im Chat senden / Zeilenumbruch |
+| `Esc` | Dialoge, Seitenleiste und Suchtreffer schließen |
+
+---
+
+<!-- Quelle: https://getnetbrain.netfactory.de/doku/firmenwissen.html -->
+
+# Firmenwissen
+
+Das Firmenwissen ist der gemeinsame Bestand Ihres Teams. Jeder darf lesen und einreichen; was veröffentlicht wird, entscheidet die Wissenspflege. So bleibt der Bestand verlässlich, ohne dass Einreichen kompliziert wird.
+
+## Wissen einreichen
+
+**Firmenwissen erfassen** in der Seitenleiste. Eines genügt, Kombinieren ist erlaubt:
+
+- **Eigener Text** — getippt oder diktiert, sofern die Spracheingabe eingerichtet ist.
+- **Ein Link** — NETbrain ruft die Seite ab und bewahrt eine Kopie als Nachweis auf. Direkte Links auf PDF, Text oder Bilder gehen auch.
+- **Eine Datei** bis 10 MB: PDF, PNG, JPEG, WebP, TXT, MD oder CSV. Bildschirmfotos fügen Sie mit `Strg` + `V` ein.
+
+Dazu wählen Sie, wie es weitergeht:
+
+- **Aufbereiten lassen** — die KI formt aus dem Material eine Wissensseite mit Titel, Kurzfassung, Tags und Kategorie.
+- **Text bleibt, wie er ist** — nur Titel, Kurzfassung, Tags und Kategorie werden ergänzt.
+
+Gescannte PDFs liest ein Modell als Bild (bis vier Seiten); Zahlen daraus bitte gegenlesen.
+
+## Entwurf prüfen und einreichen
+
+Im zweiten Schritt sehen Sie den Entwurf und können Titel, Kurzfassung, Tags, Kategorie und Inhalt anpassen. **So wird es aussehen** zeigt die Vorschau. Gibt es schon ähnliche Seiten, weist NETbrain darauf hin.
+
+**Beitrag einreichen** schickt ihn an die Wissenspflege. Den Stand sehen Sie unter **Mein Konto → Meine Beiträge**.
+
+## Wissen finden
+
+- **Suche** auf der Übersicht — eine Stichwortsuche ohne KI. Ein zweiter Knopf übernimmt die Frage in den [KI-Chat](ki-chat.html).
+- **Alle Seiten** — was neu ist und was sich geändert hat.
+- **Wissenslandkarte** — der Bestand als Netz verknüpfter Seiten.
+- **Nachweise** — alle Seiten mit Originaldokument.
+- **Seiten filtern** in der Seitenleiste, mit `Strg` + `K`.
+
+## Eine Wissensseite lesen
+
+Über dem Inhalt stehen Tags, wann die Seite geändert und geprüft wurde, wann die nächste Prüfung fällig ist und wer verantwortlich ist. Ist die Prüfung überfällig, steht es dabei.
+
+- **Originaldokument** — die eingereichte Datei, mit Vorschau, Herkunft und Prüfsumme (SHA-256).
+- **Gespeicherte Quellkopie** — der Stand einer verlinkten Webseite zum Zeitpunkt des Abrufs.
+- **Ähnliche Seiten** und **Verweise hierher** am Ende der Seite.
+
+## Fehler melden
+
+Stimmt etwas nicht? Unten auf jeder Seite: **Veraltet oder fehlerhaft melden**. Die Meldung geht als Korrekturanfrage an die Wissenspflege.
+
+## Wer was darf
+
+| | Benutzer | Wissenspflege |
+|---|---|---|
+| Lesen, suchen, einreichen, melden | ✓ | ✓ |
+| Einreichungen veröffentlichen oder ablehnen | | ✓ |
+| Seiten bearbeiten, verschieben, löschen | | ✓ |
+| Im Kundenportal veröffentlichen | | ✓ |
+
+Was die Wissenspflege im Einzelnen tut, steht unter [Wissenspflege](wissenspflege.html).
+
+---
+
+<!-- Quelle: https://getnetbrain.netfactory.de/doku/wissenspflege.html -->
+
+# Wissenspflege
+
+Die Wissenspflege hält das Firmenwissen verlässlich: Sie gibt Einreichungen frei, bearbeitet Seiten und behält im Blick, was veraltet. Wer die Rolle hat, sieht in der Seitenleiste den Bereich **Wissenspflege**.
+
+## Wissensprüfung
+
+Hier landen alle Einreichungen und Korrekturmeldungen. Je Beitrag sehen Sie den aufbereiteten Entwurf und daneben das **Ausgangsmaterial der Einreichung** zum Abgleich. Vor dem Veröffentlichen legen Sie fest:
+
+- **Titel** und **Zielordner** — neue Ordner werden angelegt,
+- **Tags**,
+- **Verantwortliche Person** und **Nächste fachliche Prüfung** (beides optional, aber empfohlen),
+- den **Inhalt**.
+
+Dann **Veröffentlichen** oder **Ablehnen**. Eine Begründung beim Ablehnen sieht der Einreicher unter „Meine Beiträge“.
+
+### Gibt es das schon?
+
+Findet NETbrain ähnliche Seiten, bietet es drei Wege an:
+
+- **Anhängen** — der Beitrag kommt als Abschnitt ans Ende der bestehenden Seite.
+- **Einarbeiten lassen …** — die KI schlägt einen neuen Stand der bestehenden Seite vor. Geschrieben wird erst, nachdem Sie den Vorher-Nachher-Vergleich bestätigt haben.
+- **Verlinken** — beide Seiten bleiben, unter „Siehe auch“ steht ein Verweis.
+
+### Korrekturanfragen
+
+Meldet jemand eine Seite als veraltet oder fehlerhaft, erscheint die Meldung als **Korrekturanfrage**: **Korrektur einarbeiten** öffnet die Seite zum Bearbeiten, **Meldung schließen** erledigt sie ohne Änderung.
+
+## Seiten bearbeiten
+
+Auf jeder Wissensseite stehen neben dem Titel:
+
+- **Bearbeiten** — Titel, Ordner, Kurzfassung, Tags, Verantwortliche, Prüftermin und Inhalt; Bilder lassen sich einsetzen. Querverweise schreiben Sie als `[[Seitentitel]]`. Offene Korrekturmeldungen können Sie beim Speichern als erledigt abhaken.
+- **Verlauf** — frühere Stände im Vorher-Nachher-Vergleich, mit **Auf diesen Stand zurücksetzen**. NETbrain hebt in der Vorgabe 20 Stände je Seite auf.
+- **Als geprüft markieren** — bestätigt die Seite fachlich und setzt „Geprüft“ auf heute, ohne den Inhalt zu ändern.
+- **Verschieben** — in einen anderen Ordner; Verweise anderer Seiten werden nachgezogen.
+- **Löschen** — in den Papierkorb. Verweise anderer Seiten lösen Sie dabei zu Text auf, lassen sie stehen oder biegen sie auf eine andere Seite um.
+
+## Den Bestand im Blick behalten
+
+- **Qualität** — Befunde wie überfällige Prüfungen, Seiten ohne Verantwortliche und Seiten, die über 180 Tage nicht geprüft wurden.
+- **Ähnliche Seiten** — mögliche Dubletten als Paare, zum Zusammenführen oder Verknüpfen.
+- **Papierkorb** — **Wiederherstellen** legt eine Seite an ihren alten Platz zurück, **Endgültig löschen** ist unwiderruflich.
+
+Jede Änderung am Firmenwissen wird mit Person und Zeitpunkt protokolliert.
+
+## Kundenportal
+
+Ist ein [Kundenportal](kundenportal.html) eingerichtet, veröffentlicht die Wissenspflege einzelne Seiten dort und zieht sie wieder zurück.
+
+---
+
+<!-- Quelle: https://getnetbrain.netfactory.de/doku/privater-vault.html -->
+
+# Privater Vault
+
+Der private Vault ist Ihr persönlicher Notizbereich. Die Notizen liegen als Markdown-Dateien in einem **Ordner auf Ihrem eigenen Rechner**. Auf dem Server wird nichts davon gespeichert, und niemand sonst sieht sie.
+
+## Ordner verbinden
+
+Beim ersten Öffnen von **Privater Vault** wählen Sie mit **Ordner auswählen** einen Ordner aus, etwa in Ihren Dokumenten. Der Browser fragt einmal, ob NETbrain darauf zugreifen darf, und merkt sich die Wahl.
+
+> [!HINWEIS] Nur in Chrome und Edge
+> Der Zugriff auf einen lokalen Ordner braucht eine Browserfunktion, die es derzeit nur in Chrome und Edge gibt. In anderen Browsern erscheint „In diesem Browser nicht verfügbar“.
+
+Mit **Trennen** lösen Sie die Verbindung; die Dateien bleiben im Ordner.
+
+## Notizen anlegen
+
+- **Neue Notiz** — eine leere Notiz.
+- **Privat erfassen** — wie beim Firmenwissen: Text, Link oder Datei einwerfen und auf Wunsch von der KI aufbereiten lassen. Das Ergebnis schreibt Ihr Browser in den Ordner; der Server speichert es nicht.
+
+Anhänge liegen im Unterordner `anhaenge`. Da alles gewöhnliche Dateien sind, können Sie sie auch mit jedem anderen Editor öffnen und mit Ihren üblichen Mitteln sichern. NETbrains Sicherung erfasst sie nicht.
+
+## Finden
+
+Übersicht, Wissenslandkarte und **Alle Notizen** wie im Firmenwissen. Die Suche bleibt lokal in Ihrem Browser. **Im KI-Chat fragen** übergibt die Frage an den Chat.
+
+## Im KI-Chat nutzen
+
+Im [KI-Chat](ki-chat.html) können Sie den Vault über **Ordner verbinden** einbeziehen. Dann gehen passende Auszüge Ihrer Notizen mit der Frage an den KI-Anbieter — an Cloud-Anbieter nur, wenn Ihr Administrator das erlaubt.
+
+---
+
+<!-- Quelle: https://getnetbrain.netfactory.de/doku/ki-chat.html -->
+
+# KI-Chat
+
+Im KI-Chat stellen Sie Fragen in eigenen Worten. NETbrain zieht passende Seiten aus dem Firmenwissen heran und zeigt an jeder Antwort, welche es waren. Der Verlauf ist verschlüsselt; lesen können ihn nur Sie.
+
+## Verschlüsselte Historie
+
+Beim ersten Öffnen klicken Sie auf **Chat einrichten** und geben Ihr Anmeldepasswort ein. Ihr Browser leitet daraus einen Schlüssel ab; der Server speichert nur verschlüsselte Daten und kann sie nicht lesen.
+
+Danach zeigt NETbrain einmal **Ihren Wiederherstellungscode**. Bewahren Sie ihn auf: Mit ihm entsperren Sie den Verlauf, falls das Passwort nicht mehr passt. Bei späteren Besuchen entsperren Sie die Historie mit Passwort oder Wiederherstellungscode.
+
+> [!WICHTIG] Passwort und Code weg heißt Verlauf weg
+> Ohne Passwort und Wiederherstellungscode kann niemand den Verlauf entschlüsseln — auch kein Administrator. Der Notausgang „Passwort und Wiederherstellungscode verloren?“ löscht den Verlauf und beginnt neu.
+
+## Fragen stellen
+
+- **Anbieter und Modell** wählen Sie oben im Chat aus dem, was Ihr Administrator freigegeben hat.
+- `Enter` sendet, `Umschalt` + `Enter` macht einen Zeilenumbruch.
+- Über **+** hängen Sie Dateien an (Bild, PDF oder Text, bis 10 MB, bis zu vier Bilder und vier Dateien je Nachricht), schalten die **Websuche** zu, diktieren oder wechseln zwischen den Modi **Antwort** und **Plan**.
+
+## Firmenwissen und Vault einbeziehen
+
+Im Kontextmenü stellen Sie ein, ob das Firmenwissen einbezogen wird: **Auto**, **An** oder **Aus**. Unter jeder Antwort steht, wie viele Seiten herangezogen wurden, mit **Ohne Firmenwissen wiederholen** bzw. **Mit Firmenwissen wiederholen**.
+
+Mit **Ordner verbinden** beziehen Sie zusätzlich Ihren [privaten Vault](privater-vault.html) ein.
+
+## Wechsel zu einem Cloud-Anbieter
+
+Enthält das Gespräch schon Firmenwissen und Sie wechseln zu einem Cloud-Anbieter, fragt NETbrain vorher: **Verlauf an … senden?** Die Zustimmung gilt für dieses Gespräch und diesen Anbieter und wird protokolliert. Was Ihr Administrator grundsätzlich nicht erlaubt, lässt sich auch so nicht freigeben.
+
+## Eigener Zugang
+
+Haben Sie einen eigenen API-Schlüssel bei einem Anbieter, hinterlegen Sie ihn unter **Eigener Zugang**. Er hat dann Vorrang vor dem Firmenzugang, die Modellwahl ist frei, und die Kosten laufen über Ihr eigenes Konto. Administratoren können eigene Zugänge je Rolle sperren.
+
+## Grenzen
+
+Damit niemand versehentlich das Kontingent des ganzen Hauses verbraucht, gelten je Konto Grenzen — in der Vorgabe sechs KI-Aufrufe pro Minute, 30 pro Tag und zwei gleichzeitig, dazu 256 MB Chat-Anhänge. Ihr Administrator kann sie anpassen.
+
+---
+
+<!-- Quelle: https://getnetbrain.netfactory.de/doku/benutzer.html -->
+
+# Benutzer und Rollen
+
+Konten verwalten Administratoren unter **Administration → Übersicht & Konten**. Die Zahl der Konten ist durch die Lizenz nicht begrenzt.
+
+## Die drei Rollen
+
+| Rolle | Darf |
+|---|---|
+| **Benutzer** | Firmenwissen lesen, einreichen und Fehler melden; privater Vault; KI-Chat. Jedes Konto hat diese Rolle. |
+| **Wissenspflege** | zusätzlich Einreichungen veröffentlichen oder ablehnen, Seiten bearbeiten, verschieben und löschen, Seiten im Kundenportal veröffentlichen. |
+| **Admin** | zusätzlich Konten und Rollen verwalten, KI-Zugänge und Freigaben, Einstellungen, Sicherung, Updates, Kundenportal und Lizenz. |
+
+Eine Firmenseite entsteht immer über die Wissensprüfung: Benutzer reichen ein, die Wissenspflege gibt frei.
+
+## Konto anlegen
+
+Unter **Konto anlegen** Benutzername, Anzeigename und ein vorläufiges Passwort eintragen. Das Konto ist sofort freigegeben. Bei der ersten Anmeldung setzt die Person ein eigenes Passwort und richtet die Zwei-Faktor-Anmeldung ein.
+
+## Zugangsanfragen
+
+Wer sich unter `/registrieren` selbst anmeldet, erscheint unter **Wartet auf Freigabe**. **Freigeben** schaltet das Konto frei, **Ablehnen** verwirft die Anfrage.
+
+## Konten verwalten
+
+Je Konto in der Liste **Konten**:
+
+- **Rollen** — Häkchen für Wissenspflege und Admin, dann **Rollen speichern**.
+- **Vorläufiges Passwort setzen** — beendet alle Sitzungen des Kontos; die Person muss beim nächsten Anmelden ein eigenes Passwort wählen.
+- **2FA zurücksetzen** — etwa bei verlorenem Handy; die Person richtet die Zwei-Faktor-Anmeldung beim nächsten Anmelden neu ein.
+- **Sperren** und **Entsperren**.
+- **Löschen**.
+
+Unter **Letzte Kontenänderungen** steht, wer wann was geändert hat.
+
+> [!HINWEIS] Ein vorläufiges Passwort öffnet den Chatverlauf nicht
+> Der Chatverlauf ist mit dem Passwort der Person verschlüsselt. Nach einem vom Administrator gesetzten Passwort entsperrt sie ihn mit ihrem Wiederherstellungscode.
+
+## Wenn sich der letzte Administrator aussperrt
+
+Auf dem Server, im Verzeichnis `/opt/netbrain`:
+
+```
+sudo docker compose -f netbrain-compose.yml exec netbrain node scripts/user.mjs --2fa-reset <benutzername>
+```
+
+Die Zwei-Faktor-Anmeldung lässt sich insgesamt freiwillig machen, mit `NETBRAIN_2FA_OPTIONAL: "true"` in der Compose-Datei. Wir raten davon ab.
+
+---
+
+<!-- Quelle: https://getnetbrain.netfactory.de/doku/ki-zugaenge.html -->
+
+# KI-Zugänge und Freigaben
+
+Welche KI NETbrain nutzt und wer welches Modell verwenden darf, legen Administratoren unter **Administration → KI & Zugriffsrechte** fest. Sie können einen Modellserver im eigenen Netz, einen Cloud-Anbieter oder beides einrichten.
+
+## Anbieter und Modelle
+
+Je Anbieter tragen Sie die Server-Adresse und einen zentralen Schlüssel ein. Der Schlüssel wird verschlüsselt gespeichert. **Modelle jetzt prüfen** ruft jedes eingestellte Modell einmal wirklich auf — das beantwortet die Frage „liegt es an uns oder am Anbieter?“ in Sekunden.
+
+## Interne KI-Aufgaben
+
+NETbrain nutzt die KI auch selbst: zum Aufbereiten eingereichten Wissens, für Rückfragen und zum Lesen von Bildern und Scans. Welches Modell das jeweils übernimmt, stellen Sie hier ein, ebenso die Spracheingabe.
+
+## Freigaben je Rolle und Konto
+
+- **Freigabe je Rolle** — welche Modelle Benutzer, Wissenspflege und Admins im Chat wählen dürfen.
+- **Ausnahmen je Konto** — abweichende Modelle für einzelne Personen, und ob jemand einen eigenen Zugang hinterlegen darf.
+
+## Wissen und Cloud
+
+Zwei Schalter regeln, ob **Firmenwissen** und ob **private Auszüge** aus dem Vault an Cloud-Anbieter gehen dürfen. Ein Modellserver im eigenen Netz ist davon nicht betroffen. Unter **Freigaben aus Gesprächen** sehen Sie, wo Nutzer im Einzelfall der Übermittlung zugestimmt haben.
+
+Was dabei genau übertragen wird, steht unter [Was den Server verlässt](datenfluss.html).
+
+## Weitere Einstellungen
+
+- **Markenschreibweisen** — wie Produkt- und Firmennamen geschrieben werden, damit die Aufbereitung sie nicht verändert.
+- **Nutzungsgrenzen** unter **Administration → Einstellungen** — KI-Aufrufe je Minute und Tag, gleichzeitige Aufrufe, Dateien und Datenmenge je Tag.
+- **Letzte Änderungen** — das Protokoll aller Änderungen an diesen Einstellungen.
+
+---
+
+<!-- Quelle: https://getnetbrain.netfactory.de/doku/kundenportal.html -->
+
+# Kundenportal
+
+Mit dem Kundenportal geben Sie einzelne Wissensseiten für Ihre Kunden frei: Anleitungen, Antworten auf häufige Fragen, Produktwissen. Das Portal zeigt sie ohne Anmeldung, mit Suche, unter einer eigenen Adresse. Es ist Teil Ihrer Lizenz, sofern diese das Portal enthält; die Testlizenz enthält es.
+
+## So funktioniert es
+
+Das Portal ist ein **eigener, kleiner Container**. Er enthält keinen NETbrain-Code und hat keinen Zugriff auf Ihre Installation. NETbrain schiebt den freigegebenen Stand zu ihm hin — signiert mit einem Kopplungsschlüssel —, das Portal holt nichts ab. NETbrain muss das Portal also erreichen können, umgekehrt nicht.
+
+- Freigegeben wird **der Stand zum Zeitpunkt der Freigabe**. Ändert jemand die Seite danach, geht die Änderung nicht unbemerkt hinaus: NETbrain zeigt „die Seite wurde seitdem geändert“, und Sie veröffentlichen den neuen Stand bewusst.
+- Links zeigen nur auf ebenfalls freigegebene Seiten; Verweise auf Unveröffentlichtes werden zu Text. Nachweise, Anhänge und interne Angaben gehen nicht mit.
+- NETbrain gleicht bei jeder Freigabe und alle zehn Minuten ab. Läuft die Lizenz aus und gleicht NETbrain nicht mehr ab, verschwinden die Inhalte nach acht Tagen von selbst.
+
+## Portal-Container starten
+
+Das Image ist öffentlich: `ghcr.io/netfactory-gmbh/netbrain-portal`. Es spricht HTTP auf Port 8080; TLS übernimmt Ihr Reverse-Proxy, unter einem eigenen Hostnamen wie `wissen.ihre-firma.de`.
+
+Der Kopplungsschlüssel verbindet beide Seiten. Er entsteht auf einem von zwei Wegen:
+
+- **Sie wählen ihn selbst**, etwa mit `openssl rand -base64 32`, starten das Portal damit und tragen ihn in NETbrain unter **Schlüssel eintragen** ein. So arbeitet auch eine App-Plattform, die den Schlüssel vorgibt.
+- **NETbrain erzeugt ihn** über **Schlüssel erzeugen**. Er erscheint einmal; kopieren Sie ihn gleich und setzen Sie ihn im Portal.
+
+Die Schritte:
+
+1. Den Container mit dem Schlüssel starten:
+
+```
+docker run -d --name netbrain-portal --restart unless-stopped \
+  -p 127.0.0.1:8080:8080 -v netbrain-portal-data:/data \
+  -e PORTAL_SYNC_KEY='<schlüssel>' \
+  ghcr.io/netfactory-gmbh/netbrain-portal:latest
+```
+
+2. Den Reverse-Proxy für den Portal-Hostnamen auf Port 8080 einrichten.
+3. In NETbrain unter **Administration → Kundenportal** die Adresse des Portals eintragen und speichern.
+4. Den Schlüssel unter **Schlüssel eintragen** einfügen und **Schlüssel übernehmen**. NETbrain gleicht sofort ab; die Meldung nennt, wie viele Seiten übertragen wurden.
+
+Dieselben Felder bietet schon der Einrichtungsassistent im Schritt Kundenportal.
+
+Läuft das Portal auf demselben Docker-Host wie NETbrain, können Sie beide in ein gemeinsames Netz hängen und als Adresse `http://netbrain-portal:8080` eintragen; dann geht der Abgleich nicht über den Proxy.
+
+## Seiten freigeben
+
+Mitglieder der Wissenspflege sehen auf jeder Wissensseite unter der Kurzfassung die Zeile **Kundenportal**:
+
+- **Im Kundenportal veröffentlichen** — nach einer Bestätigung ist die Seite öffentlich lesbar.
+- **Aktuellen Stand veröffentlichen** — erscheint, wenn die Seite seit der Freigabe geändert wurde.
+- **Zurückziehen** — die Seite verschwindet beim nächsten Abgleich aus dem Portal.
+
+Unter **Administration → Kundenportal** stehen alle freigegebenen Seiten, ebenfalls mit **Zurückziehen**. Legt jemand eine freigegebene Seite in den Papierkorb, wird auch die Freigabe zurückgezogen.
+
+## Erscheinungsbild
+
+Unter **Administration → Kundenportal → Erscheinungsbild** passen Sie das Portal an Ihr Haus an:
+
+- **Name in der Kopfzeile** und **Einleitung** auf der Startseite,
+- **Logo** — PNG, JPEG oder WebP bis 512 KB; ohne eigenes Logo erscheint das NETbrain-Logo,
+- **Akzentfarbe** für Knöpfe und Links — ist sie auf dem Hintergrund schlecht lesbar, gleicht das Portal die Linkfarbe selbst ab,
+- **Design** hell oder dunkel,
+- **Impressum**, **Datenschutzerklärung** und **Kontaktadresse** — sie stehen in der Fußzeile.
+
+> [!WICHTIG] Impressum nicht vergessen
+> Ein öffentlich erreichbares Portal Ihres Unternehmens braucht in der Regel ein Impressum und eine Datenschutzerklärung. Verweisen Sie auf die Seiten Ihres Webauftritts.
+
+Nach dem Speichern gleicht NETbrain sofort ab. Logo und Einstellungen liegen bei den Portal-Freigaben und sind damit Teil der Sicherung.
+
+## Suchmaschinen
+
+Standardmäßig bittet das Portal Suchmaschinen, es nicht aufzunehmen. Sollen Ihre Inhalte gefunden werden, setzen Sie unter **Administration → Kundenportal** das Häkchen für Suchmaschinen.
+
+## Auf einer App-Plattform
+
+Was die Plattform für den Portal-Container bereitstellen muss, steht unter [Kubernetes und App-Plattformen](plattform.html#kundenportal).
+
+---
+
+<!-- Quelle: https://getnetbrain.netfactory.de/doku/lizenz.html -->
+
+# Lizenz
+
+NETbrain wird je Installation und Jahr lizenziert. Die Zahl der Benutzerkonten ist nicht begrenzt. Aktualisierungen und eine monatliche Betreuungszeit sind enthalten.
+
+## Sieben Tage ohne Lizenz
+
+Eine neue Installation ist ab dem ersten Start **sieben Tage vollständig nutzbar**, ganz ohne Lizenzdatei. In dieser Zeit können Sie in Ruhe ausprobieren.
+
+## Testlizenz anfordern
+
+Unter **Lizenz** (`/lizenz`) oder im Einrichtungsassistenten fordern Administratoren eine Testlizenz über sieben Tage an: Firma, Name und Mailadresse eintragen, die Lizenz kommt per Mail. Den Block aus der Mail fügen Sie wie jede andere Lizenz ein. Je Mailadresse gibt es eine Testlizenz. Sie enthält auch das [Kundenportal](kundenportal.html).
+
+## Lizenz hinterlegen
+
+Ein Administrator öffnet unter **Administration** den Verweis **Lizenz aktivieren oder verlängern** oder direkt `/lizenz`, fügt den Inhalt der Lizenzdatei ein und klickt **Lizenz prüfen und aktivieren**. NETbrain bindet die Lizenz dabei beim Lizenzdienst an diese Installation; dieselbe Datei lässt sich nicht auf einem zweiten Server aktivieren. Nach erfolgreicher Aktivierung bestätigt die Seite die Lizenz und leitet zur Anwendung weiter.
+
+Übertragen werden nur die Lizenzdatei und der technische Installationsschlüssel. Notizen, Chats und Konten bleiben in Ihrer Installation.
+
+## Verbindung zum Lizenzdienst
+
+NETbrain bestätigt die Aktivierung regelmäßig beim Lizenzdienst. Ist er nicht erreichbar, arbeitet eine aktivierte Installation bis zu **sieben Tage** weiter und weist darauf hin. Der Server braucht dafür ausgehend Port 443 zu `lizenz-netbrain.netfactory.de`.
+
+## Ablauf und Verlängerung
+
+Nach dem Ablauftag bleiben **sieben Tage Übergangsfrist**. Für die Verlängerung erhalten Sie von uns eine neue Lizenzdatei, die Sie an derselben Stelle einfügen. Die Testlizenz hat keine Übergangsfrist.
+
+Ist weder Testphase noch Lizenz gültig, bleiben erreichbar:
+
+- die Lizenzseite, um eine Lizenz einzufügen,
+- der **Export des Firmenwissens** als JSON für Administratoren,
+- der private Vault.
+
+Es geht nichts verloren. Sobald eine gültige Lizenz hinterlegt ist, steht sofort wieder alles offen.
+
+## Für den Support
+
+Unter `/lizenz` steht im aufklappbaren Bereich **Installationskennung für den Support** die Kennung Ihrer Installation. Nennen Sie sie bei Fragen zur Lizenz. Lizenz kaufen oder verlängern: [info@netfactory.de](mailto:info@netfactory.de).
+
+---
+
+<!-- Quelle: https://getnetbrain.netfactory.de/doku/reverse-proxy.html -->
+
+# Reverse-Proxy
+
+NETbrain spricht im Container HTTP und wird nur auf `127.0.0.1:4321` veröffentlicht. Zwischen Ihren Anwendern und NETbrain steht ein Reverse-Proxy, den Sie stellen — nginx, Apache, HAProxy, Traefik oder die Appliance, die bei Ihnen ohnehin davorsteht. NETbrain bringt keinen mit und beschafft kein Zertifikat.
+
+## Die acht Punkte
+
+Hinter jedem steht, was passiert, wenn er fehlt.
+
+### 1. TLS beenden, Zertifikat beschaffen und erneuern
+
+NETbrain setzt sein Sitzungscookie als `secure`; über HTTP verwirft der Browser es wortlos. Die Anmeldeseite erscheint dann nach richtigem Passwort einfach wieder. Ein abgelaufenes Zertifikat wirkt genauso — die Erneuerung gehört in Ihre Überwachung.
+
+### 2. Port 80 auf 443 weiterleiten
+
+Anwender tippen den Namen ohne `https://`.
+
+### 3. HSTS setzen
+
+Der Header `Strict-Transport-Security: max-age=31536000; includeSubDomains` kommt entweder vom Proxy oder von NETbrain, mit `NETBRAIN_HSTS: "true"` in der Compose-Datei. Erst einschalten, wenn HTTPS unter dem endgültigen Namen funktioniert: Ein HSTS-Header unter falschem Namen sperrt diesen Namen ein Jahr lang in jedem Browser, der ihn gesehen hat.
+
+### 4. Mindestens 12 MB Request-Body durchlassen
+
+In nginx: `client_max_body_size 12m`. Ein engerer Deckel lässt einen eingeworfenen Scan in einer Fehlerseite Ihres Proxys enden, die dem Anwender nicht sagt, was los ist.
+
+### 5. `X-Forwarded-For` setzen und die Zahl der Proxys hinterlegen
+
+`NETBRAIN_TRUSTED_PROXY_HOPS` in der Compose-Datei oder im Assistenten, bei einem Proxy `1`. Fehlt der Wert, sieht die Anmeldedrossel alle Anwender als eine Adresse, und ein Fehlversuch sperrt alle aus.
+
+### 6. Port 4321 auf den Proxy beschränken
+
+Steht der Proxy auf demselben Server, erledigt das der Installer. Steht er auf einem anderen Rechner (`NETBRAIN_BIND=0.0.0.0`), brauchen Sie eine Firewallregel — sonst kann jeder am Proxy vorbei `X-Forwarded-For` selbst setzen und gezielt fremde Konten aussperren.
+
+### 7. Den DNS-Namen bei NETbrain hinterlegen
+
+(`NETBRAIN_ALLOWED_HOSTS`, siehe [Installation](installation.html#dns-name-und-proxy-kette-eintragen)). Fehlt er, antwortet NETbrain mit **421**. Den `Host`-Header reicht der Proxy unverändert weiter.
+
+### 8. `NODE_ENV=production` nicht überschreiben
+
+Das Image setzt den Wert; ohne ihn ist das Sitzungscookie nicht `secure`.
+
+Empfohlen: Richten Sie die Healthprobe des Proxys auf `/api/ready`. (Nicht auf `/api/health`: Das meldet bei fehlender Lizenz 503, und der Proxy sperrte die Installation dann von ihrer eigenen Lizenzseite aus.) Dann nimmt er NETbrain während eines Updates kurz aus dem Verkehr.
+
+## Beispiel für nginx
+
+Deckt die Punkte 1 bis 5 ab:
+
+```
+server {
+  listen 443 ssl;
+  server_name netbrain.ihre-firma.de;
+
+  ssl_certificate     /etc/ssl/certs/netbrain.crt;
+  ssl_certificate_key /etc/ssl/private/netbrain.key;
+
+  add_header Strict-Transport-Security "max-age=31536000; includeSubDomains" always;
+  client_max_body_size 12m;
+
+  location / {
+    proxy_pass http://127.0.0.1:4321;
+    proxy_set_header Host              $host;
+    proxy_set_header X-Forwarded-For   $proxy_add_x_forwarded_for;
+    proxy_set_header X-Forwarded-Proto $scheme;
+  }
+}
+
+server {
+  listen 80;
+  server_name netbrain.ihre-firma.de;
+  return 308 https://$host$request_uri;
+}
+```
+
+## Firewall, wenn der Proxy woanders steht
+
+Die Regel gehört in die iptables-Kette `DOCKER-USER`. `ufw` und `firewalld` greifen hier **nicht** — Docker hängt seine eigenen Regeln davor, und `ufw status` meldet „aktiv“, obwohl der Port offen ist.
+
+```
+sudo iptables -I DOCKER-USER -i <externes-interface> -p tcp --dport 4321 -j DROP
+sudo iptables -I DOCKER-USER -i <externes-interface> -s <ip-des-proxys> -p tcp --dport 4321 -j ACCEPT
+sudo iptables -I DOCKER-USER -i <externes-interface> -p tcp --dport 4321 -m conntrack --ctstate ESTABLISHED,RELATED -j ACCEPT
+```
+
+`-I` fügt vorn ein; die zuletzt gesetzte Regel gilt zuerst. Docker legt die Kette bei jedem Start neu an — machen Sie die Regeln mit dem Mittel Ihrer Distribution dauerhaft, und zwar nach `docker.service`.
+
+## Nachweisen statt annehmen
+
+Vier Punkte lassen sich in je einer Minute belegen:
+
+```
+# Zertifikat gültig und HSTS kommt an
+curl -sI https://netbrain.ihre-firma.de/login | grep -i strict-transport
+
+# Anwendungsport von außen gesperrt (von einem anderen Rechner aus, muss scheitern)
+curl -m 5 http://<server-ip>:4321/api/health
+
+# Healthprobe über den Proxy
+curl -s https://netbrain.ihre-firma.de/api/health
+```
+
+Den vierten Punkt prüfen Sie im Browser: Werfen Sie eine Datei von etwa 10 MB als Firmenwissen ein. Kommt eine Fehlerseite Ihres Proxys statt einer Meldung von NETbrain, ist das Body-Limit zu eng.
+
+---
+
+<!-- Quelle: https://getnetbrain.netfactory.de/doku/sicherung.html -->
+
+# Sicherung und Wiederherstellung
+
+NETbrain sichert sich selbst: täglich, verschlüsselt und mit anschließender Prüfung. Ihre Aufgabe ist zweierlei — die Sicherungen vom Server herunterholen und das Zurückspielen gelegentlich üben.
+
+## Was gesichert wird
+
+Eine Sicherung ist eine einzelne, mit AES-256-GCM verschlüsselte Datei (`.nbk`). Sie enthält:
+
+- den Wissensbestand samt Anhängen,
+- die Benutzerkonten,
+- die Chat-Daten samt Anhängen (sie sind zusätzlich Ende-zu-Ende-verschlüsselt),
+- die KI-Freigaben,
+- die Freigaben für das Kundenportal.
+
+Alles liegt in einem Bündel, weil die Teile zusammengehören: Die Chat-Schlüssel eines Kontos sind mit dessen Passwort verpackt. Ein Bündel aus verschiedenen Zeitpunkten wäre teilweise unlesbar.
+
+> [!WICHTIG] Ohne Passphrase keine Wiederherstellung
+> Die Sicherungen öffnen sich nur mit der Sicherungs-Passphrase aus der Einrichtung. Wir haben sie nicht und können sie nicht wiederherstellen.
+
+## Zeitplan und letzter Lauf
+
+Unter **Administration → Einstellungen → Sicherungen** stehen Uhrzeit (Vorgabe 02:00, leer heißt aus), die Zahl der aufbewahrten Stände (Vorgabe 14) und der Knopf **Jetzt sichern**. Unter **Administration → Übersicht** sehen Sie den letzten Lauf und sein Ergebnis. Ein ausbleibender Lauf meldet sich sonst nirgends — werfen Sie gelegentlich einen Blick darauf.
+
+Von Hand auf dem Server, etwa vor einem Eingriff:
+
+```
+cd /opt/netbrain
+sudo docker compose -f netbrain-compose.yml exec netbrain node scripts/backup.mjs
+```
+
+## Sicherungen vom Server holen
+
+Die Sicherungen liegen zunächst auf demselben Rechner wie die Daten. Gegen einen gelöschten Beitrag hilft das, gegen einen Ausfall des Servers nicht. Zwei Wege:
+
+**Aus dem Volume kopieren**, per Auftrag Ihres Sicherungssystems:
+
+```
+sudo docker compose -f /opt/netbrain/netbrain-compose.yml cp netbrain:/backups/ /pfad/zu/ihrem/sicherungsziel/
+```
+
+**Ein Verzeichnis des Servers einhängen.** In der `netbrain-compose.yml` die Zeile `- netbrain-backups:/backups` durch Ihr Verzeichnis ersetzen, etwa `- /srv/sicherung/netbrain:/backups`, dann `sudo ./install.sh`. NETbrain schreibt danach direkt dorthin.
+
+Die Bündel sind verschlüsselt und dürfen auf ein Ziel, das andere lesen können — solange die Passphrase nicht danebenliegt.
+
+## Eine Sicherung prüfen
+
+```
+cd /opt/netbrain
+sudo docker compose -f netbrain-compose.yml exec netbrain sh -c 'ls -lh /backups | tail -5'
+sudo docker compose -f netbrain-compose.yml exec netbrain node scripts/backup.mjs --verify /backups/<datei>.nbk
+```
+
+## Wiederherstellen
+
+Die Wiederherstellung schreibt **ausschließlich auf ein leeres Ziel**; ein bestehender Bestand wird nie überschrieben. Spielen Sie deshalb erst in ein Prüfverzeichnis zurück, sehen Sie es an, und entscheiden Sie dann.
+
+```
+sudo docker compose -f netbrain-compose.yml exec netbrain \
+  node scripts/backup.mjs --restore /backups/<datei>.nbk \
+    --vault /tmp/probe/vault --users /tmp/probe/users.json \
+    --chat /tmp/probe/ai-chat --policy /tmp/probe/ai-policy.json \
+    --portal /tmp/probe/portal.json
+```
+
+Enthält das Bündel einen Teil, für den Sie kein Ziel angeben, bricht die Wiederherstellung ab, statt ihn stillschweigend wegzulassen. Ältere Bündel ohne Portal-Freigaben brauchen `--portal` nicht.
+
+Die Passphrase nimmt der Lauf aus der Installation. Auf einem fremden Rechner — dem Ernstfall — geben Sie sie mit: `NETBRAIN_BACKUP_PASSPHRASE='…'`.
+
+### Auf einen neuen Server
+
+NETbrain nach [Installation](installation.html) aufsetzen, **nicht** einrichten, und stattdessen die Sicherung nach `/data` zurückspielen. Wenden Sie sich dafür gern an uns; wir gehen den Weg mit Ihnen durch.
+
+## Einmal im Quartal: die Probe
+
+Spielen Sie vierteljährlich eine Sicherung testweise in ein Prüfverzeichnis zurück und sehen Sie hinein. Mit Termin im Kalender, sonst findet es nicht statt. Eine Sicherung, aus der nie jemand zurückgespielt hat, ist kein Nachweis, sondern eine Vermutung.
+
+## Volumes
+
+| Volume | Inhalt |
+|---|---|
+| `netbrain-data` (`/data`) | Wissensbestand, Anhänge, Konten, Einstellungen, Lizenz — der einzige unersetzliche Zustand |
+| `netbrain-backups` (`/backups`) | die verschlüsselten Sicherungen |
+
+Zwei Installationen dürfen niemals dasselbe Datenvolume benutzen. Es gibt keine Sperre dagegen, und der Schaden zeigt sich erst später als widersprüchlicher Bestand.
+
+---
+
+<!-- Quelle: https://getnetbrain.netfactory.de/doku/aktualisieren.html -->
+
+# Aktualisieren
+
+Neue Versionen erscheinen regelmäßig. Administratoren sehen sie am Zahnrad oben rechts und ausführlich unter **Administration → Übersicht → Systemaktualisierung**. Was sich geändert hat und ob vorher etwas zu tun ist, steht in den [Versionshinweisen](versionen.html).
+
+## Im Browser
+
+**Jetzt aktualisieren** führt vier Schritte in dieser Reihenfolge aus:
+
+1. eine verschlüsselte Sicherung anlegen — schlägt sie fehl, beginnt das Update nicht;
+2. das neue NETbrain-Image beziehen;
+3. den Container neu starten und die Selbstprüfung abwarten;
+4. bei fehlgeschlagener Prüfung automatisch zur bisherigen Version zurückkehren.
+
+NETbrain selbst hat dabei keinen Zugriff auf Docker. Ein lokaler Helfer auf dem Server, den der Installer eingerichtet hat, übernimmt genau diesen Ablauf und sonst nichts. Er prüft alle sechs Stunden, ob es eine neue Version gibt.
+
+## Von Hand auf dem Server
+
+Für Wartung und den Notfall:
+
+```
+cd /opt/netbrain
+sudo docker compose -f netbrain-compose.yml exec netbrain node scripts/backup.mjs
+sudo ./install.sh
+```
+
+Der Installer erkennt die vorhandene Installation, lässt die Daten stehen und wartet, bis die Anpassungen am Bestand durch sind. Ihre `netbrain-compose.yml` bleibt unverändert. Während der Bestand angepasst wird, meldet `sudo ./install.sh status` den Zustand `migriert` — das ist normal.
+
+Eine bestimmte Version installieren Sie mit dem versionierten Link:
+
+```
+curl -fsSL https://getnetbrain.netfactory.de/install.sh@0.4.14 | sudo bash
+```
+
+## Zurück auf die Vorversion
+
+Geht über denselben Weg mit der alten Versionsnummer. Ein bereits angepasster Bestand ist von der Vorversion aber nicht immer vollständig lesbar. Der verlässliche Rückweg ist die Sicherung vor dem Update — deshalb steht sie dort.
+
+## Auf einer App-Plattform
+
+Der Update-Helfer braucht einen Docker-Host und greift auf Kubernetes nicht. Dort ziehen Sie den Image-Tag hoch wie bei jeder anderen Anwendung; siehe [Kubernetes und App-Plattformen](plattform.html).
+
+---
+
+<!-- Quelle: https://getnetbrain.netfactory.de/doku/ueberwachung.html -->
+
+# Überwachung
+
+NETbrain meldet seinen Zustand über HTTP-Endpunkte. Jeder antwortet mit **200**, wenn alles in Ordnung ist, und mit **503**, wenn nicht. Damit genügt in Uptime Kuma der gewöhnliche HTTP-Monitor.
+
+Dieselben Prüfungen sehen Administratoren auch in NETbrain selbst, unter **Administration → Übersicht → Betriebszustand**.
+
+## Die Endpunkte
+
+| Endpunkt | Prüft | 503, wenn | Token |
+|---|---|---|---|
+| `/api/live` | Der Prozess antwortet | — | nein |
+| `/api/ready` | Ablage beschreibbar, keine Migration im Gange | Ablage gestört, Migration läuft oder ist gescheitert | nein |
+| `/api/health` | wie `/api/ready`, zusätzlich die Lizenz | zusätzlich ohne gültige Lizenz | nein |
+| `/api/monitor/speicher` | Belegung von Daten- und Sicherungsablage in Prozent | über 90 % belegt | ja |
+| `/api/monitor/sicherung` | letzter Sicherungslauf | gescheitert oder älter als 26 Stunden | ja |
+| `/api/monitor/lizenz` | Restlaufzeit, Bestätigung durch den Lizenzdienst | weniger als 14 Tage übrig, gesperrt, oder seit 48 Stunden nicht bestätigt | ja |
+| `/api/monitor/portal` | letzter Abgleich mit dem Kundenportal | gescheitert oder älter als 30 Minuten; ohne Portal immer 200 | ja |
+
+`/api/live` und `/api/ready` sind die Probes für Kubernetes und antworten unabhängig vom Host-Header. `/api/health` beantwortet die Frage „ist alles gut, Lizenz eingeschlossen?“.
+
+## Token einrichten
+
+Die Endpunkte unter `/api/monitor/` geben Betriebsinterna preis und antworten nur mit Token. Ohne Token gibt es sie nicht (404).
+
+Am einfachsten: **Administration → Übersicht → Überwachung von außen → Token erzeugen**. Der Token steht danach dort zum Kopieren, samt Beispielaufruf. **Neuen Token erzeugen** macht den bisherigen ungültig.
+
+Alternativ geben Sie ihn vor, etwa auf einer App-Plattform: `NETBRAIN_MONITOR_TOKEN` mit mindestens 16 Zeichen (`openssl rand -hex 24`) in der `netbrain-compose.yml` bzw. als Umgebungsvariable des Pods. Dann ist das Feld in der Verwaltung fest.
+
+Der Monitor schickt den Token als Header:
+
+```
+curl -s -H "Authorization: Bearer <token>" https://netbrain.ihre-firma.de/api/monitor/speicher
+```
+
+Die Grenze für den Speicher ändern Sie mit `NETBRAIN_MONITOR_SPEICHER_PROZENT` (1 bis 99, Vorgabe 90).
+
+## Antwort
+
+Jeder Endpunkt unter `/api/monitor/` antwortet im selben Aufbau:
+
+```
+{
+  "ok": true,
+  "meldung": "Höchste Belegung 61.4 %.",
+  "daten": {
+    "grenze": 90,
+    "prozent": 61.4,
+    "data":    { "pfad": "/data",    "prozent": 61.4, "frei": 41234567168, "gesamt": 106825756672 },
+    "backups": { "pfad": "/backups", "prozent": 61.4, "frei": 41234567168, "gesamt": 106825756672 }
+  }
+}
+```
+
+Die `meldung` steht so in der Benachrichtigung, dass man ohne Nachschlagen weiß, was los ist. Größen sind in Byte.
+
+## In Uptime Kuma
+
+Je Endpunkt ein Monitor:
+
+1. **Monitor-Typ** „HTTP(s)“, **URL** etwa `https://netbrain.ihre-firma.de/api/monitor/sicherung`.
+2. Unter **Headers**: `{"Authorization": "Bearer <token>"}`.
+3. **Intervall**: 60 Sekunden für `live` und `ready`, 5 bis 15 Minuten für die übrigen genügt.
+
+Für einen Verlauf der Belegung nehmen Sie den Typ „HTTP(s) – Json Query“ mit dem Ausdruck `daten.prozent` und der Bedingung „kleiner als 90“.
+
+Für das Kundenportal selbst ein eigener Monitor auf `https://<portal-adresse>/health`.
+
+## Was bewusst fehlt
+
+Die Erreichbarkeit der KI-Anbieter: Eine echte Prüfung kostet bei jedem Aufruf Tokens. Prüfen Sie sie bei Bedarf unter **Administration → KI & Zugriffsrechte → Modelle jetzt prüfen**.
+
+---
+
+<!-- Quelle: https://getnetbrain.netfactory.de/doku/plattform.html -->
+
+# Kubernetes und App-Plattformen
+
+Diese Seite richtet sich an Betreiber von Kubernetes- oder App-Plattformen. Gemeint ist der Fall, dass ein Kunde NETbrain selbst startet und niemand dabei etwas von Hand einrichtet. Installer und Update-Helfer werden hier nicht gebraucht.
+
+## Kachel im Katalog
+
+| | |
+|---|---|
+| Name | NETbrain |
+| Beschreibung | Wissensplattform mit Firmenwissen, privatem Vault und KI-Chat |
+| Symbol, einfarbig | [netbrain-icon-mono.svg](https://getnetbrain.netfactory.de/bilder/netbrain-icon-mono.svg) — `fill="currentColor"`, färbt sich nach der Schriftfarbe der Kachel |
+| Symbol, farbig | [netbrain-icon.svg](https://getnetbrain.netfactory.de/bilder/netbrain-icon.svg) |
+| Schriftzug | [netbrain-logo.svg](https://getnetbrain.netfactory.de/bilder/netbrain-logo.svg) |
+
+Bitte das Signet verwenden, kein allgemeines Gehirn- oder KI-Symbol.
+
+## NETbrain
+
+| | |
+|---|---|
+| Image | `ghcr.io/netfactory-gmbh/netbrain:<version>` (öffentlich) |
+| Port | HTTP auf **4321**, TLS am Ingress |
+| Liveness | `/api/live` — antwortet, solange der Prozess lebt |
+| Readiness | `/api/ready` — Ablage beschreibbar, keine Migration im Gange |
+| Benutzer | `10001`, beide Volumes müssen ihm gehören |
+| Repliken | genau **1**, kein Autoscaling |
+
+### Umgebungsvariablen
+
+| Variable | Wert | Ohne sie |
+|---|---|---|
+| `NETBRAIN_ALLOWED_HOSTS` | der vergebene Hostname (empfohlen) | Jeder Hostname wird angenommen, bis der Assistent den Namen speichert |
+| `NETBRAIN_SETUP_TOKEN` | Zufallswert, mindestens 24 Zeichen | Das Token steht nur im Pod-Log; der Kunde kommt nicht an seine Einrichtung |
+| `NETBRAIN_SECRET_KEY` | Zufallswert, `openssl rand -base64 32` | Der Kunde kann keine KI-Zugänge hinterlegen |
+| `NETBRAIN_TRUSTED_PROXY_HOPS` | Zahl der Proxys davor, meist `1` | Anmeldedrossel und Protokoll sehen die Proxy-Adresse |
+
+`NETBRAIN_SETUP_TOKEN` und `NETBRAIN_SECRET_KEY` gehören in den Geheimnisspeicher der Plattform und müssen **über Neustarts gleich bleiben**. Ein neuer `NETBRAIN_SECRET_KEY` macht hinterlegte KI-Schlüssel unlesbar.
+
+Zeigen Sie das Einrichtungs-Token auf der Kachel an, so wie das Startpasswort anderer Anwendungen. Der Kunde braucht es genau einmal.
+
+### Probes
+
+`/api/live` und `/api/ready` antworten unabhängig vom Host-Header, von Einrichtung und Lizenz. Das ist Absicht: Eine noch nicht eingerichtete oder gesperrte Installation muss weiterlaufen und ihre Einrichtungs- bzw. Lizenzseite ausliefern.
+
+> [!WICHTIG] `/api/health` nicht als Probe verwenden
+> `/api/health` meldet **503**, solange die Lizenz fehlt oder abgelaufen ist. Als Liveness-Probe führt das zu einer Neustart-Schleife, als Readiness-Probe nimmt es die Installation aus dem Verkehr — der Kunde erreicht dann nicht einmal die Seite, auf der er die Lizenz einträgt. `/api/health` eignet sich für die Überwachung, nicht für Probes.
+
+```
+livenessProbe:
+  httpGet: { path: /api/live, port: 4321 }
+  periodSeconds: 30
+readinessProbe:
+  httpGet: { path: /api/ready, port: 4321 }
+  periodSeconds: 10
+startupProbe:
+  httpGet: { path: /api/live, port: 4321 }
+  failureThreshold: 30
+  periodSeconds: 5
+```
+
+Für die Überwachung (Speicher, Sicherung, Lizenz, Portal) gibt es zusätzlich `/api/monitor/*` mit Token; siehe [Überwachung](ueberwachung.html).
+
+### Volumes
+
+- `/data` — Wissensbestand, Konten, Chats, Lizenz. Der einzige unersetzliche Zustand.
+- `/backups` — die von NETbrain erzeugten verschlüsselten Sicherungen.
+
+Sichert die Plattform das Volume ohnehin, genügt das. Planen Sie dann nicht zusätzlich NETbrains eigene Sicherung mit Aufbewahrung im selben Verzeichnis — zwei Zeitpläne räumen sich die Dateien gegenseitig weg.
+
+### Ingress
+
+Der Ingress beendet TLS und reicht per HTTP weiter; den `Host`-Header lässt er unverändert. Ein umgeschriebener `Host` (Service-Name, `localhost`) führt zu **421**, sobald ein Hostname gesetzt ist. Request-Bodys bis 12 MB müssen durchgehen.
+
+### Warum genau eine Replik
+
+NETbrain ist für einen Knoten gebaut: Der Bestand liegt als Dateien vor, Schreibzugriffe werden im Prozess serialisiert, die Anmeldedrosseln zählen im Arbeitsspeicher. Eine zweite Replik hebt das auf. Also `replicas: 1` und eine Update-Strategie, die den alten Pod vor dem neuen beendet (`Recreate`).
+
+## Kundenportal
+
+Optional, nur für Kunden, deren Lizenz das Portal enthält.
+
+| | |
+|---|---|
+| Image | `ghcr.io/netfactory-gmbh/netbrain-portal:<version>` (öffentlich) |
+| Port | HTTP auf **8080**, eigener Hostname, TLS am Ingress |
+| Prüfpfad | `/health` |
+| Benutzer | `10001`, Volume `/data` muss ihm gehören; das übrige Dateisystem darf schreibgeschützt sein |
+| Repliken | **1** |
+| Variable | `PORTAL_SYNC_KEY` — Kopplungsschlüssel, mindestens 32 Zeichen |
+
+Die Plattform erzeugt `PORTAL_SYNC_KEY` (`openssl rand -base64 32`), legt ihn im Geheimnisspeicher ab — er muss über Neustarts gleich bleiben — und zeigt ihn **zusammen mit der Portal-Adresse auf der Kachel**. Der Kunde trägt beides in NETbrain unter **Administration → Kundenportal** ein; am Portal selbst richtet niemand etwas ein.
+
+NETbrain muss das Portal erreichen können, umgekehrt nicht. Das Portal verbindet sich nie mit NETbrain und braucht keinen Zugang dorthin.
+
+## Zwei-Faktor-Anmeldung
+
+Pflicht für jedes Konto. Sperrt sich der letzte Administrator aus:
+
+```
+kubectl exec <pod> -- node scripts/user.mjs --2fa-reset <benutzername>
+```
+
+`NETBRAIN_2FA_OPTIONAL=true` macht die Zwei-Faktor-Anmeldung freiwillig.
+
+## Lizenz
+
+Eine frische Installation läuft sieben Tage ohne Lizenz. Danach fordert der Kunde im Assistenten selbst eine Testlizenz an oder fügt seine Lizenz ein. Der Pod braucht dafür ausgehend HTTPS zu `lizenz-netbrain.netfactory.de`. Niemand auf der Plattform muss etwas freischalten.
+
+## Updates
+
+Ziehen Sie den Image-Tag hoch wie bei jeder anderen Anwendung; die [Versionshinweise](versionen.html) nennen, ob vorher etwas zu tun ist. Den mitgelieferten Update-Helfer und `install.sh` bitte nicht im Pod aufrufen — beide richten einen Docker-Host ein und haben im Pod nichts verloren.
+
+---
+
+<!-- Quelle: https://getnetbrain.netfactory.de/doku/datenfluss.html -->
+
+# Was den Server verlässt
+
+NETbrain läuft auf Ihrem Server. Diese Seite listet vollständig, welche Verbindungen nach außen es aufbaut, damit Ihre Datenschutzprüfung nicht raten muss.
+
+## An Ihren KI-Anbieter
+
+Wenn jemand den KI-Chat nutzt oder Wissen aufbereiten lässt, geht an den gewählten Anbieter:
+
+- die Frage oder der eingeworfene Text samt beigefügter Dateien und Bilder,
+- die Ausschnitte aus dem Firmenwissen, die für die Antwort herangezogen werden — sofern Firmenwissen für diesen Anbieter freigegeben ist,
+- bei verbundenem privaten Vault die passenden lokalen Auszüge — sofern freigegeben.
+
+Welcher Anbieter das ist, bestimmen Sie. Bei einem Modell in Ihrem eigenen Netz bleibt die Verarbeitung intern. Ob Firmenwissen oder private Auszüge an **Cloud**-Anbieter gehen dürfen, regeln zwei Schalter unter **Administration → KI & Zugriffsrechte → Wissen und Cloud**. Wechselt jemand mitten im Gespräch zu einem Cloud-Anbieter, fragt NETbrain vorher nach; die Zustimmung wird protokolliert. Siehe [KI-Zugänge und Freigaben](ki-zugaenge.html).
+
+## Websuche und abgerufene Links
+
+- Fügt jemand beim Erfassen einen **Link** ein, ruft NETbrain diese Seite ab und speichert eine Kopie als Nachweis.
+- Nutzt jemand im Chat die **Websuche**, gehen daraus geformte Suchanfragen an die Suche des KI-Anbieters oder an eine eigene Suchmaschine, falls Sie eine eingerichtet haben; die besten Treffer werden abgerufen.
+
+## An den Lizenzdienst
+
+`lizenz-netbrain.netfactory.de`, betrieben von NETFACTORY:
+
+- **Aktivierung und regelmäßige Bestätigung**: die Lizenzdatei und der technische Installationsschlüssel. Keine Inhalte, keine Konten.
+- **Testlizenz**, wenn Sie eine anfordern: Firma, Name und Mailadresse, zur Ausstellung und Zustellung der Lizenz.
+- **Feedback**, wenn jemand über „Feedback geben“ etwas schickt: der Text, die freiwillige Kontaktangabe, die NETbrain-Version und die Installationskennung — ohne Benutzername oder Konto. Die Meldung wird in NETbrain nicht gespeichert, sondern per Mail an uns zugestellt.
+
+## An die Container-Registry
+
+`ghcr.io`: bei Installation und Update der Bezug des Images, beim Update-Helfer alle sechs Stunden die Frage nach einer neuen Version. Das belegt, welche Version Sie beziehen — mehr nicht.
+
+## An das Kundenportal
+
+Nur wenn Sie es einrichten: die freigegebenen Seiten als fertiges HTML samt ihren Abbildungen, an den Portal-Container unter der von Ihnen eingetragenen Adresse.
+
+## Sonst nichts
+
+Keine Nutzungsstatistik, kein Tracking, keine automatische Fehlerübermittlung. Sicherungen bleiben auf Ihrem Server, verschlüsselt mit Ihrer Passphrase. Der Chatverlauf liegt Ende-zu-Ende-verschlüsselt auf dem Server; der Schlüssel entsteht im Browser aus dem Passwort des Nutzers.
+
+Persönliche Notizen im privaten Vault liegen in einem Ordner auf dem Rechner des Mitarbeiters und werden nicht auf dem Server gespeichert.
+
+---
+
+<!-- Quelle: https://getnetbrain.netfactory.de/doku/fehlerbehebung.html -->
+
+# Fehlerbehebung
+
+Die meisten Probleme haben eine von wenigen Ursachen. Diese Seite ordnet sie nach dem, was Sie sehen.
+
+## Bei der Installation
+
+| Meldung | Ursache und Abhilfe |
+|---|---|
+| `Bitte mit sudo aufrufen.` | Das Skript braucht Root-Rechte: `… \| sudo bash`. |
+| `Docker läuft nicht` | `sudo systemctl start docker`, dann erneut. |
+| `Docker Compose (v2) fehlt` | `sudo apt-get install -y docker-compose-plugin` |
+| `Das Image … konnte nicht bezogen werden` | Kommt der Server ausgehend auf 443 zu `ghcr.io`? Löst der Name auf? Gibt es die Version? Eine Anmeldung braucht es nicht. |
+| `Port … ist belegt` | Anderen Port wählen: `… \| sudo NETBRAIN_PORT=4330 bash`, der Proxy leitet dann dorthin. |
+| `hat nach 180 Sekunden nicht »bereit« gemeldet` | Der Installer zeigt die letzten Protokollzeilen. Meist ist `/data` nicht beschreibbar oder eine Einstellung ungültig. |
+
+## Im Browser
+
+| Sie sehen | Ursache und Abhilfe |
+|---|---|
+| Fehler **421** | Der aufgerufene Name steht nicht in `NETBRAIN_ALLOWED_HOSTS`, oder der Proxy schreibt den `Host`-Header um. Siehe [Installation](installation.html#dns-name-und-proxy-kette-eintragen). |
+| Anmeldung erscheint nach richtigem Passwort wieder | NETbrain wird über HTTP statt HTTPS aufgerufen, oder das Zertifikat ist abgelaufen. Siehe [Reverse-Proxy](reverse-proxy.html). |
+| „Zu viele Anmeldeversuche“, obwohl niemand sich vertippt hat | `NETBRAIN_TRUSTED_PROXY_HOPS` fehlt oder steht auf `0`: Alle Nutzer erscheinen als eine Adresse. |
+| Einrichtungs-Token wird abgewiesen | Es ist ein altes. `sudo ./install.sh token` zeigt das aktuelle. |
+| Kein Token in der Ausgabe | Die Installation ist schon eingerichtet. |
+| Eine Datei lässt sich nicht einreichen, es erscheint eine fremde Fehlerseite | Das Body-Limit des Proxys ist kleiner als 12 MB. |
+| Lizenzseite statt Anwendung | Testphase oder Lizenz abgelaufen, oder die Aktivierung wurde länger als sieben Tage nicht bestätigt. Siehe [Lizenz](lizenz.html). |
+| „Aktivierung fehlgeschlagen“ | Der Server erreicht den Lizenzdienst nicht (ausgehend 443 zu `lizenz-netbrain.netfactory.de`), oder die Lizenz ist schon an eine andere Installation gebunden. |
+| Privater Vault „In diesem Browser nicht verfügbar“ | Der Vault braucht Chrome oder Edge. |
+| KI-Chat antwortet mit Fehler | **Administration → KI & Zugriffsrechte → Modelle jetzt prüfen** zeigt, welcher Anbieter nicht antwortet. |
+
+## Zustand prüfen
+
+```
+cd /opt/netbrain
+sudo ./install.sh status
+```
+
+Am Ende steht die Antwort der Selbstprüfung:
+
+- **bereit** — alles in Ordnung.
+- **migriert** — der Bestand wird nach einem Update angepasst. Abwarten.
+- **nicht bereit** — die Einzelprüfungen daneben nennen die Ursache, meist ein nicht beschreibbares `/data`.
+
+## Bevor Sie uns schreiben
+
+Schicken Sie bitte diese beiden Ausgaben mit; sie beantworten die meisten Rückfragen vorweg:
+
+```
+sudo ./install.sh status
+sudo ./install.sh logs
+```
+
+Die letzten Zeilen des Protokolls genügen, `Strg` + `C` beendet die Ausgabe. Unsere Adresse: [info@netfactory.de](mailto:info@netfactory.de). Aus der Anwendung heraus geht es auch über **Feedback geben** im Hinweisbalken.
+
+---
+
+<!-- Quelle: https://getnetbrain.netfactory.de/doku/versionen.html -->
+
+# Versionshinweise
+
+Was sich mit jeder Version geändert hat. Steht unter **Status** ein Hinweis, lesen Sie ihn vor dem Update; wie das Update selbst abläuft, steht unter [Aktualisieren](aktualisieren.html).
+
+## NETbrain 0.4.14
+
+**Stand:** 1. Oktober 2026
+
+**Status:** Keine Eingriffe nötig.
+
+### Betriebszustand in der Administration
+
+Unter **Verwaltung → Übersicht** stehen jetzt Speicherplatz, Sicherung, Lizenz und
+Kundenportal mit Ampel und Klartext — dieselben Prüfungen wie unter `/api/monitor/`.
+Den Token für die Überwachung von außen erzeugt NETbrain dort per Knopf; die Compose-Datei
+muss dafür niemand mehr anfassen. Fehlt das Sicherungsverzeichnis noch, misst die
+Speicherprüfung den Datenträger, auf dem es entsteht.
+
+## NETbrain 0.4.13
+
+**Stand:** 1. Oktober 2026
+
+**Status:** Keine Eingriffe nötig. Für die neue Überwachung `NETBRAIN_MONITOR_TOKEN` setzen.
+
+### Überwachung für Uptime Kuma und Co.
+
+Vier neue Endpunkte, je 200 oder 503, nur mit Token (`NETBRAIN_MONITOR_TOKEN`, als
+`Authorization: Bearer …`):
+
+- `/api/monitor/speicher` — Belegung von Daten- und Sicherungsablage in Prozent; 503 über 90 %
+  (`NETBRAIN_MONITOR_SPEICHER_PROZENT`).
+- `/api/monitor/sicherung` — letzter Lauf gescheitert oder älter als 26 Stunden.
+- `/api/monitor/lizenz` — weniger als 14 Tage Restlaufzeit, gesperrt oder seit 48 Stunden
+  nicht vom Lizenzdienst bestätigt.
+- `/api/monitor/portal` — Abgleich mit dem Kundenportal gescheitert oder älter als 30 Minuten.
+
+Ohne Token gibt es die Endpunkte nicht. Anleitung:
+https://getnetbrain.netfactory.de/doku/ueberwachung.html
+
+## NETbrain 0.4.12
+
+**Stand:** 1. Oktober 2026
+
+**Status:** Für Kubernetes und App-Plattformen wichtig: Probes auf `/api/live` und `/api/ready` umstellen. Docker-Installationen: keine Eingriffe nötig.
+
+### Eigene Endpunkte für Container-Probes
+
+- **`/api/live`** (Liveness) antwortet, solange der Prozess lebt.
+- **`/api/ready`** (Readiness) prüft Ablage und Migration.
+
+Beide antworten unabhängig vom Host-Header, von Einrichtung und Lizenz. Bisher diente
+`/api/health` als Probe; es meldet 503, solange die Lizenz fehlt. Auf Kubernetes führte das
+zu einer Neustart-Schleife, und eine Installation ohne Lizenz erreichte ihre eigene
+Lizenzseite nicht. `/api/health` bleibt unverändert und dient der Überwachung. Auch die
+Healthprobe eines Reverse-Proxys gehört auf `/api/ready`.
+
+## NETbrain 0.4.11
+
+**Stand:** 1. Oktober 2026
+
+**Status:** Keine Eingriffe nötig. Für das neue Erscheinungsbild auch den Portal-Container auf 0.4.11 bringen.
+
+### Kundenportal im eigenen Erscheinungsbild
+
+Unter **Verwaltung → Kundenportal → Erscheinungsbild**: Name in der Kopfzeile, Einleitung,
+eigenes Logo (PNG, JPEG, WebP bis 512 KB), Akzentfarbe, helles oder dunkles Design sowie
+Verweise auf Impressum, Datenschutzerklärung und eine Kontaktadresse in der Fußzeile. Zu
+schwach kontrastierende Akzentfarben gleicht das Portal für Links lesbar ab. Logo und
+Einstellungen gehen mit in die Sicherung.
+
+## NETbrain 0.4.10
+
+**Stand:** 1. Oktober 2026
+
+**Status:** Keine Eingriffe nötig; Daten und Lizenzen bleiben unverändert.
+
+### Kundenportal: Schlüssel eintragen
+
+Der Kopplungsschlüssel lässt sich jetzt auch eintragen statt erzeugen — unter
+**Verwaltung → Kundenportal → Schlüssel eintragen** und im Einrichtungsassistenten. So kann
+eine App-Plattform den Schlüssel vorgeben (`PORTAL_SYNC_KEY`) und mit der Portal-Adresse
+anzeigen; am Portal selbst ist nichts einzurichten. NETbrain gleicht nach dem Eintragen sofort ab.
+
+### Weitere Änderungen
+
+- Nach dem Aktivieren einer Lizenz bestätigt die Lizenzseite und leitet zur Anwendung weiter.
+- Wissensseiten: Aktionen stehen neben dem Titel, der Portal-Status als Zeile darunter.
+- Kundenportal: Das Logo erscheint im richtigen Seitenverhältnis.
+
+## NETbrain 0.4.9
+
+**Stand:** 1. Oktober 2026
+
+**Status:** Keine Eingriffe nötig; Daten und Lizenzen bleiben unverändert.
+
+### Kundenportal im Backup
+
+Die Sicherung enthält jetzt auch die Freigaben für das Kundenportal (`/data/portal.json`).
+Beim Wiederherstellen kommt dafür `--portal <Zielpfad>` hinzu; ältere Sicherungen bleiben
+lesbar.
+
+## NETbrain 0.4.8
+
+**Stand:** 30. September 2026
+
+**Status:** Korrekturfassung zu 0.4.7. Keine Eingriffe nötig; Daten und Lizenzen bleiben unverändert.
+
+### Anmeldung nach der Einrichtung repariert
+
+Mit 0.4.7 konnte sich der erste Administrator nach der Einrichtung nicht anmelden: Die
+Pflicht zur Zwei-Faktor-Anmeldung und die Lizenzprüfung leiteten sich gegenseitig weiter, der
+Browser zeigte eine leere Seite. Behoben:
+
+- Die Einrichtung richtet die Zwei-Faktor-Anmeldung des ersten Administrators gleich mit ein
+  (QR-Code scannen, Code eingeben). Die Wiederherstellungscodes zeigt die Anmeldeseite danach
+  einmal an — bitte notieren.
+- Die Einrichtung der Zwei-Faktor-Anmeldung ist immer erreichbar, auch ohne gültige Lizenz.
+
+Eine bereits eingerichtete 0.4.7-Installation muss nicht neu aufgesetzt werden: Nach dem
+Update öffnet die Anmeldung die Einrichtung der Zwei-Faktor-Anmeldung.
+
+### Gestaltete Fehlerseiten
+
+Fehler (etwa „Seite nicht gefunden") erscheinen im NETbrain-Design statt als leere Textseite.
+
+### Neu: Kundenportal (eigene Lizenz)
+
+Kuratoren können einzelne Wissensseiten für ein öffentliches Kundenportal freigeben — mit
+Bestätigung, jederzeit widerrufbar. Das Portal läuft als eigener Container
+(`ghcr.io/netfactory-gmbh/netbrain-portal`) unter eigener Adresse und zeigt die Seiten ohne
+Anmeldung, mit Suche. Einrichtung im Assistenten (überspringbar) oder unter
+**Verwaltung → Kundenportal**. Das Portal ist nur mit einer Lizenz verfügbar, die es enthält;
+die Testlizenz enthält es. Fragen zur Lizenz: info@netfactory.de
+
+## NETbrain 0.4.7
+
+**Stand:** 30. September 2026
+
+**Status:** Bitte vorab ankündigen: Jedes Konto richtet beim nächsten Anmelden die
+Zwei-Faktor-Anmeldung ein. Daten und Lizenzen bleiben unverändert.
+
+### Zwei-Faktor-Anmeldung ist Pflicht
+
+Nach dem Passwort fragt NETbrain einen sechsstelligen Code aus einer Authenticator-App ab
+(z. B. Microsoft Authenticator, Google Authenticator, 1Password). Beim ersten Anmelden nach dem
+Update richtet jedes Konto sie ein: QR-Code scannen, Code eingeben, zehn
+Wiederherstellungscodes notieren. Bis dahin sind die übrigen Seiten gesperrt.
+
+- Unter **Mein Konto → Zwei-Faktor-Anmeldung**: neues Gerät einrichten, neue
+  Wiederherstellungscodes erzeugen.
+- Administratoren setzen die Zwei-Faktor-Anmeldung eines Kontos in der Benutzerverwaltung
+  zurück, etwa bei verlorenem Handy.
+- Hat sich der letzte Administrator ausgesperrt, hilft auf dem Server:
+  `docker compose exec netbrain node scripts/user.mjs --2fa-reset <benutzername>`
+- Wer sie freiwillig machen will: `NETBRAIN_2FA_OPTIONAL: "true"` in der Compose-Datei.
+
+### NETbrain als App
+
+NETbrain lässt sich im Browser als App installieren (Chrome, Edge, Android, iOS über „Zum
+Home-Bildschirm"). Gespeichert werden dabei nur Programmdateien, kein Wissen und keine Inhalte.
+
+## NETbrain 0.4.6
+
+**Stand:** 30. September 2026
+
+**Status:** Keine Eingriffe nötig; bestehende Installationen und Lizenzen laufen unverändert weiter.
+
+### Einrichtung hinter einem HTTPS-Proxy
+
+Hinter einem Reverse-Proxy oder Ingress, der TLS beendet, brach jedes Formular — zuerst die
+Eingabe des Einrichtungs-Tokens — mit „Cross-site POST form submissions are forbidden" ab.
+Behoben: NETbrain erkennt die HTTPS-Adresse des eigenen Hostnamens jetzt auch dann als eigene
+Herkunft, wenn der Proxy per HTTP weiterreicht. Voraussetzung: Der Proxy lässt den
+`Host`-Header unverändert. `NETBRAIN_ALLOWED_HOSTS` ist dafür nicht nötig.
+
+### Weitere Änderungen
+
+- Firmenwissen aus dem Gesprächsverlauf geht nur mit Zustimmung an einen Cloud-Anbieter.
+- Große Wissensbestände werden langsamer statt unbenutzbar.
+- Testlizenz mit dynamischem Ablaufdatum; neue Favicons und Logo.
+
+## NETbrain 0.4.5
+
+**Stand:** 21. September 2026
+
+**Status:** Korrekturfassung zur Testlizenz. Bestehende Installationen und Lizenzen laufen
+unverändert weiter; eine bereits eingespielte Testlizenz bleibt gültig.
+
+### Die Testlizenz kommt jetzt wirklich an
+
+In 0.4.4 trug die Mail mit der Testlizenz zwar die richtige Empfängeradresse im Kopf,
+zugestellt wurde sie aber an das Postfach des Herausgebers. Wer eine Testlizenz angefordert
+hat, bekam nichts. Das ist behoben — die Mail geht an die Adresse aus dem Antrag.
+
+Wer in den letzten Tagen vergeblich gewartet hat: Eine zweite Anfrage mit derselben Adresse
+wird abgewiesen, weil je Adresse eine Testlizenz vorgesehen ist. Melden Sie sich in dem Fall
+bei uns, wir stellen sie von Hand aus.
+
+### Lizenz als Dateianhang
+
+Die Lizenz hängt der Mail jetzt als `license.json` an, statt als Textblock zum Markieren im
+Nachrichtentext zu stehen. Damit fällt das Kopieren weg: Datei herunterladen, unter
+**Lizenz & Aktivierung** hochladen, fertig. Ein abgeschnittener oder umgebrochener Textblock
+kann so nicht mehr passieren.
+
+### Für Administratoren: Einrichtungs-Token vorgeben
+
+Wird NETbrain aus einer Anwendungsplattform heraus gestartet, kann die Plattform das
+Einmal-Token für die Ersteinrichtung jetzt selbst setzen, statt es aus dem Containerprotokoll
+zu fischen:
+
+    NETBRAIN_SETUP_TOKEN=<mindestens 24 Zeichen>
+
+Damit lässt sich der Einrichtungslink fertig aufgebaut an den Kunden ausgeben. Ohne die
+Variable verhält sich NETbrain wie bisher und würfelt das Token beim Start selbst aus. Ein
+zu kurzer Wert wird verworfen — mit einem Hinweis im Protokoll — und durch ein gewürfeltes
+ersetzt. Einzelheiten stehen in `plattform-bereitstellung.md`.
+
+## NETbrain 0.4.4
+
+**Stand:** 18. September 2026
+
+**Status:** Keine Eingriffe nötig; bestehende Installationen und Lizenzen laufen unverändert weiter.
+
+### Testlizenz direkt aus NETbrain anfordern
+
+Wer noch keine Lizenzdatei hat, fordert sie jetzt in der Anwendung an: unter **Lizenz &
+Aktivierung** und im Einrichtungsassistenten steht „Testlizenz anfordern" — Firma, Name,
+Mailadresse, fertig. Die Lizenz kommt per Mail und wird wie jede andere eingefügt.
+
+Sie läuft **sieben Tage** und danach ohne Übergangsfrist aus; eine reguläre Lizenz hat die
+sieben Tage Nachlauf weiterhin. Je Mailadresse gibt es eine Testlizenz. An Ihrem Bestand
+ändert das nichts: Läuft die Testphase ab, bleiben Lizenzseite, Export und der private
+Vault erreichbar, und mit der eingespielten Lizenz steht sofort wieder alles offen.
+
+Übertragen werden nur Firma, Name und Mailadresse. Inhalte aus Ihrer Installation gehen
+dabei nicht hinaus.
+
+## NETbrain 0.4.3
+
+**Stand:** 18. September 2026
+
+**Status:** Sicherheitsaktualisierung. Keine Eingriffe nötig, keine sichtbaren Änderungen.
+
+Diese Fassung hebt vier Fremdbibliotheken auf ihre fehlerbereinigten Stände. Zwei davon
+betreffen die Verarbeitung hochgeladener Dateien und sind der Grund, warum die
+Aktualisierung nicht bis zur nächsten Funktionsfassung warten sollte:
+
+- **Bildoptimierung** (`astro`, `sharp`): Präparierte Bilddateien konnten die
+  Dekodierbibliothek zum Absturz oder Schlimmerem bringen. NETbrain verarbeitet jedes
+  hochgeladene Bild — damit war der Weg über ein angemeldetes Konto offen.
+- **Frontmatter** (`js-yaml`): Eine besonders verschachtelte Notiz konnte den Server
+  rechnen lassen, bis er nicht mehr antwortete.
+- **SVG-Bereinigung** (`svgo`): Die Entfernung ausführbarer Anteile aus SVG-Dateien war
+  unvollständig.
+
+Alle vier setzen ein Konto auf Ihrer Installation voraus; von außen war nichts davon
+erreichbar. An der Bedienung ändert sich nichts.
+
+## NETbrain 0.4.2
+
+**Stand:** 18. September 2026
+
+**Status:** Keine Eingriffe nötig; bestehende Installationen und Lizenzen laufen unverändert weiter.
+
+An der Anwendung ändert sich in dieser Fassung nichts: Ihr Wissensbestand, die Suche, der
+private Vault und der KI-Chat verhalten sich wie bisher. Geändert hat sich, wie eine neue
+Installation zu ihrer Lizenz kommt.
+
+### Sieben Tage ohne Lizenz
+
+Eine frisch aufgesetzte Installation ist ab dem ersten Start **sieben Tage vollständig
+nutzbar**. Ein Hinweisband am oberen Rand nennt die verbleibende Zeit. Die Lizenzdatei
+lässt sich jederzeit unter `/lizenz` nachtragen.
+
+Läuft die Testphase ab, ohne dass eine Lizenz hinterlegt wurde, bleiben die Lizenzseite,
+der Export des Firmenwissens und Ihr lokaler privater Vault erreichbar. **Es geht nichts
+verloren** — mit der eingespielten Lizenz steht sofort wieder alles offen.
+
+### Für Administratoren
+
+- **Einrichtung:** Schritt 6 des Assistenten lässt sich mit „Ohne Lizenz weitermachen"
+  überspringen, solange die Testphase läuft.
+- **Installation und Updates brauchen keine Anmeldung mehr** an der Registry. Ein
+  vorhandenes Zugangstoken stört nicht, wird aber nicht mehr benötigt — und kann eine
+  Installation dadurch auch nicht mehr von Sicherheitsupdates abschneiden.
+- **`install.sh` meldet Zustände jetzt im Klartext.** Eine laufende Schemamigration und
+  eine fehlende Lizenzdatei liefen bisher stillschweigend in ein Zeitlimit von drei
+  Minuten, obwohl der Server längst antwortete.
+- Am Lizenzmodell selbst ändert sich nichts: eine Lizenz je Installation, beim Einspielen
+  an sie gebunden, nach dem Ablauftag sieben Tage Übergangsfrist.
+- Die Anleitungen `LIESMICH.md` und `BETRIEB.md` sind nachgezogen.
+
+## NETbrain 0.4.0
+
+**Stand:** 9. September 2026
+
+**Status:** Enthält auch die nie veröffentlichte 0.3.0 — bricht den Installationsweg `--tls`
+
+Der Schwerpunkt liegt auf der Wissenssuche, der Verwaltung der KI-Zugänge und darauf,
+dass die Oberfläche auf großen Bildschirmen wieder angemessen wirkt. Bestehende Daten
+und Konten bleiben beim Update erhalten; einzurichten ist nichts — außer bei einer
+Installation, die mit `--tls` aufgesetzt wurde.
+
+**Wer von 0.2.1 kommt, erhält zugleich die Änderungen der 0.3.0.** Diese Fassung wurde nie
+veröffentlicht; ihre Notizen stehen unten und gelten unverändert. Der Punkt daraus, der
+Arbeit macht: NETbrain bringt keinen Reverse-Proxy mehr mit — TLS, Zertifikat und
+Erneuerung liegen beim Betreiber.
+
+### Die Suche findet Wortvarianten und benannte Dinge
+
+- **Andere Worte, dieselbe Sache.** Wer nach „Urlaub" fragt, findet auch Seiten, die von
+  „Erholungsurlaub" sprechen — ebenso bei Passwort/Kennwort, Datensicherung/Backup/
+  Sicherungskopie, Laptop/Notebook und Fernzugang/Remotezugang. Enge Begriffe bleiben
+  eng: „Sonderurlaub" gilt weiterhin nicht als gewöhnlicher Urlaub.
+- **Namen von Kunden, Projekten, Systemen und Produkten** werden als eigener
+  Suchgegenstand behandelt. Eine Frage nach zwei Kunden verlangt einen Nachweis für
+  jeden — statt einer Antwort, die nur einen von beiden belegt.
+- **Lieber eine Wissenslücke als eine Ersatzseite.** Ist der gefragte Name im
+  freigegebenen Bestand nicht belegt, sagt NETbrain das, anstatt thematisch verwandte
+  Seiten anzubieten, die die Frage nicht beantworten.
+
+Gemessen an einem Katalog aus 33 Fragen mit hinterlegten Belegstellen: alle 33
+bestanden, jede erwartete Quelle gefunden und jeder Beleg im an die KI übergebenen
+Ausschnitt enthalten. Der Prüfbestand liegt beim Hersteller und enthält keine
+Kundendaten.
+
+### Wissenslandkarte: „Ohne Tag" heißt jetzt wirklich „ohne Tag"
+
+Die Karte hatte eine Sammelgruppe für zwei verschiedene Fälle — Seiten ohne jeden Tag
+und Seiten, deren Tags zu selten für einen Platz in der Legende sind. Eine Seite mit
+Tags konnte deshalb unter der Aufschrift „Weitere / ohne Tag" landen. Es sind nun zwei
+getrennte Gruppen, **„Ohne Tag"** und **„Weitere Tags"**. Damit ist „Ohne Tag" eine
+brauchbare Arbeitsliste für die Wissenspflege.
+
+### Interne KI vollständig über die Oberfläche einrichtbar
+
+- **Adresse und Schlüssel des internen KI-Servers** werden in *Administration →
+  KI-Zugänge* gepflegt. Bisher musste die Adresse in der Umgebung des Containers
+  stehen. Ist sie dort gesetzt, bleibt sie es und das Feld zeigt sie als extern
+  vorgegeben an.
+- **Ohne eingerichtete interne KI gibt es sie auch nicht zur Auswahl.** Der Schalter
+  *Intern / Cloud* in den Erfassungsformularen und der interne Anbieter im Chat
+  erscheinen nur, wenn Adresse und Modell tatsächlich hinterlegt sind. Vorher stand die
+  Auswahl auch bei einer reinen Cloud-Installation da und führte in eine Fehlermeldung.
+- **Ein neu eingetragenes internes Modell wirkt überall.** Es steht danach nicht nur im
+  KI-Chat, sondern auch beim Einreichen von Firmenwissen und in der privaten Erfassung
+  zur Verfügung.
+- **Die Auftragsmodelle** (Schnell erfassen, Einarbeiten, Rückfragen, Bilder lesen)
+  lassen sich je Anbieter getrennt einstellen; die Ansicht bleibt nach dem Speichern
+  beim gewählten Anbieter.
+
+### Nur Modelle, die die Datenschutzvorgaben erfüllen
+
+Für Cloud-Anbieter, die es angeben, prüft NETbrain je Modell vier Punkte: keine
+Speicherung der Eingaben, keine Verwendung zum Training, Hosting in der EU und ein
+nicht überschrittenes Enddatum. Wer eine dieser Angaben nicht macht, wird nicht
+angeboten — eine fehlende Angabe gilt als Nein, nicht als Ja. Aus dem Katalog des
+Anbieters Requesty bleiben damit 167 von rund 700 Modellen; fünf abgelaufene Modelle
+waren zuvor weiterhin auswählbar.
+
+Anbieter, deren Katalog diese Felder überhaupt nicht führt — der interne Server,
+Anthropic, eigene Endpunkte — werden davon nicht gefiltert. Bei einem Server im eigenen
+Haus entscheidet ohnehin nicht ein Feld in einer Schnittstelle, sondern der Standort.
+
+### Rückmeldungen gehen an den Hersteller
+
+„Feedback geben" schickt Fehlerberichte und Ideen nun direkt an den Hersteller, statt
+sie nur in der eigenen Installation abzulegen. **Ohne Mandantenbezug:** Übertragen
+werden Art, Betreff und Text, nicht Ihr Name, nicht Ihre Kontokennung und nicht der
+Name Ihrer Installation. Wer eine Antwort möchte, kann freiwillig eine Kontaktangabe
+ins Formular schreiben — sie ist das einzige personenbezogene Feld und bleibt leer,
+wenn Sie es so wollen.
+
+### Hinweis zur Alpha-Version
+
+Der Schriftzug „Alpha-Version" oben links öffnet jetzt einen ausführlichen Hinweis
+darüber, was diese Fassung leisten soll, was sie nicht ist und wie es um Gewährleistung
+und Haftung steht — statt wie vorher das Feedback-Formular. Der Hinweis zeigt sich
+**einmal je Konto** beim ersten Arbeiten von selbst und ist danach jederzeit über
+denselben Schriftzug erreichbar. Die Bestätigung hängt am Konto, nicht am Browser: Ein
+Gerätewechsel oder gelöschte Browserdaten holen den Hinweis nicht zurück.
+
+### Oberfläche und Bedienung
+
+- **Auf großen Bildschirmen wächst die Schrift mit.** Ab 1600 px und noch einmal ab
+  2200 px Fensterbreite rückt die gesamte Schriftskala eine Stufe hoch. Auf kleineren
+  Bildschirmen ändert sich nichts.
+- **Die Seite läuft nicht mehr über.** Kopfzeile und Hinweisstreifen wurden vom
+  Arbeitsbereich mit einer festen Zahl verrechnet; jeder zusätzliche Streifen und ein
+  langer Seitenbaum in der Spalte machten die Startseite dadurch höher als das Fenster.
+  Die Höhen werden nun gemessen statt angenommen.
+- **Eindeutige Symbole:** KI-Aktionen tragen durchgehend das Hirn-Symbol, die Suche eine
+  Lupe.
+
+### Fehlerbehebungen
+
+- **„Einarbeiten lassen" funktionierte nie.** Der Knopf in der Inbox führte auf eine
+  Seite „nicht gefunden". Behoben; die Funktion samt Fortschrittsanzeige und Abbruch ist
+  damit erstmals benutzbar.
+- **Ein Verbindungsfehler nennt seinen Grund und den Hostnamen.** „Der KI-Dienst ist
+  nicht erreichbar" unterschied nicht zwischen einem abgeschalteten Anbieter, einem
+  falschen Zertifikat und einem Namen, der sich nicht auflösen lässt. Die vier Fälle
+  werden jetzt getrennt benannt — samt Hinweis, wo *nicht* zu suchen ist.
+- **Eine laufende Chat-Antwort belegt ihren Platz im Kontingent bis zum Ende.** Zuvor
+  wurde er freigegeben, sobald die Antwort zu strömen begann; mehrere gleichzeitige
+  Antworten konnten die Grenze dadurch überschreiten.
+- **Ein Scan ohne lesbaren Text** führt zu einer Rückfrage statt zu einem Abbruch: Der
+  Einwurf bittet um eine kurze Beschreibung, und das Original bleibt als Nachweis
+  erhalten.
+- **Der interne KI-Anbieter durfte fehlen** — eine reine Cloud-Installation meldete sich
+  an mehreren Stellen als nicht bereit, obwohl nichts fehlte.
+
+### Für Administratoren
+
+- **Lizenzen werden beim Hersteller aktiviert.** Eine Installation bindet ihre Lizenz an
+  sich selbst und erneuert sie regelmäßig; fällt der Lizenzdienst aus, läuft der Betrieb
+  eine Woche unverändert weiter, bevor überhaupt ein Hinweis erscheint.
+- **Nach einem Deployment wird geprüft, ob die Modelle antworten.** Die Modellliste eines
+  Anbieters beweist nichts; nur ein Aufruf tut das. Von Hand geht dasselbe über „Modelle
+  jetzt prüfen" in *Administration → KI-Zugänge*.
+- **Der Nameserver des Containers steht fest in der Compose-Datei.** Startete der Server
+  neu, bevor das Netz stand, hatte der Container keinen Nameserver und erreichte keinen
+  einzigen KI-Anbieter mehr — an einem realen Fall zwei Tage lang.
+
+### Bekannte Einschränkung
+
+Ein **eigener KI-Zugang** unter einer Adresse, die keine Modellliste (`/v1/models`)
+anbietet, bleibt unbenutzbar: Die Auswahl bleibt leer und der Sendeknopf inaktiv. Ein
+Modellname lässt sich dort noch nicht von Hand eintragen.
+
+---
+
+## NETbrain 0.3.0
+
+**Stand:** 2. September 2026
+
+**Status:** Bricht den Installationsweg `--tls`
+
+### NETbrain bringt keinen Reverse-Proxy mehr mit
+
+Bisher konnte `install.sh --tls <hostname>` einen Caddy davorstellen, der sich sein
+Zertifikat selbst holte. Dieser Weg ist entfallen. NETbrain spricht im Container HTTP;
+HTTPS, Zertifikat und deren Erneuerung liegen beim Betreiber.
+
+**Was Sie einrichten müssen**, steht vollständig in `BETRIEB.md`, Abschnitt „Anforderungen
+an Ihren Reverse-Proxy" — mit einem kopierfertigen nginx-Beispiel. Die Kurzfassung: TLS
+beenden, Port 80 auf 443 weiterleiten, mindestens 12 MB Request-Body durchlassen,
+`X-Forwarded-For` setzen, Port 4321 per Firewall auf die Adresse Ihres Proxys beschränken
+und Ihren DNS-Namen in `NETBRAIN_ALLOWED_HOSTS` eintragen.
+
+### Wenn Sie bisher mit `--tls` installiert haben
+
+Ihre Installation läuft weiter — `install.sh` hat Ihre `netbrain-compose.yml` nie
+überschrieben, und der Caddy-Container darin bleibt unangetastet. Zwei Dinge ändern sich
+trotzdem:
+
+- **Ihr Update-Befehl funktioniert nicht mehr.** `install.sh --tls <hostname>` bricht jetzt
+  mit `Unbekannte Option »--tls«` ab. Aktualisieren Sie stattdessen ohne die Option; Ihre
+  Compose-Datei mit dem Proxy-Dienst bleibt dabei erhalten.
+- **Löschen Sie Ihre `netbrain-compose.yml` nicht**, um die Vorgabe zurückzubekommen. Die
+  neu erzeugte Datei enthält keinen Proxy. Ihr Caddy-Container liefe dann als Waise weiter,
+  hielte die Ports 80 und 443 besetzt, und Ihre Installation wäre nicht mehr erreichbar,
+  ohne dass etwas defekt aussieht.
+
+### NETbrain kann HSTS jetzt selbst
+
+`Strict-Transport-Security` kam vorher aus dem mitgelieferten Caddy. Setzt Ihr Proxy den
+Header nicht, können Sie ihn in NETbrain einschalten: `NETBRAIN_HSTS=true` in der `.env`
+neben den Compose-Dateien, dann Container neu starten.
+
+**Voreinstellung ist aus, und das mit Absicht.** Ein HSTS-Header auf einem falschen Namen
+oder hinter einem Proxy, der nur HTTP spricht, sperrt die Domain für ein Jahr aus, und keine
+Konfigurationsänderung holt das zurück. Schalten Sie ihn erst ein, wenn HTTPS unter dem
+endgültigen Namen steht und funktioniert.
+
+---
+
+## NETbrain 0.2.1
+
+**Stand:** 31. August 2026
+
+**Status:** Korrekturrelease zu 0.2.0
+
+Zwei Korrekturen am Installationsweg. An der Anwendung selbst ändert sich
+nichts; wer 0.2.0 bereits im Browser benutzt, merkt keinen Unterschied.
+
+### Korrekturen
+
+- **`install.sh` bezog das Image aus der falschen Registry.** Voreingestellt
+  war eine private Ablage aus der Entwicklungszeit, die einem Kunden nicht
+  zugänglich ist — die Installation brach beim Herunterladen ab. Sie zeigt nun
+  auf `ghcr.io/netfactory-gmbh/netbrain`.
+
+- **Die Einrichtungsmeldung nannte eine Adresse, unter der nichts antwortet.**
+  Eine Installation ohne `--tls` ist ausschließlich lokal erreichbar; das
+  Protokoll nannte trotzdem den Rechnernamen des Servers („Erreichbar unter:
+  https://<rechnername>"). Wer dieser Angabe folgte, landete im Nichts und
+  musste annehmen, die Installation sei fehlerhaft. Eingetragen werden jetzt
+  nur Namen, unter denen die Installation tatsächlich antwortet: bei `--tls`
+  der angegebene Hostname, bei einer Veröffentlichung auf allen Netzwerkkarten
+  der Rechnername, sonst nur `localhost`. Zusätzliche Namen — etwa der eines
+  vorhandenen Reverse-Proxys — werden wie bisher im Einrichtungsassistenten in
+  Schritt 3 nachgetragen.
+
+### Hinweis für eine bereits vorhandene Installation
+
+`install.sh aktualisieren` lässt eine vorhandene `netbrain-compose.yml`
+unangetastet — sie gehört dem Betreiber, samt seiner Eintragungen. Die zweite
+Korrektur greift deshalb nur bei einer Neuinstallation. Wer 0.2.0 schon per
+`install.sh` aufgesetzt hat und die falsche Adresse im Protokoll sieht,
+entfernt den Rechnernamen in der Zeile `NETBRAIN_ALLOWED_HOSTS` seiner
+`netbrain-compose.yml` von Hand und startet neu. Alternativ die Datei löschen
+und `install.sh installieren` erneut aufrufen; die Daten bleiben dabei
+erhalten.
+
+---
+
+## NETbrain 0.2.0
+
+**Geplanter Stand:** 28. August 2026  
+
+**Status:** Release Candidate
+
+NETbrain 0.2.0 macht aus der bisherigen Pilotinstallation eine deutlich besser
+bedienbare und betreibbare Wissensplattform. Im Mittelpunkt stehen die
+KI-Verwaltung, Spracheingabe sowie ein verlässlicherer Arbeitsfluss im Chat und
+in der Kuratur.
+
+### Neue Funktionen
+
+### Einfacher installieren und betreiben
+
+- Die Erstinstallation führt nun durch die grundlegende Einrichtung, ohne dass
+  dafür ein Benutzer auf der Kommandozeile angelegt werden muss.
+- Installation, Lizenz, Einrichtungstoken und Betriebsdaten sind für den
+  Betrieb im Container vorbereitet.
+- Datenmigrationen laufen beim Start automatisch. Tägliche Sicherungen und eine
+  Auslieferungsprüfung reduzieren den manuellen Betriebsaufwand.
+- Jeder KI-Aufruf schreibt eine Protokollzeile mit Zweck, Anbieter, Modell,
+  Dauer und Ausgang – auch dann, wenn er fehlschlägt. Inhalte, Eingaben und
+  Schlüssel stehen nicht darin. Damit sind langsame Modelle und abgebrochene
+  Aufträge im Betrieb nachvollziehbar.
+- Die Websuche kann über einen eigenen SearXNG-Dienst betrieben werden;
+  Einstellungen aus Compose-Overlays bleiben beim Deployment erhalten.
+- Administratoren werden dezent über neue NETbrain-Versionen informiert und
+  können sie im Browser installieren. Vorher läuft automatisch eine
+  verschlüsselte Sicherung; Gesundheitsprüfung und Rückkehr zum bisherigen
+  Image sind Teil desselben Ablaufs.
+
+### Zentrale KI-Verwaltung
+
+- Die Seite **Administration → KI-Zugänge** bündelt KI-Aufträge, Anbieter,
+  Modelle, Rollenfreigaben, Kontoausnahmen, Wissensregeln und den
+  Änderungsverlauf an einem Ort.
+- Für die Aufgaben *Schnell erfassen*, *Einarbeiten*, *Rückfragen zum
+  Firmenwissen* und *Bilder lesen* lassen sich eigene Modelle festlegen.
+- Eingestellte Auftragsmodelle können direkt in der Administration geprüft
+  werden. Das erleichtert die Diagnose nach Modell- oder Anbieterwechseln.
+- Große Modelllisten sind nach Anbieter gruppiert, einklappbar und durchsuchbar;
+  bereits gesetzte Freigaben bleiben beim Filtern erhalten.
+- **Mistral** ist als weiterer Cloud-Anbieter angebunden. Der Schlüssel wird wie
+  bei den übrigen Anbietern im Einrichtungsassistenten oder verschlüsselt in der
+  Administration hinterlegt; ohne gesetzte Häkchen ist kein Modell freigegeben.
+- Die Freigabeliste zeigt den vollständigen Modellkatalog des Anbieters. Auch
+  bei Anbietern mit sehr vielen Modellen lässt sich jedes davon freigeben.
+- Für interne, denkende Modelle kann der Gedankengang bei strukturierten
+  Aufgaben abgeschaltet werden. Aufbereitung und Bildanalyse werden dadurch
+  schneller und laufen seltener in die Ausgabegrenze.
+
+### Spracheingabe
+
+- Nachrichten können im Chat diktiert werden.
+- Auch die **private** und die **Firmen-Erfassung** haben einen Mikrofonknopf am
+  Inhaltsfeld. Dort darf eine Aufnahme bis zu zehn Minuten laufen, weil eine
+  Gesprächsnotiz länger ist als eine Chatnachricht.
+- Diktiertes wird an der Schreibmarke eingesetzt, nicht anstelle des bisherigen
+  Textes: Getipptes und Gesprochenes lassen sich mischen.
+- Neben **Stopp** gibt es einen **Pause**-Knopf. Er schließt den laufenden
+  Abschnitt ab, setzt den erkannten Text sofort ins Feld und lässt das Mikrofon
+  offen; **Weiter** nimmt den nächsten Abschnitt auf. So lässt sich ein längeres
+  Diktat abschnittsweise mitlesen und korrigieren, statt erst am Ende.
+- Kommt vom Mikrofon kein Ton, wird die Aufnahme nicht verschickt. Der Chat und
+  die Erfassung sagen das schon während der Aufnahme („noch kein Ton") und
+  nennen danach den Grund. Zuvor lieferte die Spracherkennung bei stummem
+  Eingang eine unverfängliche Floskel, die wie ein Ergebnis aussah.
+- Das Modell für die Spracherkennung wird zentral ausgewählt. Ohne konfigurierte
+  Spracheingabe bleibt die Funktion ausgeblendet.
+- Der Chat zeigt verständlich an, wenn die Erkennung nicht verfügbar ist oder
+  eine Aufnahme nicht verarbeitet werden konnte.
+
+### Besserer Arbeitsfluss im Chat und in der Kuratur
+
+- Laufende Chat-Antworten lassen sich stoppen. Bereits empfangener Text bleibt
+  erhalten und wird als unvollständig gekennzeichnet.
+- Das automatische Einarbeiten eines Inbox-Beitrags zeigt einen sichtbaren
+  Arbeitsstatus und kann vor dem Übernehmen abgebrochen werden.
+- Die Erfassung im privaten Vault meldet ihren Fortschritt laufend („Der Scan
+  wird gelesen …", „Der Inhalt wird aufbereitet …"). Auch mehrseitige Scans
+  laufen dadurch hinter einem vorgelagerten Proxy zu Ende, statt nach dessen
+  Wartezeit als Zeitüberschreitung zu enden.
+- Die Chat-Leiste ist auf schmalen Bildschirmen kompakter: Kontext und
+  Arbeitsmodus werden über eindeutige Symbole bedient und bleiben für
+  Screenreader beschriftet.
+
+### Erscheinungsbild
+
+- Logos, Favicon und Vorschaubild wurden auf die Marke **NETbrain** vereinheitlicht.
+
+### Verbesserungen und Fehlerbehebungen
+
+- Eine Antwort, die bei einer strukturierten KI-Aufgabe an der Ausgabegrenze
+  abgeschnitten wird, erhält nun eine konkrete, hilfreiche Meldung statt eines
+  allgemeinen Wiederholungs-Hinweises.
+- Zeitüberschreitungen werden nicht mehr wiederholt. Dadurch entsteht keine
+  doppelte Wartezeit bei einem langsamen Modell.
+- Fehlgeschlagene Aufbereitung und Einarbeitung schreiben Anbieter und
+  Modellname in das Serverprotokoll; im Browser erscheinen sichere, verständliche
+  Hinweise statt interner Anbietermeldungen. Das gilt nun für jeden KI-Aufruf:
+  Der Wortlaut der Anbieterantwort – der bei abgelaufenen Schlüsseln Teile des
+  Schlüssels enthalten kann – bleibt im Serverprotokoll.
+- Bricht ein vorgelagerter Proxy die Verbindung ab, erscheint eine
+  verständliche Meldung mit Hinweisen zum weiteren Vorgehen statt der
+  HTML-Fehlerseite des Proxys. Das gilt für die private Erfassung, die
+  Wissenssuche und den Chat.
+- Die Modellfreigabe wirkt jetzt auch für den internen Anbieter und Requesty.
+  Bisher standen dort alle entdeckten Modelle zur Auswahl, unabhängig von den
+  gesetzten Häkchen.
+- Die Markenschreibweisen zeigen bei Vorgabe über die Umgebung den vollständigen
+  Wert samt Variablennamen an, statt ein gesperrtes Feld mit abgeschnittenem
+  Text und einem wirkungslosen Speichern-Knopf. Textfelder in den
+  Freigabe-Formularen sind wieder als Eingabefelder erkennbar.
+- Die Spracheingabe verwendet den korrekten Endpunkt und zeigt Fehler der
+  Transkription nachvollziehbar an.
+- Die Mikrofonberechtigung wird nur dann per Permissions-Policy freigegeben,
+  wenn Spracheingabe eingerichtet ist.
+- In der Chat-Modellauswahl erscheinen nur tatsächlich chatfähige Modelle.
+- Die Einrichtungsprüfung erkennt Schlüssel aus Umgebungsvariablen zuverlässig.
+- Ein Sicherungs-Probelauf funktioniert auch dann, wenn noch keine Daten für ein
+  Sicherungsbündel vorhanden sind.
+- Die Lizenzdatei blockiert ein Deployment nicht mehr unnötig; Fehler im
+  Lizenzwerkzeug sind verständlicher formuliert.
+
+### Hinweise zum Update
+
+- Für die Spracheingabe muss in **Administration → KI-Zugänge** ein
+  Spracherkennungsmodell ausgewählt sein. Aufnahmen werden nur für die jeweilige
+  Transkription verarbeitet und nicht gespeichert.
+- Während einer Pause bleibt das Mikrofon geöffnet, damit der Browser nicht bei
+  jedem „Weiter" erneut nach Erlaubnis fragt und ein anderes Gerät wählt. Die
+  Aufnahmeanzeige des Browsers bleibt deshalb an; die Statuszeile weist darauf
+  hin. Die Zeitgrenze von zehn Minuten gilt je Abschnitt.
+- Der Schalter **Intern/Cloud** in den Erfassungsformularen steuert die
+  Aufbereitung des Beitrags, nicht die Spracherkennung: Diktate gehen immer an
+  den zentral eingestellten Spracherkennungsdienst. Welcher das ist, steht im
+  Hinweistext des Mikrofonknopfs.
+- Der Schalter zum Abschalten des Gedankengangs gilt ausschließlich für den
+  internen KI-Anbieter und nur für strukturierte Aufträge, nicht für normale
+  Chat-Antworten.
+- Das Stoppen einer laufenden KI-Anfrage beendet die Wartezeit im Browser. Eine
+  beim Anbieter bereits gestartete Berechnung kann dennoch weiterlaufen.
+
+---
+
+### Versionshinweis
+
+Version **0.2.0** ist das erste größere, abwärtskompatible Funktionsupdate nach
+dem Pilotstand 0.1.0. Bestehende Daten und Konten bleiben beim Update erhalten.

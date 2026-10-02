@@ -13,3 +13,10 @@ Registry und übernimmt danach der mitgelieferte Installer. Konto und Pull-Token
 für die Registry kommen von NETFACTORY.
 
 © NETFACTORY GmbH
+
+## Seite und Auffindbarkeit
+
+- `index.html` – Produktseite mit JSON-LD (`@graph`: Organisation, Website, Software, Produktfilm, FAQ).
+- `doku/`, `llms.txt`, `llms-full.txt`, `sitemap.xml` – erzeugt von `netbrain-dev/auslieferung/doku/bauen.py`, nicht von Hand ändern.
+- `robots.txt`, `site.webmanifest`, `404.html`, `bilder/og-image-1200.png` – von Hand gepflegt.
+- `.nojekyll` – GitHub Pages liefert alles unverändert aus; sonst würde Jekyll die `.md`-Fassungen der Doku zu HTML umbauen.

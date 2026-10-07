@@ -23,7 +23,7 @@
 <meta property="og:image:height" content="630">
 <meta property="og:image:alt" content="NETbrain – Wissensplattform auf Ihrem eigenen Server">
 <meta name="twitter:card" content="summary_large_image">
-<script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "TechArticle", "@id": "https://getnetbrain.netfactory.de/doku/versionen.html#artikel", "headline": "Versionshinweise", "description": "Was sich mit jeder Version von NETbrain geändert hat und ob vor dem Update etwas zu tun ist.", "url": "https://getnetbrain.netfactory.de/doku/versionen.html", "inLanguage": "de", "image": "https://getnetbrain.netfactory.de/bilder/og-image-1200.png", "version": "0.4.14", "isPartOf": {"@id": "https://getnetbrain.netfactory.de/#website"}, "about": {"@id": "https://getnetbrain.netfactory.de/#software"}, "publisher": {"@id": "https://getnetbrain.netfactory.de/#netfactory"}}, {"@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "NETbrain", "item": "https://getnetbrain.netfactory.de/"}, {"@type": "ListItem", "position": 2, "name": "Dokumentation", "item": "https://getnetbrain.netfactory.de/doku/"}, {"@type": "ListItem", "position": 3, "name": "Versionshinweise", "item": "https://getnetbrain.netfactory.de/doku/versionen.html"}]}]}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "TechArticle", "@id": "https://getnetbrain.netfactory.de/doku/versionen.html#artikel", "headline": "Versionshinweise", "description": "Was sich mit jeder Version von NETbrain geändert hat und ob vor dem Update etwas zu tun ist.", "url": "https://getnetbrain.netfactory.de/doku/versionen.html", "inLanguage": "de", "image": "https://getnetbrain.netfactory.de/bilder/og-image-1200.png", "version": "0.4.16", "isPartOf": {"@id": "https://getnetbrain.netfactory.de/#website"}, "about": {"@id": "https://getnetbrain.netfactory.de/#software"}, "publisher": {"@id": "https://getnetbrain.netfactory.de/#netfactory"}}, {"@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "NETbrain", "item": "https://getnetbrain.netfactory.de/"}, {"@type": "ListItem", "position": 2, "name": "Dokumentation", "item": "https://getnetbrain.netfactory.de/doku/"}, {"@type": "ListItem", "position": 3, "name": "Versionshinweise", "item": "https://getnetbrain.netfactory.de/doku/versionen.html"}]}]}</script>
 <link rel="preload" href="../schriften/geist-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="doku.css">
 </head>
@@ -35,7 +35,7 @@
     <nav aria-label="Hauptnavigation">
       <a href="../">Produkt</a>
       <a href="../#selbst-starten">Selbst testen</a>
-      <a href="versionen.html">Version 0.4.14</a>
+      <a href="versionen.html">Version 0.4.16</a>
       <a class="knopf" href="mailto:info@netfactory.de?subject=NETbrain%20%E2%80%93%20Frage%20zur%20Dokumentation">Frage stellen</a>
     </nav>
   </div>
@@ -56,6 +56,20 @@
     <p class="brotkrumen"><a href="../">NETbrain</a><span aria-hidden="true">/</span><a href="index.html">Dokumentation</a><span aria-hidden="true">/</span><span>Hilfe</span></p>
     <h1>Versionshinweise</h1>
 <p class="einleitung">Was sich mit jeder Version geändert hat. Steht unter <strong>Status</strong> ein Hinweis, lesen Sie ihn vor dem Update; wie das Update selbst abläuft, steht unter <a href="aktualisieren.html">Aktualisieren</a>.</p>
+<h2 id="v0-4-16">NETbrain 0.4.16<a class="anker" href="#v0-4-16" aria-label="Verweis auf diesen Abschnitt">#</a></h2>
+<p><strong>Stand:</strong> 6. Oktober 2026</p>
+<p><strong>Status:</strong> Keine Eingriffe nötig.</p>
+<h3 id="ki-zugang-pruefen">KI-Zugang prüfen<a class="anker" href="#ki-zugang-pruefen" aria-label="Verweis auf diesen Abschnitt">#</a></h3>
+<p>Scheitert die Prüfung eines KI-Anbieters, nennt NETbrain jetzt die Ursache: keine Antwort (meist eine Firewall), Name nicht auflösbar, Verbindung abgewiesen, ungültiges Zertifikat oder abgelehnter API-Schlüssel.</p>
+<h3 id="installation-und-updates">Installation und Updates<a class="anker" href="#installation-und-updates" aria-label="Verweis auf diesen Abschnitt">#</a></h3>
+<p>Installer und Update-Prüfung hinterlassen keine leeren Docker-Volumes mehr. Ältere Reste entfernt <code>docker volume prune</code> (löscht nur namenlose Volumes, die kein Container nutzt).</p>
+<h2 id="v0-4-15">NETbrain 0.4.15<a class="anker" href="#v0-4-15" aria-label="Verweis auf diesen Abschnitt">#</a></h2>
+<p><strong>Stand:</strong> 6. Oktober 2026</p>
+<p><strong>Status:</strong> Keine Eingriffe nötig.</p>
+<h3 id="installation">Installation<a class="anker" href="#installation" aria-label="Verweis auf diesen Abschnitt">#</a></h3>
+<ul><li><code>install.sh</code> prüft nach dem Start, ob der Container nach außen kommt. Ist <code>/etc/resolv.conf</code> leer, obwohl systemd-resolved läuft, verlinkt es die Datei auf <code>stub-resolv.conf</code> (die alte bleibt als Sicherung liegen) und startet Docker neu. In allen anderen Fällen erscheint eine Warnung mit den Punkten, die zu prüfen sind.</li><li><code>install.sh token</code> meldet nach abgeschlossener Einrichtung „bereits eingerichtet" statt eines alten Tokens.</li></ul>
+<h3 id="einrichtungsassistent">Einrichtungsassistent<a class="anker" href="#einrichtungsassistent" aria-label="Verweis auf diesen Abschnitt">#</a></h3>
+<ul><li>Scheitert die Prüfung des KI-Zugangs, erscheint wieder das Formular mit der Fehlermeldung.</li><li>Nach dem Probelauf der Sicherung führt „Weiter" zum nächsten Schritt.</li><li>Der Hinweis zur Alpha-Version zeigt keinen hellen Rahmen mehr.</li></ul>
 <h2 id="v0-4-14">NETbrain 0.4.14<a class="anker" href="#v0-4-14" aria-label="Verweis auf diesen Abschnitt">#</a></h2>
 <p><strong>Stand:</strong> 1. Oktober 2026</p>
 <p><strong>Status:</strong> Keine Eingriffe nötig.</p>
@@ -225,9 +239,9 @@
 <h3 id="versionshinweis">Versionshinweis<a class="anker" href="#versionshinweis" aria-label="Verweis auf diesen Abschnitt">#</a></h3>
 <p>Version <strong>0.2.0</strong> ist das erste größere, abwärtskompatible Funktionsupdate nach dem Pilotstand 0.1.0. Bestehende Daten und Konten bleiben beim Update erhalten.</p>
     <nav class="blaettern" aria-label="Weiterblättern"><a class="zurueck" href="fehlerbehebung.html"><span>Zurück</span><b>Fehlerbehebung</b></a></nav>
-    <p class="stand">Stand: NETbrain 0.4.14. Fehlt etwas oder stimmt etwas nicht? <a href="mailto:info@netfactory.de?subject=NETbrain-Dokumentation%3A%20versionen">Schreiben Sie uns.</a></p>
+    <p class="stand">Stand: NETbrain 0.4.16. Fehlt etwas oder stimmt etwas nicht? <a href="mailto:info@netfactory.de?subject=NETbrain-Dokumentation%3A%20versionen">Schreiben Sie uns.</a></p>
   </main>
-  <aside class="auf-dieser-seite" aria-label="Auf dieser Seite"><p>Auf dieser Seite</p><ul><li><a href="#v0-4-14">NETbrain 0.4.14</a></li><li><a href="#v0-4-13">NETbrain 0.4.13</a></li><li><a href="#v0-4-12">NETbrain 0.4.12</a></li><li><a href="#v0-4-11">NETbrain 0.4.11</a></li><li><a href="#v0-4-10">NETbrain 0.4.10</a></li><li><a href="#v0-4-9">NETbrain 0.4.9</a></li><li><a href="#v0-4-8">NETbrain 0.4.8</a></li><li><a href="#v0-4-7">NETbrain 0.4.7</a></li><li><a href="#v0-4-6">NETbrain 0.4.6</a></li><li><a href="#v0-4-5">NETbrain 0.4.5</a></li><li><a href="#v0-4-4">NETbrain 0.4.4</a></li><li><a href="#v0-4-3">NETbrain 0.4.3</a></li><li><a href="#v0-4-2">NETbrain 0.4.2</a></li><li><a href="#v0-4-0">NETbrain 0.4.0</a></li><li><a href="#v0-3-0">NETbrain 0.3.0</a></li><li><a href="#v0-2-1">NETbrain 0.2.1</a></li><li><a href="#v0-2-0">NETbrain 0.2.0</a></li></ul></aside>
+  <aside class="auf-dieser-seite" aria-label="Auf dieser Seite"><p>Auf dieser Seite</p><ul><li><a href="#v0-4-16">NETbrain 0.4.16</a></li><li><a href="#v0-4-15">NETbrain 0.4.15</a></li><li><a href="#v0-4-14">NETbrain 0.4.14</a></li><li><a href="#v0-4-13">NETbrain 0.4.13</a></li><li><a href="#v0-4-12">NETbrain 0.4.12</a></li><li><a href="#v0-4-11">NETbrain 0.4.11</a></li><li><a href="#v0-4-10">NETbrain 0.4.10</a></li><li><a href="#v0-4-9">NETbrain 0.4.9</a></li><li><a href="#v0-4-8">NETbrain 0.4.8</a></li><li><a href="#v0-4-7">NETbrain 0.4.7</a></li><li><a href="#v0-4-6">NETbrain 0.4.6</a></li><li><a href="#v0-4-5">NETbrain 0.4.5</a></li><li><a href="#v0-4-4">NETbrain 0.4.4</a></li><li><a href="#v0-4-3">NETbrain 0.4.3</a></li><li><a href="#v0-4-2">NETbrain 0.4.2</a></li><li><a href="#v0-4-0">NETbrain 0.4.0</a></li><li><a href="#v0-3-0">NETbrain 0.3.0</a></li><li><a href="#v0-2-1">NETbrain 0.2.1</a></li><li><a href="#v0-2-0">NETbrain 0.2.0</a></li></ul></aside>
 </div>
 <footer>
   <div class="fuss">

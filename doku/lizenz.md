@@ -8,7 +8,7 @@ Eine neue Installation ist ab dem ersten Start **sieben Tage vollständig nutzba
 
 ## Testlizenz anfordern
 
-Unter **Lizenz** (`/lizenz`) oder im Einrichtungsassistenten fordern Administratoren eine Testlizenz über sieben Tage an: Firma, Name und Mailadresse eintragen, die Lizenz kommt per Mail. Den Block aus der Mail fügen Sie wie jede andere Lizenz ein. Je Mailadresse gibt es eine Testlizenz. Sie enthält auch das [Kundenportal](kundenportal.html).
+Unter **Lizenz** (`/lizenz`) oder im Einrichtungsassistenten fordern Administratoren eine Testlizenz über 30 Tage an: Firma, Name und Mailadresse eintragen, die Lizenz kommt per Mail. Den Block aus der Mail fügen Sie wie jede andere Lizenz ein. Je Mailadresse gibt es eine Testlizenz. Sie enthält auch das [Kundenportal](kundenportal.html).
 
 ## Lizenz hinterlegen
 

@@ -23,7 +23,7 @@
 <meta property="og:image:height" content="630">
 <meta property="og:image:alt" content="NETbrain – Wissensplattform auf Ihrem eigenen Server">
 <meta name="twitter:card" content="summary_large_image">
-<script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "TechArticle", "@id": "https://getnetbrain.netfactory.de/doku/reverse-proxy.html#artikel", "headline": "Reverse-Proxy", "description": "Acht Anforderungen an den Reverse-Proxy vor NETbrain, mit vollständigem nginx-Beispiel.", "url": "https://getnetbrain.netfactory.de/doku/reverse-proxy.html", "inLanguage": "de", "image": "https://getnetbrain.netfactory.de/bilder/og-image-1200.png", "version": "0.4.14", "isPartOf": {"@id": "https://getnetbrain.netfactory.de/#website"}, "about": {"@id": "https://getnetbrain.netfactory.de/#software"}, "publisher": {"@id": "https://getnetbrain.netfactory.de/#netfactory"}}, {"@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "NETbrain", "item": "https://getnetbrain.netfactory.de/"}, {"@type": "ListItem", "position": 2, "name": "Dokumentation", "item": "https://getnetbrain.netfactory.de/doku/"}, {"@type": "ListItem", "position": 3, "name": "Reverse-Proxy", "item": "https://getnetbrain.netfactory.de/doku/reverse-proxy.html"}]}]}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "TechArticle", "@id": "https://getnetbrain.netfactory.de/doku/reverse-proxy.html#artikel", "headline": "Reverse-Proxy", "description": "Acht Anforderungen an den Reverse-Proxy vor NETbrain, mit vollständigem nginx-Beispiel.", "url": "https://getnetbrain.netfactory.de/doku/reverse-proxy.html", "inLanguage": "de", "image": "https://getnetbrain.netfactory.de/bilder/og-image-1200.png", "version": "0.4.16", "isPartOf": {"@id": "https://getnetbrain.netfactory.de/#website"}, "about": {"@id": "https://getnetbrain.netfactory.de/#software"}, "publisher": {"@id": "https://getnetbrain.netfactory.de/#netfactory"}}, {"@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "NETbrain", "item": "https://getnetbrain.netfactory.de/"}, {"@type": "ListItem", "position": 2, "name": "Dokumentation", "item": "https://getnetbrain.netfactory.de/doku/"}, {"@type": "ListItem", "position": 3, "name": "Reverse-Proxy", "item": "https://getnetbrain.netfactory.de/doku/reverse-proxy.html"}]}]}</script>
 <link rel="preload" href="../schriften/geist-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="doku.css">
 </head>
@@ -35,7 +35,7 @@
     <nav aria-label="Hauptnavigation">
       <a href="../">Produkt</a>
       <a href="../#selbst-starten">Selbst testen</a>
-      <a href="versionen.html">Version 0.4.14</a>
+      <a href="versionen.html">Version 0.4.16</a>
       <a class="knopf" href="mailto:info@netfactory.de?subject=NETbrain%20%E2%80%93%20Frage%20zur%20Dokumentation">Frage stellen</a>
     </nav>
   </div>
@@ -118,7 +118,7 @@ curl -m 5 http://&lt;server-ip&gt;:4321/api/health
 curl -s https://netbrain.ihre-firma.de/api/health</code></pre><button type="button" class="kopieren" aria-label="Befehl kopieren"><svg class="bereit" viewBox="0 0 24 24" aria-hidden="true"><rect x="8" y="8" width="11" height="11" rx="2"/><path d="M16 8V6a2 2 0 00-2-2H6a2 2 0 00-2 2v8a2 2 0 002 2h2"/></svg><svg class="fertig" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7"/></svg></button></div>
 <p>Den vierten Punkt prüfen Sie im Browser: Werfen Sie eine Datei von etwa 10 MB als Firmenwissen ein. Kommt eine Fehlerseite Ihres Proxys statt einer Meldung von NETbrain, ist das Body-Limit zu eng.</p>
     <nav class="blaettern" aria-label="Weiterblättern"><a class="zurueck" href="lizenz.html"><span>Zurück</span><b>Lizenz</b></a><a class="weiter" href="sicherung.html"><span>Weiter</span><b>Sicherung und Wiederherstellung</b></a></nav>
-    <p class="stand">Stand: NETbrain 0.4.14. Fehlt etwas oder stimmt etwas nicht? <a href="mailto:info@netfactory.de?subject=NETbrain-Dokumentation%3A%20reverse-proxy">Schreiben Sie uns.</a></p>
+    <p class="stand">Stand: NETbrain 0.4.16. Fehlt etwas oder stimmt etwas nicht? <a href="mailto:info@netfactory.de?subject=NETbrain-Dokumentation%3A%20reverse-proxy">Schreiben Sie uns.</a></p>
   </main>
   <aside class="auf-dieser-seite" aria-label="Auf dieser Seite"><p>Auf dieser Seite</p><ul><li><a href="#die-acht-punkte">Die acht Punkte</a></li><li><a href="#beispiel-fuer-nginx">Beispiel für nginx</a></li><li><a href="#firewall-wenn-der-proxy-woanders-steht">Firewall, wenn der Proxy woanders steht</a></li><li><a href="#nachweisen">Nachweisen statt annehmen</a></li></ul></aside>
 </div>

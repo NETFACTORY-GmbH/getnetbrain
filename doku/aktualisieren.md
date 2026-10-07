@@ -28,7 +28,7 @@ Der Installer erkennt die vorhandene Installation, lässt die Daten stehen und w
 Eine bestimmte Version installieren Sie mit dem versionierten Link:
 
 ```
-curl -fsSL https://getnetbrain.netfactory.de/install.sh@0.4.14 | sudo bash
+curl -fsSL https://getnetbrain.netfactory.de/install.sh@0.4.16 | sudo bash
 ```
 
 ## Zurück auf die Vorversion

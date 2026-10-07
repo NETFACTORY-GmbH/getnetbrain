@@ -1,6 +1,6 @@
 # NETbrain-Dokumentation
 
-Hier finden Sie alles, um NETbrain zu installieren, einzurichten, im Team zu nutzen und dauerhaft zu betreiben. Die Dokumentation beschreibt NETbrain 0.4.14.
+Hier finden Sie alles, um NETbrain zu installieren, einzurichten, im Team zu nutzen und dauerhaft zu betreiben. Die Dokumentation beschreibt NETbrain 0.4.16.
 
 <div class="karten">
 <a class="karte" href="installation.html"><b>In 45 Minuten startklar</b><span>Ein Befehl auf dem Server, danach führt ein Assistent im Browser durch die Einrichtung.</span></a>
@@ -26,7 +26,7 @@ Optional kommt ein **Kundenportal** hinzu: Ausgewählte Wissensseiten erscheinen
 3. [Im Browser einrichten](einrichtung.html): Token, Geheimnisse, KI-Anbieter, Sicherung, Lizenz, erster Administrator.
 4. [Benutzer anlegen](benutzer.html) und loslegen.
 
-Die ersten **sieben Tage** läuft NETbrain ohne Lizenz. Danach fordern Sie im Assistenten selbst eine Testlizenz an oder hinterlegen Ihre gekaufte — siehe [Lizenz](lizenz.html).
+Die ersten **sieben Tage** läuft NETbrain ohne Lizenz. Danach fordern Sie im Assistenten selbst eine Testlizenz über 30 Tage an oder hinterlegen Ihre gekaufte — siehe [Lizenz](lizenz.html).
 
 ## Für wen welche Seite
 

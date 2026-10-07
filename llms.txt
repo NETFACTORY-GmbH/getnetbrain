@@ -2,7 +2,7 @@
 
 > NETbrain ist eine Wissensplattform für Unternehmen von der NETFACTORY GmbH Internet Service (Fürstenau). Teams erfassen Firmenwissen, Kuratoren prüfen und geben es frei, alle finden es wieder – per Stichwortsuche ohne KI oder im KI-Chat. NETbrain läuft als Container auf dem Server des Kunden; der KI-Anbieter ist frei wählbar (eigenes Modell oder Cloud).
 
-Aktueller Stand: Version 0.4.14, Alpha in der Pilotphase. Sprache von Produkt und Dokumentation: Deutsch.
+Aktueller Stand: Version 0.4.16, Alpha in der Pilotphase. Sprache von Produkt und Dokumentation: Deutsch.
 
 ## Kurzfakten
 

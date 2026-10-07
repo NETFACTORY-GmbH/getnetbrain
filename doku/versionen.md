@@ -2,6 +2,44 @@
 
 Was sich mit jeder Version geändert hat. Steht unter **Status** ein Hinweis, lesen Sie ihn vor dem Update; wie das Update selbst abläuft, steht unter [Aktualisieren](aktualisieren.html).
 
+## NETbrain 0.4.16
+
+**Stand:** 6. Oktober 2026
+
+**Status:** Keine Eingriffe nötig.
+
+### KI-Zugang prüfen
+
+Scheitert die Prüfung eines KI-Anbieters, nennt NETbrain jetzt die Ursache: keine Antwort
+(meist eine Firewall), Name nicht auflösbar, Verbindung abgewiesen, ungültiges Zertifikat
+oder abgelehnter API-Schlüssel.
+
+### Installation und Updates
+
+Installer und Update-Prüfung hinterlassen keine leeren Docker-Volumes mehr. Ältere Reste
+entfernt `docker volume prune` (löscht nur namenlose Volumes, die kein Container nutzt).
+
+## NETbrain 0.4.15
+
+**Stand:** 6. Oktober 2026
+
+**Status:** Keine Eingriffe nötig.
+
+### Installation
+
+- `install.sh` prüft nach dem Start, ob der Container nach außen kommt. Ist
+  `/etc/resolv.conf` leer, obwohl systemd-resolved läuft, verlinkt es die Datei auf
+  `stub-resolv.conf` (die alte bleibt als Sicherung liegen) und startet Docker neu. In
+  allen anderen Fällen erscheint eine Warnung mit den Punkten, die zu prüfen sind.
+- `install.sh token` meldet nach abgeschlossener Einrichtung „bereits eingerichtet" statt
+  eines alten Tokens.
+
+### Einrichtungsassistent
+
+- Scheitert die Prüfung des KI-Zugangs, erscheint wieder das Formular mit der Fehlermeldung.
+- Nach dem Probelauf der Sicherung führt „Weiter" zum nächsten Schritt.
+- Der Hinweis zur Alpha-Version zeigt keinen hellen Rahmen mehr.
+
 ## NETbrain 0.4.14
 
 **Stand:** 1. Oktober 2026

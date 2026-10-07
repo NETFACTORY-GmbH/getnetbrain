@@ -34,7 +34,7 @@ Uhrzeit des täglichen Laufs (Vorgabe 02:00) und wie viele Stände aufgehoben we
 Fügen Sie den Inhalt Ihrer Lizenzdatei ein. NETbrain bindet sie dabei beim Lizenzdienst an diese Installation. Haben Sie noch keine Lizenz, gibt es zwei Wege:
 
 - **Ohne Lizenz weitermachen** — eine neue Installation ist ab dem ersten Start sieben Tage vollständig nutzbar.
-- **Testlizenz anfordern** — Firma, Name und Mailadresse eintragen; die Lizenz kommt per Mail und wird hier eingefügt. Je Mailadresse gibt es eine.
+- **Testlizenz anfordern** — Firma, Name und Mailadresse eintragen; die Lizenz kommt per Mail, gilt 30 Tage und wird hier eingefügt. Je Mailadresse gibt es eine.
 
 Mehr dazu unter [Lizenz](lizenz.html).
 

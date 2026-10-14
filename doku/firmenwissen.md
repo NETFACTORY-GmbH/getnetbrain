@@ -17,6 +17,22 @@ Dazu wählen Sie, wie es weitergeht:
 
 Gescannte PDFs liest ein Modell als Bild (bis vier Seiten); Zahlen daraus bitte gegenlesen.
 
+## Schnell erfassen vom Handy
+
+Zwei Seiten mit je einem großen Knopf: `/schnell/foto` öffnet die Kamera, `/schnell/diktat` das
+Mikrofon (sofern die Spracheingabe eingerichtet ist). Beide führen in denselben Entwurf wie die
+normale Erfassung.
+
+- **Android:** NETbrain als App installieren, dann das App-Symbol lange drücken — dort stehen
+  **Foto**, **Diktat** und **Chat**. Jeden Eintrag können Sie als eigenes Symbol auf den
+  Startbildschirm ziehen.
+- **iPhone:** In der App **Kurzbefehle** je einen Kurzbefehl mit der Aktion **URL öffnen** anlegen
+  (`https://<Ihre-Adresse>/schnell/foto` bzw. `/schnell/diktat`). Das **Kurzbefehle-Widget** auf
+  dem Home-Bildschirm zeigt sie als Kacheln.
+
+Echte Widgets können Web-Apps auf Android und iOS nicht anbieten; Kamera und Mikrofon starten
+im Browser immer erst nach einem Tipp.
+
 ## Entwurf prüfen und einreichen
 
 Im zweiten Schritt sehen Sie den Entwurf und können Titel, Kurzfassung, Tags, Kategorie und Inhalt anpassen. **So wird es aussehen** zeigt die Vorschau. Gibt es schon ähnliche Seiten, weist NETbrain darauf hin.

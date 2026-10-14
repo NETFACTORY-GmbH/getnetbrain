@@ -2,6 +2,122 @@
 
 Was sich mit jeder Version geändert hat. Steht unter **Status** ein Hinweis, lesen Sie ihn vor dem Update; wie das Update selbst abläuft, steht unter [Aktualisieren](aktualisieren.html).
 
+## NETbrain 0.5.2
+
+**Stand:** 14. Oktober 2026
+
+**Status:** Keine Eingriffe nötig.
+
+### Wissenslandkarte
+
+Die Landkarte zeigt als Netz die Verweise zwischen den Seiten, färbt nach Kategorie und ordnet
+sich um die Index-Seite. Jede Wissensseite zeigt ihr Umfeld als kleinen Graphen.
+
+### Korrekturen
+
+- Die Erfassung funktioniert wieder auf Servern, deren Prozessor ältere Befehlssätze meldet
+  (etwa manche virtuelle Maschinen). Seit 0.5.0 blieb sie dort hängen. Bilder werden auf solchen
+  Servern unverkleinert übernommen.
+
+### Für Administratoren
+
+- Das Protokoll der KI-Verwaltung unterscheidet Zustimmungen zu Firmenwissen an Cloud-Anbieter
+  von freigegebenen Gesprächsverläufen.
+- Meldet der Server einen Prozessor ohne x86-64-v2 (z. B. CPU-Typ `kvm64`), kann NETbrain Bilder
+  nicht verkleinern. Abhilfe in der Virtualisierung: CPU-Typ `x86-64-v2` oder `host`.
+
+## NETbrain 0.5.1
+
+**Stand:** 14. Oktober 2026
+
+**Status:** Keine Eingriffe nötig.
+
+### Schnell erfassen vom Handy
+
+Zwei neue Seiten mit je einem großen Knopf: Foto aufnehmen oder diktieren, dann wie gewohnt
+prüfen und einreichen. Auf Android liegen **Foto**, **Diktat** und **Chat** auf dem App-Symbol
+(lange drücken) und lassen sich einzeln auf den Startbildschirm ziehen. Auf dem iPhone gehen
+sie über das Kurzbefehle-Widget.
+
+### Korrektur
+
+- Die Automatik im Chat entscheidet auch mit Modellen über Azure (etwa bei Requesty) wieder,
+  ob Firmenwissen gebraucht wird. In 0.5.0 lehnte der Anbieter die Anfrage ab, und der Chat
+  antwortete ohne Firmenwissen.
+
+### Für Administratoren
+
+- Für die Spracheingabe bietet die KI-Verwaltung bei Requesty jetzt **Mistral Voxtral**
+  (Verarbeitung in der EU) und die OpenAI-Transkription an, auch wenn Requesty sie nicht in seiner
+  Modellliste nennt.
+
+## NETbrain 0.5.0
+
+**Stand:** 14. Oktober 2026
+
+**Status:** Keine Eingriffe nötig. Jedes Konto bestätigt einmal den Nutzungshinweis.
+
+### Websuche im Chat
+
+Neue Installationen bringen eine eigene Websuche mit. Sie funktioniert mit jedem KI-Anbieter;
+die Antwort nennt ihre Webquellen mit Link. Abschalten lässt sie sich in der KI-Verwaltung.
+
+### Word-Dateien übernehmen
+
+Eine .docx-Datei in der Erfassung wird zu einer Wissensseite, samt ihrer Bilder.
+
+### Firmenwissen mit Cloud-Anbietern
+
+Hat ein Administrator Firmenwissen für Cloud-Anbieter freigegeben, nutzt die Automatik im
+Chat es jetzt auch ohne internes Modell. Bevor zum ersten Mal Firmenwissen an einen
+Cloud-Anbieter geht, fragt der Chat einmal nach deiner Zustimmung.
+
+### Weitere Änderungen
+
+- „Was ist neu" zeigt diese Hinweise und öffnet sich nach einem Update einmal von selbst.
+- Alpha- und Nutzungshinweis stehen auf einer Seite und brauchen einen Klick.
+- Erfassung, Editor und private Erfassung fragen nach einer Beschreibung für jedes Bild.
+- Schrift eine Stufe größer, Knöpfe und Eingabefelder einheitlich hoch.
+- Ein gescheiterter Einwurf behält die gewählte Datei.
+- Aufbereiten und Einarbeiten ergänzen bei einem Datum ohne Jahr das richtige Jahr.
+- Vor und nach hervorgehobenen Wörtern fehlen keine Leerzeichen mehr.
+- Die Landkarte färbt das Etikett der ausgewählten Seite in der Farbe ihrer Gruppe.
+
+### Für Administratoren
+
+- Die Modellwahl in der KI-Verwaltung geht der Umgebung vor. Die Verwaltung meldet
+  Aufgabenmodelle, die gegen die Freigabe für Firmenwissen verstoßen.
+- Die Websuche kommt bei Neuinstallationen über `install.sh`. Bestehende Installationen
+  rüsten sie mit `sudo ./install.sh websuche` nach.
+- Zustimmungen zu Firmenwissen an Cloud-Anbieter stehen im Protokoll der KI-Verwaltung.
+- Der Installer bezieht das Image bei der Erstinstallation nur noch einmal.
+
+## NETbrain 0.4.17
+
+**Stand:** 12. Oktober 2026
+
+**Status:** Keine Eingriffe nötig.
+
+### Wissen erfassen
+
+Links das Textfeld, rechts die Ablage für Link und Datei (ziehen, klicken oder einfügen).
+Titel und Aufbereitung stehen im Aufklapper. Ein Text, der nur aus einem Link besteht, wird
+als Quelle übernommen.
+
+### Diagramme
+
+- Mermaid-Blöcke erscheinen auf Wissensseiten und in der Vorschau als Diagramme.
+- Die Aufbereitung übernimmt mitgegebene Mermaid-Diagramme unverändert und zeichnet in Text
+  beschriebene Abläufe selbst als Diagramm.
+
+### Weitere Änderungen
+
+- Eigener KI-Zugang im Chat: Scheitert der Abruf der Modellliste, nennt NETbrain den Grund;
+  der Modellname lässt sich von Hand eintragen.
+- Anmeldung, Bereichsumschaltung und Wissensseiten passen auf das Handy; lange Wörter in
+  Überschriften brechen um.
+- Eine Testlizenz gilt 30 statt sieben Tage.
+
 ## NETbrain 0.4.16
 
 **Stand:** 6. Oktober 2026

@@ -126,7 +126,7 @@ chmod +x "$VERZEICHNIS"/*.sh
 # Installieren. Ab hier führt install.sh und bezieht dasselbe Image.
 # ---------------------------------------------------------------------------
 cd "$VERZEICHNIS"
-NETBRAIN_IMAGE="$IMAGE" bash ./install.sh installieren
+NETBRAIN_IMAGE="$IMAGE" NETBRAIN_IMAGE_BEZOGEN=1 bash ./install.sh installieren
 
 cat <<ENDE
 

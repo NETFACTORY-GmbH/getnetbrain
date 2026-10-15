@@ -10,7 +10,8 @@ Eine Sicherung ist eine einzelne, mit AES-256-GCM verschlüsselte Datei (`.nbk`)
 - die Benutzerkonten,
 - die Chat-Daten samt Anhängen (sie sind zusätzlich Ende-zu-Ende-verschlüsselt),
 - die KI-Freigaben,
-- die Freigaben für das Kundenportal.
+- die Freigaben für das Kundenportal,
+- ein eigenes Logo.
 
 Alles liegt in einem Bündel, weil die Teile zusammengehören: Die Chat-Schlüssel eines Kontos sind mit dessen Passwort verpackt. Ein Bündel aus verschiedenen Zeitpunkten wäre teilweise unlesbar.
 
@@ -59,10 +60,10 @@ sudo docker compose -f netbrain-compose.yml exec netbrain \
   node scripts/backup.mjs --restore /backups/<datei>.nbk \
     --vault /tmp/probe/vault --users /tmp/probe/users.json \
     --chat /tmp/probe/ai-chat --policy /tmp/probe/ai-policy.json \
-    --portal /tmp/probe/portal.json
+    --portal /tmp/probe/portal.json --branding /tmp/probe/branding
 ```
 
-Enthält das Bündel einen Teil, für den Sie kein Ziel angeben, bricht die Wiederherstellung ab, statt ihn stillschweigend wegzulassen. Ältere Bündel ohne Portal-Freigaben brauchen `--portal` nicht.
+Enthält das Bündel einen Teil, für den Sie kein Ziel angeben, bricht die Wiederherstellung ab, statt ihn stillschweigend wegzulassen. Bündel ohne Portal-Freigaben oder eigenes Logo brauchen `--portal` bzw. `--branding` nicht.
 
 Die Passphrase nimmt der Lauf aus der Installation. Auf einem fremden Rechner — dem Ernstfall — geben Sie sie mit: `NETBRAIN_BACKUP_PASSPHRASE='…'`.
 

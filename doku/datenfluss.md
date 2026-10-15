@@ -9,8 +9,9 @@ Wenn jemand den KI-Chat nutzt oder Wissen aufbereiten lässt, geht an den gewäh
 - die Frage oder der eingeworfene Text samt beigefügter Dateien und Bilder,
 - die Ausschnitte aus dem Firmenwissen, die für die Antwort herangezogen werden — sofern Firmenwissen für diesen Anbieter freigegeben ist,
 - bei verbundenem privaten Vault die passenden lokalen Auszüge — sofern freigegeben.
+- beim Diktieren die Sprachaufnahme an den für die Spracheingabe gewählten Anbieter; sie wird nicht gespeichert.
 
-Welcher Anbieter das ist, bestimmen Sie. Bei einem Modell in Ihrem eigenen Netz bleibt die Verarbeitung intern. Ob Firmenwissen oder private Auszüge an **Cloud**-Anbieter gehen dürfen, regeln zwei Schalter unter **Administration → KI & Zugriffsrechte → Wissen und Cloud**. Wechselt jemand mitten im Gespräch zu einem Cloud-Anbieter, fragt NETbrain vorher nach; die Zustimmung wird protokolliert. Siehe [KI-Zugänge und Freigaben](ki-zugaenge.html).
+Welcher Anbieter das ist, bestimmen Sie. Bei einem Modell in Ihrem eigenen Netz bleibt die Verarbeitung intern. Laufen Chat, Aufbereitung, Bildlesung und Spracheingabe auf Modellen im eigenen Netz, verlässt kein Inhalt das Haus. Ob Firmenwissen oder private Auszüge an **Cloud**-Anbieter gehen dürfen, regeln zwei Schalter unter **Administration → KI & Zugriffsrechte → Wissen und Cloud**. Wechselt jemand mitten im Gespräch zu einem Cloud-Anbieter, fragt NETbrain vorher nach; die Zustimmung wird protokolliert. Siehe [KI-Zugänge und Freigaben](ki-zugaenge.html).
 
 ## Websuche und abgerufene Links
 

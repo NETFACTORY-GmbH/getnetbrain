@@ -2,7 +2,7 @@
 
 > NETbrain ist eine Wissensplattform für Unternehmen von der NETFACTORY GmbH Internet Service (Fürstenau). Teams erfassen Firmenwissen, Kuratoren prüfen und geben es frei, alle finden es wieder – per Stichwortsuche ohne KI oder im KI-Chat. NETbrain läuft als Container auf dem Server des Kunden; der KI-Anbieter ist frei wählbar (eigenes Modell oder Cloud).
 
-Aktueller Stand: Version 0.5.2, Alpha in der Pilotphase. Sprache von Produkt und Dokumentation: Deutsch.
+Aktueller Stand: Version 0.5.3, Alpha in der Pilotphase. Sprache von Produkt und Dokumentation: Deutsch.
 
 ## Kurzfakten
 
@@ -27,7 +27,7 @@ Aktueller Stand: Version 0.5.2, Alpha in der Pilotphase. Sprache von Produkt und
 
 # NETbrain-Dokumentation
 
-Hier finden Sie alles, um NETbrain zu installieren, einzurichten, im Team zu nutzen und dauerhaft zu betreiben. Die Dokumentation beschreibt NETbrain 0.5.2.
+Hier finden Sie alles, um NETbrain zu installieren, einzurichten, im Team zu nutzen und dauerhaft zu betreiben. Die Dokumentation beschreibt NETbrain 0.5.3.
 
 <div class="karten">
 <a class="karte" href="installation.html"><b>In 45 Minuten startklar</b><span>Ein Befehl auf dem Server, danach führt ein Assistent im Browser durch die Einrichtung.</span></a>
@@ -137,7 +137,7 @@ Am Ende stehen das **Einrichtungs-Token** und die Adresse, unter der es weiterge
 Die Version steckt im Link:
 
 ```
-curl -fsSL https://getnetbrain.netfactory.de/install.sh@0.5.2 | sudo bash
+curl -fsSL https://getnetbrain.netfactory.de/install.sh@0.5.3 | sudo bash
 ```
 
 ### Proxy auf einem anderen Rechner
@@ -268,6 +268,7 @@ Damit endet der Einrichtungsmodus: `/einrichtung` ist danach nicht mehr erreichb
 
 - Den Proxy und die Sicherung einmal nachweisen statt annehmen: Zertifikat gültig, Port 4321 von außen gesperrt, eine 12-MB-Datei geht durch, eine Sicherung lässt sich öffnen. Siehe [Reverse-Proxy](reverse-proxy.html#nachweisen) und [Sicherung](sicherung.html).
 - Eine Kopie der Sicherungen auf ein Ziel außerhalb des Servers einrichten.
+- Optional ein eigenes Logo unter **Verwaltung → Einstellungen** hochladen: PNG oder WebP, höchstens 1 MB. Es ersetzt das NETbrain-Logo in Kopfzeile, Anmeldung und Registrierung; darunter steht klein „mit NETbrain“.
 
 ---
 
@@ -849,7 +850,8 @@ Eine Sicherung ist eine einzelne, mit AES-256-GCM verschlüsselte Datei (`.nbk`)
 - die Benutzerkonten,
 - die Chat-Daten samt Anhängen (sie sind zusätzlich Ende-zu-Ende-verschlüsselt),
 - die KI-Freigaben,
-- die Freigaben für das Kundenportal.
+- die Freigaben für das Kundenportal,
+- ein eigenes Logo.
 
 Alles liegt in einem Bündel, weil die Teile zusammengehören: Die Chat-Schlüssel eines Kontos sind mit dessen Passwort verpackt. Ein Bündel aus verschiedenen Zeitpunkten wäre teilweise unlesbar.
 
@@ -898,10 +900,10 @@ sudo docker compose -f netbrain-compose.yml exec netbrain \
   node scripts/backup.mjs --restore /backups/<datei>.nbk \
     --vault /tmp/probe/vault --users /tmp/probe/users.json \
     --chat /tmp/probe/ai-chat --policy /tmp/probe/ai-policy.json \
-    --portal /tmp/probe/portal.json
+    --portal /tmp/probe/portal.json --branding /tmp/probe/branding
 ```
 
-Enthält das Bündel einen Teil, für den Sie kein Ziel angeben, bricht die Wiederherstellung ab, statt ihn stillschweigend wegzulassen. Ältere Bündel ohne Portal-Freigaben brauchen `--portal` nicht.
+Enthält das Bündel einen Teil, für den Sie kein Ziel angeben, bricht die Wiederherstellung ab, statt ihn stillschweigend wegzulassen. Bündel ohne Portal-Freigaben oder eigenes Logo brauchen `--portal` bzw. `--branding` nicht.
 
 Die Passphrase nimmt der Lauf aus der Installation. Auf einem fremden Rechner — dem Ernstfall — geben Sie sie mit: `NETBRAIN_BACKUP_PASSPHRASE='…'`.
 
@@ -956,7 +958,7 @@ Der Installer erkennt die vorhandene Installation, lässt die Daten stehen und w
 Eine bestimmte Version installieren Sie mit dem versionierten Link:
 
 ```
-curl -fsSL https://getnetbrain.netfactory.de/install.sh@0.5.2 | sudo bash
+curl -fsSL https://getnetbrain.netfactory.de/install.sh@0.5.3 | sudo bash
 ```
 
 ## Zurück auf die Vorversion
@@ -1173,8 +1175,9 @@ Wenn jemand den KI-Chat nutzt oder Wissen aufbereiten lässt, geht an den gewäh
 - die Frage oder der eingeworfene Text samt beigefügter Dateien und Bilder,
 - die Ausschnitte aus dem Firmenwissen, die für die Antwort herangezogen werden — sofern Firmenwissen für diesen Anbieter freigegeben ist,
 - bei verbundenem privaten Vault die passenden lokalen Auszüge — sofern freigegeben.
+- beim Diktieren die Sprachaufnahme an den für die Spracheingabe gewählten Anbieter; sie wird nicht gespeichert.
 
-Welcher Anbieter das ist, bestimmen Sie. Bei einem Modell in Ihrem eigenen Netz bleibt die Verarbeitung intern. Ob Firmenwissen oder private Auszüge an **Cloud**-Anbieter gehen dürfen, regeln zwei Schalter unter **Administration → KI & Zugriffsrechte → Wissen und Cloud**. Wechselt jemand mitten im Gespräch zu einem Cloud-Anbieter, fragt NETbrain vorher nach; die Zustimmung wird protokolliert. Siehe [KI-Zugänge und Freigaben](ki-zugaenge.html).
+Welcher Anbieter das ist, bestimmen Sie. Bei einem Modell in Ihrem eigenen Netz bleibt die Verarbeitung intern. Laufen Chat, Aufbereitung, Bildlesung und Spracheingabe auf Modellen im eigenen Netz, verlässt kein Inhalt das Haus. Ob Firmenwissen oder private Auszüge an **Cloud**-Anbieter gehen dürfen, regeln zwei Schalter unter **Administration → KI & Zugriffsrechte → Wissen und Cloud**. Wechselt jemand mitten im Gespräch zu einem Cloud-Anbieter, fragt NETbrain vorher nach; die Zustimmung wird protokolliert. Siehe [KI-Zugänge und Freigaben](ki-zugaenge.html).
 
 ## Websuche und abgerufene Links
 
@@ -1268,6 +1271,47 @@ Die letzten Zeilen des Protokolls genügen, `Strg` + `C` beendet die Ausgabe. Un
 # Versionshinweise
 
 Was sich mit jeder Version geändert hat. Steht unter **Status** ein Hinweis, lesen Sie ihn vor dem Update; wie das Update selbst abläuft, steht unter [Aktualisieren](aktualisieren.html).
+
+## NETbrain 0.5.3
+
+**Stand:** 15. Oktober 2026
+
+**Status:** Keine Eingriffe nötig.
+
+### Bilder aus PDFs
+
+Ein PDF mit Text bringt beim Erfassen seine Abbildungen mit, etwa Screenshots aus einer
+Anleitung. Sie stehen im Entwurf bei ihrem Abschnitt. Symbole, Linien und Kopfleisten des
+Briefpapiers bleiben weg, wiederkehrende Bilder kommen nur einmal. Übernommen werden bis zu
+zwölf Abbildungen.
+
+### Eigenes Logo
+
+Unter **Administration → Einstellungen** lässt sich ein eigenes Logo hochladen (PNG oder WebP).
+Es erscheint in der Kopfzeile, bei der Anmeldung und bei der Registrierung, darunter steht
+„mit NETbrain“.
+
+### KI-Chat
+
+- Findet die Suche im Firmenwissen nichts zur Frage, sagt die KI das zuerst und antwortet dann
+  allgemein.
+- Die KI antwortet auf Deutsch, außer die Frage ist erkennbar in einer anderen Sprache gestellt.
+
+### Korrekturen
+
+- Beim Aufbereiten bleiben Abbildungen an ihrer Stelle im Text. Bisher landeten sie je nach
+  Modell am Ende unter „Nicht eingeordnete Abbildungen“.
+- Die Einrichtung stellt ein bildfähiges KI-Modell auch zum Lesen von Bildern und Scans ein.
+  Bisher scheiterte „Foto erfassen“ auf neuen Installationen, bis ein Administrator das von Hand
+  nachholte. Ohne Bildmodell sagt die Foto-Seite jetzt vorab, was fehlt.
+
+### Für Administratoren
+
+- Bei der Spracheingabe zeigt die KI-Verwaltung, ob ein Modell im Haus bleibt oder in die Cloud
+  geht. Mit Modellen auf dem eigenen KI-Server verlässt kein Inhalt das Haus.
+- Die Sicherung enthält das eigene Logo. Zum Wiederherstellen eines solchen Bündels gehört
+  `--branding <Verzeichnis>` dazu (siehe Doku „Sicherung“).
+- `/api/health` prüft zusätzlich, ob das Verzeichnis für das Logo beschreibbar ist.
 
 ## NETbrain 0.5.2
 

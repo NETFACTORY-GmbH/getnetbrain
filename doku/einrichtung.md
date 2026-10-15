@@ -58,3 +58,4 @@ Damit endet der Einrichtungsmodus: `/einrichtung` ist danach nicht mehr erreichb
 
 - Den Proxy und die Sicherung einmal nachweisen statt annehmen: Zertifikat gültig, Port 4321 von außen gesperrt, eine 12-MB-Datei geht durch, eine Sicherung lässt sich öffnen. Siehe [Reverse-Proxy](reverse-proxy.html#nachweisen) und [Sicherung](sicherung.html).
 - Eine Kopie der Sicherungen auf ein Ziel außerhalb des Servers einrichten.
+- Optional ein eigenes Logo unter **Verwaltung → Einstellungen** hochladen: PNG oder WebP, höchstens 1 MB. Es ersetzt das NETbrain-Logo in Kopfzeile, Anmeldung und Registrierung; darunter steht klein „mit NETbrain“.

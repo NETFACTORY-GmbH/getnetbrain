@@ -2,6 +2,47 @@
 
 Was sich mit jeder Version geändert hat. Steht unter **Status** ein Hinweis, lesen Sie ihn vor dem Update; wie das Update selbst abläuft, steht unter [Aktualisieren](aktualisieren.html).
 
+## NETbrain 0.5.3
+
+**Stand:** 15. Oktober 2026
+
+**Status:** Keine Eingriffe nötig.
+
+### Bilder aus PDFs
+
+Ein PDF mit Text bringt beim Erfassen seine Abbildungen mit, etwa Screenshots aus einer
+Anleitung. Sie stehen im Entwurf bei ihrem Abschnitt. Symbole, Linien und Kopfleisten des
+Briefpapiers bleiben weg, wiederkehrende Bilder kommen nur einmal. Übernommen werden bis zu
+zwölf Abbildungen.
+
+### Eigenes Logo
+
+Unter **Administration → Einstellungen** lässt sich ein eigenes Logo hochladen (PNG oder WebP).
+Es erscheint in der Kopfzeile, bei der Anmeldung und bei der Registrierung, darunter steht
+„mit NETbrain“.
+
+### KI-Chat
+
+- Findet die Suche im Firmenwissen nichts zur Frage, sagt die KI das zuerst und antwortet dann
+  allgemein.
+- Die KI antwortet auf Deutsch, außer die Frage ist erkennbar in einer anderen Sprache gestellt.
+
+### Korrekturen
+
+- Beim Aufbereiten bleiben Abbildungen an ihrer Stelle im Text. Bisher landeten sie je nach
+  Modell am Ende unter „Nicht eingeordnete Abbildungen“.
+- Die Einrichtung stellt ein bildfähiges KI-Modell auch zum Lesen von Bildern und Scans ein.
+  Bisher scheiterte „Foto erfassen“ auf neuen Installationen, bis ein Administrator das von Hand
+  nachholte. Ohne Bildmodell sagt die Foto-Seite jetzt vorab, was fehlt.
+
+### Für Administratoren
+
+- Bei der Spracheingabe zeigt die KI-Verwaltung, ob ein Modell im Haus bleibt oder in die Cloud
+  geht. Mit Modellen auf dem eigenen KI-Server verlässt kein Inhalt das Haus.
+- Die Sicherung enthält das eigene Logo. Zum Wiederherstellen eines solchen Bündels gehört
+  `--branding <Verzeichnis>` dazu (siehe Doku „Sicherung“).
+- `/api/health` prüft zusätzlich, ob das Verzeichnis für das Logo beschreibbar ist.
+
 ## NETbrain 0.5.2
 
 **Stand:** 14. Oktober 2026

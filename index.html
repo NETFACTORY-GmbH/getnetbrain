@@ -405,7 +405,7 @@
 
   /* Kopfleiste — .section_nav: fest, 20 px Unschärfe, Linie unten */
   header{position:fixed; inset:0 0 auto; z-index:100; background-color:#00000059;
-    -webkit-backdrop-filter:blur(20px); backdrop-filter:blur(20px); border-bottom:1px solid var(--linie)}
+    -webkit-backdrop-filter:blur(20px); backdrop-filter:blur(20px); }
   .kopf{display:flex; align-items:center; gap:1.25rem; min-height:4.375rem}
   .kopf-teiler{flex:none; width:1px; height:1.25rem; border-radius:99px; background:#fff3}
   .kopf-rechts{margin-left:auto; display:flex; align-items:center; gap:1.25rem}
@@ -789,6 +789,7 @@
     <a href="#selbst-starten">Selbst testen</a>
     <a href="doku/">Dokumentation</a>
   </nav>
+    <div class="trennlinie" data-linie="h"></div>
 </header>
 
 <main id="inhalt">
@@ -987,8 +988,10 @@
       <img src="bilder/illustrationen/netbrain-freigabeprozess.svg"
         width="960" height="390" loading="lazy" decoding="async"
         alt="Beiträge durchlaufen eine Prüfung und werden als freigegebenes Wissen gemeinsam nutzbar.">
+        
       <figcaption><span>Wissen beitragen</span><span>Prüfen &amp; freigeben</span><span>Gemeinsam nutzen</span></figcaption>
     </figure>
+  
     <div class="funktionen">
       <div class="funktion">
         <p class="nr">Erfassen</p>
@@ -1122,7 +1125,6 @@
 </section>
 <!-- Ablauf -->
 <section class="abschnitt zentriert weiss" id="ablauf">
-  <div class="trennlinie" data-linie="h"></div>
   <div class="container">
     <p class="augenbraue"><i></i><span>Ihr Einstieg</span></p>
     <h2>Von der ersten Frage zum laufenden Betrieb.</h2>
@@ -1297,11 +1299,7 @@
     </div>
   </div>
 </section>
-<section class="schraffur-band" aria-hidden="true">
   <div class="trennlinie" data-linie="h"></div>
-  <div class="schraffur"></div>
-  <div class="trennlinie" data-linie="h"></div>
-</section>
 <!-- Kontakt -->
 <section class="kontakt-band" id="kontakt">
   <div class="linien" aria-hidden="true"></div>
@@ -1330,10 +1328,10 @@
     </div>
   </div>
 </section>
-
 </main>
 
 <footer>
+  <div class="trennlinie" data-linie="h"></div>
   <div class="container fuss-oben">
     <img class="fuss-logo" src="bilder/netbrain-logo.png" alt="NETbrain" width="1928" height="352" loading="lazy" decoding="async">
     <p class="fuss-claim">Wissensplattform für Unternehmen: Firmenwissen, persönliche Notizen und KI auf Ihrem eigenen Server.</p>

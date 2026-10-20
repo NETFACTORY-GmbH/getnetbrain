@@ -2,6 +2,22 @@
 
 Was sich mit jeder Version geändert hat. Steht unter **Status** ein Hinweis, lesen Sie ihn vor dem Update; wie das Update selbst abläuft, steht unter [Aktualisieren](aktualisieren.html).
 
+## NETbrain 0.5.4
+
+**Stand:** 20. Oktober 2026
+
+**Status:** Keine Eingriffe nötig.
+
+### Korrekturen
+
+- Neue Benutzer mit vorläufigem Passwort kommen in ihr Konto, auch wenn die Zwei-Faktor-Anmeldung
+  Pflicht ist. Bisher leitete die Anmeldung zwischen Kontoseite und Einrichtung im Kreis.
+
+### Für Administratoren
+
+- Die Installation läuft auch auf Ubuntu ab 25.10. Bisher brach sie dort zu Beginn mit
+  „install: invalid user: '10001'“ ab, und es entstand kein Container.
+
 ## NETbrain 0.5.3
 
 **Stand:** 15. Oktober 2026

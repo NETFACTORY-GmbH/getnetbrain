@@ -19,7 +19,7 @@ Am Ende stehen das **Einrichtungs-Token** und die Adresse, unter der es weiterge
 Die Version steckt im Link:
 
 ```
-curl -fsSL https://getnetbrain.netfactory.de/install.sh@0.5.4 | sudo bash
+curl -fsSL https://getnetbrain.netfactory.de/install.sh@0.5.5 | sudo bash
 ```
 
 ### Proxy auf einem anderen Rechner

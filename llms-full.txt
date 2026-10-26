@@ -2,7 +2,7 @@
 
 > NETbrain ist eine Wissensplattform für Unternehmen von der NETFACTORY GmbH Internet Service (Fürstenau). Teams erfassen Firmenwissen, Kuratoren prüfen und geben es frei, alle finden es wieder – per Stichwortsuche ohne KI oder im KI-Chat. NETbrain läuft als Container auf dem Server des Kunden; der KI-Anbieter ist frei wählbar (eigenes Modell oder Cloud).
 
-Aktueller Stand: Version 0.5.4, Alpha in der Pilotphase. Sprache von Produkt und Dokumentation: Deutsch.
+Aktueller Stand: Version 0.5.5, Alpha in der Pilotphase. Sprache von Produkt und Dokumentation: Deutsch.
 
 ## Kurzfakten
 
@@ -27,7 +27,7 @@ Aktueller Stand: Version 0.5.4, Alpha in der Pilotphase. Sprache von Produkt und
 
 # NETbrain-Dokumentation
 
-Hier finden Sie alles, um NETbrain zu installieren, einzurichten, im Team zu nutzen und dauerhaft zu betreiben. Die Dokumentation beschreibt NETbrain 0.5.4.
+Hier finden Sie alles, um NETbrain zu installieren, einzurichten, im Team zu nutzen und dauerhaft zu betreiben. Die Dokumentation beschreibt NETbrain 0.5.5.
 
 <div class="karten">
 <a class="karte" href="installation.html"><b>In 45 Minuten startklar</b><span>Ein Befehl auf dem Server, danach führt ein Assistent im Browser durch die Einrichtung.</span></a>
@@ -137,7 +137,7 @@ Am Ende stehen das **Einrichtungs-Token** und die Adresse, unter der es weiterge
 Die Version steckt im Link:
 
 ```
-curl -fsSL https://getnetbrain.netfactory.de/install.sh@0.5.4 | sudo bash
+curl -fsSL https://getnetbrain.netfactory.de/install.sh@0.5.5 | sudo bash
 ```
 
 ### Proxy auf einem anderen Rechner
@@ -958,7 +958,7 @@ Der Installer erkennt die vorhandene Installation, lässt die Daten stehen und w
 Eine bestimmte Version installieren Sie mit dem versionierten Link:
 
 ```
-curl -fsSL https://getnetbrain.netfactory.de/install.sh@0.5.4 | sudo bash
+curl -fsSL https://getnetbrain.netfactory.de/install.sh@0.5.5 | sudo bash
 ```
 
 ## Zurück auf die Vorversion
@@ -1271,6 +1271,32 @@ Die letzten Zeilen des Protokolls genügen, `Strg` + `C` beendet die Ausgabe. Un
 # Versionshinweise
 
 Was sich mit jeder Version geändert hat. Steht unter **Status** ein Hinweis, lesen Sie ihn vor dem Update; wie das Update selbst abläuft, steht unter [Aktualisieren](aktualisieren.html).
+
+## NETbrain 0.5.5
+
+**Stand:** 26. Oktober 2026
+
+**Status:** Keine Eingriffe nötig.
+
+### KI anpassen
+
+- **Prompt-Zusätze:** Unter **Administration → KI** ergänzen Administratoren die Anweisungen an
+  die KI: Hausregeln für die Aufbereitung (Wortwahl, Schreibweisen) und Vorgaben für den Chat.
+  Sie ergänzen die eingebauten Regeln und heben keine auf.
+- **Skills:** Administratoren legen dort benannte Aufträge an, etwa „Angebot prüfen“ für den
+  Chat oder „Protokoll“ für die Aufbereitung. Im Chat stehen sie im Modusmenü, beim Erfassen
+  als „Vorlage“.
+- **Eigene Vorgaben:** Jeder Nutzer kann im Chat unter **Eigene Vorgaben** einen persönlichen
+  Prompt hinterlegen. Er wird verschlüsselt gespeichert und gilt nach den Vorgaben der Firma.
+
+### Wissen
+
+- Beim Löschen einer Seite lassen sich Verweise darauf jetzt samt Linktext entfernen.
+
+### Korrekturen
+
+- Im Chat ist in einem neuen Browser das angezeigte Modell sofort nutzbar. Bisher blieb
+  Senden gesperrt, wenn die Modellliste des Anbieters nicht abrufbar war.
 
 ## NETbrain 0.5.4
 

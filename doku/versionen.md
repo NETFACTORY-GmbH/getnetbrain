@@ -2,6 +2,32 @@
 
 Was sich mit jeder Version geändert hat. Steht unter **Status** ein Hinweis, lesen Sie ihn vor dem Update; wie das Update selbst abläuft, steht unter [Aktualisieren](aktualisieren.html).
 
+## NETbrain 0.5.5
+
+**Stand:** 26. Oktober 2026
+
+**Status:** Keine Eingriffe nötig.
+
+### KI anpassen
+
+- **Prompt-Zusätze:** Unter **Administration → KI** ergänzen Administratoren die Anweisungen an
+  die KI: Hausregeln für die Aufbereitung (Wortwahl, Schreibweisen) und Vorgaben für den Chat.
+  Sie ergänzen die eingebauten Regeln und heben keine auf.
+- **Skills:** Administratoren legen dort benannte Aufträge an, etwa „Angebot prüfen“ für den
+  Chat oder „Protokoll“ für die Aufbereitung. Im Chat stehen sie im Modusmenü, beim Erfassen
+  als „Vorlage“.
+- **Eigene Vorgaben:** Jeder Nutzer kann im Chat unter **Eigene Vorgaben** einen persönlichen
+  Prompt hinterlegen. Er wird verschlüsselt gespeichert und gilt nach den Vorgaben der Firma.
+
+### Wissen
+
+- Beim Löschen einer Seite lassen sich Verweise darauf jetzt samt Linktext entfernen.
+
+### Korrekturen
+
+- Im Chat ist in einem neuen Browser das angezeigte Modell sofort nutzbar. Bisher blieb
+  Senden gesperrt, wenn die Modellliste des Anbieters nicht abrufbar war.
+
 ## NETbrain 0.5.4
 
 **Stand:** 20. Oktober 2026

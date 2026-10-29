@@ -20,7 +20,9 @@
 # aus demselben Artefakt stammen und dieser Link nie veraltet.
 #
 # Selten gebraucht: erstes Argument setzt die Version, `--verzeichnis PFAD`
-# (Vorgabe /opt/netbrain), `--image REF`, `--ja` für keine Rückfragen.
+# (Vorgabe /opt/netbrain), `--image REF`, `--ja` für keine Rückfragen,
+# `--portal` richtet das Kundenportal mit ein:
+#   curl -fsSL https://getnetbrain.netfactory.de/install.sh | sudo bash -s -- --portal
 #
 # Danach führt `install.sh` im Zielverzeichnis (status, token, logs, update).
 set -euo pipefail
@@ -33,6 +35,7 @@ IMAGE_BASIS="ghcr.io/netfactory-gmbh/netbrain"
 IMAGE=""
 VERZEICHNIS="/opt/netbrain"
 NACHFRAGEN=1
+PORTAL=0
 
 rot()   { printf '\033[31m%s\033[0m\n' "$*" >&2; }
 gelb()  { printf '\033[33m%s\033[0m\n' "$*" >&2; }
@@ -49,7 +52,8 @@ while [[ $# -gt 0 ]]; do
     --verzeichnis) VERZEICHNIS="${2:-}"; shift 2 ;;
     --image)       IMAGE="${2:-}"; shift 2 ;;
     --ja)          NACHFRAGEN=0; shift ;;
-    --*) abbruch "Unbekannte Option »$1«. Bekannt: --verzeichnis, --image, --ja" ;;
+    --portal)      PORTAL=1; shift ;;
+    --*) abbruch "Unbekannte Option »$1«. Bekannt: --verzeichnis, --image, --ja, --portal" ;;
     *)   VERSION="$1"; shift ;;
   esac
 done
@@ -126,7 +130,11 @@ chmod +x "$VERZEICHNIS"/*.sh
 # Installieren. Ab hier führt install.sh und bezieht dasselbe Image.
 # ---------------------------------------------------------------------------
 cd "$VERZEICHNIS"
-NETBRAIN_IMAGE="$IMAGE" NETBRAIN_IMAGE_BEZOGEN=1 bash ./install.sh installieren
+if (( PORTAL )); then
+  NETBRAIN_IMAGE="$IMAGE" NETBRAIN_IMAGE_BEZOGEN=1 bash ./install.sh --portal installieren
+else
+  NETBRAIN_IMAGE="$IMAGE" NETBRAIN_IMAGE_BEZOGEN=1 bash ./install.sh installieren
+fi
 
 cat <<ENDE
 

@@ -2,7 +2,7 @@
 
 > NETbrain ist eine Wissensplattform für Unternehmen von der NETFACTORY GmbH Internet Service (Fürstenau). Teams erfassen Firmenwissen, Kuratoren prüfen und geben es frei, alle finden es wieder – per Stichwortsuche ohne KI oder im KI-Chat. NETbrain läuft als Container auf dem Server des Kunden; der KI-Anbieter ist frei wählbar (eigenes Modell oder Cloud).
 
-Aktueller Stand: Version 0.5.5, Alpha in der Pilotphase. Sprache von Produkt und Dokumentation: Deutsch.
+Aktueller Stand: Version 0.5.6, Alpha in der Pilotphase. Sprache von Produkt und Dokumentation: Deutsch.
 
 ## Kurzfakten
 
@@ -27,7 +27,7 @@ Aktueller Stand: Version 0.5.5, Alpha in der Pilotphase. Sprache von Produkt und
 
 # NETbrain-Dokumentation
 
-Hier finden Sie alles, um NETbrain zu installieren, einzurichten, im Team zu nutzen und dauerhaft zu betreiben. Die Dokumentation beschreibt NETbrain 0.5.5.
+Hier finden Sie alles, um NETbrain zu installieren, einzurichten, im Team zu nutzen und dauerhaft zu betreiben. Die Dokumentation beschreibt NETbrain 0.5.6.
 
 <div class="karten">
 <a class="karte" href="installation.html"><b>In 45 Minuten startklar</b><span>Ein Befehl auf dem Server, danach führt ein Assistent im Browser durch die Einrichtung.</span></a>
@@ -137,7 +137,7 @@ Am Ende stehen das **Einrichtungs-Token** und die Adresse, unter der es weiterge
 Die Version steckt im Link:
 
 ```
-curl -fsSL https://getnetbrain.netfactory.de/install.sh@0.5.5 | sudo bash
+curl -fsSL https://getnetbrain.netfactory.de/install.sh@0.5.6 | sudo bash
 ```
 
 ### Proxy auf einem anderen Rechner
@@ -439,13 +439,13 @@ Auf jeder Wissensseite stehen neben dem Titel:
 - **Verlauf** — frühere Stände im Vorher-Nachher-Vergleich, mit **Auf diesen Stand zurücksetzen**. NETbrain hebt in der Vorgabe 20 Stände je Seite auf.
 - **Als geprüft markieren** — bestätigt die Seite fachlich und setzt „Geprüft“ auf heute, ohne den Inhalt zu ändern.
 - **Verschieben** — in einen anderen Ordner; Verweise anderer Seiten werden nachgezogen.
-- **Löschen** — in den Papierkorb. Verweise anderer Seiten lösen Sie dabei zu Text auf, lassen sie stehen oder biegen sie auf eine andere Seite um.
+- **Löschen** — in den Papierkorb oder sofort **endgültig**. Verweise anderer Seiten lösen Sie dabei zu Text auf, entfernen sie samt Text, lassen sie stehen oder biegen sie auf eine andere Seite um.
 
 ## Den Bestand im Blick behalten
 
 - **Qualität** — Befunde wie überfällige Prüfungen, Seiten ohne Verantwortliche und Seiten, die über 180 Tage nicht geprüft wurden.
 - **Ähnliche Seiten** — mögliche Dubletten als Paare, zum Zusammenführen oder Verknüpfen.
-- **Papierkorb** — **Wiederherstellen** legt eine Seite an ihren alten Platz zurück, **Endgültig löschen** ist unwiderruflich.
+- **Papierkorb** — **Wiederherstellen** legt eine Seite an ihren alten Platz zurück. **Endgültig löschen** entfernt sie unwiderruflich samt Vorversionen, Anhang und Quellkopie; zeigen noch Seiten auf sie, entfernen Sie diese Verweise dabei samt Text oder machen sie zu Text. **Papierkorb leeren** tut das für alle Einträge. Das Protokoll behält den Vorgang, Sicherungen enthalten die Seite bis zu ihrem Ablauf.
 
 Jede Änderung am Firmenwissen wird mit Person und Zeitpunkt protokolliert.
 
@@ -626,7 +626,21 @@ Das Portal ist ein **eigener, kleiner Container**. Er enthält keinen NETbrain-C
 - Links zeigen nur auf ebenfalls freigegebene Seiten; Verweise auf Unveröffentlichtes werden zu Text. Nachweise, Anhänge und interne Angaben gehen nicht mit.
 - NETbrain gleicht bei jeder Freigabe und alle zehn Minuten ab. Läuft die Lizenz aus und gleicht NETbrain nicht mehr ab, verschwinden die Inhalte nach acht Tagen von selbst.
 
-## Portal-Container starten
+## Portal mit dem Installer einrichten
+
+Am einfachsten richtet der Installer das Portal neben NETbrain ein, im selben Compose-Projekt:
+
+```
+# neu installieren oder aktualisieren, samt Portal
+curl -fsSL https://getnetbrain.netfactory.de/install.sh | sudo bash -s -- --portal
+
+# in einer bestehenden Installation nachrüsten (ab 0.5.6)
+sudo /opt/netbrain/install.sh portal
+```
+
+Er legt `portal-compose.yml` und den Kopplungsschlüssel in `portal.env` an, startet das Portal auf `127.0.0.1:8080` und zeigt am Ende Adresse und Schlüssel zum Eintragen. NETbrain erreicht das Portal intern unter `http://portal:8080`; für Ihre Kunden stellen Sie einen Reverse-Proxy mit eigenem Hostnamen davor und tragen danach die öffentliche Adresse (`https://…`) in NETbrain ein, damit Sitemap und Suchmaschinen die richtigen Links bekommen. Jeder weitere Lauf von `install.sh` aktualisiert auch das Portal.
+
+## Portal-Container von Hand starten
 
 Das Image ist öffentlich: `ghcr.io/netfactory-gmbh/netbrain-portal`. Es spricht HTTP auf Port 8080; TLS übernimmt Ihr Reverse-Proxy, unter einem eigenen Hostnamen wie `wissen.ihre-firma.de`.
 
@@ -661,8 +675,13 @@ Mitglieder der Wissenspflege sehen auf jeder Wissensseite unter der Kurzfassung 
 - **Im Kundenportal veröffentlichen** — nach einer Bestätigung ist die Seite öffentlich lesbar.
 - **Aktuellen Stand veröffentlichen** — erscheint, wenn die Seite seit der Freigabe geändert wurde.
 - **Zurückziehen** — die Seite verschwindet beim nächsten Abgleich aus dem Portal.
+- **Rubrik** — ordnet die Seite im Portal ein, etwa „myfactory“ oder „Konto & Zugang“. Bei der ersten Freigabe ist der Ordnername vorgeschlagen; **Rubrik ändern** gilt sofort, ohne den Inhalt neu zu veröffentlichen. Seiten ohne Rubrik stehen unter „Weitere Artikel“.
 
-Unter **Administration → Kundenportal** stehen alle freigegebenen Seiten, ebenfalls mit **Zurückziehen**. Legt jemand eine freigegebene Seite in den Papierkorb, wird auch die Freigabe zurückgezogen.
+## Aufbau des Portals
+
+Das Portal ist wie ein Wiki aufgebaut. Links steht eine Seitenleiste mit allen Rubriken und ihren Artikeln, auf dem Handy als aufklappbarer Block. Die Startseite zeigt die Rubriken als Kacheln und darunter die zuletzt aktualisierten Artikel; jede Rubrik hat eine eigene Seite mit den Kurzfassungen ihrer Artikel, und **Alle Artikel A–Z** listet alles alphabetisch. Ein Artikel zeigt den Weg zurück zur Rubrik, rechts „Auf dieser Seite“ mit seinen Zwischenüberschriften, darunter die Artikel, die auf ihn verweisen, und weitere Artikel derselben Rubrik. Die Suche hebt die Suchwörter hervor und nennt die Rubrik jedes Treffers.
+
+Unter **Administration → Kundenportal** stehen alle freigegebenen Seiten mit Rubrik und dem Hinweis, wenn eine Seite seit der Freigabe geändert wurde, ebenfalls mit **Zurückziehen**. Legt jemand eine freigegebene Seite in den Papierkorb, wird auch die Freigabe zurückgezogen.
 
 ## Erscheinungsbild
 
@@ -681,7 +700,7 @@ Nach dem Speichern gleicht NETbrain sofort ab. Logo und Einstellungen liegen bei
 
 ## Suchmaschinen
 
-Standardmäßig bittet das Portal Suchmaschinen, es nicht aufzunehmen. Sollen Ihre Inhalte gefunden werden, setzen Sie unter **Administration → Kundenportal** das Häkchen für Suchmaschinen.
+Standardmäßig bittet das Portal Suchmaschinen, es nicht aufzunehmen. Sollen Ihre Inhalte gefunden werden, setzen Sie unter **Administration → Kundenportal** das Häkchen für Suchmaschinen. Das Portal nennt dann unter `/sitemap.xml` alle Rubriken und Artikel und gibt jeder Seite ihre öffentliche Adresse als kanonische Adresse mit.
 
 ## Auf einer App-Plattform
 
@@ -702,6 +721,8 @@ Eine neue Installation ist ab dem ersten Start **sieben Tage vollständig nutzba
 ## Testlizenz anfordern
 
 Unter **Lizenz** (`/lizenz`) oder im Einrichtungsassistenten fordern Administratoren eine Testlizenz über 30 Tage an: Firma, Name und Mailadresse eintragen, die Lizenz kommt per Mail. Den Block aus der Mail fügen Sie wie jede andere Lizenz ein. Je Mailadresse gibt es eine Testlizenz. Sie enthält auch das [Kundenportal](kundenportal.html).
+
+Haben Sie bereits eine Lizenz ohne Kundenportal und möchten es testen, stellen wir Ihnen Ihre Lizenz mit einer befristeten Portal-Freischaltung neu aus. Sie spielen sie wie eine Verlängerung ein; unter **Administration → Kundenportal** steht, bis wann der Test läuft.
 
 ## Lizenz hinterlegen
 
@@ -958,7 +979,7 @@ Der Installer erkennt die vorhandene Installation, lässt die Daten stehen und w
 Eine bestimmte Version installieren Sie mit dem versionierten Link:
 
 ```
-curl -fsSL https://getnetbrain.netfactory.de/install.sh@0.5.5 | sudo bash
+curl -fsSL https://getnetbrain.netfactory.de/install.sh@0.5.6 | sudo bash
 ```
 
 ## Zurück auf die Vorversion
@@ -1271,6 +1292,49 @@ Die letzten Zeilen des Protokolls genügen, `Strg` + `C` beendet die Ausgabe. Un
 # Versionshinweise
 
 Was sich mit jeder Version geändert hat. Steht unter **Status** ein Hinweis, lesen Sie ihn vor dem Update; wie das Update selbst abläuft, steht unter [Aktualisieren](aktualisieren.html).
+
+## NETbrain 0.5.6
+
+**Stand:** 29. Oktober 2026
+
+**Status:** Keine Eingriffe nötig.
+
+### Kundenportal
+
+- Das Portal ist ein Wiki für Kunden: Startseite mit Rubriken, Seitenleiste, „Auf dieser Seite",
+  Rückverweise, alle Artikel von A bis Z und eine Suche. Freigegeben wird je Seite mit Rubrik.
+- `install.sh --portal` richtet das Portal mit ein, `install.sh portal` rüstet es nach.
+- Lizenzen können das Portal befristet freischalten.
+
+### Wissen
+
+- **Nachweise** lassen sich durchsuchen, nach Bereich, Art und fälliger Prüfung filtern und sortieren.
+- **Endgültig löschen** entfernt Seite, Vorversionen und Anhang, auf Wunsch auch die Verweise darauf.
+- Beim Löschen lassen sich Verweise auf eine andere Seite umbiegen; das Ziel wird per Titel gesucht.
+- **Korrekturmeldungen** lassen sich in der Wissensprüfung von der KI einarbeiten.
+- Die Suche bevorzugt Seiten, die alle Wörter der Frage enthalten.
+
+### Chat
+
+- Folgefragen in einem Gespräch mit Firmenwissen ziehen wieder Firmenwissen heran.
+- Ohne passende Quelle nennt der Chat keine Firmenangaben; Quellenangaben, die zu keiner
+  herangezogenen Seite passen, sind unterschlängelt.
+- Die Einstellung zum Firmenwissen bleibt im Browser gespeichert.
+
+### Korrekturen
+
+- Löschen scheiterte bei Seiten, auf die andere Seiten verwiesen.
+- Word-Dateien brachen mit „kein gültiges JSON" ab, wenn das Modell ungültige Zeichenfolgen schrieb.
+- Zeiten in Protokollen erscheinen in Ortszeit statt UTC.
+- Vorlagen für die Aufbereitung setzen ihre Überschriften zuverlässig durch.
+- Ein Datum ohne Jahr wird nach Kommendem („ab") oder Vergangenem („seit") eingeordnet.
+- Große Wissensbestände laden schneller: Die Seitenleiste ist rund halb so groß.
+- Auf schmalen Bildschirmen überdeckt das Kontosymbol nicht mehr das Logo.
+
+### Für Administratoren
+
+- „KI-Limit erreicht" nennt die Grenze, die gegriffen hat (gleichzeitig, je Minute, je Tag).
+- Das Protokoll unter **KI** zeigt Kontonamen statt Kennungen.
 
 ## NETbrain 0.5.5
 

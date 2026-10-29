@@ -10,7 +10,21 @@ Das Portal ist ein **eigener, kleiner Container**. Er enthält keinen NETbrain-C
 - Links zeigen nur auf ebenfalls freigegebene Seiten; Verweise auf Unveröffentlichtes werden zu Text. Nachweise, Anhänge und interne Angaben gehen nicht mit.
 - NETbrain gleicht bei jeder Freigabe und alle zehn Minuten ab. Läuft die Lizenz aus und gleicht NETbrain nicht mehr ab, verschwinden die Inhalte nach acht Tagen von selbst.
 
-## Portal-Container starten
+## Portal mit dem Installer einrichten
+
+Am einfachsten richtet der Installer das Portal neben NETbrain ein, im selben Compose-Projekt:
+
+```
+# neu installieren oder aktualisieren, samt Portal
+curl -fsSL https://getnetbrain.netfactory.de/install.sh | sudo bash -s -- --portal
+
+# in einer bestehenden Installation nachrüsten (ab 0.5.6)
+sudo /opt/netbrain/install.sh portal
+```
+
+Er legt `portal-compose.yml` und den Kopplungsschlüssel in `portal.env` an, startet das Portal auf `127.0.0.1:8080` und zeigt am Ende Adresse und Schlüssel zum Eintragen. NETbrain erreicht das Portal intern unter `http://portal:8080`; für Ihre Kunden stellen Sie einen Reverse-Proxy mit eigenem Hostnamen davor und tragen danach die öffentliche Adresse (`https://…`) in NETbrain ein, damit Sitemap und Suchmaschinen die richtigen Links bekommen. Jeder weitere Lauf von `install.sh` aktualisiert auch das Portal.
+
+## Portal-Container von Hand starten
 
 Das Image ist öffentlich: `ghcr.io/netfactory-gmbh/netbrain-portal`. Es spricht HTTP auf Port 8080; TLS übernimmt Ihr Reverse-Proxy, unter einem eigenen Hostnamen wie `wissen.ihre-firma.de`.
 
@@ -45,8 +59,13 @@ Mitglieder der Wissenspflege sehen auf jeder Wissensseite unter der Kurzfassung 
 - **Im Kundenportal veröffentlichen** — nach einer Bestätigung ist die Seite öffentlich lesbar.
 - **Aktuellen Stand veröffentlichen** — erscheint, wenn die Seite seit der Freigabe geändert wurde.
 - **Zurückziehen** — die Seite verschwindet beim nächsten Abgleich aus dem Portal.
+- **Rubrik** — ordnet die Seite im Portal ein, etwa „myfactory“ oder „Konto & Zugang“. Bei der ersten Freigabe ist der Ordnername vorgeschlagen; **Rubrik ändern** gilt sofort, ohne den Inhalt neu zu veröffentlichen. Seiten ohne Rubrik stehen unter „Weitere Artikel“.
 
-Unter **Administration → Kundenportal** stehen alle freigegebenen Seiten, ebenfalls mit **Zurückziehen**. Legt jemand eine freigegebene Seite in den Papierkorb, wird auch die Freigabe zurückgezogen.
+## Aufbau des Portals
+
+Das Portal ist wie ein Wiki aufgebaut. Links steht eine Seitenleiste mit allen Rubriken und ihren Artikeln, auf dem Handy als aufklappbarer Block. Die Startseite zeigt die Rubriken als Kacheln und darunter die zuletzt aktualisierten Artikel; jede Rubrik hat eine eigene Seite mit den Kurzfassungen ihrer Artikel, und **Alle Artikel A–Z** listet alles alphabetisch. Ein Artikel zeigt den Weg zurück zur Rubrik, rechts „Auf dieser Seite“ mit seinen Zwischenüberschriften, darunter die Artikel, die auf ihn verweisen, und weitere Artikel derselben Rubrik. Die Suche hebt die Suchwörter hervor und nennt die Rubrik jedes Treffers.
+
+Unter **Administration → Kundenportal** stehen alle freigegebenen Seiten mit Rubrik und dem Hinweis, wenn eine Seite seit der Freigabe geändert wurde, ebenfalls mit **Zurückziehen**. Legt jemand eine freigegebene Seite in den Papierkorb, wird auch die Freigabe zurückgezogen.
 
 ## Erscheinungsbild
 
@@ -65,7 +84,7 @@ Nach dem Speichern gleicht NETbrain sofort ab. Logo und Einstellungen liegen bei
 
 ## Suchmaschinen
 
-Standardmäßig bittet das Portal Suchmaschinen, es nicht aufzunehmen. Sollen Ihre Inhalte gefunden werden, setzen Sie unter **Administration → Kundenportal** das Häkchen für Suchmaschinen.
+Standardmäßig bittet das Portal Suchmaschinen, es nicht aufzunehmen. Sollen Ihre Inhalte gefunden werden, setzen Sie unter **Administration → Kundenportal** das Häkchen für Suchmaschinen. Das Portal nennt dann unter `/sitemap.xml` alle Rubriken und Artikel und gibt jeder Seite ihre öffentliche Adresse als kanonische Adresse mit.
 
 ## Auf einer App-Plattform
 

@@ -33,13 +33,13 @@ Auf jeder Wissensseite stehen neben dem Titel:
 - **Verlauf** — frühere Stände im Vorher-Nachher-Vergleich, mit **Auf diesen Stand zurücksetzen**. NETbrain hebt in der Vorgabe 20 Stände je Seite auf.
 - **Als geprüft markieren** — bestätigt die Seite fachlich und setzt „Geprüft“ auf heute, ohne den Inhalt zu ändern.
 - **Verschieben** — in einen anderen Ordner; Verweise anderer Seiten werden nachgezogen.
-- **Löschen** — in den Papierkorb. Verweise anderer Seiten lösen Sie dabei zu Text auf, lassen sie stehen oder biegen sie auf eine andere Seite um.
+- **Löschen** — in den Papierkorb oder sofort **endgültig**. Verweise anderer Seiten lösen Sie dabei zu Text auf, entfernen sie samt Text, lassen sie stehen oder biegen sie auf eine andere Seite um.
 
 ## Den Bestand im Blick behalten
 
 - **Qualität** — Befunde wie überfällige Prüfungen, Seiten ohne Verantwortliche und Seiten, die über 180 Tage nicht geprüft wurden.
 - **Ähnliche Seiten** — mögliche Dubletten als Paare, zum Zusammenführen oder Verknüpfen.
-- **Papierkorb** — **Wiederherstellen** legt eine Seite an ihren alten Platz zurück, **Endgültig löschen** ist unwiderruflich.
+- **Papierkorb** — **Wiederherstellen** legt eine Seite an ihren alten Platz zurück. **Endgültig löschen** entfernt sie unwiderruflich samt Vorversionen, Anhang und Quellkopie; zeigen noch Seiten auf sie, entfernen Sie diese Verweise dabei samt Text oder machen sie zu Text. **Papierkorb leeren** tut das für alle Einträge. Das Protokoll behält den Vorgang, Sicherungen enthalten die Seite bis zu ihrem Ablauf.
 
 Jede Änderung am Firmenwissen wird mit Person und Zeitpunkt protokolliert.
 

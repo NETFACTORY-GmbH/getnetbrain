@@ -10,6 +10,8 @@ Eine neue Installation ist ab dem ersten Start **sieben Tage vollständig nutzba
 
 Unter **Lizenz** (`/lizenz`) oder im Einrichtungsassistenten fordern Administratoren eine Testlizenz über 30 Tage an: Firma, Name und Mailadresse eintragen, die Lizenz kommt per Mail. Den Block aus der Mail fügen Sie wie jede andere Lizenz ein. Je Mailadresse gibt es eine Testlizenz. Sie enthält auch das [Kundenportal](kundenportal.html).
 
+Haben Sie bereits eine Lizenz ohne Kundenportal und möchten es testen, stellen wir Ihnen Ihre Lizenz mit einer befristeten Portal-Freischaltung neu aus. Sie spielen sie wie eine Verlängerung ein; unter **Administration → Kundenportal** steht, bis wann der Test läuft.
+
 ## Lizenz hinterlegen
 
 Ein Administrator öffnet unter **Administration** den Verweis **Lizenz aktivieren oder verlängern** oder direkt `/lizenz`, fügt den Inhalt der Lizenzdatei ein und klickt **Lizenz prüfen und aktivieren**. NETbrain bindet die Lizenz dabei beim Lizenzdienst an diese Installation; dieselbe Datei lässt sich nicht auf einem zweiten Server aktivieren. Nach erfolgreicher Aktivierung bestätigt die Seite die Lizenz und leitet zur Anwendung weiter.

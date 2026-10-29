@@ -2,6 +2,49 @@
 
 Was sich mit jeder Version geändert hat. Steht unter **Status** ein Hinweis, lesen Sie ihn vor dem Update; wie das Update selbst abläuft, steht unter [Aktualisieren](aktualisieren.html).
 
+## NETbrain 0.5.6
+
+**Stand:** 29. Oktober 2026
+
+**Status:** Keine Eingriffe nötig.
+
+### Kundenportal
+
+- Das Portal ist ein Wiki für Kunden: Startseite mit Rubriken, Seitenleiste, „Auf dieser Seite",
+  Rückverweise, alle Artikel von A bis Z und eine Suche. Freigegeben wird je Seite mit Rubrik.
+- `install.sh --portal` richtet das Portal mit ein, `install.sh portal` rüstet es nach.
+- Lizenzen können das Portal befristet freischalten.
+
+### Wissen
+
+- **Nachweise** lassen sich durchsuchen, nach Bereich, Art und fälliger Prüfung filtern und sortieren.
+- **Endgültig löschen** entfernt Seite, Vorversionen und Anhang, auf Wunsch auch die Verweise darauf.
+- Beim Löschen lassen sich Verweise auf eine andere Seite umbiegen; das Ziel wird per Titel gesucht.
+- **Korrekturmeldungen** lassen sich in der Wissensprüfung von der KI einarbeiten.
+- Die Suche bevorzugt Seiten, die alle Wörter der Frage enthalten.
+
+### Chat
+
+- Folgefragen in einem Gespräch mit Firmenwissen ziehen wieder Firmenwissen heran.
+- Ohne passende Quelle nennt der Chat keine Firmenangaben; Quellenangaben, die zu keiner
+  herangezogenen Seite passen, sind unterschlängelt.
+- Die Einstellung zum Firmenwissen bleibt im Browser gespeichert.
+
+### Korrekturen
+
+- Löschen scheiterte bei Seiten, auf die andere Seiten verwiesen.
+- Word-Dateien brachen mit „kein gültiges JSON" ab, wenn das Modell ungültige Zeichenfolgen schrieb.
+- Zeiten in Protokollen erscheinen in Ortszeit statt UTC.
+- Vorlagen für die Aufbereitung setzen ihre Überschriften zuverlässig durch.
+- Ein Datum ohne Jahr wird nach Kommendem („ab") oder Vergangenem („seit") eingeordnet.
+- Große Wissensbestände laden schneller: Die Seitenleiste ist rund halb so groß.
+- Auf schmalen Bildschirmen überdeckt das Kontosymbol nicht mehr das Logo.
+
+### Für Administratoren
+
+- „KI-Limit erreicht" nennt die Grenze, die gegriffen hat (gleichzeitig, je Minute, je Tag).
+- Das Protokoll unter **KI** zeigt Kontonamen statt Kennungen.
+
 ## NETbrain 0.5.5
 
 **Stand:** 26. Oktober 2026

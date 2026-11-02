@@ -22,7 +22,7 @@ Dieselben Prüfungen sehen Administratoren auch in NETbrain selbst, unter **Admi
 
 Die Endpunkte unter `/api/monitor/` geben Betriebsinterna preis und antworten nur mit Token. Ohne Token gibt es sie nicht (404).
 
-Am einfachsten: **Administration → Übersicht → Überwachung von außen → Token erzeugen**. Der Token steht danach dort zum Kopieren, samt Beispielaufruf. **Neuen Token erzeugen** macht den bisherigen ungültig.
+Am einfachsten: **Administration → Einstellungen → Überwachung von außen → Token erzeugen**. Der Token steht danach dort zum Kopieren, samt Beispielaufruf. **Neuen Token erzeugen** macht den bisherigen ungültig.
 
 Alternativ geben Sie ihn vor, etwa auf einer App-Plattform: `NETBRAIN_MONITOR_TOKEN` mit mindestens 16 Zeichen (`openssl rand -hex 24`) in der `netbrain-compose.yml` bzw. als Umgebungsvariable des Pods. Dann ist das Feld in der Verwaltung fest.
 
@@ -41,7 +41,7 @@ Jeder Endpunkt unter `/api/monitor/` antwortet im selben Aufbau:
 ```
 {
   "ok": true,
-  "meldung": "Höchste Belegung 61.4 %.",
+  "meldung": "Höchste Belegung 61,4 %.",
   "daten": {
     "grenze": 90,
     "prozent": 61.4,
@@ -67,4 +67,4 @@ Für das Kundenportal selbst ein eigener Monitor auf `https://<portal-adresse>/h
 
 ## Was bewusst fehlt
 
-Die Erreichbarkeit der KI-Anbieter: Eine echte Prüfung kostet bei jedem Aufruf Tokens. Prüfen Sie sie bei Bedarf unter **Administration → KI & Zugriffsrechte → Modelle jetzt prüfen**.
+Die Erreichbarkeit der KI-Anbieter: Eine echte Prüfung kostet bei jedem Aufruf Tokens. Prüfen Sie sie bei Bedarf unter **Administration → KI → Modelle jetzt prüfen**.

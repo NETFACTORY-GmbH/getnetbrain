@@ -1,6 +1,6 @@
 # Benutzer und Rollen
 
-Konten verwalten Administratoren unter **Administration → Übersicht & Konten**. Die Zahl der Konten ist durch die Lizenz nicht begrenzt.
+Konten verwalten Administratoren unter **Administration → Konten**. Die Zahl der Konten ist durch die Lizenz nicht begrenzt.
 
 ## Die drei Rollen
 
@@ -14,7 +14,7 @@ Eine Firmenseite entsteht immer über die Wissensprüfung: Benutzer reichen ein,
 
 ## Konto anlegen
 
-Unter **Konto anlegen** Benutzername, Anzeigename und ein vorläufiges Passwort eintragen. Das Konto ist sofort freigegeben. Bei der ersten Anmeldung setzt die Person ein eigenes Passwort und richtet die Zwei-Faktor-Anmeldung ein.
+Unter **Neues Konto anlegen** Benutzername, Anzeigename und ein vorläufiges Passwort eintragen. Das Konto ist sofort freigegeben. Bei der ersten Anmeldung setzt die Person ein eigenes Passwort und richtet die Zwei-Faktor-Anmeldung ein.
 
 ## Zugangsanfragen
 
@@ -22,13 +22,14 @@ Wer sich unter `/registrieren` selbst anmeldet, erscheint unter **Wartet auf Fre
 
 ## Konten verwalten
 
-Je Konto in der Liste **Konten**:
+Je Konto in der Liste **Konten**, nach Klick auf **Bearbeiten**:
 
 - **Rollen** — Häkchen für Wissenspflege und Admin, dann **Rollen speichern**.
 - **Vorläufiges Passwort setzen** — beendet alle Sitzungen des Kontos; die Person muss beim nächsten Anmelden ein eigenes Passwort wählen.
 - **2FA zurücksetzen** — etwa bei verlorenem Handy; die Person richtet die Zwei-Faktor-Anmeldung beim nächsten Anmelden neu ein.
 - **Sperren** und **Entsperren**.
-- **Löschen**.
+- **KI-Freigabe dieses Kontos** — führt zur persönlichen Ausnahme unter **Administration → KI**.
+- **Löschen**, abgesetzt unter **Konto löschen**.
 
 Unter **Letzte Kontenänderungen** steht, wer wann was geändert hat.
 

@@ -2,7 +2,7 @@
 
 > NETbrain ist eine Wissensplattform für Unternehmen von der NETFACTORY GmbH Internet Service (Fürstenau). Teams erfassen Firmenwissen, Kuratoren prüfen und geben es frei, alle finden es wieder – per Stichwortsuche ohne KI oder im KI-Chat. NETbrain läuft als Container auf dem Server des Kunden; der KI-Anbieter ist frei wählbar (eigenes Modell oder Cloud).
 
-Aktueller Stand: Version 0.5.7, Alpha in der Pilotphase. Sprache von Produkt und Dokumentation: Deutsch.
+Aktueller Stand: Version 0.5.8, Alpha in der Pilotphase. Sprache von Produkt und Dokumentation: Deutsch.
 
 ## Kurzfakten
 
@@ -27,7 +27,7 @@ Aktueller Stand: Version 0.5.7, Alpha in der Pilotphase. Sprache von Produkt und
 
 # NETbrain-Dokumentation
 
-Hier finden Sie alles, um NETbrain zu installieren, einzurichten, im Team zu nutzen und dauerhaft zu betreiben. Die Dokumentation beschreibt NETbrain 0.5.7.
+Hier finden Sie alles, um NETbrain zu installieren, einzurichten, im Team zu nutzen und dauerhaft zu betreiben. Die Dokumentation beschreibt NETbrain 0.5.8.
 
 <div class="karten">
 <a class="karte" href="installation.html"><b>In 45 Minuten startklar</b><span>Ein Befehl auf dem Server, danach führt ein Assistent im Browser durch die Einrichtung.</span></a>
@@ -137,7 +137,7 @@ Am Ende stehen das **Einrichtungs-Token** und die Adresse, unter der es weiterge
 Die Version steckt im Link:
 
 ```
-curl -fsSL https://getnetbrain.netfactory.de/install.sh@0.5.7 | sudo bash
+curl -fsSL https://getnetbrain.netfactory.de/install.sh@0.5.8 | sudo bash
 ```
 
 ### Proxy auf einem anderen Rechner
@@ -532,7 +532,7 @@ Damit niemand versehentlich das Kontingent des ganzen Hauses verbraucht, gelten 
 
 # Benutzer und Rollen
 
-Konten verwalten Administratoren unter **Administration → Übersicht & Konten**. Die Zahl der Konten ist durch die Lizenz nicht begrenzt.
+Konten verwalten Administratoren unter **Administration → Konten**. Die Zahl der Konten ist durch die Lizenz nicht begrenzt.
 
 ## Die drei Rollen
 
@@ -546,7 +546,7 @@ Eine Firmenseite entsteht immer über die Wissensprüfung: Benutzer reichen ein,
 
 ## Konto anlegen
 
-Unter **Konto anlegen** Benutzername, Anzeigename und ein vorläufiges Passwort eintragen. Das Konto ist sofort freigegeben. Bei der ersten Anmeldung setzt die Person ein eigenes Passwort und richtet die Zwei-Faktor-Anmeldung ein.
+Unter **Neues Konto anlegen** Benutzername, Anzeigename und ein vorläufiges Passwort eintragen. Das Konto ist sofort freigegeben. Bei der ersten Anmeldung setzt die Person ein eigenes Passwort und richtet die Zwei-Faktor-Anmeldung ein.
 
 ## Zugangsanfragen
 
@@ -554,13 +554,14 @@ Wer sich unter `/registrieren` selbst anmeldet, erscheint unter **Wartet auf Fre
 
 ## Konten verwalten
 
-Je Konto in der Liste **Konten**:
+Je Konto in der Liste **Konten**, nach Klick auf **Bearbeiten**:
 
 - **Rollen** — Häkchen für Wissenspflege und Admin, dann **Rollen speichern**.
 - **Vorläufiges Passwort setzen** — beendet alle Sitzungen des Kontos; die Person muss beim nächsten Anmelden ein eigenes Passwort wählen.
 - **2FA zurücksetzen** — etwa bei verlorenem Handy; die Person richtet die Zwei-Faktor-Anmeldung beim nächsten Anmelden neu ein.
 - **Sperren** und **Entsperren**.
-- **Löschen**.
+- **KI-Freigabe dieses Kontos** — führt zur persönlichen Ausnahme unter **Administration → KI**.
+- **Löschen**, abgesetzt unter **Konto löschen**.
 
 Unter **Letzte Kontenänderungen** steht, wer wann was geändert hat.
 
@@ -583,13 +584,13 @@ Die Zwei-Faktor-Anmeldung lässt sich insgesamt freiwillig machen, mit `NETBRAIN
 
 # KI-Zugänge und Freigaben
 
-Welche KI NETbrain nutzt und wer welches Modell verwenden darf, legen Administratoren unter **Administration → KI & Zugriffsrechte** fest. Sie können einen Modellserver im eigenen Netz, einen Cloud-Anbieter oder beides einrichten.
+Welche KI NETbrain nutzt und wer welches Modell verwenden darf, legen Administratoren unter **Administration → KI** fest. Die Seite **Modelle & Zugriff** enthält Anbieter, Modelle und Freigaben, **Prompts & Skills** die Vorgaben für die KI, **Protokoll** die Änderungen. Sie können einen Modellserver im eigenen Netz, einen Cloud-Anbieter oder beides einrichten.
 
 ## Anbieter und Modelle
 
-Je Anbieter tragen Sie die Server-Adresse und einen zentralen Schlüssel ein. Der Schlüssel wird verschlüsselt gespeichert. **Modelle jetzt prüfen** ruft jedes eingestellte Modell einmal wirklich auf — das beantwortet die Frage „liegt es an uns oder am Anbieter?“ in Sekunden.
+Je Anbieter tragen Sie die Server-Adresse und einen zentralen Schlüssel ein. Der Schlüssel wird verschlüsselt gespeichert. **Modelle jetzt prüfen** ruft jedes eingestellte Modell einmal wirklich auf — das beantwortet die Frage „liegt es an uns oder am Anbieter?“ in Sekunden. Den Anzeigenamen des Modellservers im eigenen Netz ändern Sie in der Karte **Intern**.
 
-## Interne KI-Aufgaben
+## Hintergrundaufgaben
 
 NETbrain nutzt die KI auch selbst: zum Aufbereiten eingereichten Wissens, für Rückfragen und zum Lesen von Bildern und Scans. Welches Modell das jeweils übernimmt, stellen Sie hier ein, ebenso die Spracheingabe.
 
@@ -600,15 +601,15 @@ NETbrain nutzt die KI auch selbst: zum Aufbereiten eingereichten Wissens, für R
 
 ## Wissen und Cloud
 
-Zwei Schalter regeln, ob **Firmenwissen** und ob **private Auszüge** aus dem Vault an Cloud-Anbieter gehen dürfen. Ein Modellserver im eigenen Netz ist davon nicht betroffen. Unter **Freigaben aus Gesprächen** sehen Sie, wo Nutzer im Einzelfall der Übermittlung zugestimmt haben.
+Zwei Schalter regeln, ob **Firmenwissen** und ob **private Auszüge** aus dem Vault an Cloud-Anbieter gehen dürfen. Ein Modellserver im eigenen Netz ist davon nicht betroffen. Unter **Protokoll → Freigaben aus Gesprächen** sehen Sie, wo Nutzer im Einzelfall der Übermittlung zugestimmt haben.
 
 Was dabei genau übertragen wird, steht unter [Was den Server verlässt](datenfluss.html).
 
 ## Weitere Einstellungen
 
-- **Markenschreibweisen** — wie Produkt- und Firmennamen geschrieben werden, damit die Aufbereitung sie nicht verändert.
+- **Markenschreibweisen** (unter **Prompts & Skills**) — wie Produkt- und Firmennamen geschrieben werden, damit die Aufbereitung sie nicht verändert.
 - **Nutzungsgrenzen** unter **Administration → Einstellungen** — KI-Aufrufe je Minute und Tag, gleichzeitige Aufrufe, Dateien und Datenmenge je Tag.
-- **Letzte Änderungen** — das Protokoll aller Änderungen an diesen Einstellungen.
+- **Letzte Änderungen** (unter **Protokoll**) — das Protokoll aller Änderungen an diesen Einstellungen.
 
 ---
 
@@ -726,7 +727,7 @@ Haben Sie bereits eine Lizenz ohne Kundenportal und möchten es testen, stellen 
 
 ## Lizenz hinterlegen
 
-Ein Administrator öffnet unter **Administration** den Verweis **Lizenz aktivieren oder verlängern** oder direkt `/lizenz`, fügt den Inhalt der Lizenzdatei ein und klickt **Lizenz prüfen und aktivieren**. NETbrain bindet die Lizenz dabei beim Lizenzdienst an diese Installation; dieselbe Datei lässt sich nicht auf einem zweiten Server aktivieren. Nach erfolgreicher Aktivierung bestätigt die Seite die Lizenz und leitet zur Anwendung weiter.
+Ein Administrator öffnet **Administration → Lizenz** (direkt: `/lizenz`), fügt den Inhalt der Lizenzdatei ein und klickt **Lizenz prüfen und aktivieren**. NETbrain bindet die Lizenz dabei beim Lizenzdienst an diese Installation; dieselbe Datei lässt sich nicht auf einem zweiten Server aktivieren. Nach erfolgreicher Aktivierung bestätigt die Seite die Lizenz und leitet zur Anwendung weiter.
 
 Übertragen werden nur die Lizenzdatei und der technische Installationsschlüssel. Notizen, Chats und Konten bleiben in Ihrer Installation.
 
@@ -748,7 +749,7 @@ Es geht nichts verloren. Sobald eine gültige Lizenz hinterlegt ist, steht sofor
 
 ## Für den Support
 
-Unter `/lizenz` steht im aufklappbaren Bereich **Installationskennung für den Support** die Kennung Ihrer Installation. Nennen Sie sie bei Fragen zur Lizenz. Lizenz kaufen oder verlängern: [info@netfactory.de](mailto:info@netfactory.de).
+Unter `/lizenz` steht im aufklappbaren Bereich **Kennungen für den Support** die Kennung Ihrer Installation. Nennen Sie sie bei Fragen zur Lizenz. Lizenz kaufen oder verlängern: [info@netfactory.de](mailto:info@netfactory.de).
 
 ---
 
@@ -881,7 +882,7 @@ Alles liegt in einem Bündel, weil die Teile zusammengehören: Die Chat-Schlüss
 
 ## Zeitplan und letzter Lauf
 
-Unter **Administration → Einstellungen → Sicherungen** stehen Uhrzeit (Vorgabe 02:00, leer heißt aus), die Zahl der aufbewahrten Stände (Vorgabe 14) und der Knopf **Jetzt sichern**. Unter **Administration → Übersicht** sehen Sie den letzten Lauf und sein Ergebnis. Ein ausbleibender Lauf meldet sich sonst nirgends — werfen Sie gelegentlich einen Blick darauf.
+Unter **Administration → Einstellungen → Sicherungen** stehen Uhrzeit (Vorgabe 02:00, leer heißt aus), die Zahl der aufbewahrten Stände (Vorgabe 14) und der Knopf **Jetzt sichern**. Der letzte Lauf und sein Ergebnis stehen dort und unter **Administration → Übersicht**. Daneben lädt **Firmenwissen als JSON exportieren** alle Firmenseiten als eine Datei herunter. Ein ausbleibender Lauf meldet sich sonst nirgends — werfen Sie gelegentlich einen Blick darauf.
 
 Von Hand auf dem Server, etwa vor einem Eingriff:
 
@@ -979,7 +980,7 @@ Der Installer erkennt die vorhandene Installation, lässt die Daten stehen und w
 Eine bestimmte Version installieren Sie mit dem versionierten Link:
 
 ```
-curl -fsSL https://getnetbrain.netfactory.de/install.sh@0.5.7 | sudo bash
+curl -fsSL https://getnetbrain.netfactory.de/install.sh@0.5.8 | sudo bash
 ```
 
 ## Zurück auf die Vorversion
@@ -1018,7 +1019,7 @@ Dieselben Prüfungen sehen Administratoren auch in NETbrain selbst, unter **Admi
 
 Die Endpunkte unter `/api/monitor/` geben Betriebsinterna preis und antworten nur mit Token. Ohne Token gibt es sie nicht (404).
 
-Am einfachsten: **Administration → Übersicht → Überwachung von außen → Token erzeugen**. Der Token steht danach dort zum Kopieren, samt Beispielaufruf. **Neuen Token erzeugen** macht den bisherigen ungültig.
+Am einfachsten: **Administration → Einstellungen → Überwachung von außen → Token erzeugen**. Der Token steht danach dort zum Kopieren, samt Beispielaufruf. **Neuen Token erzeugen** macht den bisherigen ungültig.
 
 Alternativ geben Sie ihn vor, etwa auf einer App-Plattform: `NETBRAIN_MONITOR_TOKEN` mit mindestens 16 Zeichen (`openssl rand -hex 24`) in der `netbrain-compose.yml` bzw. als Umgebungsvariable des Pods. Dann ist das Feld in der Verwaltung fest.
 
@@ -1037,7 +1038,7 @@ Jeder Endpunkt unter `/api/monitor/` antwortet im selben Aufbau:
 ```
 {
   "ok": true,
-  "meldung": "Höchste Belegung 61.4 %.",
+  "meldung": "Höchste Belegung 61,4 %.",
   "daten": {
     "grenze": 90,
     "prozent": 61.4,
@@ -1063,7 +1064,7 @@ Für das Kundenportal selbst ein eigener Monitor auf `https://<portal-adresse>/h
 
 ## Was bewusst fehlt
 
-Die Erreichbarkeit der KI-Anbieter: Eine echte Prüfung kostet bei jedem Aufruf Tokens. Prüfen Sie sie bei Bedarf unter **Administration → KI & Zugriffsrechte → Modelle jetzt prüfen**.
+Die Erreichbarkeit der KI-Anbieter: Eine echte Prüfung kostet bei jedem Aufruf Tokens. Prüfen Sie sie bei Bedarf unter **Administration → KI → Modelle jetzt prüfen**.
 
 ---
 
@@ -1259,7 +1260,7 @@ Die meisten Probleme haben eine von wenigen Ursachen. Diese Seite ordnet sie nac
 | Lizenzseite statt Anwendung | Testphase oder Lizenz abgelaufen, oder die Aktivierung wurde länger als sieben Tage nicht bestätigt. Siehe [Lizenz](lizenz.html). |
 | „Aktivierung fehlgeschlagen“ | Der Server erreicht den Lizenzdienst nicht (ausgehend 443 zu `lizenz-netbrain.netfactory.de`), oder die Lizenz ist schon an eine andere Installation gebunden. |
 | Privater Vault „In diesem Browser nicht verfügbar“ | Der Vault braucht Chrome oder Edge. |
-| KI-Chat antwortet mit Fehler | **Administration → KI & Zugriffsrechte → Modelle jetzt prüfen** zeigt, welcher Anbieter nicht antwortet. |
+| KI-Chat antwortet mit Fehler | **Administration → KI → Modelle jetzt prüfen** zeigt, welcher Anbieter nicht antwortet. |
 
 ## Zustand prüfen
 
@@ -1292,6 +1293,28 @@ Die letzten Zeilen des Protokolls genügen, `Strg` + `C` beendet die Ausgabe. Un
 # Versionshinweise
 
 Was sich mit jeder Version geändert hat. Steht unter **Status** ein Hinweis, lesen Sie ihn vor dem Update; wie das Update selbst abläuft, steht unter [Aktualisieren](aktualisieren.html).
+
+## NETbrain 0.5.8
+
+**Stand:** 2. November 2026
+
+**Status:** Keine Eingriffe nötig.
+
+### Chat
+
+- Quellenangaben in Antworten wie [Datensicherungskonzept] sind Links auf die herangezogene Seite.
+
+### Administration neu gegliedert
+
+- Sechs Reiter: Übersicht, Konten, KI, Einstellungen, Kundenportal, Lizenz. Auf dem Handy eine wischbare Zeile.
+- **Übersicht** zeigt nur den Systemstand; jede Karte führt dorthin, wo man etwas tun kann.
+- **Konten** als kompakte Liste, „Bearbeiten" klappt Rollen, Passwort, Zugang und Löschen auf.
+- **KI** in drei Unterseiten: Modelle & Zugriff, Prompts & Skills, Protokoll. Freigaben und Protokoll in
+  Klartext statt Kennungen; der Name des internen Anbieters steht jetzt in dessen Karte.
+- **Einstellungen** enthalten die Überwachung von außen und den Export des Firmenwissens; Grenzen tragen Einheiten.
+- **Kundenportal** zeigt zuerst, ob die Verbindung steht; die Einrichtung ist in Schritte gegliedert.
+- **Lizenz** nennt die geltende Lizenz mit Laufzeit und Bausteinen.
+- Datum, Zahlen und Zeitangaben durchgehend deutsch, etwa „vor 48 Minuten" und „79,6 %".
 
 ## NETbrain 0.5.7
 

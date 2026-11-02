@@ -2,6 +2,28 @@
 
 Was sich mit jeder Version geändert hat. Steht unter **Status** ein Hinweis, lesen Sie ihn vor dem Update; wie das Update selbst abläuft, steht unter [Aktualisieren](aktualisieren.html).
 
+## NETbrain 0.5.8
+
+**Stand:** 2. November 2026
+
+**Status:** Keine Eingriffe nötig.
+
+### Chat
+
+- Quellenangaben in Antworten wie [Datensicherungskonzept] sind Links auf die herangezogene Seite.
+
+### Administration neu gegliedert
+
+- Sechs Reiter: Übersicht, Konten, KI, Einstellungen, Kundenportal, Lizenz. Auf dem Handy eine wischbare Zeile.
+- **Übersicht** zeigt nur den Systemstand; jede Karte führt dorthin, wo man etwas tun kann.
+- **Konten** als kompakte Liste, „Bearbeiten" klappt Rollen, Passwort, Zugang und Löschen auf.
+- **KI** in drei Unterseiten: Modelle & Zugriff, Prompts & Skills, Protokoll. Freigaben und Protokoll in
+  Klartext statt Kennungen; der Name des internen Anbieters steht jetzt in dessen Karte.
+- **Einstellungen** enthalten die Überwachung von außen und den Export des Firmenwissens; Grenzen tragen Einheiten.
+- **Kundenportal** zeigt zuerst, ob die Verbindung steht; die Einrichtung ist in Schritte gegliedert.
+- **Lizenz** nennt die geltende Lizenz mit Laufzeit und Bausteinen.
+- Datum, Zahlen und Zeitangaben durchgehend deutsch, etwa „vor 48 Minuten" und „79,6 %".
+
 ## NETbrain 0.5.7
 
 **Stand:** 2. November 2026

@@ -20,7 +20,7 @@ Alles liegt in einem Bündel, weil die Teile zusammengehören: Die Chat-Schlüss
 
 ## Zeitplan und letzter Lauf
 
-Unter **Administration → Einstellungen → Sicherungen** stehen Uhrzeit (Vorgabe 02:00, leer heißt aus), die Zahl der aufbewahrten Stände (Vorgabe 14) und der Knopf **Jetzt sichern**. Unter **Administration → Übersicht** sehen Sie den letzten Lauf und sein Ergebnis. Ein ausbleibender Lauf meldet sich sonst nirgends — werfen Sie gelegentlich einen Blick darauf.
+Unter **Administration → Einstellungen → Sicherungen** stehen Uhrzeit (Vorgabe 02:00, leer heißt aus), die Zahl der aufbewahrten Stände (Vorgabe 14) und der Knopf **Jetzt sichern**. Der letzte Lauf und sein Ergebnis stehen dort und unter **Administration → Übersicht**. Daneben lädt **Firmenwissen als JSON exportieren** alle Firmenseiten als eine Datei herunter. Ein ausbleibender Lauf meldet sich sonst nirgends — werfen Sie gelegentlich einen Blick darauf.
 
 Von Hand auf dem Server, etwa vor einem Eingriff:
 

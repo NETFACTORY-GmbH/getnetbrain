@@ -26,7 +26,7 @@ Die meisten Probleme haben eine von wenigen Ursachen. Diese Seite ordnet sie nac
 | Lizenzseite statt Anwendung | Testphase oder Lizenz abgelaufen, oder die Aktivierung wurde länger als sieben Tage nicht bestätigt. Siehe [Lizenz](lizenz.html). |
 | „Aktivierung fehlgeschlagen“ | Der Server erreicht den Lizenzdienst nicht (ausgehend 443 zu `lizenz-netbrain.netfactory.de`), oder die Lizenz ist schon an eine andere Installation gebunden. |
 | Privater Vault „In diesem Browser nicht verfügbar“ | Der Vault braucht Chrome oder Edge. |
-| KI-Chat antwortet mit Fehler | **Administration → KI & Zugriffsrechte → Modelle jetzt prüfen** zeigt, welcher Anbieter nicht antwortet. |
+| KI-Chat antwortet mit Fehler | **Administration → KI → Modelle jetzt prüfen** zeigt, welcher Anbieter nicht antwortet. |
 
 ## Zustand prüfen
 

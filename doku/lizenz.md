@@ -14,7 +14,7 @@ Haben Sie bereits eine Lizenz ohne Kundenportal und möchten es testen, stellen 
 
 ## Lizenz hinterlegen
 
-Ein Administrator öffnet unter **Administration** den Verweis **Lizenz aktivieren oder verlängern** oder direkt `/lizenz`, fügt den Inhalt der Lizenzdatei ein und klickt **Lizenz prüfen und aktivieren**. NETbrain bindet die Lizenz dabei beim Lizenzdienst an diese Installation; dieselbe Datei lässt sich nicht auf einem zweiten Server aktivieren. Nach erfolgreicher Aktivierung bestätigt die Seite die Lizenz und leitet zur Anwendung weiter.
+Ein Administrator öffnet **Administration → Lizenz** (direkt: `/lizenz`), fügt den Inhalt der Lizenzdatei ein und klickt **Lizenz prüfen und aktivieren**. NETbrain bindet die Lizenz dabei beim Lizenzdienst an diese Installation; dieselbe Datei lässt sich nicht auf einem zweiten Server aktivieren. Nach erfolgreicher Aktivierung bestätigt die Seite die Lizenz und leitet zur Anwendung weiter.
 
 Übertragen werden nur die Lizenzdatei und der technische Installationsschlüssel. Notizen, Chats und Konten bleiben in Ihrer Installation.
 
@@ -36,4 +36,4 @@ Es geht nichts verloren. Sobald eine gültige Lizenz hinterlegt ist, steht sofor
 
 ## Für den Support
 
-Unter `/lizenz` steht im aufklappbaren Bereich **Installationskennung für den Support** die Kennung Ihrer Installation. Nennen Sie sie bei Fragen zur Lizenz. Lizenz kaufen oder verlängern: [info@netfactory.de](mailto:info@netfactory.de).
+Unter `/lizenz` steht im aufklappbaren Bereich **Kennungen für den Support** die Kennung Ihrer Installation. Nennen Sie sie bei Fragen zur Lizenz. Lizenz kaufen oder verlängern: [info@netfactory.de](mailto:info@netfactory.de).

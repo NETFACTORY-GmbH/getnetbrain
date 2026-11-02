@@ -2,7 +2,7 @@
 
 > NETbrain ist eine Wissensplattform für Unternehmen von der NETFACTORY GmbH Internet Service (Fürstenau). Teams erfassen Firmenwissen, Kuratoren prüfen und geben es frei, alle finden es wieder – per Stichwortsuche ohne KI oder im KI-Chat. NETbrain läuft als Container auf dem Server des Kunden; der KI-Anbieter ist frei wählbar (eigenes Modell oder Cloud).
 
-Aktueller Stand: Version 0.5.6, Alpha in der Pilotphase. Sprache von Produkt und Dokumentation: Deutsch.
+Aktueller Stand: Version 0.5.7, Alpha in der Pilotphase. Sprache von Produkt und Dokumentation: Deutsch.
 
 ## Kurzfakten
 
@@ -27,7 +27,7 @@ Aktueller Stand: Version 0.5.6, Alpha in der Pilotphase. Sprache von Produkt und
 
 # NETbrain-Dokumentation
 
-Hier finden Sie alles, um NETbrain zu installieren, einzurichten, im Team zu nutzen und dauerhaft zu betreiben. Die Dokumentation beschreibt NETbrain 0.5.6.
+Hier finden Sie alles, um NETbrain zu installieren, einzurichten, im Team zu nutzen und dauerhaft zu betreiben. Die Dokumentation beschreibt NETbrain 0.5.7.
 
 <div class="karten">
 <a class="karte" href="installation.html"><b>In 45 Minuten startklar</b><span>Ein Befehl auf dem Server, danach führt ein Assistent im Browser durch die Einrichtung.</span></a>
@@ -137,7 +137,7 @@ Am Ende stehen das **Einrichtungs-Token** und die Adresse, unter der es weiterge
 Die Version steckt im Link:
 
 ```
-curl -fsSL https://getnetbrain.netfactory.de/install.sh@0.5.6 | sudo bash
+curl -fsSL https://getnetbrain.netfactory.de/install.sh@0.5.7 | sudo bash
 ```
 
 ### Proxy auf einem anderen Rechner
@@ -979,7 +979,7 @@ Der Installer erkennt die vorhandene Installation, lässt die Daten stehen und w
 Eine bestimmte Version installieren Sie mit dem versionierten Link:
 
 ```
-curl -fsSL https://getnetbrain.netfactory.de/install.sh@0.5.6 | sudo bash
+curl -fsSL https://getnetbrain.netfactory.de/install.sh@0.5.7 | sudo bash
 ```
 
 ## Zurück auf die Vorversion
@@ -1292,6 +1292,36 @@ Die letzten Zeilen des Protokolls genügen, `Strg` + `C` beendet die Ausgabe. Un
 # Versionshinweise
 
 Was sich mit jeder Version geändert hat. Steht unter **Status** ein Hinweis, lesen Sie ihn vor dem Update; wie das Update selbst abläuft, steht unter [Aktualisieren](aktualisieren.html).
+
+## NETbrain 0.5.7
+
+**Stand:** 2. November 2026
+
+**Status:** Keine Eingriffe nötig. Wer ein mitinstalliertes Kundenportal betreibt, führt einmal
+`sudo ./install.sh` aus — danach zieht das Update über **Administration** das Portal mit.
+
+### Anmeldung
+
+- Hinter einem HTTPS-Proxy brach die Weiterleitung nach dem Anmelden ab, wenn ein vorläufiges
+  Passwort zu ändern oder die Zwei-Faktor-Anmeldung einzurichten war. Weiterleitungen bleiben
+  jetzt auf https.
+
+### Suche und Chat
+
+- Die Suche findet auch gebeugte Wortformen, etwa Mehrzahl und Fälle.
+- Seiten, die alle Wörter der Frage enthalten, stehen weiter vorn; Titeltreffer allein zählen weniger.
+- „Auto" nimmt Firmenwissen ohne Vorprüfung mit, wenn eine Seite alle Fragewörter enthält —
+  die Antwort kommt schneller.
+
+### Große Wissensbestände
+
+- Seiten und Listen werden komprimiert übertragen und laden deutlich schneller.
+- Ordner, Tags und „Neu & geändert" blättern seitenweise.
+
+### Für Administratoren
+
+- Das Update über **Administration** aktualisiert ein mitinstalliertes Kundenportal mit.
+- Der Lizenzhinweis nennt das Ende des Offline-Betriebs als Datum in Ortszeit.
 
 ## NETbrain 0.5.6
 

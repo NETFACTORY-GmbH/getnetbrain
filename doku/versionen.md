@@ -2,6 +2,36 @@
 
 Was sich mit jeder Version geändert hat. Steht unter **Status** ein Hinweis, lesen Sie ihn vor dem Update; wie das Update selbst abläuft, steht unter [Aktualisieren](aktualisieren.html).
 
+## NETbrain 0.5.7
+
+**Stand:** 2. November 2026
+
+**Status:** Keine Eingriffe nötig. Wer ein mitinstalliertes Kundenportal betreibt, führt einmal
+`sudo ./install.sh` aus — danach zieht das Update über **Administration** das Portal mit.
+
+### Anmeldung
+
+- Hinter einem HTTPS-Proxy brach die Weiterleitung nach dem Anmelden ab, wenn ein vorläufiges
+  Passwort zu ändern oder die Zwei-Faktor-Anmeldung einzurichten war. Weiterleitungen bleiben
+  jetzt auf https.
+
+### Suche und Chat
+
+- Die Suche findet auch gebeugte Wortformen, etwa Mehrzahl und Fälle.
+- Seiten, die alle Wörter der Frage enthalten, stehen weiter vorn; Titeltreffer allein zählen weniger.
+- „Auto" nimmt Firmenwissen ohne Vorprüfung mit, wenn eine Seite alle Fragewörter enthält —
+  die Antwort kommt schneller.
+
+### Große Wissensbestände
+
+- Seiten und Listen werden komprimiert übertragen und laden deutlich schneller.
+- Ordner, Tags und „Neu & geändert" blättern seitenweise.
+
+### Für Administratoren
+
+- Das Update über **Administration** aktualisiert ein mitinstalliertes Kundenportal mit.
+- Der Lizenzhinweis nennt das Ende des Offline-Betriebs als Datum in Ortszeit.
+
 ## NETbrain 0.5.6
 
 **Stand:** 29. Oktober 2026

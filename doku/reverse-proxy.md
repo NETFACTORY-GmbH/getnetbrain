@@ -38,6 +38,8 @@ Steht der Proxy auf demselben Server, erledigt das der Installer. Steht er auf e
 
 Das Image setzt den Wert; ohne ihn ist das Sitzungscookie nicht `secure`.
 
+Nicht nötig: eine längere Wartezeit. Lange KI-Aufgaben wie das Aufbereiten eines Scans senden alle zehn Sekunden ein Lebenszeichen; die Voreinstellung üblicher Proxys (nginx: 60 s) reicht.
+
 Empfohlen: Richten Sie die Healthprobe des Proxys auf `/api/ready`. (Nicht auf `/api/health`: Das meldet bei fehlender Lizenz 503, und der Proxy sperrte die Installation dann von ihrer eigenen Lizenzseite aus.) Dann nimmt er NETbrain während eines Updates kurz aus dem Verkehr.
 
 ## Beispiel für nginx

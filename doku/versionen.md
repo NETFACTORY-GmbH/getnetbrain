@@ -2,6 +2,38 @@
 
 Was sich mit jeder Version geändert hat. Steht unter **Status** ein Hinweis, lesen Sie ihn vor dem Update; wie das Update selbst abläuft, steht unter [Aktualisieren](aktualisieren.html).
 
+## NETbrain 0.5.9
+
+**Stand:** 3. November 2026
+
+**Status:** Keine Eingriffe nötig.
+
+### Eigene Akzentfarbe und Sicherungen
+
+- **Akzentfarbe:** Unter **Administration → Einstellungen** lässt sich neben dem Logo eine eigene Farbe für
+  Knöpfe, Verweise und Hervorhebungen wählen. Sie gilt im Firmenwissen und bei der Anmeldung; der private
+  Bereich bleibt grün. Zu dunkle Farben werden für die Lesbarkeit aufgehellt.
+- **Sicherungen herunterladen:** Die Einstellungen listen die vorhandenen Sicherungen zum Herunterladen.
+  Die Dateien sind mit der Sicherungs-Passphrase verschlüsselt. Bei abgelaufener Lizenz steht die neueste
+  unter **Lizenz → Daten mitnehmen**.
+
+### Oberfläche aufgeräumt
+
+- In der Seitenleiste lassen sich die Wissensseiten zuklappen und nach Titel oder „Neueste" sortieren.
+- Die Verwaltung hat eine Seitenleiste wie das Firmenwissen.
+- Unter einem Artikel stehen Verweise und ähnliche Seiten nebeneinander, das Umfeld ist zugeklappt.
+  Die Freigabe fürs Kundenportal sitzt in der Werkzeugleiste.
+- Die Index-Seite erscheint nicht mehr unter „Was neu ist", in der Suche und als Chat-Quelle.
+- Die Modellauswahl im Chat zeigt kurze Namen.
+- Beim Seitenwechsel springt die Ansicht nicht mehr, auch nicht mit einer selbst gewählten Breite der
+  Seitenleiste.
+
+### Erfassung und Fehlermeldungen
+
+- Die Erfassung von Firmenwissen läuft nicht mehr in die Zeitgrenze eines vorgeschalteten Proxys.
+- Antwortet ein vorgeschalteter Proxy oder ein Fremddienst (Lizenzdienst, KI-Anbieter, Portal) mit
+  einer Fehlerseite, erscheint eine verständliche Meldung statt „Unexpected token '<'".
+
 ## NETbrain 0.5.8
 
 **Stand:** 2. November 2026

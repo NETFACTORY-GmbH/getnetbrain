@@ -2,7 +2,7 @@
 
 > NETbrain ist eine Wissensplattform für Unternehmen von der NETFACTORY GmbH Internet Service (Fürstenau). Teams erfassen Firmenwissen, Kuratoren prüfen und geben es frei, alle finden es wieder – per Stichwortsuche ohne KI oder im KI-Chat. NETbrain läuft als Container auf dem Server des Kunden; der KI-Anbieter ist frei wählbar (eigenes Modell oder Cloud).
 
-Aktueller Stand: Version 0.6.0, Alpha in der Pilotphase. Sprache von Produkt und Dokumentation: Deutsch.
+Aktueller Stand: Version 0.6.1, Alpha in der Pilotphase. Sprache von Produkt und Dokumentation: Deutsch.
 
 ## Kurzfakten
 
@@ -27,7 +27,7 @@ Aktueller Stand: Version 0.6.0, Alpha in der Pilotphase. Sprache von Produkt und
 
 # NETbrain-Dokumentation
 
-Hier finden Sie alles, um NETbrain zu installieren, einzurichten, im Team zu nutzen und dauerhaft zu betreiben. Die Dokumentation beschreibt NETbrain 0.6.0.
+Hier finden Sie alles, um NETbrain zu installieren, einzurichten, im Team zu nutzen und dauerhaft zu betreiben. Die Dokumentation beschreibt NETbrain 0.6.1.
 
 <div class="karten">
 <a class="karte" href="installation.html"><b>In 45 Minuten startklar</b><span>Ein Befehl auf dem Server, danach führt ein Assistent im Browser durch die Einrichtung.</span></a>
@@ -137,7 +137,7 @@ Am Ende stehen das **Einrichtungs-Token** und die Adresse, unter der es weiterge
 Die Version steckt im Link:
 
 ```
-curl -fsSL https://getnetbrain.netfactory.de/install.sh@0.6.0 | sudo bash
+curl -fsSL https://getnetbrain.netfactory.de/install.sh@0.6.1 | sudo bash
 ```
 
 ### Proxy auf einem anderen Rechner
@@ -982,7 +982,7 @@ Der Installer erkennt die vorhandene Installation, lässt die Daten stehen und w
 Eine bestimmte Version installieren Sie mit dem versionierten Link:
 
 ```
-curl -fsSL https://getnetbrain.netfactory.de/install.sh@0.6.0 | sudo bash
+curl -fsSL https://getnetbrain.netfactory.de/install.sh@0.6.1 | sudo bash
 ```
 
 ## Zurück auf die Vorversion
@@ -1295,6 +1295,31 @@ Die letzten Zeilen des Protokolls genügen, `Strg` + `C` beendet die Ausgabe. Un
 # Versionshinweise
 
 Was sich mit jeder Version geändert hat. Steht unter **Status** ein Hinweis, lesen Sie ihn vor dem Update; wie das Update selbst abläuft, steht unter [Aktualisieren](aktualisieren.html).
+
+## NETbrain 0.6.1
+
+**Stand:** 12. November 2026
+
+**Status:** Keine Eingriffe nötig.
+
+### Nutzung
+
+- Neuer Bereich **Administration → Nutzung**: aktive Nutzer je Tag und Woche, Aufrufe je Bereich, Suchen und
+  Suchen ohne Treffer, Chat-Anfragen je Modell, Einreichungen und Veröffentlichungen mit Durchlaufzeit, Diktate.
+- Gezählt wird je Tag ohne Personenbezug: keine Namen, keine Suchbegriffe, keine Inhalte. Die Zahlen bleiben
+  13 Monate und verlassen die Installation nicht.
+
+### Erfassen
+
+- Beim Aufbereiten liest die KI eingesetzte Bilder mit, sofern ein Bildmodell eingestellt ist (höchstens fünf je
+  Erfassung). Die eigene Bildbeschreibung geht dabei vor und fließt jetzt in den Entwurf ein.
+
+### Lizenz
+
+- **Lizenz verlängern:** Läuft die Lizenz ab oder ist sie abgelaufen, fragt die Seite **Lizenz** die Verlängerung
+  direkt beim Herausgeber an. Nach einer Testlizenz heißt der Weg „Lizenz anfordern". Eine Testlizenz lässt sich
+  nur noch anfordern, solange noch keine Lizenz hinterlegt war.
+- Die Lizenz bestätigt sich auch dann regelmäßig beim Lizenzdienst, wenn sich tagelang niemand anmeldet.
 
 ## NETbrain 0.6.0
 

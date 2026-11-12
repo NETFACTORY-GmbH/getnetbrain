@@ -2,6 +2,31 @@
 
 Was sich mit jeder Version geändert hat. Steht unter **Status** ein Hinweis, lesen Sie ihn vor dem Update; wie das Update selbst abläuft, steht unter [Aktualisieren](aktualisieren.html).
 
+## NETbrain 0.6.1
+
+**Stand:** 12. November 2026
+
+**Status:** Keine Eingriffe nötig.
+
+### Nutzung
+
+- Neuer Bereich **Administration → Nutzung**: aktive Nutzer je Tag und Woche, Aufrufe je Bereich, Suchen und
+  Suchen ohne Treffer, Chat-Anfragen je Modell, Einreichungen und Veröffentlichungen mit Durchlaufzeit, Diktate.
+- Gezählt wird je Tag ohne Personenbezug: keine Namen, keine Suchbegriffe, keine Inhalte. Die Zahlen bleiben
+  13 Monate und verlassen die Installation nicht.
+
+### Erfassen
+
+- Beim Aufbereiten liest die KI eingesetzte Bilder mit, sofern ein Bildmodell eingestellt ist (höchstens fünf je
+  Erfassung). Die eigene Bildbeschreibung geht dabei vor und fließt jetzt in den Entwurf ein.
+
+### Lizenz
+
+- **Lizenz verlängern:** Läuft die Lizenz ab oder ist sie abgelaufen, fragt die Seite **Lizenz** die Verlängerung
+  direkt beim Herausgeber an. Nach einer Testlizenz heißt der Weg „Lizenz anfordern". Eine Testlizenz lässt sich
+  nur noch anfordern, solange noch keine Lizenz hinterlegt war.
+- Die Lizenz bestätigt sich auch dann regelmäßig beim Lizenzdienst, wenn sich tagelang niemand anmeldet.
+
 ## NETbrain 0.6.0
 
 **Stand:** 12. November 2026

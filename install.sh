@@ -136,10 +136,15 @@ else
   NETBRAIN_IMAGE="$IMAGE" NETBRAIN_IMAGE_BEZOGEN=1 bash ./install.sh installieren
 fi
 
-cat <<ENDE
+if bash ./install.sh einrichtung-offen; then
+  cat <<ENDE
 
 Weiter im Browser: Einrichtungs-Token von oben eintragen, ersten Administrator
 anlegen, Lizenzdatei einfügen.
+ENDE
+fi
+
+cat <<ENDE
 
 Spätere Befehle in $VERZEICHNIS:
   sudo ./install.sh status | token | logs | stop | start

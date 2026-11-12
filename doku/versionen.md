@@ -2,6 +2,45 @@
 
 Was sich mit jeder Version geändert hat. Steht unter **Status** ein Hinweis, lesen Sie ihn vor dem Update; wie das Update selbst abläuft, steht unter [Aktualisieren](aktualisieren.html).
 
+## NETbrain 0.6.0
+
+**Stand:** 12. November 2026
+
+**Status:** Keine Eingriffe nötig.
+
+### Chat
+
+- **Antworten bewerten:** Unter jeder Antwort stehen Daumen hoch und runter. Bei Kritik lassen sich Grund,
+  Kommentar und auf Wunsch Frage und Antwort mitsenden.
+- **Antwortqualität:** Unter **Administration → KI → Antwortqualität** steht die Auswertung je Modell, ohne
+  Namen der Bewertenden. Administratoren können einzelne Bewertungen entfernen.
+
+### Eingang: Vier-Augen-Prinzip
+
+- Kuratoren geben ihre eigenen Einreichungen nicht mehr selbst frei; das übernimmt ein anderer Kurator.
+  Ablehnen bleibt möglich. Gibt es nur einen Kurator, bleibt die Freigabe wie bisher.
+
+### Privater Vault
+
+- Bilder aus eigenen Ordnern erscheinen, auch in Obsidians Schreibweise `![[bild.png]]`.
+- Bilder lassen sich mit Strg+V in bestehende Notizen einfügen; sie landen in Obsidians Anhangsordner.
+
+### Suche und Seitenleiste
+
+- Die Suche findet gebeugte Formen und Grundwörter: „gesichert" trifft die Seite „Datensicherung".
+- Der Seitenbaum öffnet den Ordner der offenen Seite und die Ordner mit Filtertreffern.
+- Der private Baum erscheint ohne Neuladen.
+
+### Behoben
+
+- Die Schrift Inter wird mitgeliefert, statt auf eine installierte zu hoffen.
+- Die Landkarte zeigt ihre Kategoriefarben wieder.
+- Mehrere Bildbeschreibungen beim Erfassen lassen sich nacheinander eingeben.
+- Während des vorläufigen Passworts führt ein abgeschicktes Formular auf die Kontoseite statt auf eine
+  Fehlerseite.
+- Suchauszüge im Kundenportal zeigen keine Lücken vor Satzzeichen und stellen &, < und > richtig dar.
+- Der Installationslink fordert nur noch zur Einrichtung auf, solange sie offen ist.
+
 ## NETbrain 0.5.9
 
 **Stand:** 3. November 2026

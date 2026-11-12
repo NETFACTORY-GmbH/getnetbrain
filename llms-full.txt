@@ -2,7 +2,7 @@
 
 > NETbrain ist eine Wissensplattform für Unternehmen von der NETFACTORY GmbH Internet Service (Fürstenau). Teams erfassen Firmenwissen, Kuratoren prüfen und geben es frei, alle finden es wieder – per Stichwortsuche ohne KI oder im KI-Chat. NETbrain läuft als Container auf dem Server des Kunden; der KI-Anbieter ist frei wählbar (eigenes Modell oder Cloud).
 
-Aktueller Stand: Version 0.5.9, Alpha in der Pilotphase. Sprache von Produkt und Dokumentation: Deutsch.
+Aktueller Stand: Version 0.6.0, Alpha in der Pilotphase. Sprache von Produkt und Dokumentation: Deutsch.
 
 ## Kurzfakten
 
@@ -27,7 +27,7 @@ Aktueller Stand: Version 0.5.9, Alpha in der Pilotphase. Sprache von Produkt und
 
 # NETbrain-Dokumentation
 
-Hier finden Sie alles, um NETbrain zu installieren, einzurichten, im Team zu nutzen und dauerhaft zu betreiben. Die Dokumentation beschreibt NETbrain 0.5.9.
+Hier finden Sie alles, um NETbrain zu installieren, einzurichten, im Team zu nutzen und dauerhaft zu betreiben. Die Dokumentation beschreibt NETbrain 0.6.0.
 
 <div class="karten">
 <a class="karte" href="installation.html"><b>In 45 Minuten startklar</b><span>Ein Befehl auf dem Server, danach führt ein Assistent im Browser durch die Einrichtung.</span></a>
@@ -137,7 +137,7 @@ Am Ende stehen das **Einrichtungs-Token** und die Adresse, unter der es weiterge
 Die Version steckt im Link:
 
 ```
-curl -fsSL https://getnetbrain.netfactory.de/install.sh@0.5.9 | sudo bash
+curl -fsSL https://getnetbrain.netfactory.de/install.sh@0.6.0 | sudo bash
 ```
 
 ### Proxy auf einem anderen Rechner
@@ -982,7 +982,7 @@ Der Installer erkennt die vorhandene Installation, lässt die Daten stehen und w
 Eine bestimmte Version installieren Sie mit dem versionierten Link:
 
 ```
-curl -fsSL https://getnetbrain.netfactory.de/install.sh@0.5.9 | sudo bash
+curl -fsSL https://getnetbrain.netfactory.de/install.sh@0.6.0 | sudo bash
 ```
 
 ## Zurück auf die Vorversion
@@ -1295,6 +1295,45 @@ Die letzten Zeilen des Protokolls genügen, `Strg` + `C` beendet die Ausgabe. Un
 # Versionshinweise
 
 Was sich mit jeder Version geändert hat. Steht unter **Status** ein Hinweis, lesen Sie ihn vor dem Update; wie das Update selbst abläuft, steht unter [Aktualisieren](aktualisieren.html).
+
+## NETbrain 0.6.0
+
+**Stand:** 12. November 2026
+
+**Status:** Keine Eingriffe nötig.
+
+### Chat
+
+- **Antworten bewerten:** Unter jeder Antwort stehen Daumen hoch und runter. Bei Kritik lassen sich Grund,
+  Kommentar und auf Wunsch Frage und Antwort mitsenden.
+- **Antwortqualität:** Unter **Administration → KI → Antwortqualität** steht die Auswertung je Modell, ohne
+  Namen der Bewertenden. Administratoren können einzelne Bewertungen entfernen.
+
+### Eingang: Vier-Augen-Prinzip
+
+- Kuratoren geben ihre eigenen Einreichungen nicht mehr selbst frei; das übernimmt ein anderer Kurator.
+  Ablehnen bleibt möglich. Gibt es nur einen Kurator, bleibt die Freigabe wie bisher.
+
+### Privater Vault
+
+- Bilder aus eigenen Ordnern erscheinen, auch in Obsidians Schreibweise `![[bild.png]]`.
+- Bilder lassen sich mit Strg+V in bestehende Notizen einfügen; sie landen in Obsidians Anhangsordner.
+
+### Suche und Seitenleiste
+
+- Die Suche findet gebeugte Formen und Grundwörter: „gesichert" trifft die Seite „Datensicherung".
+- Der Seitenbaum öffnet den Ordner der offenen Seite und die Ordner mit Filtertreffern.
+- Der private Baum erscheint ohne Neuladen.
+
+### Behoben
+
+- Die Schrift Inter wird mitgeliefert, statt auf eine installierte zu hoffen.
+- Die Landkarte zeigt ihre Kategoriefarben wieder.
+- Mehrere Bildbeschreibungen beim Erfassen lassen sich nacheinander eingeben.
+- Während des vorläufigen Passworts führt ein abgeschicktes Formular auf die Kontoseite statt auf eine
+  Fehlerseite.
+- Suchauszüge im Kundenportal zeigen keine Lücken vor Satzzeichen und stellen &, < und > richtig dar.
+- Der Installationslink fordert nur noch zur Einrichtung auf, solange sie offen ist.
 
 ## NETbrain 0.5.9
 

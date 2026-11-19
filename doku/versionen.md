@@ -2,6 +2,34 @@
 
 Was sich mit jeder Version geändert hat. Steht unter **Status** ein Hinweis, lesen Sie ihn vor dem Update; wie das Update selbst abläuft, steht unter [Aktualisieren](aktualisieren.html).
 
+## NETbrain 0.6.2
+
+**Stand:** 19. November 2026
+
+**Status:** Keine Eingriffe nötig.
+
+### Anmeldung und Chat
+
+- Der Chat entsperrt sich bei der Anmeldung mit demselben Passwort; die zweite Passwortabfrage entfällt. Bei einem
+  anderen Chat-Passwort, in einem neuen Tab oder nach Ablauf der Frist fragt der Chat wie bisher. Abmelden räumt
+  die Schlüsselkopie des Tabs ab.
+- Die Chat-Automatik sieht die Titel der gefundenen Seiten und zieht Firmenwissen auch ohne Firmenbezug in der Frage heran.
+
+### Wissen
+
+- **Vier-Augen-Prinzip einstellbar** unter Administration → Einstellungen: Aus, Nur Eingang (Vorgabe) oder Eingang und
+  Bestand. In der Stufe „Eingang und Bestand“ wird jede Bearbeitung einer Seite ein Vorschlag, den ein zweiter Kurator
+  freigibt. Ist die Seite inzwischen geändert, lässt sich der Vorschlag nur noch ablehnen.
+- Die Startseite durchsucht das Firmenwissen. Datumsangaben stehen einheitlich im deutschen Format.
+
+### Betrieb
+
+- Die Sicherung nimmt Chat-Bewertungen und Nutzungszähler mit. Beim Zurückspielen bleiben vorhandene Einträge stehen.
+- Das Cookie der Anbieterwahl trägt über HTTPS das Attribut `Secure`.
+- Die Seite **Lizenz** bietet bei fehlender Aktivierung keine Verlängerung mehr an.
+- Die Logo-Uploads in Einstellungen und Kundenportal tragen eine deutsche Beschriftung.
+- Rückfragen vor Ablehnen, Verwerfen und Zurücksetzen erscheinen auch unter einer strengen Inhaltsrichtlinie.
+
 ## NETbrain 0.6.1
 
 **Stand:** 12. November 2026

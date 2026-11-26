@@ -2,6 +2,20 @@
 
 Was sich mit jeder Version geändert hat. Steht unter **Status** ein Hinweis, lesen Sie ihn vor dem Update; wie das Update selbst abläuft, steht unter [Aktualisieren](aktualisieren.html).
 
+## NETbrain 0.6.3
+
+**Stand:** 25. November 2026
+
+**Status:** Keine Eingriffe nötig.
+
+### Suche und Chat
+
+- **Bedeutungssuche (optional).** Findet Firmenwissen auch ohne gemeinsames Wort, etwa „Abwesenheit“ zur Seite
+  „Urlaubsantrag“. Einschalten unter Administration → KI → Bedeutungssuche mit einem Embedding-Modell auf dem eigenen
+  KI-Server (z. B. Qwen3-Embedding-0.6B). Ohne Modell bleibt alles wie bisher. Private Notizen werden nicht einbezogen.
+- Neues und Geändertes wird nach dem Speichern im Hintergrund nachgezogen; fällt der KI-Server aus, sucht NETbrain
+  weiter über Wörter.
+
 ## NETbrain 0.6.2
 
 **Stand:** 19. November 2026

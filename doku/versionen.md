@@ -2,6 +2,29 @@
 
 Was sich mit jeder Version geändert hat. Steht unter **Status** ein Hinweis, lesen Sie ihn vor dem Update; wie das Update selbst abläuft, steht unter [Aktualisieren](aktualisieren.html).
 
+## NETbrain 0.6.4
+
+**Stand:** 26. November 2026
+
+**Status:** Keine Eingriffe nötig.
+
+### Chat
+
+- **Lücke melden.** Findet der Chat im Firmenwissen nichts, lässt sich die Frage mit „Lücke an die Wissenspflege
+  melden“ weitergeben. Vor dem Absenden kannst du sie kürzen. Die Meldung ist anonym: Die Wissenspflege sieht nur
+  den Text und den Tag, keinen Namen.
+
+### Wissenspflege
+
+- Neu unter Wissenspflege: **Offene Fragen**. Gemeldete Lücken stehen dort, die häufigsten zuerst, mit der Zahl
+  offener Fragen in der Seitenleiste. „Antwort erfassen“ öffnet die Erfassung mit der Frage als Titel; „Beantwortet“
+  und „Verwerfen“ haken sie ab.
+
+### Für Administratoren
+
+- Die Nutzungsauswertung zählt gemeldete Lücken je Zeitraum.
+- Die Sicherung nimmt die offenen Fragen mit (`offene-fragen.json`).
+
 ## NETbrain 0.6.3
 
 **Stand:** 25. November 2026

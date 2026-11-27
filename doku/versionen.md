@@ -2,6 +2,37 @@
 
 Was sich mit jeder Version geändert hat. Steht unter **Status** ein Hinweis, lesen Sie ihn vor dem Update; wie das Update selbst abläuft, steht unter [Aktualisieren](aktualisieren.html).
 
+## NETbrain 0.6.5
+
+**Stand:** 27. November 2026
+
+**Status:** Keine Eingriffe nötig.
+
+### Chat
+
+- **Warnhinweis an Quellen.** Stützt sich eine Antwort auf eine Seite, deren Prüfung überfällig ist oder die als
+  veraltet oder fehlerhaft gemeldet wurde, steht das direkt an der Quelle. Die KI weist in der Antwort darauf hin.
+
+### Wissen erfassen
+
+- **Sammelimport.** Unter „Firmenwissen erfassen“ → „Viele Dateien auf einmal“ lassen sich PDF-, Word-, Text-,
+  Markdown- und CSV-Dateien gemeinsam hochladen. Jede Datei wird im Hintergrund aufbereitet und landet ohne Vorschau
+  bei der Wissenspflege; die Seite zeigt den Stand je Datei und darf geschlossen werden. Bilder und eingescannte PDFs
+  weiter einzeln erfassen.
+- **Tageskontingent.** Unter „Konto“ und im Sammelimport steht, wie viele KI-Anfragen und Datei-Uploads heute
+  verbraucht sind und wann das Kontingent wieder voll ist.
+
+### Wissenspflege
+
+- Einwürfe aus dem Sammelimport sind in der Wissensprüfung gekennzeichnet.
+- Die Liste lässt sich nach Einreicher filtern. Mehrere Beiträge lassen sich mit einer gemeinsamen Begründung
+  ablehnen; veröffentlicht wird weiter einzeln.
+
+### Für Administratoren
+
+- Der Sammelimport legt seine Warteschlange unter `/data` ab (`sammelimport.json`, Ordner `sammelimport/`). Jede Datei
+  zählt gegen die bestehenden Tagesgrenzen je Konto für Uploads und KI-Anfragen.
+
 ## NETbrain 0.6.4
 
 **Stand:** 26. November 2026
